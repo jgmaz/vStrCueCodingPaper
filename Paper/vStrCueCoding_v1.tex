@@ -1,0 +1,284 @@
+% UPDATES:
+% Version 1.1 - JG initial import of text and figures from Google Drive, with edits
+
+\documentclass[11pt]{article}
+
+% packages
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage[nolists]{endfloat}
+\usepackage{times}
+\usepackage{ifthen}
+\usepackage{parskip}
+\usepackage[font=sf,labelfont=bf]{caption}
+\usepackage{xspace}
+\usepackage[pdftex]{color}
+\usepackage{pdfcolmk}
+\usepackage{fixltx2e} % for \textsubscript
+%\usepackage{epstopdf}
+
+% line numbers
+\usepackage[left]{lineno}
+
+% variable margins
+\usepackage[left=2.5cm,top=2.5cm,bottom=3.5cm,right=2.5cm]{geometry}
+
+% this helps figure placement
+\renewcommand{\textfraction}{0.0}
+\renewcommand{\topfraction}{1}
+\renewcommand{\bottomfraction}{1}
+
+% convert tif to png for pdf
+%\epstopdfDeclareGraphicsRule{.tif}{png}{.png}{convert #1 \OutputFile}
+%\AppendGraphicsExtensions{.tif}
+
+% spacing
+\setlength{\parindent}{0in} 
+\setlength{\parskip}{2\baselineskip}
+\linespread{2}
+\renewcommand{\baselinestretch}{1.66}\normalsize
+
+% definitions
+\newcommand{\bsf}[1]{\textbf{#1}}
+\newcommand{\sem}{S.E.M.\@\xspace}
+\newcommand{\degree}{$^o$\@\xspace}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+% bib
+\bibliographystyle{apa}
+\let\cite=\citep
+\let\citeN=\citet
+\let\citeNP=\citealt
+\renewcommand{\bibfont}{\footnotesize}
+\setlength{\bibsep}{2pt}
+
+\begin{document}
+
+{\Large\bf Coding of behaviorally relevant and irrelevant cue features in the nucleus accumbens}
+
+{\bf Authors}: Jimmie M.\ Gmaz\textsuperscript{1}, James
+E.\ Carmichael\textsuperscript{1}, Matthijs A.\ A.\ van der
+Meer\textsuperscript{1*}
+
+\textsuperscript{1}Department of Psychological and Brain Sciences,
+Dartmouth College, Hanover NH
+03755\\ 
+
+\textsuperscript{*}Correspondence should be addressed to MvdM,
+Department of Psychological and Brain Sciences, Dartmouth College, 3
+Maynard St, Hanover, NH 03755. E-mail: {\sffamily mvdm@dartmouth.edu}.
+
+\textbf{Number of Figures:} 11\\
+\textbf{Number of Tables:} 1\\
+\textbf{Total Word Count:} ?\\
+\textbf{Abstract Word Count:} ?\\
+\textbf{Introduction Word Count:} ?\\
+\textbf{Discussion Word Count:} ?\\
+
+\textbf{Acknowledgments}: We thank Nancy Gibson, Martin Ryan and Jean
+Flanagan for animal care, and Min-Ching Kuo and
+Alyssa Carey for technical assistance. This work was supported by
+Dartmouth College (Dartmouth Fellowship to JMG and JEC, and start-up funds to
+MvdM) and the Natural Sciences and Engineering Research Council
+(NSERC) of Canada (Discovery Grant award to MvdM, Canada Graduate
+Scholarship to JMG).
+
+\textbf{Conflict of Interest}: The authors declare no competing
+financial interests.\\
+
+\newpage
+\linenumbers
+
+\section*{Abstract}
+
+to do
+
+\section*{Significance Statement (120 words)}
+
+to do
+
+\newpage
+
+\section*{Introduction}
+% Version 1.1 - imported from Google Drive
+% To do JG: refine (e.g. make more explicit the tie to the schematic), add references
+
+Theories of nucleus accumbens (NAc) function generally agree that this brain structure contributes to motivated behavior, with some emphasizing a role in learning from reward prediction errors (Joel, Doya, Schultz; see also the addiction literature on the effects of drug rewards; Nestler, Kalivas; Carelli) and others a role in the modulation of ongoing behavior through stimuli associated with motivationally relevant outcomes (invigorating, directing; Nicola, Floresco, Salamone). These proposals echo similar ideas on the functions of the neuromodulator dopamine (Schultz, Berridge, Maia/Frank, Cools), with which NAc is tightly linked functionally as well as anatomically (Haber, Sesack, something more recent).
+
+Much of our understanding of NAc function comes from studies of how cues that predict motivationally relevant outcomes (e.g. reward) influence behavior and neural activity in the NAc. Task designs that associate such cues with rewarding outcomes provide a convenient access point eliciting conditioned responses such as sign-tracking and goal-tracking (Robinson), pavlovian-instrumental transfer (Balleine) and response vigor (Niv; McGinty) which tend to be affected by NAc manipulations (Flagel, Balleine, Chang; although not always straightforwardly: Hauber, Chang). Similarly, analysis of reward prediction errors typically proceeds by establishing an association between a cue and subsequent reward, with NAc responses transferring from outcome to the cue with learning (Schultz, Schoenbaum, Carelli). WHAT ABOUT HUMAN WORK
+
+Surprisingly, although substantial work has been done on the coding of outcomes predicted by such cues (e.g. reward value; Hollerman/Schultz, Roesch, Day; reward identity; Cooch), much less is known about how reward-predictive cues themselves are encoded in the NAc (Hayden from primate realm). This is an important issue for at least two reasons. First, in reinforcement learning, motivationally relevant outcomes are typically temporally delayed relative to the cues that predict them. In order to solve the problem of assigning credit (or blame) across such temporal gaps, some trace of preceding activity needs to be maintained (Maia?). Since NAc is a primary target of DA signals interpretable as RPEs, its activity trace will help determine what can be learned when RPEs arrive.
+
+Second, for ongoing behavior, the relevance of cues typically depends on “context”. In experimental settings, context may include the identity of a preceding cue (occasion setter, Holland, Kesner), spatial or configural arrangements (Good/Honey, Eichenbaum), and unsignaled rules as occurs in set shifting and other cognitive control tasks (CITE). In such situations, the question arises how selective, context-dependent processing of reward-predictive cues is implemented. For instance, is there a “gate” prior to NAc, or are all cues represented in NAc but their current values dynamically updated (FitzGerald; WHAT ARE SOME THEORETICAL POSITIONS ON THIS)? 
+
+Thus, both from a learning and a flexible performance perspective, it is of interest to determine how cue identity is represented in the brain, with NAc of particular interest given its anatomical and functional position at the center of motivational systems. We sought to determine whether cue identity is represented in the NAc, and if various cue features are represented alongside other motivationally relevant variables, such as cue value (Figure \ref{fig:schematic}). To address this question, we designed an experiment in which multiple, distinct sets of cues predicted the same outcome. We recorded the activity of NAc neurons as rats performed this task. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 1 - Schematic neural.png}
+\caption{Neural schematic}
+\label{fig:schematic}
+\end{figure}
+
+\section*{Methods}
+%Version 1.1 - imported from Google Drive
+%To do JG: elaborate on data analysis, add recording sites to histo figure
+
+{\bf Subjects:}
+
+Adult male Long-Evans rats (n = 4, Charles River, Saint Constant, QC) were used as subjects. Rats were individually housed with a 12/12-h light-dark cycle, and tested during the light cycle. Rats were food deprived to 85-90\% of their free feeding weight (weight at time of implantation was 440 - 470 g), and water restricted 4-6 hours before testing. All experimental procedures were approved by the the University of Waterloo Animal Care Committee (protocol\# 11-06) and carried out in accordance with Canadian Council for Animal Care (CCAC) guidelines. 
+
+{\bf Overall timeline:}
+
+Each subject was first handled for seven days where they were exposed to the running room, the sucrose solution, and the click of the valves upon approach to the receptacles. They were then shaped to run on the task for seven days where they were restricted to running in the clockwise direction by presenting a physical barrier to running counterclockwise. Rats underwent hyperdrive implantation after showing discrimination of approach behavior for rewarded and unrewarded cues for three consecutive days according to a chi square test. Rats were allowed to recover for a minimum of five days before being retrained on the task, and recording began once performance returned to pre-surgery levels. Upon completion of recording, animals were sacrificed and recording sites were histologically confirmed.
+
+{\bf Behavioral task and training:} 
+
+Rats were trained to run clockwise on an elevated, square-shaped track (100x100 cm) containing four possible reward locations (Figure \ref{fig:task}). Rats initiated a trial by running down the length of an arm, and triggering a photobeam located 24 cm from the start of each arm. Upon trial initiation, a cue was presented that signaled the presence of absence of a 12\% sucrose water reward (0.1 mL) at the upcoming site. A trial was classified as an approach trial if the rat turned left at the decision point and made a nosepoke at the reward receptacle (40 cm from the decision point), while trials were classified as a skip trial if the rat instead turned right at the decision point and triggered the photobeam to initiate the following trial. There was a 1 second delay from a rewarded nosepoke and reward delivery. Each day rats were trained in both a light and sound block for 100 trials each. Within a block, one cue signaled reward was available on that trial, while the other signaled reward was not available. Light block cues were a flashing white light, and a constant yellow light. Sound block cues were a 2 kHz sine wave and a 8 kHz sine wave whose amplitude was modulated from 0 to maximum by a 2 Hz sine wave. Reward-cue associations were counterbalanced across rats. Cue presentation was pseudorandomized so that the same cue could not be presented more than twice in a row. Block order within each day was also pseudorandomized, such that the rat could not start with the block within a session more than two days in a row. Each training or testing day consisted of a 5 minute pre-session period on a pedestal, followed by the first block, then the second block, then a 5 minute post-session period on the pedestal. Accuracy was determined by the proportion of trials a rat approached each cue. Perfect performance would be 100\% approach on “approach” trials (reward available), and 0\% approach on “skip” trials (no reward available). Trial length was determined by measuring the length of time from cue onset until nosepoke or the start of the following trial. Rats were trained daily until they could distinguish between the rewarded and unrewarded cues for both light and sound blocks for three consecutive days according to a chi-square test, at which point they underwent surgery.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 2 - Schematic task.png}
+\caption{Task schematic}
+\label{fig:task}
+\end{figure}
+
+{\bf Surgery:}
+
+Surgical procedures were as described previously (Malhotra et al., 2015). Briefly, animals were anesthetized with isoflurane, induced with 5\% in medical grade oxygen and maintained at 2\% throughout the surgery (~0.8 L/min). Rats were then chronically implanted with a “hyperdrive” consisting of 16 independently drivable tetrodes, either all 16 targeted for the right NAc (AP +1.4 mm and ML +1.6 mm, relative to bregma; Paxinos and Watson, 2005), or 12 in the right NAc and 4 targeted at the mPFC (AP +3.0 mm and ML +0.6 mm, relative to bregma; only data from NAc tetrodes were analyzed). Following surgery, all animals were given a least five days to recover and lower tetrodes to the target (DV -6.0 mm) before being reintroduced to the behavioral task.
+
+{\bf Data acquisition and preprocessing:}
+
+After recovery, rats were placed back on the task for recording. NAc signals were acquired at 20 kHz with a RHA2132 v0810 preamplifier (Intan) and a KJE-1001/KJD-1000 data acquisition system (Amplipex). Signals were referenced against a tetrode placed in the corpus callosum above the NAc.
+
+Candidate spikes for sorting into putative single units were obtained by band-pass filtering the data between 600-9000 Hz, thresholding and aligning the peaks (UltraMegaSort2k, Hull et al., 2011). Spike waveforms were then clustered with KlustaKwik using energy and the first derivative of energy as features (peak, valley, peak index, wave PC1, time were used as extra features, does this need to be included?), and manually sorted into units (MClust 3.5, A.D. Redish et al.). Isolated units containing a minimum of 200 spikes within a session were included for subsequent analysis. Units were classified as high firing neurons if they had high tonic firing rates marked by an absence of interspike intervals (ISIs) $>$ 2 s, while medium spiny neurons had a combination of ISIs $>$ 2 s and phasic activity with shorter ISIs (Barnes 2005, Atallah 2014). 
+
+{\bf Data analysis:}
+
+Average firing rates for a session were generated for the 1 s preceding cue-onset, and the 1 s following cue-onset. Single units were considered to be cue-responsive if both the mean firing rate difference between pre- and post-cue onset was within the lower or upper 2.5\% of a shuffled distribution, and a Wilcoxon signed-rank test comparing pre- and post-cue firing was p $<$ .01. Units were classified as having either an excitatory or inhibitory response if the post-cue activity was higher or lower than the pre-cue activity, respectively. A stepwise general linear model (GLM) was then fit to cue-responsive units using cue modality, cue location, cue outcome, approach behavior, trial length, trial number, and trial history as potential predictors. Units were classified as being modulated by a given task parameter if addition of the parameter significantly improvement model fit using deviance as the criterion (p $<$ .01). Perievent time histograms (PETHs) were generated by smoothing firing rates with a gaussian kernel. To align the data in the heat plots, firing rates of each units were z-scored then ordered by location of their peak firing rate. All analyses were completed in MATLAB R2015a, and the code is available on GitHub.
+
+{\bf Histology:}
+
+Upon completion of the experiment, rats were anesthetized with 5\% isoflurane, then asphyxiated with carbon dioxide. Transcardial perfusions were performed, and brains were fixed and removed. Brains were sliced in 50 um coronal sections and stained with thionin. Slices were visualized under light microscopy, and tetrode placement was determined (Figure \ref{fig:histo}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 3 - Histology.png}
+\caption{Histology}
+\label{fig:histo}
+\end{figure}
+
+\section*{Results}
+% Version 1.1 - Imported from Google Drive
+% To do JG: add more detail to text, finalize figures after Matt's approval, add table
+
+\subsection*{Behavior}
+
+Rats were trained to discriminate between cues signalling the availability and absence of reward on a square track with four identical arms. An example learning curve is seen in Figure \ref{fig:behav}A,B. All four rats learned to discriminate between the rewarded and unrewarded cue for both the light and sound blocks as determined by reaching significance (p $<$ .05) on a daily chi-square test comparing approach behavior for rewarded and unrewarded cues for each block, for at least three consecutive days. Additionally, all four trial types had relatively similar trial lengths (Figure \ref{fig:behav}C,D).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 4 - Behavioral results.png}
+\caption{Behavioral results}
+\label{fig:behav}
+\end{figure}
+
+\subsection*{NAc neurons encode behaviorally relevant and irrelevant cue features}
+
+{\bf General responses to cue:}
+
+A total of 443 units were recorded in the NAc from 4 rats over 57 sessions. The activity of 171 (39\%) of these was modulated by the cue, with more units showing a decrease in firing (n = 124) than an increase (n = 47) around the time of the cue (Table 1). Within this group, 32 were classified as HFNs, while 139 were classified as SPNs. Fitting a GLM to each unit revealed that a variety of task parameters accounted for a significant portion of firing rate variance in NAc cue-modulated units (Figure \ref{fig:GLM}). Notably, there were units that discriminated between whether the rat was performing in the light or sound block, which arm the rat was currently on, and whether the rat was engaged in a rewarded or unrewarded trial (Figure \ref{fig:examples}A-F). Interactions between multiple cue features appeared as significant predictors of firing rate variance for x \% units, although this effect was relatively modest (Figure \ref{fig:examples}G,H).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 5 - Neural examples.png}
+\caption{Neural examples}
+\label{fig:examples}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 6 - GLM matrix.png}
+\caption{GLM matrix}
+\label{fig:GLM}
+\end{figure}
+
+{\bf Population level responses:}
+
+To get a better sense of how cue information was encoded at the population level, firing activity was normalized then averaged for each cell whose firing rate was modulated by a given cue feature. Plotting these averages aligned to cue-onset revealed that as a population, units whose activity was modulated by cue modality showed a difference in firing rate across blocks that extended beyond the transient response to the cue (Figure \ref{fig:pop}A,B). Additionally, units whom had exhibited a decrease in firing in response to the cue and whose activity was modulated by cue outcome, showed a sustained response that extended beyond cue-onset (Figure \ref{fig:pop}F).  
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 7 - Population averages.png}
+\caption{Population averages}
+\label{fig:pop}
+\end{figure}
+
+{\bf NAc units segment the task:}
+
+It has been shown that NAc neurons are not silent outside of key task events. To look at the distribution of responses across the entire task, we z-scored the firing rate of each unit and plotted the normalized firing rates of all units aligned to cue-onset and according to peak firing rate. We did this separately for both the light and sound blocks, and found a nearly uniform distribution of firing fields in task space that was not limited to alignment to the cue (Figure \ref{fig:tiling}). Furthermore, to see if this population level activity was similar across blocks, we also organized firing during the sound blocks according to the ordering derived from the light blocks. This revealed, that the overall firing was qualitatively different across the two blocks. Additionally, given that the majority of our units showed an inhibitory response to the cue, we also plotted the firing rates according to the lowest time in firing. This process was repeated for cue location and cue outcome, with similar results. 
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 8 - Task tiling.png}
+\caption{Task tiling}
+\label{fig:tiling}
+\end{figure}
+ 
+{\bf Encoding of cue features is not limited to cue-onset:}
+
+In order to be useful for learning, a trace of the cue must be maintained until the outcome. Fitting a GLM to firing rates at the time of a nosepoke response showed that a variety of units still discriminated firing according to various cue features (Figures \ref{fig:NP_GLM}, \ref{fig:NP_pop}). Furthermore, aligning normalized peak firing rates to nosepoke onset, revealed a clustering of responses around reward receipt (Figure \ref{fig:NP_tiling}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 9 - NP GLM matrix.png}
+\caption{NP GLM matrix}
+\label{fig:NP_GLM}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 10 - NP population averages.png}
+\caption{NP population averages}
+\label{fig:NP_pop}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 11 - NP task tiling.png}
+\caption{NP task tiling}
+\label{fig:NP_tiling}
+\end{figure}
+
+\section*{Discussion}
+% Version 1.1 - Imported from Google Drive
+% To do JG: restructure to fit new results layout, add references
+
+The present study found evidence for coding of multiple identifying features of motivationally relevant stimuli; the sensory modality of the presented cue, as well at its physical location within the track. Furthermore, this coding was both independent, and intermixed with coding for the associated outcome of the cue as well as motivational vigor, measured by time to complete the trial. At the population level, a tiling of task structure was observed such that all points within our analyzed task space was accounted for by the ordered peak firing rates of all cells, and this tiling differed between blocks where sound or light cues were presented.
+Cells that discriminated across blocks were not simply due to drifting of the signal across trials, as cells that showed a drift in firing between the first and second half within a block were excluded from the analysis. Furthermore, even though actions were stereotyped during correct trials, such that the rat always turned left at the decision point to approach for reward, and right to skip the receptacle and initiate the next trial, cells that were modulated by the expected value of the cue maintained their specific firing patterns even during error trials where the rat turned left after presentation of the unrewarded cue, suggesting that these signals did not represent action values. Additionally, NAc signals have been shown to be modulated by response vigor, to detangle this from our results we included the trial length as a predictor in our GLMs, and found cells with correlates independent of trial length.
+
+{\bf Cue modality:}  
+
+Our finding that ventral striatal units can discriminate between cues from different sensory modalities expands upon an extensive literature examining neural correlates of conditioned stimuli. Perhaps the most comparable work in rodents comes from a study that found distinct coding for an odor when it predicted separate but equally valued rewards (Cooch). The present work is complementary to this as it shows that ventral striatal cells have representations of identifiable aspects of the cue itself, in addition to the reward it predicts. Another study paired separate cues with appetitive or aversive outcomes, and found separate populations of cells that encode each cue, with many switching selectivity after reversal of the associations between the cues and outcomes, providing evidence that the NAc encodes the biological significance of stimuli. Once again, our study was different as we recorded neural responses to distinct cues encoding the same anticipated outcome, suggesting that even when the biological relevance of these stimuli is similar, the NAc dissociates their representations at the level of the single-unit (Setlow). Another possibility is that these modality specific cells were encoding the context, rule, or sequence within a session as some cells responded similar for both rewarded and unrewarded cues within a block. This interpretation is in alignment with a recent paper from the primate realm that recorded ventral striatal responses during the Wisconsin Card Sorting Task (WCST), a common set-shifting task used in both the laboratory and clinic, and found cells that preferred firing to stimuli when a certain rule, or rule category was currently active (Sleezer). Indeed, an encoding of the current strategy could be an explanation as to why differentially tiling of task structure was observed across blocks in the current study. Further support for a modulation of NAc responses by strategy comes from an fMRI study that examined BOLD levels during a set-shifting task (FitzGerald et al., 2014). In this task, participants learned two sets of stimuli-reward contingencies, a visual set and auditory set. During testing they were presented with both simultaneously, and the stimulus dimension that was relevant was periodically shifted between the two. Here, they found that bilateral NAc activity reflected value representations of whatever the currently relevant stimulus dimension was, and not the irrelevant stimulus. The current finding of separate, but overlapping, populations of cells encoding cue modality and expected value, suggests that the fMRI finding is generated by the combined activity of several different functional cell types. 
+
+A caveat of the current study is that rats were never presented with both sets of cues simultaneously, and thus never had to switch strategies, although extrapolating the data from the primate study, suggests that the activity of the cue modality cells would be modulated by relevance. Keeping along this theme, the current data set is unable to identity precisely what the modality-sensitive neurons were encoding, that is were they tracking representations of stimulus identity, a preferred context, or even a macroscale representation of progress through the session. Furthermore, their relevance for ongoing behavior is also uncertain. Nucleus accumbens core lesions have been shown to impair shifting between different behavioral strategies, and it is possible that selectively silencing the cells that prefer responding for a given modality or rule would impair performance when the animal is required to use that information, or artificial enhancement of those cells would cause them to use the rule when it is the inappropriate strategy.  
+
+{\bf Encoding of position:} 
+
+Our finding that cue-evoked activity was modulated by cue location sides with some of the literature (Lavoie, 1994; Tabuchi, 2000; Strait, 2016). An alternative explanation for a pure spatial representation, is that these are task segmentation correlates, keeping track of where in the task the rat is. A previous non-human primate paper has shown that when reward is contingent upon completion of a series of trials, separate populations of NAc neurons signal the start of a schedule, subsequent trials in the schedule, and the first trial in extended schedules (Shidara et al., 1998). This signalling of position within a sequence has been observed in subsequent studies, and it is possible that the our rats were keeping track of which specific arm they were in as part of a sequence of arms, and not just strictly a spatial representation (Mulder, 2004 and 2005; Khamassi et al., 2008; Berke, 2009). Also, given that our task is pseudo-random, it is possible that the rats learned which cue to anticipate, and the neural activity could reflect this. However, this is unlikely as including a ‘previous trial’ variable in the analysis did not explain a significant amount of firing rate variance in response to the cue for the vast majority of cells..
+
+{\bf Mixed selectivity:} 
+
+Several other papers have reported unit profiles that integrate different task-related variables. These papers report integrated coding between expected value and subsequent motor responses, expected value and identity of a reward, and a combination of spatial-, movement-, and reward-related features (Roesch, Lavoie, Cooch). However, our study is the first to show mixed selectivity among identifying features of a cue and expected outcome or behavior. The presence of mixed selectivity responses confers a larger number of input-output relationships that are available to a given neuron. A possible functional consequence of this attribute of NAc units, is the combination and transformation of various motivationally relevant features into a signal informing downstream decoders such as the ventral pallidum about appropriate behaviors in obtaining motivationally relevant goals and biasing action selection towards these behaviors. 
+Mixed selectivity in the NAc could be a consequence of synaptic integration from a variety of anatomically distinct inputs, as seen in experiments examining the convergence of various NAc afferents at the level of synaptic transmission and stimulation-induced firing (Goto and Grace 2008). In one such experiment it was shown that NAc cells that responded to stimulation of either the fornix, amygdala, or PFC, typically responded to stimulation from all inputs (O’Donnell and Grace, 1995). Furthermore, an interaction between these inputs was observed such that PFC stimulation failed to elicit spiking in the NAc neurons unless they were in a depolarized UP-state, a state induced by hippocampal stimulation and was dependent on an intact fornix. Hippocampal-induced suppression of other inputs has also been observed for the BLA (Mulder et al., 1998). Recently, it has also been shown that train stimulation of PFC afferents reduces hippocampal-evoked NAc responses, suggesting that there is competition between various inputs (Calhoon and O’Donnell, 2013). These studies suggest that the integration of the variables we saw could be the result of this gating observed in behaviorally-independent preparations. However, given that we did not systematically manipulate these various limbic and cortical afferents, comments on the anatomical origins of the observed mixed selectivity responses are speculative at this point.
+
+Integrating cue identity and value, as seen in the present study, could be one neural instantiation of how value is associated with the appropriate predictive stimuli (credit assignment), keeping in mind that value encoding is distributed, redundantly in some aspects, across various structures (Hayden Nat Neuro opinion). Indeed, lesions of the NAc impair the ability to learn changes in reward value or identity in an unblocking experiment, as well as disrupting dopamine RPEs generated by modification of timing of reward (McDannald 2011, Takahashi 2016). Would be interesting to see if uncoupling the integrated coding of stimulus features and predictive properties of a cue has an effect on the ability of a rat to use reward-predictive cues to pursue the associated reward.
+
+{\bf Tiling of task structure:}
+
+ Additionally, we found that the population of recorded units had a relatively uniform distribution of firing fields within our task space, similar to what has been reported previously (Shidara, 1998; Berke, 2009; Lansink, 2012). Uniquely, we found that this representation differed according to whether the rat was currently engaged in the light or sound block, suggesting that this could be a possible neural correlate for encoding the currently relevant strategy in the NAc. During progress through a predictable trial series, neurons represented state value of cue (Shidara 1998). Single-unit responses allowed the monkey to know how it was progressing throughout the task. Likewise, the tiling we saw could be a consequence of upstream cortical or limbic inputs informing the striatum of the current task rules. Another possibility is that the NAc not only pays attention to progress throughout a task within a trial, but also higher-order task information, like blocks. Cue location was a behaviorally irrelevant variable in the current experiment, but it is possible that if this tiling is dependent on hippocampal input, or related to a state value representation, that making cue location a relevant variable by adding positional contingencies such as only alternating arms are rewarded in one block, would result in a further separation of the mapping within a block between the rewarded and unrewarded arms. Furthermore, dopamine levels in the NAc fluctuate through a trial, and it is possible that the observed tiling could be a NAc-representation of state value related to this temporally evolving dopamine signal. Future experiments should monitor this mapping of task structure during the application of dopamine antagonists. Finally, the presence of functional correlates not evident when looking at single-unit responses time-locked to salient task events emphasizes the need to employ ensemble level analyses across all aspects of a task.
+
+%\bibliography{vStrCueCoding}
+\end{document}
