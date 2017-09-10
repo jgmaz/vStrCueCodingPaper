@@ -1,5 +1,5 @@
 % UPDATES:
-% Version 1.1 - JG initial import of text and figures from Google Drive, with edits
+% Version 1.2 - JG initial import of text and figures from Google Drive, with edits
 
 \documentclass[11pt]{article}
 
@@ -102,7 +102,7 @@ to do
 \newpage
 
 \section*{Introduction}
-% Version 1.1 - imported from Google Drive
+% Version 1.2 - imported from Google Drive
 % To do JG: refine (e.g. make more explicit the tie to the schematic), add references
 
 Theories of nucleus accumbens (NAc) function generally agree that this brain structure contributes to motivated behavior, with some emphasizing a role in learning from reward prediction errors (Joel, Doya, Schultz; see also the addiction literature on the effects of drug rewards; Nestler, Kalivas; Carelli) and others a role in the modulation of ongoing behavior through stimuli associated with motivationally relevant outcomes (invigorating, directing; Nicola, Floresco, Salamone). These proposals echo similar ideas on the functions of the neuromodulator dopamine (Schultz, Berridge, Maia/Frank, Cools), with which the NAc is tightly linked functionally as well as anatomically (Haber, Sesack, Takahashi).
@@ -123,8 +123,8 @@ Thus, both from a learning and a flexible performance perspective, it is of inte
 \end{figure}
 
 \section*{Methods}
-%Version 1.1 - imported from Google Drive
-%To do JG: elaborate on data analysis, add recording sites to histo figure
+%Version 1.2 - imported from Google Drive
+%To do JG: add stats for pop level and tiling stats
 
 {\bf Subjects:}
 
@@ -171,8 +171,8 @@ Upon completion of the experiment, rats were anesthetized with 5\% isoflurane, t
 \end{figure}
 
 \section*{Results}
-% Version 1.1 - Imported from Google Drive
-% To do JG: add more detail to text, finalize figures after Matt's approval, add table
+% Version 1.2 - Imported from Google Drive
+% To do JG: add more detail to text, finalize figures after Matt's approval
 
 \subsection*{Behavior}
 
@@ -279,7 +279,7 @@ To get a sense of how cue information was encoded at the population level, firin
 
 {\bf NAc units segment the task:}
 
-NAc neurons have been shown to have correlates across an entire task space. To look at the distribution of responses throughout our task space and see if this distribution is modulated by cue features, we z-scored the firing rate of each unit and plotted the normalized firing rates of all units aligned to cue-onset and according to peak firing rate. We did this separately for both the light and sound blocks, and found a nearly uniform distribution of firing fields in task space that was not limited to alignment to the cue (Figure \ref{fig:tiling}). Furthermore, to see if this population level activity was similar across blocks, we also organized firing during the sound blocks according to the ordering derived from the light blocks. This revealed, that the overall firing was qualitatively different across the two blocks. Additionally, given that the majority of our units showed an inhibitory response to the cue, we also plotted the firing rates according to the lowest time in firing. This process was repeated for cue location and cue outcome, with similar results. 
+NAc neurons have been shown to have correlates across an entire task space. To look at the distribution of responses throughout our task space and see if this distribution is modulated by cue features, we z-scored the firing rate of each unit and plotted the normalized firing rates of all units aligned to cue-onset and according to peak firing rate. We did this separately for both the light and sound blocks, and found a nearly uniform distribution of firing fields in task space that was not limited to alignment to the cue (Figure \ref{fig:tiling}). Furthermore, to see if this population level activity was similar across blocks, we also organized firing during the sound blocks according to the ordering derived from the light blocks. This revealed, that the overall firing was qualitatively different across the two blocks. Additionally, given that the majority of our units showed an inhibitory response to the cue, we also plotted the firing rates according to the lowest time in firing. This process was repeated for cue location and cue outcomes. 
 
 \begin{figure}[h]
 \centering
@@ -290,7 +290,7 @@ NAc neurons have been shown to have correlates across an entire task space. To l
  
 {\bf Encoding of cue features is not limited to cue-onset:}
 
-In order to be useful for learning, a trace of the cue must be maintained until the outcome. Fitting a GLM to the firing rates of cue-modulated units at the time of a nosepoke response showed that a variety of units still discriminated firing according to various cue features, but not other task parameters (Table \ref{tbl3}, Figures \ref{fig:NP_GLM}, \ref{fig:NP_pop}). Fitting a GLM to all recorded units...*Jimmie finish this* (data not shown). Furthermore, aligning normalized peak firing rates to nosepoke onset, revealed a clustering of responses around reward receipt (Figure \ref{fig:NP_tiling}). Alongside this, fitting a GLM to the firing rates of cue-modulated units at the time of reward receipt, revealed 10 units (8\%) where cue outcome accounted for an average of 32\% of firing rate variance (data not shown). 
+In order to be useful for learning, a trace of the cue must be maintained until the outcome. Fitting a GLM to the firing rates of cue-modulated units at the time of a nosepoke response showed that a variety of units still discriminated firing according to various cue features, but not other task parameters (Table \ref{tbl3}, Figures \ref{fig:NP_GLM},\ref{fig:NP_RSQ}, \ref{fig:NP_pop}). Fitting a GLM to all recorded units...*Jimmie finish this* (data not shown). Furthermore, aligning normalized peak firing rates to nosepoke onset, revealed a clustering of responses around reward receipt (Figure \ref{fig:NP_tiling}). Alongside this, fitting a GLM to the firing rates of cue-modulated units at the time of reward receipt, revealed 10 units (8\%) where cue outcome accounted for an average of 32\% of firing rate variance (data not shown). 
 
 \begin{table}[p]
 \centering
@@ -329,6 +329,13 @@ Cue x behavior interactions       & 0         & 0          & 0          & 0     
 
 \begin{figure}[h]
 \centering
+\includegraphics[width=\textwidth]{Fig 9b - RSquared.png}
+\caption{NP RSquared}
+\label{fig:NP_RSQ}
+\end{figure}
+
+\begin{figure}[h]
+\centering
 \includegraphics[width=\textwidth]{Fig 10 - NP population averages.png}
 \caption{NP population averages}
 \label{fig:NP_pop}
@@ -342,7 +349,7 @@ Cue x behavior interactions       & 0         & 0          & 0          & 0     
 \end{figure}
 
 \section*{Discussion}
-% Version 1.1 - Imported from Google Drive
+% Version 1.2 - Imported from Google Drive
 % To do JG: restructure to fit new results layout, add references
 
 The present study found evidence for coding of multiple identifying features of motivationally relevant stimuli; the sensory modality of the presented cue, as well at its physical location within the track. Furthermore, this coding was both independent, and intermixed with coding for the associated outcome of the cue as well as motivational vigor, measured by time to complete the trial. At the population level, a tiling of task structure was observed such that all points within our analyzed task space was accounted for by the ordered peak firing rates of all cells, and this tiling differed between blocks where sound or light cues were presented.
