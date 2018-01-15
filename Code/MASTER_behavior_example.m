@@ -1,9 +1,16 @@
+% explain at the start of each MASTER script what it does, and a summary of the steps involved
+
+% it seems this script duplicates behavioral analysis with others -- should make that into a function or separate script
+
 %% R060 light
 
+% for clarity, put settings/parameters/constants into a cfg struct, e.g. cfg.first_vs.. and explain what they do
 data_days = 70; % how many days of data
 cum_rolling_avg_light = linspace(0,0,200);
 first_vs_second_half = 1;
 
+% it looks like this is just a list of filenames -- is better stored as a cell array. e.g. fn{1} = cat(2,DATA_ROOT,'R060\R060-2014-07-16\');
+% relatedly: recording sessions should be organized as follows: Rxxx\Rxxx-YYYY-MM-DD\
 for ij = 1:data_days
     clear behav_analysis
     switch ij
@@ -628,6 +635,8 @@ for i_day = 1:length(sound_app_1)
     p_sound_1(i_day) = 1 - chi2cdf(chi_sound_1(i_day),1);
     p_sound_2(i_day) = 1 - chi2cdf(chi_sound_2(i_day),1);
 end
+
+% if you are going to make multiple of the plots below, should be a function
 
 %%
 % figure
