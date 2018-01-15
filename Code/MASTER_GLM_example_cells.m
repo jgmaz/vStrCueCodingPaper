@@ -1,3 +1,7 @@
+% explain what this script does and what the steps are
+
+% have a cfg struct here that has all the parameters/constsants, including what folder you're getting the data from
+
 %% Which cell to load
 example_cells = {'R057-2015-02-15-TT11-cell2.mat', 'R057-2015-02-26-TT11-cell1.mat',... % cue modality
     'R053-2014-11-15-TT13-cell1.mat', 'R056-2015-06-05-TT7-cell1.mat',... % cue location
@@ -17,7 +21,7 @@ figure
     meta = metadata;
 disp(i);
 %%
-peak_value(1) = max(PETH.Trial.MEAN.rew_trials_light(4001:7000));
+peak_value(1) = max(PETH.Trial.MEAN.rew_trials_light(4001:7000)); % this 4001:7000 should be a parameter at the start (and ideally defined as something more human readable and robust like seconds?)
 peak_value(2) = max(PETH.Trial.MEAN.unrew_trials_light(4001:7000));
 peak_value(3) = max(PETH.Trial.MEAN.rew_trials_sound(4001:7000));
 peak_value(4) = max(PETH.Trial.MEAN.unrew_trials_sound(4001:7000));
@@ -51,7 +55,7 @@ maximum_value = max(peak_value);
 switch example_coding(i)
     case 1
 %% light v sound blocks
-    time_light = -5:.001:10;
+    time_light = -5:.001:10; % this also looks like some kind of setting that should be in a cfg at the top to avoid repetition/inadvertent changes
     time_light = time_light(1:length(PETH.Trial.MEAN.trials_light_PETH));
     time_sound = -5:.001:10;
     time_sound = time_sound(1:length(PETH.Trial.MEAN.trials_sound_PETH));
@@ -163,7 +167,7 @@ switch strcmp(sesh.session_id(1:4),'R060')
     case 0
 %% rasterplots
 subtightplot(8,4,example_fig_raster{i});
-for j = 1:length(metadata.TrialInfo_block1.trialT)
+for j = 1:length(metadata.TrialInfo_block1.trialT) % use informative var names, iTrial?
 %     switch metadata.TrialInfo_block1.approached(j)
 %         case 1
 %             colour = 'black';
