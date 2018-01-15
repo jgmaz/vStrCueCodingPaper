@@ -1,14 +1,17 @@
-directory = 'E:\Jimmie\Jimmie\Analysis\'; %working directory
+% start with description of what this script does and what the steps are
+
+directory = 'E:\Jimmie\Jimmie\Analysis\'; %working directory -- it's helpful to place these into a cfg struct, so that when reading code, it's clear what you're looking at (not a dynamically changing variable but a constant)
 destination = 'E:\CueCoding\mat files\'; %where to save .mat files
 
-for ii = 1:4 % work through each rat in the dataset
+% this block seems to define the list of sessions to include. That's likely to be useful for other analyses too (now or in the future) so could be broken out into a function.
+for ii = 1:4 % work through each rat in the dataset --> if you use a more informative name like 'iRat', makes code easier to read
     switch ii
         case 1
             rat_id = 'R053';
             day = {'-2014-11-04'; '-2014-11-05'; '-2014-11-06'; '-2014-11-07'; '-2014-11-08'; ...
                 '-2014-11-10'; '-2014-11-11'; '-2014-11-12'; '-2014-11-13'; '-2014-11-14'; ...
                 '-2014-11-15'; '-2014-11-16'};
-            block_order_list = [1 1 2 1 2 2 1 2 2 1 1 2];
+            block_order_list = [1 1 2 1 2 2 1 2 2 1 1 2]; % this should really be in metadata for each session
         case 2
             rat_id = 'R056';
             day = {'-2015-05-16'; '-2015-05-18'; '-2015-05-19'; '-2015-05-21'; '-2015-05-22'; ...
@@ -50,7 +53,7 @@ for ii = 1:4 % work through each rat in the dataset
         metadata.TrialInfo{1}.offsetT = meta.offsetT_block1;
         metadata.TrialInfo{2}.offsetT = meta.offsetT_block2;
         
-        for kk = 1:16
+        for kk = 1:16 % as elsewhere, use informative var names, such as iTT
             %% input tt info
             sesh.tt_number = kk; % which tt are you currently looking at
             disp(cat(2,'tetrode ',num2str(kk)));
@@ -107,6 +110,8 @@ for ii = 1:4 % work through each rat in the dataset
                 %% save variables in .mat file
                 save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','PETH','RAST','spk_t','dataPoint','sesh','SHUFF','DIFF','RANK');
                 clearvars -except ii kj kk jj sesh rat_id days block_order_list directory destination meta
+                
+                % nicely done breaking out the above steps into functions!
             end
         end
     end
