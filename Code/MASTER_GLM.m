@@ -1,13 +1,18 @@
+% describe what this script does and what the steps are
+
+% include cfg struct with constants and parameters at the start including location of data
+
 mat_files = dir('*.mat');
-for kk = 1:length(dir('*.mat'))
+for kk = 1:length(dir('*.mat')) % use infomative variable names, iCell, iSession, etc.
     load(mat_files(kk).name);
     mat_overview.fname{kk} = mat_files(kk).name;
     disp(cat(2,num2str(kk),'/',num2str(length(dir('*.mat')))));
     new_v_old = strcmp(mat_overview.fname{kk}(1:4),'R060');
     
-    if RANK.two.Trial > 975 || RANK.two.Trial < 26
-        if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
+    if RANK.two.Trial > 975 || RANK.two.Trial < 26 % what is this about? pls explain
+        if TESTS.WSR.Task.Trial_b4_vs_Trial < .01 % explain what this means, e.g. "for all task coding cells"
             
+            % the below is hard to follow and there seems to be repetition -- can this be broken out into a function with a human readable name?
             clear dataset ds %mdl
             switch new_v_old
                 case 0
@@ -223,6 +228,14 @@ end
 %%
 mat_files = dir('*.mat');
 
+% the below can be done with two nested loops, like this:
+% cell_types = {'HFN','SPN','Inc','Dec'};
+% vars = {'Location','Modality');
+% for iCell = 1:length(cell_types)
+%   for iVar = 1:length(vars)
+%     summary_var.(cell_types{iCell}).(vars{iVar}) = [];
+%   end
+% end
 GLM_matrices.count.combined = [];
 GLM_matrices.count.HFN_Inc = [];
 GLM_matrices.count.SPN_Inc = [];
@@ -418,6 +431,9 @@ for kk = 1:length(dir('*.mat'))
                                     end
                             end
                             
+                            % wow, the below block gets into really deep nesting of conditions and loops and therefore becomes hard to track...
+                            % at a minimum you should explain the logic of it in a comment block here
+                            % but it seems like could/should be simplified to avoid duplication and deep nesting
                             for ll = 2:length(mdl{1,kk}.CoefficientNames)
                                 if mdl{1,kk}.Coefficients{ll,4} < .01 %&& mdl{1,kk}.Coefficients{ll,4} ~= 0
                                     idx = [];
@@ -1058,8 +1074,9 @@ for kk = 1:length(dir('*.mat'))
                                                             end
                                                     end
                                             end
-                                    end
-                                end
+                                    end % of ...
+                                end % of...
+                                % adding explanations of what loop or conditional these ends end is helpful
                                     end
                                 end
                             end
@@ -1229,7 +1246,7 @@ GLM_matrices.count.combined_transposed = GLM_matrices.count.combined';
 figure
 imagesc(GLM_matrices.count.combined_transposed);
 map = [229/255,245/255,249/255
-    44/255,162/255,95/255];
+    44/255,162/255,95/255]; % put in cfg at the start
 colormap(map);
 set(gca,'YTickLabel','')
 
