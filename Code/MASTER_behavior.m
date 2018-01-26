@@ -510,6 +510,19 @@ temp_APP_rats(temp_APP+1:temp_APP*2,1) = 2;
 temp_APP_rats(temp_APP*2+1:temp_APP*3,1) = 3;
 temp_APP_rats(temp_APP*3+1:temp_APP*4,1) = 4;
 
+for iRat = 1:temp_APP
+    temp_APP_rats{iRat,1} = 'A';
+end
+for iRat = temp_APP+1:temp_APP*2
+    temp_APP_rats{iRat,1} = 'B';
+end
+for iRat = temp_APP*2+1:temp_APP*3
+    temp_APP_rats{iRat,1} = 'C';
+end
+for iRat = temp_APP*3+1:temp_APP*4
+    temp_APP_rats{iRat,1} = 'D';
+end
+
 BEHAV_summary.APP.ALL(:,1) = temp_APP_ALL(:,1);
 BEHAV_summary.APP.ALL(:,2) = temp_APP_rats;
 BEHAV_summary.APP.ALL(:,3) = temp_APP_ALL(:,2);
@@ -521,7 +534,8 @@ Length_lme_reduced = fitlme(Length_tbl,'TrialLength~1+(1|RatID)');
 
 Length_comparison = compare(Length_lme_reduced,Length_lme);
 
-APP_tbl = table(BEHAV_summary.APP.ALL(:,1),BEHAV_summary.APP.ALL(:,2),BEHAV_summary.APP.ALL(:,3),'VariableNames',{'RatID','CueType','AppProp'});
+APP_tbl = table(BEHAV_summary.APP.ALL(:,1),temp_APP_rats,BEHAV_summary.APP.ALL(:,3),'VariableNames',{'RatID','CueType','AppProp'});
+APP_tbl.CueType = nominal(APP_tbl.CueType);
 APP_lme = fitlme(APP_tbl,'AppProp~CueType+(1|RatID)'); %+(CueType-1|RatID)');
 APP_lme_reduced = fitlme(APP_tbl,'AppProp~1+(1|RatID)');
 

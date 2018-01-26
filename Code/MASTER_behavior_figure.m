@@ -18,7 +18,7 @@ plot([3.85 4.15],[mean_unrew_sound mean_unrew_sound],'k')
 xlim([0 5]); ylim([0 1]); title('Proportion Approached');
 % set(gca,'XTickLength', [0 0]); 
 set(gca,'XTickLabel',{'','Light+','Light-','Sound+','Sound-'});
-ylabel('Proportion approached'); xlabel('Cue identity');
+ylabel('Proportion approached'); xlabel('Cue type');
 box off;
 h = gca;
 h.XRuler.TickLength = 0; 
@@ -40,7 +40,7 @@ plot([3.85 4.15],[mean_unrew_sound2 mean_unrew_sound2],'k')
 xlim([0 5]); ylim([0 3]); title('Trial Length');
 % set(gca,'TickLength', [0 0]); box off;
 set(gca,'XTickLabel',{'','Light+','Light-','Sound+','Sound-'})
-    ylabel('Trial length (s)');  xlabel('Cue identity'); 'XTickLabelRotation',90,
+    ylabel('Trial length (s)');  xlabel('Cue type'); 'XTickLabelRotation',90,
 box off;
 h = gca;
 h.XRuler.TickLength = 0;   

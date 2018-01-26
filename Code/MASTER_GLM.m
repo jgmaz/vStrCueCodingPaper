@@ -392,6 +392,7 @@ for kk = 1:length(dir('*.mat'))
         case 0
             switch block_drift.MWU_b1(kk) < .01 || block_drift.MWU_b2(kk) < .01
                 case 0
+                    block_drift.summary(kk) = 0;
                     if RANK.two.Trial > 975 || RANK.two.Trial < 26
                         if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
                             summary_var.All.Cue = summary_var.All.Cue + 1;
@@ -1082,6 +1083,8 @@ for kk = 1:length(dir('*.mat'))
                             end
                         end
                     end
+                case 1
+                    block_drift.summary(kk) = 1;
             end
     end
 end
@@ -1315,14 +1318,27 @@ ylim([0 12]);
 ylabel('Percent improvement to R-Squared')
 
 %% plot for paper
+%add rows
+%add (6) spaces between SPN and HFNs
+GLM_matrices.Rsquared.cat_combined = cat(1,abs(GLM_matrices.Rsquared.SPN_Inc),abs(GLM_matrices.Rsquared.SPN_Dec)*-1,abs(GLM_matrices.Rsquared.HFN_Inc),abs(GLM_matrices.Rsquared.HFN_Dec)*-1)';
+for iCell = length(GLM_matrices.Rsquared.cat_combined):-1:1
+    for iFeature = 1:length(GLM_matrices.Rsquared.cat_combined(:,iCell))
+    if GLM_matrices.Rsquared.cat_combined(iFeature,iCell) > 100 || GLM_matrices.Rsquared.cat_combined(iFeature,iCell) < -100
+        GLM_matrices.Rsquared.cat_combined(:,iCell) = [];
+        break
+    end
+    end
+end
+
+%%
 rColorMap = [linspace(233/255, 255/255, 183),linspace(255/255, 161/255, 73)];
     gColorMap = [linspace(163/255, 255/255, 183),linspace(255/255, 215/255, 73)];
     bColorMap = [linspace(201/255, 255/255, 183),linspace(255/255, 106/255, 73)];
 colorMap = [rColorMap; gColorMap; bColorMap]';
 
 figure
-subplot(1,4,[1 2])
-heatmap(GLM_matrices.Rsquared.cat_combined(1:10,:),  'RowLabels', {'Cue modality','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue modality x location','Cue modality x outcome','Cue location x outcome'},... 
+subplot(3,12,[2 3 4 5 6 14 15 16 17 18])
+heatmap(GLM_matrices.Rsquared.cat_combined(1:10,:),  'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'},... 
 '%0.0f', 'Colormap',colorMap, ...
         'FontSize', 0); %, 'Colorbar', true);   
 % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
@@ -1330,9 +1346,10 @@ xlabel('Unit number');
 % xlabel('MSNs increasing      MSNs decreasing          FSIs increasing        FSIs decreasing')
 title('GLM matrix for cue-modulated units');  
 set(gca,'FontSize',18);
-subplot(1,4,[3 4])
+hold on; plot(108,1:.001:10,'.k');
+subplot(3,12,[8 9 10 11 12 20 21 22 23 24])
 violin(GLM_matrices.Rsquared.MEAN.ALL_NaN(:,1:7));
-set(gca,'XTickLabel',{'Modality','Location','Outcome','Approach','Trial length','Trial number','Previous'})
+set(gca,'XTickLabel',{'Identity','Location','Outcome','Approach','Trial length','Trial number','Previous'},'XTickLabelRotation',45)
 % ylim([0 12]);
 ylabel('Percent improvement to R-Squared')
 title('Summary of changes to model fit')

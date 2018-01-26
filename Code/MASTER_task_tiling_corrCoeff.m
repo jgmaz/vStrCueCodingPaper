@@ -589,3 +589,175 @@ subplot(3,4,12)
 scatter(abs(Corr.loc.ctrl.arm2),abs(Corr.loc.cond.one2_v_two2))
 hold on; line([0 1],[0 1]); title(cat(2,'ctrl arm2 v comp4; p = ',num2str(Corr.loc.ttest.cond.arm2_cond4)))
 xlabel('ctrl arm2'); ylabel('comparison 4');
+
+%% set up variables for LME (mod)
+temp_Corr = 1:length(Corr.mod.ctrl.light);
+Corr_mod_summary(:,1) = cat(2,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr)';
+
+temp_length = length(Corr.mod.ctrl.light);
+for iCell = 1:temp_length
+temp_Corr_cells{iCell,1} = 'A';
+end
+for iCell = temp_length+1:temp_length*2
+temp_Corr_cells{iCell,1} = 'B';
+end
+for iCell = temp_length*2+1:temp_length*3
+temp_Corr_cells{iCell,1} = 'C';
+end
+for iCell = temp_length*3+1:temp_length*4
+temp_Corr_cells{iCell,1} = 'D';
+end
+for iCell = temp_length*4+1:temp_length*5
+temp_Corr_cells{iCell,1} = 'E';
+end
+for iCell = temp_length*5+1:temp_length*6
+temp_Corr_cells{iCell,1} = 'F';
+end
+
+% temp_Corr_cells(1:temp_length,1) = 'A';
+% temp_Corr_cells(temp_length+1:temp_length*2,1) = 'B';
+% temp_Corr_cells(temp_length*2+1:temp_length*3,1) = 'C';
+% temp_Corr_cells(temp_length*3+1:temp_length*4,1) = 'D';
+% temp_Corr_cells(temp_length*4+1:temp_length*5,1) = 'E';
+% temp_Corr_cells(temp_length*5+1:temp_length*6,1) = 'F';
+% Corr_mod_summary(:,2) = temp_Corr_cells;
+
+% temp_Corr_cond(1:temp_length,1) = 1;
+% temp_Corr_cond(temp_length+1:temp_length*2,1) = 1;
+% temp_Corr_cond(temp_length*2+1:temp_length*3,1) = 2;
+% temp_Corr_cond(temp_length*3+1:temp_length*4,1) = 2;
+% temp_Corr_cond(temp_length*4+1:temp_length*5,1) = 2;
+% temp_Corr_cond(temp_length*5+1:temp_length*6,1) = 2;
+% Corr_mod_summary(:,3) = temp_Corr_cond;
+
+Corr_mod_summary(:,2) = cat(2,Corr.mod.ctrl.light,Corr.mod.ctrl.sound,Corr.mod.cond.l1_v_s1,Corr.mod.cond.l1_v_s2,Corr.mod.cond.l2_v_s1,Corr.mod.cond.l2_v_s2)';
+
+%% linear mixed effects model (mod)
+Corr.mod.LME.tbl = table(Corr_mod_summary(:,1),temp_Corr_cells,Corr_mod_summary(:,2),'VariableNames',{'CellID','compType','corrCoeff'});
+Corr.mod.LME.tbl.compType = nominal(Corr.mod.LME.tbl.compType);
+Corr.mod.LME.lme = fitlme(Corr.mod.LME.tbl,'corrCoeff~compType+(1|CellID)');%,'DummyVarCoding','effects');% +(CueType-1|RatID)'); <- matlab includes this, not sure why %lme for Trial length with cue type as fixed effect and a random intercept for each rat.
+Corr.mod.LME.lme_reduced = fitlme(Corr.mod.LME.tbl,'corrCoeff~1+(1|CellID)');
+
+Corr.mod.LME.comparison = compare(Corr.mod.LME.lme_reduced,Corr.mod.LME.lme);
+
+%% set up variables for LME (loc)
+temp_Corr = 1:length(Corr.loc.ctrl.light);
+Corr_loc_summary(:,1) = cat(2,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr)';
+
+temp_length = length(Corr.loc.ctrl.light);
+for iCell = 1:temp_length
+temp_Corr_cells{iCell,1} = 'A';
+end
+for iCell = temp_length+1:temp_length*2
+temp_Corr_cells{iCell,1} = 'B';
+end
+for iCell = temp_length*2+1:temp_length*3
+temp_Corr_cells{iCell,1} = 'C';
+end
+for iCell = temp_length*3+1:temp_length*4
+temp_Corr_cells{iCell,1} = 'D';
+end
+for iCell = temp_length*4+1:temp_length*5
+temp_Corr_cells{iCell,1} = 'E';
+end
+for iCell = temp_length*5+1:temp_length*6
+temp_Corr_cells{iCell,1} = 'F';
+end
+
+% temp_Corr_cells(1:temp_length,1) = 'A';
+% temp_Corr_cells(temp_length+1:temp_length*2,1) = 'B';
+% temp_Corr_cells(temp_length*2+1:temp_length*3,1) = 'C';
+% temp_Corr_cells(temp_length*3+1:temp_length*4,1) = 'D';
+% temp_Corr_cells(temp_length*4+1:temp_length*5,1) = 'E';
+% temp_Corr_cells(temp_length*5+1:temp_length*6,1) = 'F';
+% Corr_loc_summary(:,2) = temp_Corr_cells;
+
+% temp_Corr_cond(1:temp_length,1) = 1;
+% temp_Corr_cond(temp_length+1:temp_length*2,1) = 1;
+% temp_Corr_cond(temp_length*2+1:temp_length*3,1) = 2;
+% temp_Corr_cond(temp_length*3+1:temp_length*4,1) = 2;
+% temp_Corr_cond(temp_length*4+1:temp_length*5,1) = 2;
+% temp_Corr_cond(temp_length*5+1:temp_length*6,1) = 2;
+% Corr_loc_summary(:,3) = temp_Corr_cond;
+
+Corr_loc_summary(:,2) = cat(2,Corr.loc.ctrl.arm1,Corr.loc.ctrl.arm2,Corr.loc.cond.one1_v_two1,Corr.loc.cond.one1_v_two2,Corr.loc.cond.one2_v_two1,Corr.loc.cond.one2_v_two2)';
+
+%% linear mixed effects model (loc)
+Corr.loc.LME.tbl = table(Corr_loc_summary(:,1),temp_Corr_cells,Corr_loc_summary(:,2),'VariableNames',{'CellID','compType','corrCoeff'});
+Corr.loc.LME.tbl.compType = nominal(Corr.loc.LME.tbl.compType);
+Corr.loc.LME.lme = fitlme(Corr.loc.LME.tbl,'corrCoeff~compType+(1|CellID)');%,'DummyVarCoding','effects');% +(CueType-1|RatID)'); <- matlab includes this, not sure why %lme for Trial length with cue type as fixed effect and a random intercept for each rat.
+Corr.loc.LME.lme_reduced = fitlme(Corr.loc.LME.tbl,'corrCoeff~1+(1|CellID)');
+
+Corr.loc.LME.comparison = compare(Corr.loc.LME.lme_reduced,Corr.loc.LME.lme);
+
+%% set up variables for LME (out)
+temp_Corr = 1:length(Corr.out.ctrl.light);
+Corr_out_summary(:,1) = cat(2,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr,temp_Corr)';
+
+temp_length = length(Corr.out.ctrl.light);
+for iCell = 1:temp_length
+temp_Corr_cells{iCell,1} = 'A';
+end
+for iCell = temp_length+1:temp_length*2
+temp_Corr_cells{iCell,1} = 'B';
+end
+for iCell = temp_length*2+1:temp_length*3
+temp_Corr_cells{iCell,1} = 'C';
+end
+for iCell = temp_length*3+1:temp_length*4
+temp_Corr_cells{iCell,1} = 'D';
+end
+for iCell = temp_length*4+1:temp_length*5
+temp_Corr_cells{iCell,1} = 'E';
+end
+for iCell = temp_length*5+1:temp_length*6
+temp_Corr_cells{iCell,1} = 'F';
+end
+
+% temp_Corr_cells(1:temp_length,1) = 'A';
+% temp_Corr_cells(temp_length+1:temp_length*2,1) = 'B';
+% temp_Corr_cells(temp_length*2+1:temp_length*3,1) = 'C';
+% temp_Corr_cells(temp_length*3+1:temp_length*4,1) = 'D';
+% temp_Corr_cells(temp_length*4+1:temp_length*5,1) = 'E';
+% temp_Corr_cells(temp_length*5+1:temp_length*6,1) = 'F';
+% Corr_out_summary(:,2) = temp_Corr_cells;
+
+% temp_Corr_cond(1:temp_length,1) = 1;
+% temp_Corr_cond(temp_length+1:temp_length*2,1) = 1;
+% temp_Corr_cond(temp_length*2+1:temp_length*3,1) = 2;
+% temp_Corr_cond(temp_length*3+1:temp_length*4,1) = 2;
+% temp_Corr_cond(temp_length*4+1:temp_length*5,1) = 2;
+% temp_Corr_cond(temp_length*5+1:temp_length*6,1) = 2;
+% Corr_out_summary(:,3) = temp_Corr_cond;
+
+Corr_out_summary(:,2) = cat(2,Corr.out.ctrl.rew,Corr.out.ctrl.unrew,Corr.out.cond.r1_v_un1,Corr.out.cond.r1_v_un2,Corr.out.cond.r2_v_un1,Corr.out.cond.r2_v_un2)';
+
+%% linear mixed effects model (out)
+Corr.out.LME.tbl = table(Corr_out_summary(:,1),temp_Corr_cells,Corr_out_summary(:,2),'VariableNames',{'CellID','compType','corrCoeff'});
+Corr.out.LME.tbl.compType = nominal(Corr.out.LME.tbl.compType);
+Corr.out.LME.lme = fitlme(Corr.out.LME.tbl,'corrCoeff~compType+(1|CellID)');%,'DummyVarCoding','effects');% +(CueType-1|RatID)'); <- matlab includes this, not sure why %lme for Trial length with cue type as fixed effect and a random intercept for each rat.
+Corr.out.LME.lme_reduced = fitlme(Corr.out.LME.tbl,'corrCoeff~1+(1|CellID)');
+
+Corr.out.LME.comparison = compare(Corr.out.LME.lme_reduced,Corr.out.LME.lme);
+
+%% means for table
+Corr.mod.mean.light = nanmean(abs(Corr.mod.ctrl.light));
+Corr.mod.mean.sound = nanmean(abs(Corr.mod.ctrl.sound));
+Corr.mod.mean.cond1 = nanmean(abs(Corr.mod.cond.l1_v_s1));
+Corr.mod.mean.cond2 = nanmean(abs(Corr.mod.cond.l1_v_s2));
+Corr.mod.mean.cond3 = nanmean(abs(Corr.mod.cond.l2_v_s1));
+Corr.mod.mean.cond4 = nanmean(abs(Corr.mod.cond.l2_v_s2));
+
+Corr.loc.mean.arm1 = nanmean(abs(Corr.loc.ctrl.arm1));
+Corr.loc.mean.arm2 = nanmean(abs(Corr.loc.ctrl.arm2));
+Corr.loc.mean.cond1 = nanmean(abs(Corr.loc.cond.one1_v_two1));
+Corr.loc.mean.cond2 = nanmean(abs(Corr.loc.cond.one1_v_two2));
+Corr.loc.mean.cond3 = nanmean(abs(Corr.loc.cond.one2_v_two1));
+Corr.loc.mean.cond4 = nanmean(abs(Corr.loc.cond.one2_v_two2));
+
+Corr.out.mean.rew = nanmean(abs(Corr.out.ctrl.rew));
+Corr.out.mean.unrew = nanmean(abs(Corr.out.ctrl.unrew));
+Corr.out.mean.cond1 = nanmean(abs(Corr.out.cond.r1_v_un1));
+Corr.out.mean.cond2 = nanmean(abs(Corr.out.cond.r1_v_un2));
+Corr.out.mean.cond3 = nanmean(abs(Corr.out.cond.r2_v_un1));
+Corr.out.mean.cond4 = nanmean(abs(Corr.out.cond.r2_v_un2));
