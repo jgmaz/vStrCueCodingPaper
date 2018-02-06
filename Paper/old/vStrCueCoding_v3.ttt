@@ -1,0 +1,91 @@
+\begin{table}[p]
+\centering
+\setlength{\tabcolsep}{1 em} % for the horizontal padding
+\begin{tabular}{l c  c c c c}
+
+Rat                                   & Total        & $\uparrow$ MSN        & $\downarrow$ MSN        & $\uparrow$ FSI       & $\downarrow$ FSI\\
+\hline
+R053                       & 145         & 51          & 79          & 4         & 11\\
+\hline
+R056                       & 70         & 12          & 13         & 17          & 28\\
+\hline
+R057              & 136         & 55          & 75          & 3          & 3\\
+\hline
+R060                       & 92         & 37          & 49          & 3          & 3\\
+\hline
+
+\end{tabular}
+\caption {Cells from each rat} \label{tbl1}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[p]
+\centering
+\setlength{\tabcolsep}{1 em} % for the horizontal padding
+\begin{tabular}{l c  c c c c}
+
+Task parameter                                 & Total        & $\uparrow$ MSN        & $\downarrow$ MSN        & $\uparrow$ FSI       & $\downarrow$ FSI\\
+\hline
+All units                       & 443        & 155         & 216          & 27          & 45\\
+\hline
+Analyzed units                       & 344        & ?         & ?         & ?          & ?\\
+\hline
+Cue modulated units                      & 133         &24          &85          & 6          &18\\
+\hline
+GLM aligned to cue-onset                       &         &       &          &          &\\
+\hline
+Cue identity       & 37         & 7          & 21          & 1          & 8\\
+\hline
+Cue location       & 50         &13          & 27          & 3          & 7\\
+\hline
+Cue outcome       & 34         & 10          & 18        & 0          & 6\\
+\hline
+Approach behavior      & 31         & 8          & 18          & 1          & 4\\
+\hline
+Trial length       & 25        & 5          & 18         & 0         & 2\\
+\hline
+Trial number       & 32         & 11          & 12         & 1          & 8\\
+\hline
+Recent trial history       & 5         & 0          &5          & 0          & 0\\
+\hline
+Cue x cue interactions       & 11         & 3          & 7          & 0          & 1\\
+\hline
+Cue x behavior interactions       & ?         & ?          & ?          & ?          & ?\\
+\hline
+GLM aligned to nosepoke                       &         &       &          &          &\\
+\hline
+Cue identity       & 66         &14          & 36          & 2          &14\\
+\hline
+Cue location       & 66         &14          & 40          & 3          & 9\\
+\hline
+Cue outcome       & 42        & 8          & 29        & 0          & 5\\
+\hline
+GLM aligned to outcome                       &         &       &          &          &\\
+\hline
+Cue outcome       & 10        & 0          & 6       & 0          &4\\
+\hline
+
+\end{tabular}
+\caption {Cells from GLM} \label{tbl2}
+\end{table}
+\efloatseparator
+ 
+\begin{table}[p]
+\centering
+\setlength{\tabcolsep}{1 em} % for the horizontal padding
+\begin{tabular}{l c  c c c c c}
+
+Task parameter                                 & Within condition 1        &Within condition 2        & Across conditions 1        &Across conditions 2       &Across conditions 3       &Across conditions 4\\
+\hline
+Cue identity       & .383         &.379          & .343          & .338          &.337        &.348\\
+\hline
+Cue location       & .369         &.350          & .290          & .286          & .285        &.291\\
+\hline
+Cue outcome       & .429        &.261          & .258        & .253          & .255        &.249\\
+\hline
+
+\end{tabular}
+\caption {Firing rate correlations} \label{tbl3}
+\end{table}
+\efloatseparator
+ 

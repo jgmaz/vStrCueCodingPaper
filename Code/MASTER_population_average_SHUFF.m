@@ -586,6 +586,45 @@ popSHUFF_fig.location_encoding.four.DEC.SEM(iBin,1) = std(popSHUFF.location_enco
 
 end
 
+%% CI
+CI_range = [0.025 0.975];
+ts = tinv(CI_range,999);
+
+encoding_vars = {'rule_encoding' 'location_encoding' 'outcome_encoding'};
+arms = {'one' 'two' 'three' 'four'};
+pref_vars = {'pref' 'nonpref'};
+direction = {'INC' 'DEC'};
+CI_vars = {'CI_max' 'CI_min'};
+
+for iVars = 1:length(encoding_vars)
+    for iDir = 1:length(direction)
+        for iCI = 1:length(CI_vars)
+            if iVars == 2
+                for iArm = 1:length(arms)
+                    popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).(CI_vars{iCI}).raw = ...
+                        popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).MEAN ...
+                        + ts(iCI)*popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).SEM;
+                    
+                    popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).(CI_vars{iCI}).abs = ...
+                        abs(popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).MEAN - ...
+                        popSHUFF_fig.(encoding_vars{iVars}).(arms{iArm}).(direction{iDir}).(CI_vars{iCI}).raw);
+                end
+            else
+                for iPref = 1:length(pref_vars)
+                    popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).(CI_vars{iCI}).raw = ...
+                        popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).MEAN ...
+                        + ts(iCI)*popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).SEM;
+                    
+                    popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).(CI_vars{iCI}).abs = ...
+                        abs(popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).MEAN - ...
+                      popSHUFF_fig.(encoding_vars{iVars}).(pref_vars{iPref}).(direction{iDir}).(CI_vars{iCI}).raw);  
+                end
+            end
+        end
+    end
+end
+    
+
 %% plot for modality (normalized)
 peak_value = [];
 min_value = [];
