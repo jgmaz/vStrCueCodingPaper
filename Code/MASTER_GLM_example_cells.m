@@ -2,14 +2,14 @@
 example_cells = {'R057-2015-02-15-TT11-cell2.mat', 'R057-2015-02-26-TT11-cell1.mat',... % cue modality (inc, dec)
     'R053-2014-11-15-TT13-cell1.mat', 'R056-2015-06-05-TT7-cell1.mat',... % cue location (inc, dec)
      'R060-2015-01-03-TT7-cell1.mat', 'R053-2014-11-15-TT4-cell1.mat',... % cue outcome (inc, dec)
-      'R053-2014-11-12-TT4-cell3.mat','R053-2014-11-12-TT5-cell1.mat', }; % multiple cue features (mod x outcome, mod x loc, respectively)
-example_coding = [1 1 2 2 3 3 5 4]; % what to visualize, 1 = modality, 2 = location, 3 = outcome, 4 = mod x loc, 5 = mod x outcome
+      'R053-2014-11-12-TT5-cell1.mat','R060-2015-01-04-TT15-cell1.mat'}; % multiple cue features (mod x outcome, loc x out, respectively) 'R053-2014-11-12-TT4-cell3.mat' - old modxout 'R053-2014-11-12-TT5-cell1.mat' - old modxloc
+example_coding = [1 1 2 2 3 3 5 4]; % what to visualize, 1 = modality, 2 = location, 3 = outcome, 4 = loc x out, 5 = mod x outcome
 example_fig_PETH = {9,10,11,12,25,26,27,28};
 example_fig_raster = {[1 5],[2 6],[3 7],[4 8],[17 21],[18 22],[19 23],[20 24]};
 example_types = {'Cue identity - increasing','Cue identity - decreasing',...
     'Cue location - increasing','Cue location - decreasing',...
     'Cue outcome - increasing','Cue outcome - decreasing',...
-    'Cue identity x cue outcome','Cue identity x cue location'};
+    'Cue identity x cue outcome','Cue location x cue outcome'};
 figure
 
   for i = 1:length(example_cells)
@@ -95,44 +95,44 @@ set(y, 'position', get(y,'position')+[.14,0,0]);
 set(gca,'FontSize',16)%,'YTick',[]);
 
     case 4
-%% mod x loc
-    peak_value(1) = max(PETH.Arm.MEAN.photosensor1_light(4001:7000));
-peak_value(2) = max(PETH.Arm.MEAN.photosensor2_light(4001:7000));
-peak_value(3) = max(PETH.Arm.MEAN.photosensor3_light(4001:7000));
-peak_value(4) = max(PETH.Arm.MEAN.photosensor4_light(4001:7000));
+%% loc x out
+    peak_value(1) = max(PETH.Arm.MEAN.photosensor1_rew(4001:7000));
+peak_value(2) = max(PETH.Arm.MEAN.photosensor2_rew(4001:7000));
+peak_value(3) = max(PETH.Arm.MEAN.photosensor3_rew(4001:7000));
+peak_value(4) = max(PETH.Arm.MEAN.photosensor4_rew(4001:7000));
 
-    peak_value(5) = max(PETH.Arm.MEAN.photosensor1_sound(4001:7000));
-peak_value(6) = max(PETH.Arm.MEAN.photosensor2_sound(4001:7000));
-peak_value(7) = max(PETH.Arm.MEAN.photosensor3_sound(4001:7000));
-peak_value(8) = max(PETH.Arm.MEAN.photosensor4_sound(4001:7000));
+    peak_value(5) = max(PETH.Arm.MEAN.photosensor1_unrew(4001:7000));
+peak_value(6) = max(PETH.Arm.MEAN.photosensor2_unrew(4001:7000));
+peak_value(7) = max(PETH.Arm.MEAN.photosensor3_unrew(4001:7000));
+peak_value(8) = max(PETH.Arm.MEAN.photosensor4_unrew(4001:7000));
 maximum_value = max(peak_value);
 
-photosensor1_light_time = -5:.001:10;
-    photosensor1_light_time = photosensor1_light_time(1:length(PETH.Arm.MEAN.photosensor1_light));
-    photosensor2_light_time = -5:.001:10;
-    photosensor2_light_time = photosensor2_light_time(1:length(PETH.Arm.MEAN.photosensor2_light));
-    photosensor3_light_time = -5:.001:10;
-    photosensor3_light_time = photosensor3_light_time(1:length(PETH.Arm.MEAN.photosensor3_light));
-    photosensor4_light_time = -5:.001:10;
-    photosensor4_light_time = photosensor4_light_time(1:length(PETH.Arm.MEAN.photosensor4_light));
-    photosensor1_sound_time = -5:.001:10;
-    photosensor1_sound_time = photosensor1_sound_time(1:length(PETH.Arm.MEAN.photosensor1_sound));
-    photosensor2_sound_time = -5:.001:10;
-    photosensor2_sound_time = photosensor2_sound_time(1:length(PETH.Arm.MEAN.photosensor2_sound));
-    photosensor3_sound_time = -5:.001:10;
-    photosensor3_sound_time = photosensor3_sound_time(1:length(PETH.Arm.MEAN.photosensor3_sound));
-    photosensor4_sound_time = -5:.001:10;
-    photosensor4_sound_time = photosensor4_sound_time(1:length(PETH.Arm.MEAN.photosensor4_sound));
+photosensor1_rew_time = -5:.001:10;
+    photosensor1_rew_time = photosensor1_rew_time(1:length(PETH.Arm.MEAN.photosensor1_rew));
+    photosensor2_rew_time = -5:.001:10;
+    photosensor2_rew_time = photosensor2_rew_time(1:length(PETH.Arm.MEAN.photosensor2_rew));
+    photosensor3_rew_time = -5:.001:10;
+    photosensor3_rew_time = photosensor3_rew_time(1:length(PETH.Arm.MEAN.photosensor3_rew));
+    photosensor4_rew_time = -5:.001:10;
+    photosensor4_rew_time = photosensor4_rew_time(1:length(PETH.Arm.MEAN.photosensor4_rew));
+    photosensor1_unrew_time = -5:.001:10;
+    photosensor1_unrew_time = photosensor1_unrew_time(1:length(PETH.Arm.MEAN.photosensor1_unrew));
+    photosensor2_unrew_time = -5:.001:10;
+    photosensor2_unrew_time = photosensor2_unrew_time(1:length(PETH.Arm.MEAN.photosensor2_unrew));
+    photosensor3_unrew_time = -5:.001:10;
+    photosensor3_unrew_time = photosensor3_unrew_time(1:length(PETH.Arm.MEAN.photosensor3_unrew));
+    photosensor4_unrew_time = -5:.001:10;
+    photosensor4_unrew_time = photosensor4_unrew_time(1:length(PETH.Arm.MEAN.photosensor4_unrew));
     
-    subtightplot(8,4,example_fig_PETH{i},[0,.03]); shadedErrorBar(photosensor1_light_time,PETH.Arm.MEAN.photosensor1_light,PETH.Arm.SEM.photosensor1_light,'-m',1);
+    subtightplot(8,4,example_fig_PETH{i},[0,.03]); shadedErrorBar(photosensor1_rew_time,PETH.Arm.MEAN.photosensor1_rew,PETH.Arm.SEM.photosensor1_rew,'-m',1);
     hold on; plot(0,0:maximum_value/20:maximum_value+(maximum_value*.2),'.','color','black');
-    shadedErrorBar(photosensor2_light_time,PETH.Arm.MEAN.photosensor2_light,PETH.Arm.SEM.photosensor2_light,'-b',1);
-    shadedErrorBar(photosensor3_light_time,PETH.Arm.MEAN.photosensor3_light,PETH.Arm.SEM.photosensor3_light,'-k',1);
-    shadedErrorBar(photosensor4_light_time,PETH.Arm.MEAN.photosensor4_light,PETH.Arm.SEM.photosensor4_light,'-y',1);
-    shadedErrorBar(photosensor1_sound_time,PETH.Arm.MEAN.photosensor1_sound,PETH.Arm.SEM.photosensor1_sound,'-r',1);
-    shadedErrorBar(photosensor2_sound_time,PETH.Arm.MEAN.photosensor2_sound,PETH.Arm.SEM.photosensor2_sound,'-c',1);
-    shadedErrorBar(photosensor3_sound_time,PETH.Arm.MEAN.photosensor3_sound,PETH.Arm.SEM.photosensor3_sound,'-k',1);
-    shadedErrorBar(photosensor4_sound_time,PETH.Arm.MEAN.photosensor4_sound,PETH.Arm.SEM.photosensor4_sound,'-g',1);
+    shadedErrorBar(photosensor2_rew_time,PETH.Arm.MEAN.photosensor2_rew,PETH.Arm.SEM.photosensor2_rew,'-b',1);
+    shadedErrorBar(photosensor3_rew_time,PETH.Arm.MEAN.photosensor3_rew,PETH.Arm.SEM.photosensor3_rew,'-k',1);
+    shadedErrorBar(photosensor4_rew_time,PETH.Arm.MEAN.photosensor4_rew,PETH.Arm.SEM.photosensor4_rew,'-y',1);
+    shadedErrorBar(photosensor1_unrew_time,PETH.Arm.MEAN.photosensor1_unrew,PETH.Arm.SEM.photosensor1_unrew,'-r',1);
+    shadedErrorBar(photosensor2_unrew_time,PETH.Arm.MEAN.photosensor2_unrew,PETH.Arm.SEM.photosensor2_unrew,'-c',1);
+    shadedErrorBar(photosensor3_unrew_time,PETH.Arm.MEAN.photosensor3_unrew,PETH.Arm.SEM.photosensor3_unrew,'-k',1);
+    shadedErrorBar(photosensor4_unrew_time,PETH.Arm.MEAN.photosensor4_unrew,PETH.Arm.SEM.photosensor4_unrew,'-g',1);
      xlim([-1.15 2.15]); ylim([0 maximum_value+(maximum_value*.2)]);
   box off;
 xlabel('Time from cue onset (s)');

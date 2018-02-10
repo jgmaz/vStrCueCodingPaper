@@ -341,6 +341,15 @@ if sesh.PETH.Arm == 1
     photosensor2_b2_count = 1;
     photosensor3_b2_count = 1;
     photosensor4_b2_count = 1;
+    photosensor1_rew_count = 1;
+    photosensor2_rew_count = 1;
+    photosensor3_rew_count = 1;
+    photosensor4_rew_count = 1;
+    photosensor1_unrew_count = 1;
+    photosensor2_unrew_count = 1;
+    photosensor3_unrew_count = 1;
+    photosensor4_unrew_count = 1;
+    
     for ik = 1:length(meta.TrialInfo_block1.trialT)
         switch meta.TrialInfo_block1.photosensorID(ik) %add to count of location of trial
             case 1
@@ -348,129 +357,297 @@ if sesh.PETH.Arm == 1
                     if ik == 1
                         photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                         photosensor1_block1(jk,photosensor1_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1)
                             if meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block1.summary(ik-1,9)
                                     photosensor1(jk,photosensor1_count) = NaN;
                                     photosensor1_block1(jk,photosensor1_b1_count) = NaN;
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = NaN;
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = NaN;
+                        end
                                 else
                                     photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                                     photosensor1_block1(jk,photosensor1_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                                 end
                             else
                                 photosensor1(jk,photosensor1_count) = NaN;
                                 photosensor1_block1(jk,photosensor1_b1_count) = NaN;
+                                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = NaN;
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block1.summary(ik,9)
                             photosensor1(jk:15001,photosensor1_count) = NaN;
                             photosensor1_block1(jk:15001,photosensor1_b1_count) = NaN;
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = NaN;
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                              photosensor1_block1(jk,photosensor1_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                             switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor1_count = photosensor1_count + 1;
                 photosensor1_b1_count = photosensor1_b1_count + 1;
+                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor1_unrew_count = photosensor1_unrew_count + 1;
+                            case 1
+                                photosensor1_rew_count = photosensor1_rew_count + 1;
+                        end
             case 2
                 for jk = 1:15001
                     if ik == 1
                         photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                         photosensor2_block1(jk,photosensor2_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1)
                             if meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block1.summary(ik-1,9)
                                     photosensor2(jk,photosensor2_count) = NaN;
                                     photosensor2_block1(jk,photosensor2_b1_count) = NaN;
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                                 else
                                     photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                                     photosensor2_block1(jk,photosensor2_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                                 end
                             else
                                 photosensor2(jk,photosensor2_count) = NaN;
                                 photosensor2_block1(jk,photosensor2_b1_count) = NaN;
+                                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block1.summary(ik,9)
                             photosensor2(jk:15001,photosensor2_count) = NaN;
                             photosensor2_block1(jk:15001,photosensor2_b1_count) = NaN;
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                             photosensor2_block1(jk,photosensor2_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor2_count = photosensor2_count + 1;
                 photosensor2_b1_count = photosensor2_b1_count + 1;
+                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor2_unrew_count = photosensor2_unrew_count + 1;
+                            case 1
+                                photosensor2_rew_count = photosensor2_rew_count + 1;
+                        end
             case 3
                 for jk = 1:15001
                     if ik == 1
                         photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                         photosensor3_block1(jk,photosensor3_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1)
                             if meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block1.summary(ik-1,9)
                                     photosensor3(jk,photosensor3_count) = NaN;
                                     photosensor3_block1(jk,photosensor3_b1_count) = NaN;
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                                 else
                                     photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                                     photosensor3_block1(jk,photosensor3_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                                 end
                             else
                                 photosensor3(jk,photosensor3_count) = NaN;
                                 photosensor3_block1(jk,photosensor3_b1_count) = NaN;
+                                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block1.summary(ik,9)
                             photosensor3(jk:15001,photosensor3_count) = NaN;
                             photosensor3_block1(jk:15001,photosensor3_b1_count) = NaN;
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                             photosensor3_block1(jk,photosensor3_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor3_count = photosensor3_count + 1;
                 photosensor3_b1_count = photosensor3_b1_count + 1;
+                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor3_unrew_count = photosensor3_unrew_count + 1;
+                            case 1
+                                photosensor3_rew_count = photosensor3_rew_count + 1;
+                        end
             case 4
                 for jk = 1:15001
                     if ik == 1
                         photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                         photosensor4_block1(jk,photosensor4_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1)
                             if meta.TrialInfo_block1.unnosepoke_to_trialT(ik-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block1.summary(ik-1,9)
                                     photosensor4(jk,photosensor4_count) = NaN;
                                     photosensor4_block1(jk,photosensor4_b1_count) = NaN;
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                                 else
                                     photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                                     photosensor4_block1(jk,photosensor4_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                                    switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                                 end
                             else
                                 photosensor4(jk,photosensor4_count) = NaN;
                                 photosensor4_block1(jk,photosensor4_b1_count) = NaN;
+                                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block1.summary(ik,9)
                             photosensor4(jk:15001,photosensor4_count) = NaN;
                             photosensor4_block1(jk:15001,photosensor4_b1_count) = NaN;
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(ik) + temp);
                             photosensor4_block1(jk,photosensor4_b1_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(ik) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor4_count = photosensor4_count + 1;
                 photosensor4_b1_count = photosensor4_b1_count + 1;
+                switch meta.TrialInfo_block1.rewarded(ik)
+                            case 0
+                                photosensor4_unrew_count = photosensor4_unrew_count + 1;
+                            case 1
+                                photosensor4_rew_count = photosensor4_rew_count + 1;
+                        end
         end
         temp = -5000;
     end
@@ -482,129 +659,297 @@ if sesh.PETH.Arm == 1
                     if ip == 1
                         photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                         photosensor1_block2(jk,photosensor1_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1)
                             if meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block2.summary(ip-1,9)
                                     photosensor1(jk,photosensor1_count) = NaN;
                                     photosensor1_block2(jk,photosensor1_b2_count) = NaN;
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = NaN;
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = NaN;
+                        end
                                 else
                                     photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                                     photosensor1_block2(jk,photosensor1_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                                 end
                             else
                                 photosensor1(jk,photosensor1_count) = NaN;
                                 photosensor1_block2(jk,photosensor1_b2_count) = NaN;
+                                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block2.summary(ip,9)
                             photosensor1(jk:15001,photosensor1_count) = NaN;
                             photosensor1_block2(jk:15001,photosensor1_b2_count) = NaN;
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                             break
                         else
-                            photosensor1(jk,photosensor1_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
-                            photosensor1_block2(jk,photosensor1_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            photosensor1(jk,photosensor1_count) = NaN;
+                            photosensor1_block2(jk,photosensor1_b2_count) = NaN;
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew(jk,photosensor1_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor1_rew(jk,photosensor1_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor1_count = photosensor1_count + 1;
                 photosensor1_b2_count = photosensor1_b2_count + 1;
+                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor1_unrew_count = photosensor1_unrew_count + 1;
+                            case 1
+                                photosensor1_rew_count = photosensor1_rew_count + 1;
+                        end
             case 2
                 for jk = 1:15001
                     if ip == 1
                         photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                         photosensor2_block2(jk,photosensor2_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1)
                             if meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block2.summary(ip-1,9)
                                     photosensor2(jk,photosensor2_count) = NaN;
                                     photosensor2_block2(jk,photosensor2_b2_count) = NaN;
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                                 else
                                     photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                                      photosensor2_block2(jk,photosensor2_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                                     switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                                 end
                             else
                                 photosensor2(jk,photosensor2_count) = NaN;
                                 photosensor2_block2(jk,photosensor2_b2_count) = NaN;
+                                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block2.summary(ip,9)
                             photosensor2(jk:15001,photosensor2_count) = NaN;
                             photosensor2_block2(jk:15001,photosensor2_b2_count) = NaN;
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = NaN;
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor2(jk,photosensor2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                              photosensor2_block2(jk,photosensor2_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                             switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew(jk,photosensor2_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor2_rew(jk,photosensor2_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor2_count = photosensor2_count + 1;
                 photosensor2_b2_count = photosensor2_b2_count + 1;
+                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor2_unrew_count = photosensor2_unrew_count + 1;
+                            case 1
+                                photosensor2_rew_count = photosensor2_rew_count + 1;
+                        end
             case 3
                 for jk = 1:15001
                     if ip == 1
                         photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                         photosensor3_block2(jk,photosensor3_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1)
                             if meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block2.summary(ip-1,9)
                                     photosensor3(jk,photosensor3_count) = NaN;
                                     photosensor3_block2(jk,photosensor3_b2_count) = NaN;
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                                 else
                                     photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                                     photosensor3_block2(jk,photosensor3_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                                 end
                             else
                                 photosensor3(jk,photosensor3_count) = NaN;
                                 photosensor3_block2(jk,photosensor3_b2_count) = NaN;
+                                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block2.summary(ip,9)
                             photosensor3(jk:15001,photosensor3_count) = NaN;
                             photosensor3_block2(jk:15001,photosensor3_b2_count) = NaN;
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = NaN;
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor3(jk,photosensor3_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                             photosensor3_block2(jk,photosensor3_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew(jk,photosensor3_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor3_rew(jk,photosensor3_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor3_count = photosensor3_count + 1;
                 photosensor3_b2_count = photosensor3_b2_count + 1;
+                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor3_unrew_count = photosensor3_unrew_count + 1;
+                            case 1
+                                photosensor3_rew_count = photosensor3_rew_count + 1;
+                        end
             case 4
                 for jk = 1:15001
                     if ip == 1
                         photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                         photosensor4_block2(jk,photosensor4_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                     else
                         if temp / -1000 > meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1)
                             if meta.TrialInfo_block2.unnosepoke_to_trialT(ip-1) == 0
                                 if temp / -1000 > meta.TrialInfo_block2.summary(ip-1,9)
                                     photosensor4(jk,photosensor4_count) = NaN;
                                     photosensor4_block2(jk,photosensor4_b2_count) = NaN;
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                                 else
                                     photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                                     photosensor4_block2(jk,photosensor4_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                                    switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                                 end
                             else
                                 photosensor4(jk,photosensor4_count) = NaN;
                                 photosensor4_block2(jk,photosensor4_b2_count) = NaN;
+                                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                             end
                         elseif temp / 1000 > meta.TrialInfo_block2.summary(ip,9)
                             photosensor4(jk:15001,photosensor4_count) = NaN;
                             photosensor4_block2(jk:15001,photosensor4_b2_count) = NaN;
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = NaN;
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = NaN;
+                        end
                             break
                         else
                             photosensor4(jk,photosensor4_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
                             photosensor4_block2(jk,photosensor4_b2_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew(jk,photosensor4_unrew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                            case 1
+                                photosensor4_rew(jk,photosensor4_rew_count) = gau_sdf(dataPoint.Trials(length(meta.TrialInfo_block1.trialT) + ip) + temp);
+                        end
                         end
                     end
                     temp = temp + 1;
                 end
                 photosensor4_count = photosensor4_count + 1;
                 photosensor4_b2_count = photosensor4_b2_count + 1;
+                switch meta.TrialInfo_block2.rewarded(ip)
+                            case 0
+                                photosensor4_unrew_count = photosensor4_unrew_count + 1;
+                            case 1
+                                photosensor4_rew_count = photosensor4_rew_count + 1;
+                        end
         end
         temp = -5000;
     end
@@ -658,6 +1003,39 @@ if jj <= length(photosensor1_block2)
             avg_photosensor4_block2(jj,1) = nanmean(photosensor4_block2(jj,:));
             SEM_photosensor4_block2(jj,1) = nanstd(photosensor4_block2(jj,:)/sqrt(numel(photosensor4_block2(jj,:))-sum(isnan(photosensor4_block2(jj,:)))));
         end
+        
+        if jj <= length(photosensor1_rew)
+            avg_photosensor1_rew(jj,1) = nanmean(photosensor1_rew(jj,:));
+            SEM_photosensor1_rew(jj,1) = nanstd(photosensor1_rew(jj,:)/sqrt(numel(photosensor1_rew(jj,:))-sum(isnan(photosensor1_rew(jj,:)))));
+        end
+        if jj <= length(photosensor2_rew)
+            avg_photosensor2_rew(jj,1) = nanmean(photosensor2_rew(jj,:));
+            SEM_photosensor2_rew(jj,1) = nanstd(photosensor2_rew(jj,:)/sqrt(numel(photosensor2_rew(jj,:))-sum(isnan(photosensor2_rew(jj,:)))));
+        end
+        if jj <= length(photosensor3_rew)
+            avg_photosensor3_rew(jj,1) = nanmean(photosensor3_rew(jj,:));
+            SEM_photosensor3_rew(jj,1) = nanstd(photosensor3_rew(jj,:)/sqrt(numel(photosensor3_rew(jj,:))-sum(isnan(photosensor3_rew(jj,:)))));
+        end
+        if jj <= length(photosensor4_rew)
+            avg_photosensor4_rew(jj,1) = nanmean(photosensor4_rew(jj,:));
+            SEM_photosensor4_rew(jj,1) = nanstd(photosensor4_rew(jj,:)/sqrt(numel(photosensor4_rew(jj,:))-sum(isnan(photosensor4_rew(jj,:)))));
+        end
+if jj <= length(photosensor1_unrew)
+            avg_photosensor1_unrew(jj,1) = nanmean(photosensor1_unrew(jj,:));
+            SEM_photosensor1_unrew(jj,1) = nanstd(photosensor1_unrew(jj,:)/sqrt(numel(photosensor1_unrew(jj,:))-sum(isnan(photosensor1_unrew(jj,:)))));
+        end
+        if jj <= length(photosensor2_unrew)
+            avg_photosensor2_unrew(jj,1) = nanmean(photosensor2_unrew(jj,:));
+            SEM_photosensor2_unrew(jj,1) = nanstd(photosensor2_unrew(jj,:)/sqrt(numel(photosensor2_unrew(jj,:))-sum(isnan(photosensor2_unrew(jj,:)))));
+        end
+        if jj <= length(photosensor3_unrew)
+            avg_photosensor3_unrew(jj,1) = nanmean(photosensor3_unrew(jj,:));
+            SEM_photosensor3_unrew(jj,1) = nanstd(photosensor3_unrew(jj,:)/sqrt(numel(photosensor3_unrew(jj,:))-sum(isnan(photosensor3_unrew(jj,:)))));
+        end
+        if jj <= length(photosensor4_unrew)
+            avg_photosensor4_unrew(jj,1) = nanmean(photosensor4_unrew(jj,:));
+            SEM_photosensor4_unrew(jj,1) = nanstd(photosensor4_unrew(jj,:)/sqrt(numel(photosensor4_unrew(jj,:))-sum(isnan(photosensor4_unrew(jj,:)))));
+        end
     end
     
     switch sesh.block_order
@@ -705,6 +1083,24 @@ if jj <= length(photosensor1_block2)
     PETH.Arm.ALL.photosensor2 = photosensor2;
     PETH.Arm.ALL.photosensor3 = photosensor3;
     PETH.Arm.ALL.photosensor4 = photosensor4;
+    
+    PETH.Arm.MEAN.photosensor1_rew = avg_photosensor1_rew;
+            PETH.Arm.MEAN.photosensor2_rew = avg_photosensor2_rew;
+            PETH.Arm.MEAN.photosensor3_rew = avg_photosensor3_rew;
+            PETH.Arm.MEAN.photosensor4_rew = avg_photosensor4_rew;
+            PETH.Arm.MEAN.photosensor1_unrew = avg_photosensor1_unrew;
+            PETH.Arm.MEAN.photosensor2_unrew = avg_photosensor2_unrew;
+            PETH.Arm.MEAN.photosensor3_unrew = avg_photosensor3_unrew;
+            PETH.Arm.MEAN.photosensor4_unrew = avg_photosensor4_unrew;
+                
+            PETH.Arm.SEM.photosensor1_rew = SEM_photosensor1_rew;
+            PETH.Arm.SEM.photosensor2_rew = SEM_photosensor2_rew;
+            PETH.Arm.SEM.photosensor3_rew = SEM_photosensor3_rew;
+            PETH.Arm.SEM.photosensor4_rew = SEM_photosensor4_rew;
+            PETH.Arm.SEM.photosensor1_unrew = SEM_photosensor1_unrew;
+            PETH.Arm.SEM.photosensor2_unrew = SEM_photosensor2_unrew;
+            PETH.Arm.SEM.photosensor3_unrew = SEM_photosensor3_unrew;
+            PETH.Arm.SEM.photosensor4_unrew = SEM_photosensor4_unrew; 
     
 end
 
