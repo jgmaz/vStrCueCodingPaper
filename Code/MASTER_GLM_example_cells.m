@@ -388,3 +388,5 @@ end
 clearvars -except load_var mat_files i example_cells example_coding example_fig_PETH example_fig_raster example_types
 i = i + 1;
   end
+  
+  tic; print(gcf,'-depsc','E:\examples2.eps'); toc;

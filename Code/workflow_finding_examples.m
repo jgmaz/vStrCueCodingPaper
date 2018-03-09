@@ -2,7 +2,7 @@ mat_files = dir('*.mat');
 cell_id = [];
 id_count = 1;
 %%
-for iCell = 360:length(ALL_matrix)
+for iCell = 1:length(ALL_matrix)
            if ALL_matrix(iCell,2) == 1 && ALL_matrix(iCell,3) == 1
     load(mat_files(iCell).name);
   cell_id{id_count} = mat_files(iCell).name;  
