@@ -1338,15 +1338,15 @@ colorMap = [rColorMap; gColorMap; bColorMap]';
 
 figure
 subplot(3,12,[2 3 4 5 6 14 15 16 17 18])
-heatmap(GLM_matrices.Rsquared.cat_combined(1:10,:),  'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'},... 
+heatmap(GLM_matrices.Rsquared.cat_combined(1:7,:),  'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'},... 
 '%0.0f', 'Colormap',colorMap, ...
-        'FontSize', 0); %, 'Colorbar', true);   
+        'FontSize', 0, 'Colorbar', true);   
 % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
 xlabel('Unit number');
 % xlabel('MSNs increasing      MSNs decreasing          FSIs increasing        FSIs decreasing')
 title('GLM matrix for cue-modulated units');  
 set(gca,'FontSize',18);
-hold on; plot(108,1:.001:10,'.k');
+hold on; plot(108,1:.001:7,'.k'); % plot(108,1:.001:10,'.k');
 subplot(3,12,[8 9 10 11 12 20 21 22 23 24])
 violin(GLM_matrices.Rsquared.MEAN.ALL_NaN(:,1:7));
 set(gca,'XTickLabel',{'Identity','Location','Outcome','Approach','Trial length','Trial number','Previous'},'XTickLabelRotation',45)

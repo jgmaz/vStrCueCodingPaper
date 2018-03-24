@@ -591,9 +591,9 @@ four_time = four_time(1:length(location_encoding.zscore.four.AVG.MEAN));
 subplot(3,2,3)
 shadedErrorBar(one_time,location_encoding.zscore.one.INC.AVG.MEAN,location_encoding.zscore.one.INC.AVG.SEM,'-m',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
-shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
-shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
-shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-y',1);
+% shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-k',1);
   xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
@@ -606,9 +606,9 @@ box off;
 subplot(3,2,4)
 shadedErrorBar(one_time,location_encoding.zscore.one.DEC.AVG.MEAN,location_encoding.zscore.one.DEC.AVG.SEM,'-m',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
-shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
-shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
-shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-y',1);
+% shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-k',1);
   xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);

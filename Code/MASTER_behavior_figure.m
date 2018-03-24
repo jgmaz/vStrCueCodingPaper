@@ -4,7 +4,7 @@
 group = [1 2 3 4];
 figure
 % subplot(2,3,[2 5])
-subplot(7,3,[2 5 8 11])
+subplot(7,3,[2 5 8 ])
 gscatter([1 1 1 1],BEHAV_summary.APP.MEAN.rew_trials_light,group,'r','xo+*')
 hold on;
 gscatter([2 2 2 2],BEHAV_summary.APP.MEAN.unrew_trials_light,group,'g','xo+*')
@@ -15,9 +15,9 @@ plot([1.85 2.15],[mean_unrew_light mean_unrew_light],'k')
 plot([2.85 3.15],[mean_rew_sound mean_rew_sound],'k')
 plot([3.85 4.15],[mean_unrew_sound mean_unrew_sound],'k')
 
-xlim([0 5]); ylim([0 1]); title('Proportion Approached');
+xlim([0 5]); ylim([0 1]); %title('Proportion Approached');
 % set(gca,'XTickLength', [0 0]); 
-set(gca,'XTickLabel',{'','Light+','Light-','Sound+','Sound-'});
+set(gca,'XTickLabel',{'','L1+','L2-','S1+','S2-'});
 ylabel('Proportion approached'); xlabel('Cue type');
 box off;
 h = gca;
@@ -26,7 +26,7 @@ set(h,'FontSize',18);
     
 % figure
 %subplot(2,3,[3 6])
-subplot(7,3,[3 6])
+subplot(7,3,[3 6 9])
 gscatter([1 1 1 1],BEHAV_summary.Length.MEAN.rew_trials_light,group,'r','xo+*')
 hold on;
 gscatter([2 2 2 2],BEHAV_summary.Length.MEAN.unrew_trials_light,group,'g','xo+*')
@@ -37,9 +37,9 @@ plot([1.85 2.15],[mean_unrew_light2 mean_unrew_light2],'k')
 plot([2.85 3.15],[mean_rew_sound2 mean_rew_sound2],'k')
 plot([3.85 4.15],[mean_unrew_sound2 mean_unrew_sound2],'k')
 
-xlim([0 5]); ylim([0 3]); title('Trial Length');
+xlim([0 5]); ylim([0 3]); %title('Trial Length');
 % set(gca,'TickLength', [0 0]); box off;
-set(gca,'XTickLabel',{'','Light+','Light-','Sound+','Sound-'})
+set(gca,'XTickLabel',{'','L1+','L2-','S1+','S2-'})
     ylabel('Trial length (s)');  xlabel('Cue type'); %'XTickLabelRotation',90,
 box off;
 h = gca;
@@ -61,9 +61,9 @@ light_sig_next = find(p_light_1(light_sig_first_last + 1:end) < .05, 1,'first') 
 light_sig_next_last = find(p_light_1(light_sig_next + 1:end) > .05, 1,'first') + light_sig_next
 light_sig_final = find(p_light_1(light_sig_first_last + 1:end) < .05, 1,'first') + light_sig_next_last
 light_sig_final_last = length(p_light_1)
-plot([light_sig_first light_sig_first_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
-plot([light_sig_next light_sig_next_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
-plot([light_sig_final light_sig_final_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
+plot([light_sig_first light_sig_first_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
+plot([light_sig_next light_sig_next_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
+plot([light_sig_final light_sig_final_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 set(gca,'FontSize',18);
 
 % subplot(2,3,4)
@@ -79,7 +79,7 @@ sound_sig_next = find(p_sound_1(sound_sig_first_last + 1:end) < .05, 1,'first') 
 sound_sig_next_last = find(p_sound_1(sound_sig_next + 1:end) > .05, 1,'first') + sound_sig_next
 sound_sig_final = find(p_sound_1(sound_sig_first_last + 1:end) < .05, 1,'first') + sound_sig_next_last
 sound_sig_final_last = length(p_sound_1)
-plot([sound_sig_first sound_sig_first_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
-plot([sound_sig_next sound_sig_next_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
-plot([sound_sig_final sound_sig_final_last], [1.025 1.025], '-k', 'LineWidth',2,'color','r')
+plot([sound_sig_first sound_sig_first_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
+plot([sound_sig_next sound_sig_next_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
+plot([sound_sig_final sound_sig_final_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 set(gca,'FontSize',18);

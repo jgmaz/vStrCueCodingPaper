@@ -1230,7 +1230,7 @@ figure
 subplot(3,12,[2 3 4 5 6 14 15 16 17 18])
 heatmap(GLM_matrices.Rsquared.cat_combined,  'RowLabels', {'Cue identity','Cue location','Cue outcome'},... 
 '%0.0f', 'Colormap',colorMap, ...
-        'FontSize', 0); %,'Colorbar', true);   
+        'FontSize', 0,'Colorbar', true);   
 xlabel('Unit number');
 title('GLM matrix for cue-modulated units aligned to nosepoke');  
 set(gca,'FontSize',18);

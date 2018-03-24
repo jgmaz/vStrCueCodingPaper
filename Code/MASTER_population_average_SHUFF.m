@@ -644,7 +644,7 @@ figure;
 % shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.INC.MEAN,popSHUFF_fig.rule_encoding.pref.SEM,'-r',1);
 % hold on; plot(0,-5:.5:50,'.','color','black');
 % shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,popSHUFF_fig.rule_encoding.nonpref.SEM,'-b',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -656,7 +656,7 @@ subplot(3,2,1)
 shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.INC.MEAN,popSHUFF_fig.rule_encoding.pref.INC.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,popSHUFF_fig.rule_encoding.nonpref.INC.SEM,'-b',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -669,7 +669,7 @@ subplot(3,2,2)
 shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,popSHUFF_fig.rule_encoding.pref.DEC.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,popSHUFF_fig.rule_encoding.nonpref.DEC.SEM,'-b',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -709,7 +709,7 @@ four_time = four_time(1:length(popSHUFF_fig.location_encoding.four.INC.MEAN));
 % shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.INC.MEAN,popSHUFF_fig.location_encoding.two.SEM,'-b',1);
 % shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.INC.MEAN,popSHUFF_fig.location_encoding.three.SEM,'-k',1);
 % shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,popSHUFF_fig.location_encoding.four.SEM,'-y',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -723,7 +723,7 @@ hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.INC.MEAN,popSHUFF_fig.location_encoding.two.INC.SEM,'-b',1);
 shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.INC.MEAN,popSHUFF_fig.location_encoding.three.INC.SEM,'-k',1);
 shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,popSHUFF_fig.location_encoding.four.INC.SEM,'-y',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -738,7 +738,7 @@ hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.DEC.MEAN,popSHUFF_fig.location_encoding.two.DEC.SEM,'-b',1);
 shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.DEC.MEAN,popSHUFF_fig.location_encoding.three.DEC.SEM,'-k',1);
 shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,popSHUFF_fig.location_encoding.four.DEC.SEM,'-y',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -768,7 +768,7 @@ nonpref_time = nonpref_time(1:length(popSHUFF_fig.outcome_encoding.nonpref.INC.M
 % shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,popSHUFF_fig.outcome_encoding.pref.SEM,'-r',1);
 % hold on; plot(0,-5:.5:50,'.','color','black');
 % shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.SEM,'-g',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -780,7 +780,7 @@ subplot(3,2,5)
 shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,popSHUFF_fig.outcome_encoding.pref.INC.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.INC.SEM,'-g',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -793,7 +793,7 @@ subplot(3,2,6)
 shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,popSHUFF_fig.outcome_encoding.pref.DEC.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.DEC.SEM,'-g',1);
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -804,6 +804,9 @@ ylabel('Normalized firing rate');
  
 % title('Decreased');
 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% plots for fig %%%
 %% plot for modality (normalized)
 peak_value = [];
 min_value = [];
@@ -823,7 +826,7 @@ figure;
 % shadedErrorBar(pref_time,rule_encoding.zscore.pref.AVG.MEAN,rule_encoding.zscore.pref.AVG.SEM,'-r',1);
 % hold on; plot(0,-5:.5:50,'.','color','black');
 % shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.AVG.MEAN,rule_encoding.zscore.nonpref.AVG.SEM,'-b',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -835,10 +838,12 @@ subplot(3,2,1)
 shadedErrorBar(pref_time,rule_encoding.zscore.pref.INC.AVG.MEAN,rule_encoding.zscore.pref.INC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.INC.AVG.MEAN,rule_encoding.zscore.nonpref.INC.AVG.SEM,'-b',1);
-shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.INC.MEAN,popSHUFF_fig.rule_encoding.pref.INC.SEM,'-k',1);
-shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,popSHUFF_fig.rule_encoding.nonpref.INC.SEM,'-k',1);
+plot(pref_time,popSHUFF_fig.rule_encoding.pref.INC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,'--b');
+% shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.INC.MEAN,popSHUFF_fig.rule_encoding.pref.INC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,popSHUFF_fig.rule_encoding.nonpref.INC.SEM,'--b',1);
 
-  xlim([-5 10]);
+  xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -851,10 +856,12 @@ subplot(3,2,2)
 shadedErrorBar(pref_time,rule_encoding.zscore.pref.DEC.AVG.MEAN,rule_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.DEC.AVG.MEAN,rule_encoding.zscore.nonpref.DEC.AVG.SEM,'-b',1);
-shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,popSHUFF_fig.rule_encoding.pref.DEC.SEM,'-k',1);
-shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,popSHUFF_fig.rule_encoding.nonpref.DEC.SEM,'-k',1);
+plot(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,'--b');
+% shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,popSHUFF_fig.rule_encoding.pref.DEC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,popSHUFF_fig.rule_encoding.nonpref.DEC.SEM,'--b',1);
  
-xlim([-5 10]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -894,7 +901,7 @@ four_time = four_time(1:length(location_encoding.zscore.four.AVG.MEAN));
 % shadedErrorBar(two_time,location_encoding.zscore.two.AVG.MEAN,location_encoding.zscore.two.AVG.SEM,'-b',1);
 % shadedErrorBar(three_time,location_encoding.zscore.three.AVG.MEAN,location_encoding.zscore.three.AVG.SEM,'-k',1);
 % shadedErrorBar(four_time,location_encoding.zscore.four.AVG.MEAN,location_encoding.zscore.four.AVG.SEM,'-y',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -905,14 +912,16 @@ four_time = four_time(1:length(location_encoding.zscore.four.AVG.MEAN));
 subplot(3,2,3)
 shadedErrorBar(one_time,location_encoding.zscore.one.INC.AVG.MEAN,location_encoding.zscore.one.INC.AVG.SEM,'-m',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
-shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
-shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
-shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-y',1);
-shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.INC.MEAN,popSHUFF_fig.location_encoding.one.INC.SEM,'-k',1);
-shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.INC.MEAN,popSHUFF_fig.location_encoding.two.INC.SEM,'-k',1);
-shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.INC.MEAN,popSHUFF_fig.location_encoding.three.INC.SEM,'-k',1);
-shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,popSHUFF_fig.location_encoding.four.INC.SEM,'-k',1);
-xlim([-5 10]);
+% shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-k',1);
+plot(one_time,popSHUFF_fig.location_encoding.one.INC.MEAN,'--m');
+plot(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,'--k');
+% shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.INC.MEAN,popSHUFF_fig.location_encoding.one.INC.SEM,'--m',1);
+% % shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.INC.MEAN,popSHUFF_fig.location_encoding.two.INC.SEM,'-k',1);
+% % shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.INC.MEAN,popSHUFF_fig.location_encoding.three.INC.SEM,'-k',1);
+% shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,popSHUFF_fig.location_encoding.four.INC.SEM,'--k',1);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -924,15 +933,17 @@ box off;
 subplot(3,2,4)
 shadedErrorBar(one_time,location_encoding.zscore.one.DEC.AVG.MEAN,location_encoding.zscore.one.DEC.AVG.SEM,'-m',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
-shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
-shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
-shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-y',1);
-shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,popSHUFF_fig.location_encoding.one.DEC.SEM,'-k',1);
-shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.DEC.MEAN,popSHUFF_fig.location_encoding.two.DEC.SEM,'-k',1);
-shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.DEC.MEAN,popSHUFF_fig.location_encoding.three.DEC.SEM,'-k',1);
-shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,popSHUFF_fig.location_encoding.four.DEC.SEM,'-k',1);
+% shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-k',1);
+plot(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,'--m');
+plot(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,'--k');
+% shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,popSHUFF_fig.location_encoding.one.DEC.SEM,'--m',1);
+% % shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.DEC.MEAN,popSHUFF_fig.location_encoding.two.DEC.SEM,'-k',1);
+% % shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.DEC.MEAN,popSHUFF_fig.location_encoding.three.DEC.SEM,'-k',1);
+% shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,popSHUFF_fig.location_encoding.four.DEC.SEM,'--k',1);
 
-xlim([-5 10]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -962,7 +973,7 @@ nonpref_time = nonpref_time(1:length(outcome_encoding.zscore.nonpref.AVG.MEAN));
 % shadedErrorBar(pref_time,outcome_encoding.zscore.pref.AVG.MEAN,outcome_encoding.zscore.pref.AVG.SEM,'-r',1);
 % hold on; plot(0,-5:.5:50,'.','color','black');
 % shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.AVG.MEAN,outcome_encoding.zscore.nonpref.AVG.SEM,'-g',1);
-%   xlim([-5 10]);
+%   xlim([-2 5]);
 % ylim([minimum_value-.5 maximum_value+.5]);
 % %     set(gca,'XTick',[]);
 % box off;
@@ -974,10 +985,12 @@ subplot(3,2,5)
 shadedErrorBar(pref_time,outcome_encoding.zscore.pref.INC.AVG.MEAN,outcome_encoding.zscore.pref.INC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.INC.AVG.MEAN,outcome_encoding.zscore.nonpref.INC.AVG.SEM,'-g',1);
-shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,popSHUFF_fig.outcome_encoding.pref.INC.SEM,'-k',1);
-shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.INC.SEM,'-k',1);
+plot(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,'--g');
+% shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,popSHUFF_fig.outcome_encoding.pref.INC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.INC.SEM,'--g',1);
 
-xlim([-5 10]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -990,10 +1003,213 @@ subplot(3,2,6)
 shadedErrorBar(pref_time,outcome_encoding.zscore.pref.DEC.AVG.MEAN,outcome_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.5:50,'.','color','black');
 shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.DEC.AVG.MEAN,outcome_encoding.zscore.nonpref.DEC.AVG.SEM,'-g',1);
-shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,popSHUFF_fig.outcome_encoding.pref.DEC.SEM,'-k',1);
-shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.DEC.SEM,'-k',1);
+plot(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,'--g');
+% shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,popSHUFF_fig.outcome_encoding.pref.DEC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.DEC.SEM,'--g',1);
 
-xlim([-5 10]);
+xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+xlabel('Time from cue onset (s)');
+ylabel('Normalized firing rate');
+%  set(gca,'YTick',[]);
+ set(gca,'FontSize',16);
+ 
+% title('Decreased');
+
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% test plots for fig %%%
+%% plot for modality (normalized)
+peak_value = [];
+min_value = [];
+peak_value(1) = max(rule_encoding.zscore.pref.INC.AVG.MEAN(4001:7000));
+peak_value(2) = max(rule_encoding.zscore.nonpref.INC.AVG.MEAN(4001:7000));
+maximum_value = max(peak_value);
+min_value(1) = min(rule_encoding.zscore.pref.DEC.AVG.MEAN(4001:7000));
+min_value(2) = min(rule_encoding.zscore.nonpref.DEC.AVG.MEAN(4001:7000));
+minimum_value = min(min_value);
+
+pref_time = -5:.001:10;
+pref_time = pref_time(1:length(rule_encoding.zscore.pref.AVG.MEAN));
+nonpref_time = -5:.001:10;
+nonpref_time = nonpref_time(1:length(rule_encoding.zscore.nonpref.AVG.MEAN));
+figure; 
+
+
+subplot(3,2,1)
+shadedErrorBar(pref_time,rule_encoding.zscore.pref.INC.AVG.MEAN ./ popSHUFF_fig.rule_encoding.pref.INC.MEAN,rule_encoding.zscore.pref.INC.AVG.SEM ./ popSHUFF_fig.rule_encoding.pref.INC.MEAN,'-r',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.INC.AVG.MEAN ./ popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,rule_encoding.zscore.nonpref.INC.AVG.SEM ./ popSHUFF_fig.rule_encoding.nonpref.INC.MEAN,'-b',1);
+
+  xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+xlabel('Time from cue onset (s)');
+ylabel('Normalized firing rate');
+title('Cue-modulated units that increased post cue-onset');
+ set(gca,'FontSize',16);
+
+subplot(3,2,2)
+shadedErrorBar(pref_time,rule_encoding.zscore.pref.DEC.AVG.MEAN,rule_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.DEC.AVG.MEAN,rule_encoding.zscore.nonpref.DEC.AVG.SEM,'-b',1);
+plot(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,'--b');
+% shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,popSHUFF_fig.rule_encoding.pref.DEC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.rule_encoding.nonpref.DEC.MEAN,popSHUFF_fig.rule_encoding.nonpref.DEC.SEM,'--b',1);
+ 
+xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+ xlabel('Time from cue onset (s)');
+% ylabel('Firing rate (Hz)');
+ylabel('Normalized firing rate');
+%  set(gca,'YTick',[]);
+title('Cue-modulated units that decreased post cue-onset');
+ set(gca,'FontSize',16);
+
+%% plot for location
+peak_value = [];
+min_value = [];
+peak_value(1) = max(location_encoding.zscore.one.INC.AVG.MEAN(4001:7000));
+peak_value(2) = max(location_encoding.zscore.two.INC.AVG.MEAN(4001:7000));
+peak_value(3) = max(location_encoding.zscore.three.INC.AVG.MEAN(4001:7000));
+peak_value(4) = max(location_encoding.zscore.four.INC.AVG.MEAN(4001:7000));
+maximum_value = max(peak_value);
+min_value(1) = min(location_encoding.zscore.one.DEC.AVG.MEAN(4001:7000));
+min_value(2) = min(location_encoding.zscore.two.DEC.AVG.MEAN(4001:7000));
+min_value(3) = min(location_encoding.zscore.three.DEC.AVG.MEAN(4001:7000));
+min_value(4) = min(location_encoding.zscore.four.DEC.AVG.MEAN(4001:7000));
+minimum_value = min(min_value);
+
+one_time = -5:.001:10;
+one_time = one_time(1:length(location_encoding.zscore.one.AVG.MEAN));
+two_time = -5:.001:10;
+two_time = two_time(1:length(location_encoding.zscore.two.AVG.MEAN));
+three_time = -5:.001:10;
+three_time = three_time(1:length(location_encoding.zscore.three.AVG.MEAN));
+four_time = -5:.001:10;
+four_time = four_time(1:length(location_encoding.zscore.four.AVG.MEAN));
+% figure; 
+% subplot(3,3,4)
+% shadedErrorBar(one_time,location_encoding.zscore.one.AVG.MEAN,location_encoding.zscore.one.AVG.SEM,'-m',1);
+% hold on; plot(0,-5:.5:50,'.','color','black');
+% shadedErrorBar(two_time,location_encoding.zscore.two.AVG.MEAN,location_encoding.zscore.two.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.AVG.MEAN,location_encoding.zscore.three.AVG.SEM,'-k',1);
+% shadedErrorBar(four_time,location_encoding.zscore.four.AVG.MEAN,location_encoding.zscore.four.AVG.SEM,'-y',1);
+%   xlim([-2 5]);
+% ylim([minimum_value-.5 maximum_value+.5]);
+% %     set(gca,'XTick',[]);
+% box off;
+% % xlabel('Time from cue onset (s)');
+% ylabel('Normalized firing rate');
+% % title('All');
+
+subplot(3,2,3)
+shadedErrorBar(one_time,location_encoding.zscore.one.INC.AVG.MEAN,location_encoding.zscore.one.INC.AVG.SEM,'-m',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+% shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-k',1);
+plot(one_time,popSHUFF_fig.location_encoding.one.INC.MEAN,'--m');
+plot(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,'--k');
+% shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.INC.MEAN,popSHUFF_fig.location_encoding.one.INC.SEM,'--m',1);
+% % shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.INC.MEAN,popSHUFF_fig.location_encoding.two.INC.SEM,'-k',1);
+% % shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.INC.MEAN,popSHUFF_fig.location_encoding.three.INC.SEM,'-k',1);
+% shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.INC.MEAN,popSHUFF_fig.location_encoding.four.INC.SEM,'--k',1);
+xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+ xlabel('Time from cue onset (s)');
+ ylabel('Normalized firing rate');
+% title('Increased');
+ set(gca,'FontSize',16);
+
+subplot(3,2,4)
+shadedErrorBar(one_time,location_encoding.zscore.one.DEC.AVG.MEAN,location_encoding.zscore.one.DEC.AVG.SEM,'-m',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+% shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
+% shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
+shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-k',1);
+plot(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,'--m');
+plot(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,'--k');
+% shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,popSHUFF_fig.location_encoding.one.DEC.SEM,'--m',1);
+% % shadedErrorBar(two_time,popSHUFF_fig.location_encoding.two.DEC.MEAN,popSHUFF_fig.location_encoding.two.DEC.SEM,'-k',1);
+% % shadedErrorBar(three_time,popSHUFF_fig.location_encoding.three.DEC.MEAN,popSHUFF_fig.location_encoding.three.DEC.SEM,'-k',1);
+% shadedErrorBar(four_time,popSHUFF_fig.location_encoding.four.DEC.MEAN,popSHUFF_fig.location_encoding.four.DEC.SEM,'--k',1);
+
+xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+ylabel('Normalized firing rate');
+%  set(gca,'YTick',[]);
+ xlabel('Time from cue onset (s)');
+% ylabel('Firing rate (Hz)');
+% title('Decreased');
+ set(gca,'FontSize',16);
+
+%% plot for outcome (normalized)
+peak_value = [];
+min_value = [];
+peak_value(1) = max(outcome_encoding.zscore.pref.INC.AVG.MEAN(4001:7000));
+peak_value(2) = max(outcome_encoding.zscore.nonpref.INC.AVG.MEAN(4001:7000));
+maximum_value = max(peak_value);
+min_value(1) = min(outcome_encoding.zscore.pref.DEC.AVG.MEAN(4001:7000));
+min_value(2) = min(outcome_encoding.zscore.nonpref.DEC.AVG.MEAN(4001:7000));
+minimum_value = min(min_value);
+
+pref_time = -5:.001:10;
+pref_time = pref_time(1:length(outcome_encoding.zscore.pref.AVG.MEAN));
+nonpref_time = -5:.001:10;
+nonpref_time = nonpref_time(1:length(outcome_encoding.zscore.nonpref.AVG.MEAN));
+% figure; 
+% subplot(3,3,7)
+% shadedErrorBar(pref_time,outcome_encoding.zscore.pref.AVG.MEAN,outcome_encoding.zscore.pref.AVG.SEM,'-r',1);
+% hold on; plot(0,-5:.5:50,'.','color','black');
+% shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.AVG.MEAN,outcome_encoding.zscore.nonpref.AVG.SEM,'-g',1);
+%   xlim([-2 5]);
+% ylim([minimum_value-.5 maximum_value+.5]);
+% %     set(gca,'XTick',[]);
+% box off;
+% xlabel('Time from cue onset (s)');
+% ylabel('Normalized firing rate');
+% % title('All');
+
+subplot(3,2,5)
+shadedErrorBar(pref_time,outcome_encoding.zscore.pref.INC.AVG.MEAN,outcome_encoding.zscore.pref.INC.AVG.SEM,'-r',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.INC.AVG.MEAN,outcome_encoding.zscore.nonpref.INC.AVG.SEM,'-g',1);
+plot(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,'--g');
+% shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.INC.MEAN,popSHUFF_fig.outcome_encoding.pref.INC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.INC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.INC.SEM,'--g',1);
+
+xlim([-2 5]);
+ylim([minimum_value-.5 maximum_value+.5]);
+%     set(gca,'XTick',[]);
+box off;
+xlabel('Time from cue onset (s)');
+ylabel('Normalized firing rate');
+% title('Increased');ее
+set(gca,'FontSize',16);
+
+subplot(3,2,6)
+shadedErrorBar(pref_time,outcome_encoding.zscore.pref.DEC.AVG.MEAN,outcome_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
+hold on; plot(0,-5:.5:50,'.','color','black');
+shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.DEC.AVG.MEAN,outcome_encoding.zscore.nonpref.DEC.AVG.SEM,'-g',1);
+plot(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,'--r');
+plot(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,'--g');
+% shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,popSHUFF_fig.outcome_encoding.pref.DEC.SEM,'--r',1);
+% shadedErrorBar(nonpref_time,popSHUFF_fig.outcome_encoding.nonpref.DEC.MEAN,popSHUFF_fig.outcome_encoding.nonpref.DEC.SEM,'--g',1);
+
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;

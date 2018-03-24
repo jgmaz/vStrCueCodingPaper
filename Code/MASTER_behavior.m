@@ -1,7 +1,6 @@
-% cd(cat(2,'E:\Jimmie\Jimmie\Analysis\R057\Mat2'));
-for iii = 1:3
 %% rewarded vs unrewarded trials for both blocks
-which_constraints = iii; %for length, 1 = all trials, 2 = all trials < 5s, 3 = only approaches w/ constraint
+mat_files = dir('Events*');
+    for iFind = 1:length(mat_files)
 
 rew_trial_num_block1 = 1;
 unrew_trial_num_block1 = 1;
@@ -26,36 +25,7 @@ avg_rew_trials_block2 = [];
 SEM_rew_trials_block2 = [];
 avg_unrew_trials_block2 = [];
 SEM_unrew_trials_block2 = [];
-
-switch which_constraints
-    case 1
-        for ik = 1:length(metadata.TrialInfo{1,1}.trialT)
-            switch metadata.TrialInfo{1,1}.rewarded(ik) %add to rewarded or unrewarded count depending on if trial was rewarded or not
-                case 1
-                    app_rew_trials_block1(rew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,3);
-                    length_rew_trials_block1(rew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,15);
-                    rew_trial_num_block1 = rew_trial_num_block1 + 1;
-                case 0
-                    app_unrew_trials_block1(unrew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,3);
-                    length_unrew_trials_block1(unrew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,15);
-                    unrew_trial_num_block1 = unrew_trial_num_block1 + 1;
-            end
-        end
-        
-        for ip = 1:length(metadata.TrialInfo{1,2}.trialT)
-            switch metadata.TrialInfo{1,2}.rewarded(ip) %add to rewarded or unrewarded count depending on if trial was rewarded or not
-                case 1
-                    app_rew_trials_block2(rew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,3);
-                    length_rew_trials_block2(rew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,15);
-                    rew_trial_num_block2 = rew_trial_num_block2 + 1;
-                case 0
-                    app_unrew_trials_block2(unrew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,3);
-                    length_unrew_trials_block2(unrew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,15);
-                    unrew_trial_num_block2 = unrew_trial_num_block2 + 1;
-            end
-        end
-        
-    case 2
+      
         for ik = 1:length(metadata.TrialInfo{1,1}.trialT)
             switch metadata.TrialInfo{1,1}.rewarded(ik) %add to rewarded or unrewarded count depending on if trial was rewarded or not
                 case 1
@@ -96,67 +66,7 @@ switch which_constraints
                     end
                     unrew_trial_num_block2 = unrew_trial_num_block2 + 1;
             end
-        end
-        
-    case 3
-        for ik = 1:length(metadata.TrialInfo{1,1}.trialT)
-            switch metadata.TrialInfo{1,1}.rewarded(ik) %add to rewarded or unrewarded count depending on if trial was rewarded or not
-                case 1
-                    app_rew_trials_block1(rew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,3);
-                    if metadata.TrialInfo{1,1}.summary(ik,3) == 1
-                        if metadata.TrialInfo{1,1}.summary(ik,15) < 5
-                            length_rew_trials_block1(rew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,15);
-                        else
-                            length_rew_trials_block1(rew_trial_num_block1) = NaN;
-                        end
-                    else
-                        length_rew_trials_block1(rew_trial_num_block1) = NaN;
-                    end
-                    rew_trial_num_block1 = rew_trial_num_block1 + 1;
-                case 0
-                    app_unrew_trials_block1(unrew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,3);
-                    if metadata.TrialInfo{1,1}.summary(ik,3) == 1
-                        if metadata.TrialInfo{1,1}.summary(ik,15) < 5
-                            length_unrew_trials_block1(unrew_trial_num_block1) = metadata.TrialInfo{1,1}.summary(ik,15);
-                        else
-                            length_unrew_trials_block1(unrew_trial_num_block1) = NaN;
-                        end
-                    else
-                        length_unrew_trials_block1(unrew_trial_num_block1) = NaN;
-                    end
-                    unrew_trial_num_block1 = unrew_trial_num_block1 + 1;
-            end
-        end
-        
-        for ip = 1:length(metadata.TrialInfo{1,2}.trialT)
-            switch metadata.TrialInfo{1,2}.rewarded(ip) %add to rewarded or unrewarded count depending on if trial was rewarded or not
-                case 1
-                    app_rew_trials_block2(rew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,3);
-                    if metadata.TrialInfo{1,2}.summary(ip,3) == 1
-                        if metadata.TrialInfo{1,2}.summary(ip,15) < 5
-                            length_rew_trials_block2(rew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,15);
-                        else
-                            length_rew_trials_block2(rew_trial_num_block2) = NaN;
-                        end
-                    else
-                        length_rew_trials_block2(rew_trial_num_block2) = NaN;
-                    end
-                    rew_trial_num_block2 = rew_trial_num_block2 + 1;
-                case 0
-                    app_unrew_trials_block2(unrew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,3);
-                    if metadata.TrialInfo{1,2}.summary(ip,3) == 1
-                        if metadata.TrialInfo{1,2}.summary(ip,15) < 5
-                            length_unrew_trials_block2(unrew_trial_num_block2) = metadata.TrialInfo{1,2}.summary(ip,15);
-                        else
-                            length_unrew_trials_block2(unrew_trial_num_block2) = NaN;
-                        end
-                    else
-                        length_unrew_trials_block2(unrew_trial_num_block2) = NaN;
-                    end
-                    unrew_trial_num_block2 = unrew_trial_num_block2 + 1;
-            end
-        end
-end
+        end        
 %% summary
 
 count_rew_trials_block1 = length(app_rew_trials_block1);
@@ -254,7 +164,6 @@ switch which_constraints
         save(cat(2,'E:\Jimmie\Jimmie\Analysis\',sesh.session_id(1:4),'\Mat\BEHAV\BEHAV3\',sesh.session_id),'BEHAV');
 end
 clearvars -except metadata sesh
-end
 clear
 %% group
 % cd(cat(2,'E:\Jimmie\Jimmie\Analysis\R053\Mat\BEHAV\BEHAV'));
@@ -511,16 +420,16 @@ temp_APP_rats(temp_APP*2+1:temp_APP*3,1) = 3;
 temp_APP_rats(temp_APP*3+1:temp_APP*4,1) = 4;
 
 for iRat = 1:temp_APP
-    temp_APP_rats{iRat,1} = 'A';
+    temp_APP_cuetype{iRat,1} = 'A';
 end
 for iRat = temp_APP+1:temp_APP*2
-    temp_APP_rats{iRat,1} = 'B';
+    temp_APP_cuetype{iRat,1} = 'B';
 end
 for iRat = temp_APP*2+1:temp_APP*3
-    temp_APP_rats{iRat,1} = 'C';
+    temp_APP_cuetype{iRat,1} = 'C';
 end
 for iRat = temp_APP*3+1:temp_APP*4
-    temp_APP_rats{iRat,1} = 'D';
+    temp_APP_cuetype{iRat,1} = 'D';
 end
 
 BEHAV_summary.APP.ALL(:,1) = temp_APP_ALL(:,1);
@@ -540,3 +449,53 @@ APP_lme = fitlme(APP_tbl,'AppProp~CueType+(1|RatID)'); %+(CueType-1|RatID)');
 APP_lme_reduced = fitlme(APP_tbl,'AppProp~1+(1|RatID)');
 
 APP_comparison = compare(APP_lme_reduced,APP_lme);
+
+%% separate light and sound (ctrl) , rew and unrew exp)
+for iCue = 1:length(BEHAV_summary.APP.ALL)
+    switch BEHAV_summary.APP.ALL(iCue,2)
+        case {1,2}
+             BEHAV_summary.APP.ALL(iCue,4) = 1;
+        case {3,4}
+            BEHAV_summary.APP.ALL(iCue,4) = 2;
+    end
+    switch BEHAV_summary.APP.ALL(iCue,2)
+        case {1,3}
+             BEHAV_summary.APP.ALL(iCue,5) = 1;
+        case {2,4}
+            BEHAV_summary.APP.ALL(iCue,5) = 2;
+    end
+end
+%%
+    
+APP.tbl = table(BEHAV_summary.APP.ALL(:,1),BEHAV_summary.APP.ALL(:,4),BEHAV_summary.APP.ALL(:,5),BEHAV_summary.APP.ALL(:,3),'VariableNames',{'RatID','CueIdentity','CueOutcome','AppProp'});
+APP.tbl.CueIdentity = nominal(APP.tbl.CueIdentity);
+APP.tbl.CueOutcome = nominal(APP.tbl.CueOutcome);
+APP.lme = fitlme(APP.tbl,'AppProp~CueIdentity+CueOutcome+(1|RatID)');
+APP.lme_reduced = fitlme(APP.tbl,'AppProp~CueIdentity+(1|RatID)');
+
+APP.comparison = compare(APP.lme_reduced,APP.lme);
+
+%% separate light and sound (ctrl) , rew and unrew exp)
+for iCue = 1:length(BEHAV_summary.Length.ALL)
+    switch BEHAV_summary.Length.ALL(iCue,2)
+        case {1,2}
+             BEHAV_summary.Length.ALL(iCue,4) = 1;
+        case {3,4}
+            BEHAV_summary.Length.ALL(iCue,4) = 2;
+    end
+    switch BEHAV_summary.Length.ALL(iCue,2)
+        case {1,3}
+             BEHAV_summary.Length.ALL(iCue,5) = 1;
+        case {2,4}
+            BEHAV_summary.Length.ALL(iCue,5) = 2;
+    end
+end
+%%
+    
+Length.tbl = table(BEHAV_summary.Length.ALL(:,1),BEHAV_summary.Length.ALL(:,4),BEHAV_summary.Length.ALL(:,5),BEHAV_summary.Length.ALL(:,3),'VariableNames',{'RatID','CueIdentity','CueOutcome','TrialLength'});
+Length.tbl.CueIdentity = nominal(Length.tbl.CueIdentity);
+Length.tbl.CueOutcome = nominal(Length.tbl.CueOutcome);
+Length.lme = fitlme(Length.tbl,'TrialLength~CueIdentity+CueOutcome+(1|RatID)');
+Length.lme_reduced = fitlme(Length.tbl,'TrialLength~CueIdentity+(1|RatID)');
+
+Length.comparison = compare(Length.lme_reduced,Length.lme);
