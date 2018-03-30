@@ -9,95 +9,163 @@ mat_files = dir('*.mat');
 for kk = 1:length(load_vars)
     load(mat_files(load_vars(kk)).name);
     mat_overview.fname{kk} = mat_files(load_vars(kk)).name;
-    disp(cat(2,num2str(kk),'/',num2str(length(load_vars))));   
-
-                temp_block1_MEAN = [];
-                temp_block1_SEM = [];
-                temp_block2_MEAN = [];
-                temp_block2_SEM = [];
+    disp(cat(2,num2str(kk),'/',num2str(length(load_vars))));
+    
+    temp_block1_MEAN = [];
+    temp_block1_SEM = [];
+    temp_block2_MEAN = [];
+    temp_block2_SEM = [];
+    
+    rule_encoding.zscore.MEAN(rule_count) = mean(PETH.Nosepoke.MEAN.nosepoke_PETH);
+    rule_encoding.zscore.STD(rule_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);
+    
+    switch sesh.block_order
+        case 1
+            temp_block1_MEAN = PETH.Nosepoke.MEAN.nosepoke_light_PETH;
+            temp_block1_SEM = PETH.Nosepoke.SEM.nosepoke_light_PETH;
+            temp_block2_MEAN = PETH.Nosepoke.MEAN.nosepoke_sound_PETH;
+            temp_block2_SEM = PETH.Nosepoke.SEM.nosepoke_sound_PETH;
+        case 2
+            temp_block1_MEAN = PETH.Nosepoke.MEAN.nosepoke_sound_PETH;
+            temp_block1_SEM = PETH.Nosepoke.SEM.nosepoke_sound_PETH;
+            temp_block2_MEAN = PETH.Nosepoke.MEAN.nosepoke_light_PETH;
+            temp_block2_SEM = PETH.Nosepoke.SEM.nosepoke_light_PETH;
+    end
+    
+    if mean(FRATE.Task.Trial_firing_rate) > mean(FRATE.Task.Trial_B4_firing_rate)
+        if mean(FRATE.Cue.Nosepoke_firing_rate_block1) > mean(FRATE.Cue.Nosepoke_firing_rate_block2)
+            rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+            rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+            rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+            rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+            rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            
+            rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
+            rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
+            rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
+            rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
+            rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+        elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) > mean(FRATE.Cue.Nosepoke_firing_rate_block1)
+            rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+            rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+            rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+            rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+            rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            
+            rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
+            rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
+            rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
+            rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
+            rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+        elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) == mean(FRATE.Cue.Nosepoke_firing_rate_block1)
+            disp('error: 0')
+            
+            if mean(FRATE.Cue.Trial_firing_rate_block1) > mean(FRATE.Cue.Trial_firing_rate_block2)
+                rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+                rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+                rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+                rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+                rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
                 
-                rule_encoding.zscore.MEAN(rule_count) = mean(PETH.Nosepoke.MEAN.nosepoke_PETH);
-                rule_encoding.zscore.STD(rule_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);
-                               
-                switch sesh.block_order
-                    case 1
-                        temp_block1_MEAN = PETH.Nosepoke.MEAN.nosepoke_light_PETH;
-                        temp_block1_SEM = PETH.Nosepoke.SEM.nosepoke_light_PETH;
-                        temp_block2_MEAN = PETH.Nosepoke.MEAN.nosepoke_sound_PETH;
-                        temp_block2_SEM = PETH.Nosepoke.SEM.nosepoke_sound_PETH;
-                    case 2
-                        temp_block1_MEAN = PETH.Nosepoke.MEAN.nosepoke_sound_PETH;
-                        temp_block1_SEM = PETH.Nosepoke.SEM.nosepoke_sound_PETH;
-                        temp_block2_MEAN = PETH.Nosepoke.MEAN.nosepoke_light_PETH;
-                        temp_block2_SEM = PETH.Nosepoke.SEM.nosepoke_light_PETH;
-                end
+                rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
+                rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
+                rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
+                rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
+                rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            elseif mean(FRATE.Cue.Trial_firing_rate_block2) > mean(FRATE.Cue.Trial_firing_rate_block1)
+                rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+                rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+                rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+                rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+                rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
                 
-                if mean(FRATE.Task.Trial_firing_rate) > mean(FRATE.Task.Trial_B4_firing_rate)
-                    if mean(FRATE.Cue.Nosepoke_firing_rate_block1) > mean(FRATE.Cue.Nosepoke_firing_rate_block2)
-                        rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
-                        rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
-                        rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
-                        rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
-                        rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        
-                        rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
-                        rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
-                        rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
-                        rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
-                        rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                    elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) > mean(FRATE.Cue.Nosepoke_firing_rate_block1)
-                        rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
-                        rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
-                        rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
-                        rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
-                        rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        
-                        rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
-                        rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
-                        rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
-                        rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
-                        rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                    end
-                    rule_count_INC = rule_count_INC + 1;
-                elseif mean(FRATE.Task.Trial_firing_rate) < mean(FRATE.Task.Trial_B4_firing_rate)
-                    if mean(FRATE.Cue.Nosepoke_firing_rate_block1) > mean(FRATE.Cue.Nosepoke_firing_rate_block2)
-                        rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
-                        rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
-                        rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
-                        rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
-                        rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        
-                        rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
-                        rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
-                        rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
-                        rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
-                        rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                    elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) > mean(FRATE.Cue.Nosepoke_firing_rate_block1)
-                        rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
-                        rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
-                        rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
-                        rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
-                        rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        
-                        rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
-                        rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
-                        rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
-                        rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
-                        rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                        rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
-                    end
-                    rule_count_DEC = rule_count_DEC + 1;
-                end
+                rule_encoding.RAW.pref.INC.MEAN(:,rule_count_INC) = temp_block2_MEAN;
+                rule_encoding.RAW.pref.INC.SEM(:,rule_count_INC) = temp_block2_SEM;
+                rule_encoding.RAW.nonpref.INC.MEAN(:,rule_count_INC) = temp_block1_MEAN;
+                rule_encoding.RAW.nonpref.INC.SEM(:,rule_count_INC) = temp_block1_SEM;
+                rule_encoding.zscore.pref.INC.MEAN(:,rule_count_INC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.INC.MEAN(:,rule_count_INC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            elseif mean(FRATE.Cue.Trial_firing_rate_block2) == mean(FRATE.Cue.Trial_firing_rate_block1)
+                disp('fatal error')
+            end
+        end
+        rule_count_INC = rule_count_INC + 1;
+    elseif mean(FRATE.Task.Trial_firing_rate) < mean(FRATE.Task.Trial_B4_firing_rate)
+        if mean(FRATE.Cue.Nosepoke_firing_rate_block1) > mean(FRATE.Cue.Nosepoke_firing_rate_block2)
+            rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+            rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+            rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+            rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+            rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            
+            rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
+            rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
+            rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
+            rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
+            rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+        elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) > mean(FRATE.Cue.Nosepoke_firing_rate_block1)
+            rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+            rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+            rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+            rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+            rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            
+            rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
+            rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
+            rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
+            rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
+            rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+        elseif mean(FRATE.Cue.Nosepoke_firing_rate_block2) == mean(FRATE.Cue.Nosepoke_firing_rate_block1)
+            disp('error: 0')
+            if mean(FRATE.Cue.Trial_firing_rate_block1) > mean(FRATE.Cue.Trial_firing_rate_block2)
+                rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+                rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+                rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+                rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+                rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
                 
-                rule_count = rule_count + 1;
+                rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
+                rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
+                rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
+                rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
+                rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            elseif mean(FRATE.Cue.Trial_firing_rate_block2) > mean(FRATE.Cue.Trial_firing_rate_block1)
+                rule_encoding.RAW.pref.ALL.MEAN(:,rule_count) = temp_block2_MEAN;
+                rule_encoding.RAW.pref.ALL.SEM(:,rule_count) = temp_block2_SEM;
+                rule_encoding.RAW.nonpref.ALL.MEAN(:,rule_count) = temp_block1_MEAN;
+                rule_encoding.RAW.nonpref.ALL.SEM(:,rule_count) = temp_block1_SEM;
+                rule_encoding.zscore.pref.ALL.MEAN(:,rule_count) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.ALL.MEAN(:,rule_count) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
                 
+                rule_encoding.RAW.pref.DEC.MEAN(:,rule_count_DEC) = temp_block2_MEAN;
+                rule_encoding.RAW.pref.DEC.SEM(:,rule_count_DEC) = temp_block2_SEM;
+                rule_encoding.RAW.nonpref.DEC.MEAN(:,rule_count_DEC) = temp_block1_MEAN;
+                rule_encoding.RAW.nonpref.DEC.SEM(:,rule_count_DEC) = temp_block1_SEM;
+                rule_encoding.zscore.pref.DEC.MEAN(:,rule_count_DEC) = (temp_block2_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+                rule_encoding.zscore.nonpref.DEC.MEAN(:,rule_count_DEC) = (temp_block1_MEAN - rule_encoding.zscore.MEAN(rule_count)) / rule_encoding.zscore.STD(rule_count);
+            elseif mean(FRATE.Cue.Trial_firing_rate_block2) == mean(FRATE.Cue.Trial_firing_rate_block1)
+                disp('fatal error')
+            end
+            
+        end
+        rule_count_DEC = rule_count_DEC + 1;
+    end
+    
+    rule_count = rule_count + 1;
+    
 end
 
 for jj = 1:15001 %generate averaged responses
@@ -154,9 +222,9 @@ for kk = 1:length(load_vars)
     load(mat_files(load_vars(kk)).name);
     mat_overview.fname{kk} = mat_files(load_vars(kk)).name;
     disp(cat(2,num2str(kk),'/',num2str(length(load_vars))));
-        
+    
     location_encoding.zscore.MEAN(location_count) = mean(PETH.Nosepoke.MEAN.nosepoke_PETH);
-    location_encoding.zscore.STD(location_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);    
+    location_encoding.zscore.STD(location_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);
     
     arm2_start = find(FRATE.Arm.Nosepoke_firing_rate_groups == 2,1,'first');
     arm3_start = find(FRATE.Arm.Nosepoke_firing_rate_groups == 3,1,'first');
@@ -175,17 +243,17 @@ for kk = 1:length(load_vars)
                 
                 switch idx(i)
                     case 1
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor1;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor1;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle1;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle1;
                     case 2
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor2;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor2;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle2;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle2;
                     case 3
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor3;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor3;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle3;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle3;
                     case 4
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor4;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor4;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle4;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle4;
                 end
                 
                 switch i
@@ -231,17 +299,17 @@ for kk = 1:length(load_vars)
                 
                 switch idx(i)
                     case 1
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor1;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor1;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle1;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle1;
                     case 2
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor2;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor2;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle2;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle2;
                     case 3
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor3;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor3;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle3;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle3;
                     case 4
-                        temp_FR_MEAN = PETH.Arm.MEAN.photosensor4;
-                        temp_FR_SEM = PETH.Arm.SEM.photosensor4;
+                        temp_FR_MEAN = PETH.Receptacle.MEAN.receptacle4;
+                        temp_FR_SEM = PETH.Receptacle.SEM.receptacle4;
                 end
                 
                 switch i
@@ -283,7 +351,7 @@ for kk = 1:length(load_vars)
             location_count_DEC = location_count_DEC + 1;
             
     end
-    location_count = location_count + 1;        
+    location_count = location_count + 1;
 end
 
 for jj = 1:15001 %generate averaged responses
@@ -380,77 +448,143 @@ mat_files = dir('*.mat');
 for kk = 1:length(load_vars)
     load(mat_files(load_vars(kk)).name);
     mat_overview.fname{kk} = mat_files(load_vars(kk)).name;
-    disp(cat(2,num2str(kk),'/',num2str(length(load_vars))));   
+    disp(cat(2,num2str(kk),'/',num2str(length(load_vars))));
+    
+    outcome_encoding.zscore.MEAN(outcome_count) = mean(PETH.Nosepoke.MEAN.nosepoke_PETH);
+    outcome_encoding.zscore.STD(outcome_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);
+    
+    if mean(FRATE.Task.Trial_firing_rate) > mean(FRATE.Task.Trial_B4_firing_rate)
+        if mean(FRATE.Reward.Nosepoke_firing_rate_reward) > mean(FRATE.Reward.Nosepoke_firing_rate_unreward)
+            outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            
+            outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+        elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) > mean(FRATE.Reward.Nosepoke_firing_rate_reward)
+            outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            
+            outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+        elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) == mean(FRATE.Reward.Nosepoke_firing_rate_reward)
+            disp('error = 0')
+            if mean(FRATE.Reward.Trial_firing_rate_reward) > mean(FRATE.Reward.Trial_firing_rate_unreward)
+                outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
                 
-                outcome_encoding.zscore.MEAN(outcome_count) = mean(PETH.Nosepoke.MEAN.nosepoke_PETH);
-                outcome_encoding.zscore.STD(outcome_count) = std(PETH.Nosepoke.MEAN.nosepoke_PETH);
+                outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            elseif mean(FRATE.Reward.Trial_firing_rate_unreward) > mean(FRATE.Reward.Trial_firing_rate_reward)
+                outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
                 
-                if mean(FRATE.Task.Trial_firing_rate) > mean(FRATE.Task.Trial_B4_firing_rate)
-                    if mean(FRATE.Reward.Nosepoke_firing_rate_reward) > mean(FRATE.Reward.Nosepoke_firing_rate_unreward)
-                        outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        
-                        outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                    elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) > mean(FRATE.Reward.Nosepoke_firing_rate_reward)
-                        outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        
-                        outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                    end
-                    outcome_count_INC = outcome_count_INC + 1;
-                elseif mean(FRATE.Task.Trial_firing_rate) < mean(FRATE.Task.Trial_B4_firing_rate)
-                    if mean(FRATE.Reward.Nosepoke_firing_rate_reward) > mean(FRATE.Reward.Nosepoke_firing_rate_unreward)
-                        outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        
-                        outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                    elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) > mean(FRATE.Reward.Nosepoke_firing_rate_reward)
-                        outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        
-                        outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
-                        outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
-                        outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
-                        outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                        outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
-                    end
-                    outcome_count_DEC = outcome_count_DEC + 1;
-                end
+                outcome_encoding.RAW.pref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.pref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.INC.MEAN(:,outcome_count_INC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.INC.SEM(:,outcome_count_INC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.zscore.pref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.INC.MEAN(:,outcome_count_INC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            elseif mean(FRATE.Reward.Trial_firing_rate_unreward) == mean(FRATE.Reward.Trial_firing_rate_reward)
+                disp('fatal error')
+            end
+        end
+        outcome_count_INC = outcome_count_INC + 1;
+    elseif mean(FRATE.Task.Trial_firing_rate) < mean(FRATE.Task.Trial_B4_firing_rate)
+        if mean(FRATE.Reward.Nosepoke_firing_rate_reward) > mean(FRATE.Reward.Nosepoke_firing_rate_unreward)
+            outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            
+            outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+        elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) > mean(FRATE.Reward.Nosepoke_firing_rate_reward)
+            outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            
+            outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+            outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+            outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+            outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+        elseif mean(FRATE.Reward.Nosepoke_firing_rate_unreward) == mean(FRATE.Reward.Nosepoke_firing_rate_reward)
+            disp('error = 0')
+            if mean(FRATE.Reward.Trial_firing_rate_reward) > mean(FRATE.Reward.Trial_firing_rate_unreward)
+                outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
                 
-                outcome_count = outcome_count + 1;
+                outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            elseif mean(FRATE.Reward.Trial_firing_rate_unreward) > mean(FRATE.Reward.Trial_firing_rate_reward)
+                outcome_encoding.RAW.pref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.pref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.MEAN(:,outcome_count) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.ALL.SEM(:,outcome_count) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.zscore.pref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.ALL.MEAN(:,outcome_count) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
                 
+                outcome_encoding.RAW.pref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.pref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_unrew_PETH;
+                outcome_encoding.RAW.nonpref.DEC.MEAN(:,outcome_count_DEC) = PETH.Nosepoke.MEAN.nosepoke_rew_PETH;
+                outcome_encoding.RAW.nonpref.DEC.SEM(:,outcome_count_DEC) = PETH.Nosepoke.SEM.nosepoke_rew_PETH;
+                outcome_encoding.zscore.pref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_unrew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+                outcome_encoding.zscore.nonpref.DEC.MEAN(:,outcome_count_DEC) = (PETH.Nosepoke.MEAN.nosepoke_rew_PETH - outcome_encoding.zscore.MEAN(outcome_count)) / outcome_encoding.zscore.STD(outcome_count);
+            elseif mean(FRATE.Reward.Trial_firing_rate_unreward) == mean(FRATE.Reward.Trial_firing_rate_reward)
+                disp('fatal error')
+            end
+        end
+        outcome_count_DEC = outcome_count_DEC + 1;
+    end
+    
+    outcome_count = outcome_count + 1;
+    
 end
 
 for jj = 1:15001 %generate averaged responses
@@ -510,7 +644,7 @@ pref_time = -5:.001:10;
 pref_time = pref_time(1:length(rule_encoding.zscore.pref.AVG.MEAN));
 nonpref_time = -5:.001:10;
 nonpref_time = nonpref_time(1:length(rule_encoding.zscore.nonpref.AVG.MEAN));
-figure; 
+figure;
 % subplot(3,3,1)
 % shadedErrorBar(pref_time,rule_encoding.zscore.pref.AVG.MEAN,rule_encoding.zscore.pref.AVG.SEM,'-r',1);
 % hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
@@ -527,29 +661,29 @@ subplot(3,2,1)
 shadedErrorBar(pref_time,rule_encoding.zscore.pref.INC.AVG.MEAN,rule_encoding.zscore.pref.INC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
 shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.INC.AVG.MEAN,rule_encoding.zscore.nonpref.INC.AVG.SEM,'-b',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 title('Cue-modulated units that increased post cue-onset');
- set(gca,'FontSize',16);
+set(gca,'FontSize',16);
 
 subplot(3,2,2)
 shadedErrorBar(pref_time,rule_encoding.zscore.pref.DEC.AVG.MEAN,rule_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
 shadedErrorBar(nonpref_time,rule_encoding.zscore.nonpref.DEC.AVG.MEAN,rule_encoding.zscore.nonpref.DEC.AVG.SEM,'-b',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
- xlabel('Time from nosepoke (s)');
+xlabel('Time from nosepoke (s)');
 % ylabel('Firing rate (Hz)');
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
 title('Cue-modulated units that decreased post cue-onset');
- set(gca,'FontSize',16);
+set(gca,'FontSize',16);
 
 %% plot for location
 peak_value = [];
@@ -573,7 +707,7 @@ three_time = -5:.001:10;
 three_time = three_time(1:length(location_encoding.zscore.three.AVG.MEAN));
 four_time = -5:.001:10;
 four_time = four_time(1:length(location_encoding.zscore.four.AVG.MEAN));
-% figure; 
+% figure;
 % subplot(3,3,4)
 % shadedErrorBar(one_time,location_encoding.zscore.one.AVG.MEAN,location_encoding.zscore.one.AVG.SEM,'-m',1);
 % hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
@@ -594,14 +728,14 @@ hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red')
 % shadedErrorBar(two_time,location_encoding.zscore.two.INC.AVG.MEAN,location_encoding.zscore.two.INC.AVG.SEM,'-b',1);
 % shadedErrorBar(three_time,location_encoding.zscore.three.INC.AVG.MEAN,location_encoding.zscore.three.INC.AVG.SEM,'-k',1);
 shadedErrorBar(four_time,location_encoding.zscore.four.INC.AVG.MEAN,location_encoding.zscore.four.INC.AVG.SEM,'-k',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
- xlabel('Time from nosepoke (s)');
- ylabel('Normalized firing rate');
+xlabel('Time from nosepoke (s)');
+ylabel('Normalized firing rate');
 % title('Increased');
- set(gca,'FontSize',16);
+set(gca,'FontSize',16);
 
 subplot(3,2,4)
 shadedErrorBar(one_time,location_encoding.zscore.one.DEC.AVG.MEAN,location_encoding.zscore.one.DEC.AVG.SEM,'-m',1);
@@ -609,16 +743,16 @@ hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red')
 % shadedErrorBar(two_time,location_encoding.zscore.two.DEC.AVG.MEAN,location_encoding.zscore.two.DEC.AVG.SEM,'-b',1);
 % shadedErrorBar(three_time,location_encoding.zscore.three.DEC.AVG.MEAN,location_encoding.zscore.three.DEC.AVG.SEM,'-k',1);
 shadedErrorBar(four_time,location_encoding.zscore.four.DEC.AVG.MEAN,location_encoding.zscore.four.DEC.AVG.SEM,'-k',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
- xlabel('Time from nosepoke (s)');
+xlabel('Time from nosepoke (s)');
 % ylabel('Firing rate (Hz)');
 % title('Decreased');
- set(gca,'FontSize',16);
+set(gca,'FontSize',16);
 
 %% plot for outcome (normalized)
 peak_value = [];
@@ -634,7 +768,7 @@ pref_time = -5:.001:10;
 pref_time = pref_time(1:length(outcome_encoding.zscore.pref.AVG.MEAN));
 nonpref_time = -5:.001:10;
 nonpref_time = nonpref_time(1:length(outcome_encoding.zscore.nonpref.AVG.MEAN));
-% figure; 
+% figure;
 % subplot(3,3,7)
 % shadedErrorBar(pref_time,outcome_encoding.zscore.pref.AVG.MEAN,outcome_encoding.zscore.pref.AVG.SEM,'-r',1);
 % hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
@@ -651,7 +785,7 @@ subplot(3,2,5)
 shadedErrorBar(pref_time,outcome_encoding.zscore.pref.INC.AVG.MEAN,outcome_encoding.zscore.pref.INC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
 shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.INC.AVG.MEAN,outcome_encoding.zscore.nonpref.INC.AVG.SEM,'-g',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
@@ -664,13 +798,13 @@ subplot(3,2,6)
 shadedErrorBar(pref_time,outcome_encoding.zscore.pref.DEC.AVG.MEAN,outcome_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
 hold on; plot(0,-5:.1:5,'.','color','black');  plot(1,-5:.1:5,'.','color','red');
 shadedErrorBar(nonpref_time,outcome_encoding.zscore.nonpref.DEC.AVG.MEAN,outcome_encoding.zscore.nonpref.DEC.AVG.SEM,'-g',1);
-  xlim([-2 5]);
+xlim([-2 5]);
 ylim([minimum_value-.5 maximum_value+.5]);
 %     set(gca,'XTick',[]);
 box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
- set(gca,'FontSize',16);
- 
+set(gca,'FontSize',16);
+
 % title('Decreased');

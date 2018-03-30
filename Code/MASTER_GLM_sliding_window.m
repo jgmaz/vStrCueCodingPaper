@@ -1,10 +1,11 @@
 warning('error', 'stats:glmfit:IterationLimit'); % turn GLM warning into error so that you can use try catch to skip to next iteration of loop.
 %% time window to analyze
-    for iTime = -.5:.025:.5
+for iRound = 1:4
+    for iTime = -.5:.1:.5
 
 
 time_window_start = iTime; %starting time window for analysis, 0 = time zero
-        time_window_end = time_window_start + .2;
+        time_window_end = time_window_start + .5;
         epoch_start = 0;
 
 mat_files = dir('*.mat');
@@ -272,7 +273,7 @@ for kk = 1:length(dir('*.mat'))
                     end
                     
             end
-            if sum(dataset(:,7)) < 30
+            if sum(dataset(:,7)) < 10
                 mdl{kk} = [];
             else
                 %%
@@ -1171,10 +1172,10 @@ for kk = 1:length(dir('*.mat'))
     end
 end
 
-save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-03-12-GLM_cueon_',num2str(iTime),'-200bin25step.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
-clearvars -except iTime
+save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-03-24-GLM_cueon_',num2str(iTime),'-round',num2str(iRound),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
+clearvars -except iTime iRound
     end
-
+end
 %%
 summary_table{1,1} = 'Category';
 summary_table{2,1} = 'Cue-evoked';

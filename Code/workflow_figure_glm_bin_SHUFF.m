@@ -106,7 +106,7 @@ legend({'trial number' 'previous trial'});
 subplot(2,3,4)
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
@@ -116,7 +116,7 @@ ylim([1 8]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-o
 subplot(2,3,5)
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(4,:),GLM_window.cueon.Rsquared.SEM(4,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(5,:),GLM_window.cueon.Rsquared.SEM(5,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Approach,GLM_window_SHUFF.cueon.Rsquared.SEM.Approach,'--b',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Latency,GLM_window_SHUFF.cueon.Rsquared.SEM.Latency,'--r',1);
@@ -124,7 +124,7 @@ ylim([1 8]); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.
 subplot(2,3,6)
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(6,:),GLM_window.cueon.Rsquared.SEM(6,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(7,:),GLM_window.cueon.Rsquared.SEM(7,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Trial,GLM_window_SHUFF.cueon.Rsquared.SEM.Trial,'--b',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Previous,GLM_window_SHUFF.cueon.Rsquared.SEM.Previous,'--r',1);
@@ -160,12 +160,12 @@ shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.prop.MEAN.Location,GLM_windo
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.prop.MEAN.Outcome,GLM_window_SHUFF.outcome.prop.SEM.Outcome,'--y',1);
 plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
 % legend({'identity' 'location' 'outcome'});
-title('Cue features aligned to outcome'); ylabel('Proportion of cue-modulated units')
+title('Cue features aligned to outcome'); %ylabel('Proportion of cue-modulated units')
 ylim([0 .5]); xlabel('Time from outcome (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
 subplot(2,3,4)
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
@@ -175,23 +175,23 @@ ylim([1 10]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-
 subplot(2,3,5)
 shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(1,:),GLM_window.NP.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(2,:),GLM_window.NP.Rsquared.SEM(2,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(3,:),GLM_window.NP.Rsquared.SEM(3,:),'-y',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Modality,GLM_window_SHUFF.NP.Rsquared.SEM.Modality,'--b',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Location,GLM_window_SHUFF.NP.Rsquared.SEM.Location,'--r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Outcome,GLM_window_SHUFF.NP.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 10]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([1 10]);  xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
 subplot(2,3,6)
 shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(1,:),GLM_window.outcome.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(2,:),GLM_window.outcome.Rsquared.SEM(2,:),'-r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(3,:),GLM_window.outcome.Rsquared.SEM(3,:),'-y',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Modality,GLM_window_SHUFF.outcome.Rsquared.SEM.Modality,'--b',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Location,GLM_window_SHUFF.outcome.Rsquared.SEM.Location,'--r',1);
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Outcome,GLM_window_SHUFF.outcome.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 10]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([1 10]);  xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
 
 %%
 for iList = 2:length(predictor_list)
@@ -269,20 +269,20 @@ legend({'trial number' 'previous trial'});
 subplot(2,3,4)
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(1,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(2,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(2,:),'-r',1);
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(3,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(3,:),'-y',1);
 ylim([1 8]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-onset (s)');
 subplot(2,3,5)
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(4,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(4,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(5,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(5,:),'-r',1);
 ylim([1 8]); xlabel('Time from cue-onset (s)');
 subplot(2,3,6)
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(6,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(6,:),'-b',1);
 hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:10,'.k');
+plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
 shadedErrorBar(-.25:.05:.75,GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.MEAN(7,:),GLM_window.(cat(2,'shuff_',num2str(iShuff))).cueon.Rsquared.SEM(7,:),'-r',1);
 ylim([1 8]); xlabel('Time from cue-onset (s)');
 

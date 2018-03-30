@@ -1,6 +1,6 @@
 figure;
 subplot(3,4,1)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.light.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.light.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % colorbar; 
 caxis([-3 4]);
@@ -10,7 +10,7 @@ ylabel('Unit number');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 subplot(3,4,2)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.sound.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.sound.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % ylabel('Unit number');
 % xlabel('Time from cue onset (s)'); 
@@ -21,7 +21,7 @@ caxis([-3 4]);
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
  
  subplot(3,4,3)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.sound_2_light.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.sound_2_light.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % ylabel('Unit number');
 % xlabel('Time from cue onset (s)'); 
@@ -31,21 +31,21 @@ caxis([-3 4]);
  title('Sound vs. Light block');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
- subplot(3,4,4)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH_mod.light_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-% ylabel('Unit number');
-% xlabel('Time from cue onset (s)'); 
-% colorbar; 
-caxis([-3 4]);
-% set(gca,'YTick',[]);
- title('Light control');
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+%  subplot(3,4,4)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH_mod.light_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% % ylabel('Unit number');
+% % xlabel('Time from cue onset (s)'); 
+% % colorbar; 
+% caxis([-3 4]);
+% % set(gca,'YTick',[]);
+%  title('Light control');
+% set(gca,'FontSize',16,'YTick',[],'XTick',[]);
  
 
  %%
  subplot(3,4,5)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.arm1.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.arm1.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % colorbar; 
 caxis([-3 4]);
@@ -55,7 +55,7 @@ title('Arm 1');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 subplot(3,4,6)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.arm2.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.arm2.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Arm 2');
 % ylabel('Unit number');
@@ -66,7 +66,7 @@ caxis([-3 4]);
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 subplot(3,4,7)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.arm2_2_arm1.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.arm2_2_arm1.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Arm 2 vs. Arm 1');
 % colorbar; 
@@ -76,62 +76,62 @@ caxis([-3 4]);
 % xlabel('Time from cue onset (s)'); 
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
-subplot(3,4,8)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH_loc.arm1_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-title('Arm 1 control');
-% colorbar; 
-caxis([-3 4]);
-% set(gca,'YTick',[]);
-%  ylabel('Unit number');
-% xlabel('Time from cue onset (s)'); 
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+% subplot(3,4,8)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH_loc.arm1_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% title('Arm 1 control');
+% % colorbar; 
+% caxis([-3 4]);
+% % set(gca,'YTick',[]);
+% %  ylabel('Unit number');
+% % xlabel('Time from cue onset (s)'); 
+% set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
  %%
  subplot(3,4,9)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.rew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.rew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % colorbar; 
 title('Reward-available');
 caxis([-3 4]);
-% xlabel('Time from cue onset (s)'); 
+xlabel('Time from cue onset (s)'); 
 ylabel('Unit number');
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+set(gca,'FontSize',16,'YTick',[])%,'XTick',[]);
 
 subplot(3,4,10)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.unrew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.unrew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Reward-unavailable');
 % colorbar; 
 caxis([-3 4]);
  % set(gca,'YTick',[]); 
-%  xlabel('Time from cue onset (s)'); ylabel('Unit number');
- set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+ xlabel('Time from cue onset (s)'); %ylabel('Unit number');
+ set(gca,'FontSize',16,'YTick',[])%,'XTick',[]);
  
 subplot(3,4,11)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.unrew_2_rew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.unrew_2_rew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Reward-unavailable vs. -available');
 % colorbar; 
 caxis([-3 4]);
 % set(gca,'YTick',[]); 
-%  xlabel('Time from cue onset (s)'); ylabel('Unit number');
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+ xlabel('Time from cue onset (s)');% ylabel('Unit number');
+set(gca,'FontSize',16,'YTick',[])%,'XTick',[]);
 
-subplot(3,4,12)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH_out.rew_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-title('Reward-available control');
-% colorbar; 
-caxis([-3 4]);
-% set(gca,'YTick',[]); 
-%  xlabel('Time from cue onset (s)'); ylabel('Unit number');
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+% subplot(3,4,12)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH_out.rew_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% title('Reward-available control');
+% % colorbar; 
+% caxis([-3 4]);
+% % set(gca,'YTick',[]); 
+% %  xlabel('Time from cue onset (s)'); ylabel('Unit number');
+% set(gca,'FontSize',16,'YTick',[],'XTick',[]);
  
 %%
 figure
 subplot(3,4,1)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.light.zscore); 
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.light.zscore); 
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % colorbar; 
  caxis([-3 4]);
@@ -142,7 +142,7 @@ hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
   set(gca,'FontSize',16,'YTick',[],'XTick',[]);
   
 subplot(3,4,2)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.sound.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.sound.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % ylabel('Unit number');
 % xlabel('Time from cue onset (s)'); 
@@ -153,7 +153,7 @@ hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
    set(gca,'FontSize',16,'YTick',[],'XTick',[]);
    
 subplot(3,4,3)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.sound_2_light.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.sound_2_light.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 %  colorbar; 
  caxis([-3 4]);
@@ -163,20 +163,20 @@ hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 % xlabel('Time from cue onset (s)');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
-subplot(3,4,4)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH_mod.light_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-%  colorbar; 
- caxis([-3 4]);
-%  set(gca,'YTick',[]); 
-  title('Light control');
-%   ylabel('Unit number');
-% xlabel('Time from cue onset (s)');
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+% subplot(3,4,4)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH_mod.light_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% %  colorbar; 
+%  caxis([-3 4]);
+% %  set(gca,'YTick',[]); 
+%   title('Light control');
+% %   ylabel('Unit number');
+% % xlabel('Time from cue onset (s)');
+% set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 %%
 subplot(3,4,5)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.arm1.zscore); 
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.arm1.zscore); 
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Arm 1');
 % colorbar; 
@@ -187,7 +187,7 @@ title('Arm 1');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 subplot(3,4,6)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.arm2.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.arm2.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Arm 2');
 %  colorbar; 
@@ -198,7 +198,7 @@ title('Arm 2');
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 subplot(3,4,7)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.arm2_2_arm1.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.arm2_2_arm1.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Arm 2 vs. Arm 1');
 %  colorbar; 
@@ -208,20 +208,20 @@ title('Arm 2 vs. Arm 1');
 %  set(gca,'YTick',[]);
 set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
-subplot(3,4,8)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH_loc.arm1_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-title('Arm 1 control');
-%  colorbar; 
- caxis([-3 4]);
-%  ylabel('Unit number');
-% xlabel('Time from cue onset (s)'); 
-%  set(gca,'YTick',[]);
-set(gca,'FontSize',16,'YTick',[],'XTick',[]);
+% subplot(3,4,8)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH_loc.arm1_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% title('Arm 1 control');
+% %  colorbar; 
+%  caxis([-3 4]);
+% %  ylabel('Unit number');
+% % xlabel('Time from cue onset (s)'); 
+% %  set(gca,'YTick',[]);
+% set(gca,'FontSize',16,'YTick',[],'XTick',[]);
 
 %%
 subplot(3,4,9)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.rew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.rew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Reward-available');
 % colorbar; 
@@ -232,7 +232,7 @@ title('Reward-available');
   set(gca,'FontSize',16,'YTick',[]);
   
 subplot(3,4,10)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.unrew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.unrew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 title('Reward-unavailable');
 %  colorbar; 
@@ -243,7 +243,7 @@ title('Reward-unavailable');
    set(gca,'FontSize',16,'YTick',[]);
    
 subplot(3,4,11)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH.unrew_2_rew.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH.unrew_2_rew.zscore);
 hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
 %  colorbar; 
  caxis([-3 4]);
@@ -253,20 +253,20 @@ hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
   title('Reward-unavailable vs. -available');
 set(gca,'FontSize',16,'YTick',[]);  
 
-subplot(3,4,12)
-imagesc(-1:.001:3,1:length(dir('*.mat')),MINsortedPETH_out.rew_2nd_2_1st.zscore);
-hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
-%  colorbar; 
- caxis([-3 4]);
-%  set(gca,'YTick',[]);
-  xlabel('Time from cue onset (s)');
-%    ylabel('Unit number');
-  title('Reward-available control');
-set(gca,'FontSize',16,'YTick',[]);  
+% subplot(3,4,12)
+% imagesc(-1:.001:1,1:length(dir('*.mat')),MINsortedPETH_out.rew_2nd_2_1st.zscore);
+% hold on; plot(0,0:10:length(dir('*.mat')),'.','color','black');
+% %  colorbar; 
+%  caxis([-3 4]);
+% %  set(gca,'YTick',[]);
+%   xlabel('Time from cue onset (s)');
+% %    ylabel('Unit number');
+%   title('Reward-available control');
+% set(gca,'FontSize',16,'YTick',[]);  
   
  %%
  figure
  subplot(3,4,1)
-imagesc(-1:.001:3,1:length(dir('*.mat')),sortedPETH.light.zscore);
+imagesc(-1:.001:1,1:length(dir('*.mat')),sortedPETH.light.zscore);
 colorbar; 
   caxis([-3 4]);

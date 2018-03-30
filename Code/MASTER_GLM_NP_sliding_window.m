@@ -1,5 +1,6 @@
 warning('error', 'stats:glmfit:IterationLimit')
 %% time window to analyze
+for iRound = 1:5
 for iEpoch = 1:2%3
     for iTime = -.5:.1:.5
 
@@ -294,8 +295,7 @@ end
             if sum(dataset(:,7)) < 10
                 mdl{kk} = [];
             else
-                %%
-                 dataset(:,7) = datasample(dataset(:,7),length(dataset(:,7)),'Replace',false);   
+                %% 
                 ds = mat2dataset(dataset,'VarNames',{'Previous','Outcome','Modality','Location','Latency','Trial','FiringRate'});
                 
                 %             mdl{kk}= stepwiseglm(ds,'constant','upper','linear','Distribution','poisson');
@@ -1066,9 +1066,10 @@ for kk = 1:length(dir('*.mat'))
     end
 end
 
-save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-03-24-GLM_',Epoch,'_',num2str(iTime),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
-clearvars -except iEpoch iTime
+save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-03-26-GLM_',Epoch,'_',num2str(iTime),'-round',num2str(iRound),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
+clearvars -except iEpoch iTime iRound
     end
+end
 end
 %%
 summary_table{1,1} = 'Category';
