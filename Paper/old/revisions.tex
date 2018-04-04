@@ -1,13 +1,21 @@
 % UPDATES:
 %DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL vStrCueCoding_v4.tex   Wed Mar  7 11:38:22 2018
-%DIF ADD vStrCueCoding_v5.tex   Fri Mar 23 21:53:33 2018
+%DIF DEL vStrCueCoding_v5.tex      Fri Mar 23 21:53:33 2018
+%DIF ADD vStrCueCoding_final.tex   Tue Apr  3 10:34:59 2018
 % Version 1.2 - JG initial import of text and figures from Google Drive, with edits
 
 \documentclass[11pt]{article}
 
 % packages
-\usepackage{natbib}
+%DIF 7c7-11
+%DIF < \usepackage{natbib}
+%DIF -------
+%\usepackage{natbib} %DIF > 
+%\usepackage{doi} %DIF > 
+%\usepackage{hyperref}  %DIF > 
+\usepackage[natbibapa]{apacite} %DIF > 
+%\usepackage{url} %DIF > 
+%DIF -------
 \usepackage{graphicx}
 \usepackage[nolists]{endfloat}
 \usepackage{times}
@@ -18,7 +26,9 @@
 \usepackage[pdftex]{color}
 \usepackage{pdfcolmk}
 \usepackage{fixltx2e} % for \textsubscript
-%\usepackage{epstopdf}
+%DIF 18d22
+%DIF < %\usepackage{epstopdf}
+%DIF -------
 
 % line numbers
 \usepackage[left]{lineno}
@@ -31,11 +41,17 @@
 \renewcommand{\topfraction}{1}
 \renewcommand{\bottomfraction}{1}
 
+%DIF 31a34-35
+% removes filenames from figures %DIF > 
+\usepackage{grffile} %DIF > 
+%DIF -------
 
-% convert tif to png for pdf
-%\epstopdfDeclareGraphicsRule{.tif}{png}{.png}{convert #1 \OutputFile}
-%\AppendGraphicsExtensions{.tif}
-
+%DIF 32-35d37
+%DIF < % convert tif to png for pdf
+%DIF < %\epstopdfDeclareGraphicsRule{.tif}{png}{.png}{convert #1 \OutputFile}
+%DIF < %\AppendGraphicsExtensions{.tif}
+%DIF < 
+%DIF -------
 % spacing
 \setlength{\parindent}{0in} 
 \setlength{\parskip}{2\baselineskip}
@@ -51,12 +67,40 @@
 \makeatother
 
 % bib
-\bibliographystyle{apa}
+%DIF 51c52-53
+%DIF < \bibliographystyle{apa}
+%DIF -------
+% \bibliographystyle{apa} %DIF > 
+\bibliographystyle{apacite} %DIF > 
+%DIF -------
 \let\cite=\citep
 \let\citeN=\citet
 \let\citeNP=\citealt
 \renewcommand{\bibfont}{\footnotesize}
 \setlength{\bibsep}{2pt}
+ %DIF > 
+% remove urls from references %DIF > 
+\usepackage{etoolbox} %DIF > 
+\usepackage{environ} %DIF > 
+\newtoggle{bibdoi} %DIF > 
+\newtoggle{biburl} %DIF > 
+\makeatletter %DIF > 
+ %DIF > 
+\undef{\APACrefURL} %DIF > 
+\undef{\endAPACrefURL} %DIF > 
+\undef{\APACrefDOI} %DIF > 
+\undef{\endAPACrefDOI} %DIF > 
+ %DIF > 
+\long\def\collect@url#1{\global\def\bib@url{#1}} %DIF > 
+\long\def\collect@doi#1{\global\def\bib@doi{#1}} %DIF > 
+\newenvironment{APACrefURL}{\global\toggletrue{biburl}\Collect@Body\collect@url}{\unskip\unskip} %DIF > 
+\newenvironment{APACrefDOI}{\global\toggletrue{bibdoi}\Collect@Body\collect@doi}{} %DIF > 
+ %DIF > 
+\AtBeginEnvironment{thebibliography}{ %DIF > 
+ \pretocmd{\PrintBackRefs}{% %DIF > 
+    {\iftoggle{biburl}{\unskip\unskip doi:\bib@doi}{}} %DIF > 
+}{}{} %DIF > 
+} %DIF > 
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
 %DIF UNDERLINE PREAMBLE %DIF PREAMBLE
 \RequirePackage[normalem]{ulem} %DIF PREAMBLE
@@ -119,6 +163,9 @@
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
+%DIF > change intext citations to ``%'', have to do it after begin document as commands get redefined
+\DIFaddbegin \renewcommand{\BBAB}{\BBAA}
+\DIFaddend 
 
 {\Large\bf Persistent coding of outcome-predictive cue features in the
   rat nucleus accumbens.}
@@ -138,7 +185,7 @@ Maynard St, Hanover, NH 03755. E-mail: {\sffamily mvdm@dartmouth.edu}.
 \textbf{Number of Figures:} 12\\
 \textbf{Number of Tables:} 1\\
 \textbf{Total Word Count:} ?\\
-\textbf{Abstract Word Count:} ?\\
+\textbf{Abstract Word Count:} \DIFdelbegin \DIFdel{?}\DIFdelend \DIFaddbegin \DIFadd{150}\DIFaddend \\
 \textbf{Introduction Word Count:} ?\\
 \textbf{Discussion Word Count:} ?\\
 
@@ -156,133 +203,151 @@ financial interests.\\
 \newpage
 \linenumbers
 
-\section*{Abstract \DIFaddbegin \DIFadd{(eLife: 150 words)}\DIFaddend }
+\section*{Abstract\DIFdelbegin \DIFdel{(eLife: 150 words)}\DIFdelend }
 
-\DIFdelbegin \DIFdel{In reinforcement learning, adaptive behavior requires assigning credit to the appropriate reward-predictive stimuli in the environment. }\DIFdelend The nucleus accumbens \DIFaddbegin \DIFadd{(NAc) }\DIFaddend has been shown to be important for
+The nucleus accumbens (NAc) has been shown to be important for
 learning from feedback, and biasing and invigorating behavior in
-response to \DIFdelbegin \DIFdel{reward-predictive cues. Much work has emphasized nucleus accumbens coding of reward features of reward-predictive stimuli such as }\DIFdelend \DIFaddbegin \DIFadd{outcome-predictive cues. NAc encodes outcome-related cue
-features such as the }\DIFaddend magnitude and identity of reward. However, not
-much is known \DIFdelbegin \DIFdel{as to }\DIFdelend \DIFaddbegin \DIFadd{about }\DIFaddend how features of cues themselves are encoded.  \DIFdelbegin \DIFdel{To test this we }\DIFdelend \DIFaddbegin \DIFadd{We
-}\DIFaddend designed a decision making task where rats \DIFdelbegin \DIFdel{had to learn }\DIFdelend \DIFaddbegin \DIFadd{learned }\DIFaddend multiple sets of
-\DIFdelbegin \DIFdel{reward-predictive }\DIFdelend \DIFaddbegin \DIFadd{outcome-predictive }\DIFaddend cues, and recorded single-unit activity in the \DIFdelbegin \DIFdel{nucleus accumbens }\DIFdelend \DIFaddbegin \DIFadd{NAc
-}\DIFaddend during performance. We found that coding of various cue features
-occurred alongside coding of expected outcome. Furthermore, \DIFdelbegin \DIFdel{we found that }\DIFdelend this
+response to outcome-predictive cues. NAc encodes outcome-related cue
+features such as the magnitude and identity of reward. However, not
+much is known about how features of cues themselves are encoded.  We
+designed a decision making task where rats learned multiple sets of
+outcome-predictive cues, and recorded single-unit activity in the NAc
+during performance. We found that coding of various cue features
+occurred alongside coding of expected outcome. Furthermore, this
 coding persisted during a delay period, after the rat made a decision
 and was waiting for an outcome, but not after the outcome was
-revealed. \DIFdelbegin \DIFdel{This finding of persistent coding of }\DIFdelend \DIFaddbegin \DIFadd{Encoding of }\DIFaddend cue features in the \DIFdelbegin \DIFdel{nucleus accumbens could be one way in which the brain maintains }\DIFdelend \DIFaddbegin \DIFadd{NAc may enable contextual
-modulation of ongoing behavior, and provide }\DIFaddend an eligibility trace of
-outcome-predictive stimuli \DIFdelbegin \DIFdel{to be used }\DIFdelend for updating stimulus-outcome associations
+revealed. Encoding of cue features in the NAc may enable contextual
+modulation of ongoing behavior, and provide an eligibility trace of
+outcome-predictive stimuli for updating stimulus-outcome associations
 to inform future behavior.
 
-\DIFdelbegin \section*{\DIFdel{Significance Statement (120 words)}}
-%DIFAUXCMD
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{to do
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdelend \newpage
+\newpage
 
 \section*{Introduction}
 
-\DIFdelbegin \DIFdel{A fundamental problem faced by all reinforcement learning agents is which features and/or actions to credit and blame for particular outcomes \mbox{%DIFAUXCMD
-\cite{sutton1998}}\hspace{0pt}%DIFAUXCMD
-. Adaptive behavior requires associating motivationally relevant outcomes with the cues that predict them through learning from feedback. Much work has focused on value signals such as reward prediction errors (RPEs), state values and action values \mbox{%DIFAUXCMD
-\cite{Lee2012,Maia2009}}\hspace{0pt}%DIFAUXCMD
-. However, successful learning requires not only a RPE but also a trace of the preceding actions and/or cues. For example, if you become ill after eating food X in restaurant A, depending on if you remember the identity of the restaurant or the food at the time of illness, you may learn to avoid }%DIFDELCMD < {%%%
-\DIFdel{all restaurants; A only; X only; all foods; specific pairing of X-in-A.}%DIFDELCMD < }%%%
-\DIFdel{. Thus a complete understanding of what is learned following feedback requires understanding what “trace” is maintained.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdelend Theories of nucleus accumbens (NAc) function generally agree that this
+Theories of nucleus accumbens (NAc) function generally agree that this
 brain structure contributes to motivated behavior, with some
-emphasizing a role in learning from RPEs
-\cite{Averbeck2017,Joel2002,Khamassi2012,Lee2012,Maia2009,Schultz2016}\cite[see
+emphasizing a role in learning from \DIFdelbegin \DIFdel{RPEs
+\mbox{%DIFAUXCMD
+\cite{Averbeck2017,Joel2002,Khamassi2012,Lee2012,Maia2009,Schultz2016}}\hspace{0pt}%DIFAUXCMD
+\mbox{%DIFAUXCMD
+\cite[see
   also the addiction literature on effects of drug
-  rewards;][]{Carelli2009,Hyman2006,Kalivas2005} and others a role in
+  rewards;][]{Carelli2009,Hyman2006,Kalivas2005} }\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{reward prediction errors (RPEs) (\mbox{%DIFAUXCMD
+\citeNP{Joel2002,Maia2009,Khamassi2012,Lee2012,Schultz2016,Averbeck2017}}\hspace{0pt}%DIFAUXCMD
+; see
+  also the addiction literature on effects of drug
+  rewards; \mbox{%DIFAUXCMD
+\citeNP{Kalivas2005,Hyman2006,Carelli2009}}\hspace{0pt}%DIFAUXCMD
+) }\DIFaddend and others a role in
 the modulation of ongoing behavior through stimuli associated with
-motivationally relevant outcomes \cite[invigorating,
-  directing;][]{Floresco2015,Nicola2010a,Salamone2012}. These
+motivationally relevant outcomes \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite[invigorating,
+  directing;][]{Floresco2015,Nicola2010a,Salamone2012}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite[invigorating,
+  directing;][]{Nicola2010a,Salamone2012,Floresco2015}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . These
 proposals echo similar ideas on the functions of the neuromodulator
-dopamine \cite{Berridge2012,Maia2009,Salamone2012,Schultz2016}, with
+dopamine \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Berridge2012,Maia2009,Salamone2012,Schultz2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Maia2009,Berridge2012,Salamone2012,Schultz2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , with
 which the NAc is tightly linked functionally as well as anatomically
-\cite{Cheer2007,DuHoffmann2014,Ikemoto2007,Takahashi2016}.
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Cheer2007,DuHoffmann2014,Ikemoto2007,Takahashi2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Cheer2007,Ikemoto2007,DuHoffmann2014,Takahashi2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 Much of our understanding of NAc function comes from studies of how
-cues that predict motivationally relevant outcomes (e.g.\DIFaddbegin \DIFadd{\ }\DIFaddend reward)
+cues that predict motivationally relevant outcomes (e.g.\ reward)
 influence behavior and neural activity in the NAc. Task designs that
 associate such cues with rewarding outcomes provide a convenient
 access point eliciting conditioned responses such as sign-tracking and
 goal-tracking \cite{hearst1974sign,Robinson2009},
 pavlovian-instrumental transfer \cite{Estes1943,Rescorla1967} and
-enhanced response vigor \cite{Nicola2010a,Niv2007}, which tend to be
-affected by NAc manipulations \cite{Chang2012,Corbit2011,Flagel2011}
-\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite[although not always
-straightforwardly (is Hauber appropriate?);][]{Chang2013,Hauber2000}}\hspace{0pt}%DIFAUXCMD
+enhanced response vigor \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Nicola2010a,Niv2007}}\hspace{0pt}%DIFAUXCMD
 }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Niv2007,Nicola2010a}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , which tend to be
+affected by NAc manipulations \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Chang2012,Corbit2011,Flagel2011}
+}\hspace{0pt}%DIFAUXCMD
+\mbox{%DIFAUXCMD
 \cite[although not always
   straightforwardly;][]{Giertler2004,Chang2013}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend . Similarly, analysis
+}\DIFdelend \DIFaddbegin \DIFadd{(\mbox{%DIFAUXCMD
+\citeNP{Corbit2011,Flagel2011,Chang2012}}\hspace{0pt}%DIFAUXCMD
+;
+although not always
+  straightforwardly; \mbox{%DIFAUXCMD
+\citeNP{Giertler2004,Chang2013}}\hspace{0pt}%DIFAUXCMD
+)}\DIFaddend . Similarly, analysis
 of RPEs typically proceeds by establishing an association between a
 cue and subsequent reward, with NAc responses transferring from
 outcome to the cue with learning
-\cite{Day2007a,Roitman2005,Setlow2003,Schultz1997}\DIFdelbegin \DIFdel{(Day 2007 is the only paper referenced here that looks at transferring of responses from reward to CS+, other papers are in VTA, or the development of CS+ responses)}\DIFdelend .
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Day2007a,Roitman2005,Setlow2003,Schultz1997}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Schultz1997,Setlow2003,Roitman2005,Day2007a}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 Surprisingly, although substantial work has been done on the coding of
 outcomes predicted by such cues
-\cite{Atallah2014,Bissonette2013,Cooch2015,Day2006,Goldstein2012,Hollerman1998,Lansink2012,McGinty2013,Nicola2004,Roesch2009a,Roitman2005,Saddoris2011,Setlow2003,Sugam2014,West2016},
-much less is known about how \DIFdelbegin \DIFdel{reward-predictive }\DIFdelend \DIFaddbegin \DIFadd{outcome-predictive }\DIFaddend cues themselves are
-encoded in the NAc \cite{Sleezer2016}. This is an important issue for
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Atallah2014,Bissonette2013,Cooch2015,Day2006,Goldstein2012,Hollerman1998,Lansink2012,McGinty2013,Nicola2004,Roesch2009a,Roitman2005,Saddoris2011,Setlow2003,Sugam2014,West2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Hollerman1998,Setlow2003,Nicola2004,Roitman2005,Day2006,Roesch2009a,Saddoris2011,Goldstein2012,Lansink2012,Bissonette2013,McGinty2013,Atallah2014,Sugam2014,Cooch2015,West2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend ,
+much less is known about how outcome-predictive cues themselves are
+encoded in the NAc \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Sleezer2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite[but see;][]{Sleezer2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . This is an important issue for
 at least two reasons. First, in reinforcement learning, motivationally
 relevant outcomes are typically temporally delayed relative to the
 cues that predict them. In order to solve the problem of assigning
 credit (or blame) across such temporal gaps, some trace of preceding
-activity needs to be maintained \cite{Lee2012,sutton1998}. \DIFaddbegin \DIFadd{For
+activity needs to be maintained \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Lee2012,sutton1998}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{sutton1998,Lee2012}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . For
 example, if you become ill after eating food X in restaurant A,
 depending on if you remember the identity of the restaurant or the
 food at the time of illness, you may learn to avoid all restaurants,
 restaurant A only, food X only, or the specific pairing of
 X-in-A. Therefore, a complete understanding of what is learned
 following feedback requires understanding what “trace” is
-maintained. }\DIFaddend Since NAc is a primary target of DA signals interpretable
-as \DIFdelbegin \DIFdel{RPEs}\DIFdelend \DIFaddbegin \DIFadd{reward prediction errors (RPEs)}\DIFaddend , and NAc lesions impair RPEs
+maintained. Since NAc is a primary target of DA signals interpretable
+as \DIFdelbegin \DIFdel{reward prediction errors (RPEs)}\DIFdelend \DIFaddbegin \DIFadd{RPEs}\DIFaddend , and NAc lesions impair RPEs
 related to timing, its activity trace will help determine what can be
 learned when RPEs arrive
-\cite{Hamid2016,Hart2014,Ikemoto2007,McDannald2011,Takahashi2016}.
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Hamid2016,Hart2014,Ikemoto2007,McDannald2011,Takahashi2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Ikemoto2007,McDannald2011,Hart2014,Hamid2016,Takahashi2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
 
 Second, for ongoing behavior, the relevance of cues typically depends
 on “context”. In experimental settings, context may include the
-identity of a preceding cue\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{Holland1992}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend , spatial or configural arrangements
-\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{Honey2014}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{Holland1992,Bouton1993,Honey2014}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend , and unsignaled rules as
+identity of a preceding cue, spatial or configural arrangements
+\cite{Holland1992,Bouton1993,Honey2014}, and unsignaled rules as
 occurs in set shifting and other cognitive control tasks
-\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{Grant1948}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{Grant1948,cohen1992context,Floresco2006a,Sleezer2016}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend . In such
+\cite{Grant1948,cohen1992context,Floresco2006a,Sleezer2016}. In such
 situations, the question arises how selective, context-dependent
-processing of \DIFdelbegin \DIFdel{reward-predictive }\DIFdelend \DIFaddbegin \DIFadd{outcome-predictive }\DIFaddend cues is implemented. For instance, is
-there a “gate” prior to NAc, or are all cues represented in NAc but
+processing of outcome-predictive cues is implemented. For instance, is
+there a “gate” prior to NAc \DIFaddbegin \DIFadd{such that only currently relevant cues are encoded in NAc}\DIFaddend , or are all cues represented in NAc but
 their current values dynamically updated
-\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{Fitzgerald2014,Sleezer2016}}\hspace{0pt}%DIFAUXCMD
-. }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{Goto2008,Fitzgerald2014,Sleezer2016}}\hspace{0pt}%DIFAUXCMD
-. Representation of cue
+\cite{Goto2008,Fitzgerald2014,Sleezer2016}. Representation of cue
 identity would allow for context-dependent mapping of outcomes
 predicted by specific cues.
-}\DIFaddend 
 
 Thus, both from a learning and a flexible performance perspective, it
 is of interest to determine how cue identity is represented in the
@@ -293,18 +358,19 @@ identity is represented alongside other motivationally relevant
 variables, such as cue value, and if these representations are
 maintained after a behavioral decision has been made (Figure
 \ref{fig:schematic}). To address these questions, we recorded the
-activity of NAc \DIFdelbegin \DIFdel{neurons }\DIFdelend \DIFaddbegin \DIFadd{units }\DIFaddend as rats performed a task in which multiple,
+activity of NAc units as rats performed a task in which multiple,
 distinct sets of cues predicted the same outcome.
 
-\begin{figure}[h]
+\begin{figure}
+[h]
 \centering
 \includegraphics[height=0.5\textheight]{Fig 1 - Schematic neural.png}
 \caption{Schematic of potential coding strategies for cue identity
   (light, sound) and cue outcome (reward-available,
-  reward-unavailable) employed by single units in the NAc \DIFaddbeginFL \DIFaddFL{across
-  different units (A) and in time (B)}\DIFaddendFL . \bsf{A}: Displayed are
+  reward-unavailable) employed by single units in the NAc across
+  different units (A) and in time (B). \bsf{A}: Displayed are
   schematic PETHs illustrating putative responses to different cues
-  under different hypotheses of how cue identity and \DIFdelbeginFL \DIFdelFL{value }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{outcome }\DIFaddendFL are
+  under different hypotheses of how cue identity and outcome are
   coded. H1 (left panel): Coding of cue identity is absent in the
   NAc. Top: Unit A encodes a motivationally relevant variable, such as
   expected outcome, similarly across other cue features, such as cue
@@ -322,8 +388,8 @@ distinct sets of cues predicted the same outcome.
   modalities, depicted here as firing to light cues but not sound
   cues. H3 (right panel): Coding of cue identity is integrated with
   coding of other motivationally relevant variables. Hypothetical
-  example demonstrating a unit that responds to \DIFdelbeginFL \DIFdelFL{reward-predictive }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{outcome-predictive
-  }\DIFaddendFL cues, but firing rate is also modulated by cue identity, firing most
+  example demonstrating a unit that responds to outcome-predictive
+  cues, but firing rate is also modulated by cue identity, firing most
   for the reward-available light cue. \bsf{B}: Displayed are schematic
   PETHs illustrating potential ways in which cue identity signals may
   persist over time. H1 (left panel): Cue-onset triggers a transient
@@ -331,24 +397,28 @@ distinct sets of cues predicted the same outcome.
   indicate time of a behavioral or environmental event. 'Cue-ON'
   signifies onset of cue, 'NP' signifies when the rat holds a nosepoke
   at a reward receptacle, 'Out' signifies when the outcome is
-  revealed, '\DIFdelbeginFL \DIFdelFL{Cue-OFF}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{OFF}\DIFaddendFL ' signifies when the cue turns off. H2 (middle
-  panel): Coding of cue identity \DIFdelbeginFL \DIFdelFL{is
-  maintained }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{persists }\DIFaddendFL during a nosepoke hold
+  revealed, 'OFF' signifies when the cue turns off. H2 (middle
+  panel): Coding of cue identity persists during a nosepoke hold
   period until outcome is revealed. Coding can either be maintained by
   the same unit as during cue-onset (H2A) or by a sequence of units
-  (H2B). H3 (right panel): Coding of cue identity \DIFdelbeginFL \DIFdelFL{is
-  maintained during entire duration of cue, including }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{persists }\DIFaddendFL after \DIFaddbeginFL \DIFaddFL{the }\DIFaddendFL outcome is \DIFdelbeginFL \DIFdelFL{revealed}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{received when the rat gets feedback about his decision,
-  by either the same unit as during cue-onset (H3A) or by a sequence of units (H3B)}\DIFaddendFL . The
+  (H2B). H3 (right panel): Coding of cue identity persists after the outcome is received when the rat gets feedback about his decision,
+  by either the same unit as during cue-onset (H3A) or by a sequence of units (H3B). The
   same hypotheses apply to other information-containing aspects of the
   environment when the cue is presented, such as the physical location
   of the cue.}
 \label{fig:schematic}
+
 \end{figure}
-\section*{Methods}
+\DIFdelbegin \section*{\DIFdel{Methods}}
+%DIFAUXCMD
+%DIFDELCMD < 
 
-{\bf Subjects:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Subjects:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-Adult male Long-Evans rats (n = 4, Charles River, Saint Constant, QC)
+%DIFDELCMD < %%%
+\DIFdel{Adult male Long-Evans rats (n = 4, Charles River, Saint Constant, QC)
 were used as subjects. Rats were individually housed with a 12/12-h
 light-dark cycle, and tested during the light cycle. Rats were food
 deprived to 85-90\% of their free feeding weight (weight at time of
@@ -357,59 +427,82 @@ testing. All experimental procedures were approved by the the
 University of Waterloo Animal Care Committee (protocol\# 11-06) and
 carried out in accordance with Canadian Council for Animal Care (CCAC)
 guidelines.
+}%DIFDELCMD < 
 
-{\bf Overall timeline:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Overall timeline:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-Each rat was first handled for seven days during which they were
+%DIFDELCMD < %%%
+\DIFdel{Each rat was first handled for seven days during which they were
 exposed to the experiment room, the sucrose solution used as a
 reinforcer, and the click of the sucrose dispenser valves. Rats were
-then \DIFdelbegin \DIFdel{shaped to run on the task for sucrose
-reward while being restricted to running in the clockwise direction by
-presenting a physical barrier to running counterclockwise. Cues signaling the
-availability and inavailability of reward were then introduced }\DIFdelend \DIFaddbegin \DIFadd{trained on the behavioral task }\DIFaddend (described in \DIFdelbegin \DIFdel{detail below, and rats were trained for 200 trials per day until they discriminated between the cues}\DIFdelend \DIFaddbegin \DIFadd{the next section)
-until they reached performance criterion}\DIFaddend . At this point they
+then trained on the behavioral task (described in the next section)
+until they reached performance criterion. At this point they
 underwent hyperdrive implantation targeted at the NAc. Rats were
 allowed to recover for a minimum of five days before being retrained
 on the task, and recording began once performance returned to
-pre-surgery levels. Upon completion of recording, animals were \DIFaddbegin \DIFadd{gliosed,
-}\DIFaddend euthanized and recording sites were histologically confirmed.
+pre-surgery levels. Upon completion of recording, animals were gliosed,
+euthanized and recording sites were histologically confirmed.
+}%DIFDELCMD < 
 
-{\bf Behavioral task and training:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Behavioral task and training:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-\DIFdelbegin \DIFdel{Rats were trained to run clockwise on }\DIFdelend \DIFaddbegin \DIFadd{The behavioral apparatus was }\DIFaddend an elevated, square-shaped track (100 x
+%DIFDELCMD < %%%
+\DIFdel{The behavioral apparatus was an elevated, square-shaped track (100 x
 100 cm, track width 10 cm) containing four possible reward locations
-\DIFaddbegin \DIFadd{at the end of track ``arms'' }\DIFaddend (Figure \ref{fig:task}). Rats initiated a
-{\it trial} by \DIFdelbegin \DIFdel{running down the length of an
-arm, and }\DIFdelend triggering a photobeam located 24 cm from the start of
+at the end of track ``arms'' (Figure \ref{fig:task}). Rats initiated a
+}%DIFDELCMD < {\it %%%
+\DIFdel{trial}%DIFDELCMD < } %%%
+\DIFdel{by triggering a photobeam located 24 cm from the start of
 each arm. Upon trial initiation, one of two possible light cues (L1,
 L2), or one of two possible sound cues (S1, S2), was presented that
-signaled the presence ({\it reward-available trial}, L1+, S1+) or
-absence ({\it reward-unavailable trial}, L2-, S2-) of a 12\% sucrose
+signaled the presence (}%DIFDELCMD < {\it %%%
+\DIFdel{reward-available trial}%DIFDELCMD < }%%%
+\DIFdel{, L1+, S1+) or
+absence (}%DIFDELCMD < {\it %%%
+\DIFdel{reward-unavailable trial}%DIFDELCMD < }%%%
+\DIFdel{, L2-, S2-) of a 12\% sucrose
 water reward (0.1 mL) at the upcoming reward site. A trial was
-classified as an {\it approach trial} if the rat turned left at the
+classified as an }%DIFDELCMD < {\it %%%
+\DIFdel{approach trial}%DIFDELCMD < } %%%
+\DIFdel{if the rat turned left at the
 decision point and made a nosepoke at the reward receptacle (40 cm
-from the decision point), while trials were classified as a {\it skip
-trial} if the rat instead turned right at the decision point and
+from the decision point), while trials were classified as a }%DIFDELCMD < {\it %%%
+\DIFdel{skip
+trial}%DIFDELCMD < } %%%
+\DIFdel{if the rat instead turned right at the decision point and
 triggered the photobeam to initiate the next trial. A trial is labeled
-{\it correct} if the rat approached (i.e.\ nosepoked) on
+}%DIFDELCMD < {\it %%%
+\DIFdel{correct}%DIFDELCMD < } %%%
+\DIFdel{if the rat approached (i.e.\ nosepoked) on
 reward-available trials, and skipped (i.e.\ did not nosepoke) on
 reward-unavailable trials. On reward-available trials there was a 1
-second delay between a nosepoke and subsequent reward delivery. {\it
-Trial length} was determined by measuring the length of time from
+second delay between a nosepoke and subsequent reward delivery. }%DIFDELCMD < {\it
+%DIFDELCMD < %%%
+\DIFdel{Trial length}%DIFDELCMD < } %%%
+\DIFdel{was determined by measuring the length of time from
 cue onset until nosepoke (for approach trials), or from cue onset
 until the start of the following trial (for skip trials). Trials could
 only be initiated through clockwise progression through the series of
 arms, and each entry into the subsequent arm on the track counted as a
 trial.
+}%DIFDELCMD < 
 
-Each session consisted of both a {\it light block} and a {\it sound block} with
+%DIFDELCMD < %%%
+\DIFdel{Each session consisted of both a }%DIFDELCMD < {\it %%%
+\DIFdel{light block}%DIFDELCMD < } %%%
+\DIFdel{and a }%DIFDELCMD < {\it %%%
+\DIFdel{sound block}%DIFDELCMD < } %%%
+\DIFdel{with
 100 trials each. Within a block, one cue signaled reward was available on that
 trial (L1+ or S1+), while the other signaled reward was not available (L2- or
 S2-). Light block cues were a flashing white light, and a constant yellow
 light. Sound block cues were a 2 kHz sine wave and a 8 kHz sine wave whose
-amplitude was modulated from 0 to maximum by a 2 Hz sine wave. \DIFdelbegin \DIFdel{Reward-cue
-}\DIFdelend \DIFaddbegin \DIFadd{Outcome-cue
-}\DIFaddend associations were counterbalanced across rats, e.g.\ for some rats L1+ was the
+amplitude was modulated from 0 to maximum by a 2 Hz sine wave. Outcome-cue
+associations were counterbalanced across rats, e.g.\ for some rats L1+ was the
 flashing white light, and for others L1+ was the constant yellow light. The
 order of cue presentation was pseudorandomized so that the same cue could not be
 presented more than twice in a row. Block order within each day was also
@@ -417,133 +510,141 @@ pseudorandomized, such that the rat could not begin a session with the same
 block for more than two days in a row. Each session consisted of a 5 minute
 pre-session period on a pedestal (a terracotta planter filled with towels),
 followed by the first block, then the second block, then a 5 minute post-session
-period on the pedestal. \DIFaddbegin \DIFadd{For approximately the first week of training, rats were restricted to
+period on the pedestal. For approximately the first week of training, rats were restricted to
 running in the clockwise direction by presenting a physical barrier to
 running counterclockwise. Cues signaling the availability and
 unavailability of reward, as described above, were present from the
-start of training. }\DIFaddend Rats were trained \DIFdelbegin \DIFdel{daily until they could distinguish
-}\DIFdelend \DIFaddbegin \DIFadd{for 200 trials per day (100
-trials per block) until they discriminated }\DIFaddend between the reward-available and reward-unavailable cues for both light and
+start of training. Rats were trained for 200 trials per day (100
+trials per block) until they discriminated between the reward-available and reward-unavailable cues for both light and
 sound blocks for three consecutive days, according to a chi-square test
 rejecting the null hypothesis of equal approaches for reward-available and
-reward-unavailable trials, at which point they underwent \DIFdelbegin \DIFdel{eletrode }\DIFdelend \DIFaddbegin \DIFadd{electrode }\DIFaddend implant
+reward-unavailable trials, at which point they underwent electrode implant
 surgery.
+}%DIFDELCMD < 
 
-\begin{figure}
-[h]
-\centering
-\includegraphics[width=\textwidth]{Fig 2 - Schematic task.png}
-\caption{Schematic of behavioral task. \bsf{A}: To scale depiction of square
+%DIFDELCMD < \begin{figure}[h]
+%DIFDELCMD < \centering
+%DIFDELCMD < \includegraphics[width=\textwidth]{Fig 2 - Schematic task.png}
+%DIFDELCMD < %%%
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Schematic of behavioral task. \bsf{A}: To scale depiction of square
 track consisting of multiple identical T-choice points. At each choice point,
-the availability of \DIFaddbeginFL \DIFaddFL{12\% }\DIFaddendFL sucrose reward at the nearest reward receptacle (light
+the availability of 12\% sucrose reward at the nearest reward receptacle (light
 blue fill) was signaled by one of four possible cues, presented when the rat
 initiated a trial by crossing a photobeam on the track (dashed
 lines). Photobeams at the ends of the arms by the receptacles registered
-\DIFdelbeginFL \DIFdelFL{nosepokes}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Nosepokes (solid lines)}\DIFaddendFL . Rectangular boxes with yellow fill indicate location of LEDs used
+Nosepokes (solid lines). Rectangular boxes with yellow fill indicate location of LEDs used
 for light cues. Speakers for tone cues were placed underneath the choice
-points, indicated by magenta fill on track. \DIFdelbeginFL \DIFdelFL{Light blue fill on ends }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Arrows outside }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{arms
-  }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{track }\DIFaddendFL indicate \DIFdelbeginFL \DIFdelFL{location of receptacles where sucrose was dispensed on rewarded
-  trials}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{correct running direction}\DIFaddendFL . Circle in the center indicates location of pedestal during pre- and post-records. Scale bar is located beneath the track. \bsf{B}: Progression of
+points, indicated by magenta fill on track. Arrows outside of track indicate correct running direction. Circle in the center indicates location of pedestal during pre- and post-records. Scale bar is located beneath the track. \bsf{B}: Progression of
 a recording session. A session was started with a 5 minute recording period on
-a pedestal placed in the center of the apparatus. Rats then performed \DIFdelbeginFL \DIFdelFL{two
-  }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the light and sound }\DIFaddendFL blocks of \DIFdelbeginFL \DIFdelFL{a }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{the }\DIFaddendFL cue discrimination task \DIFdelbeginFL \DIFdelFL{on a square track where they had to
-  dissociate between a reward-available and reward-unavailable cue }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{in succession }\DIFaddendFL for \DIFdelbeginFL \DIFdelFL{a set of
-  light cues and a set of sound cues for a target of }\DIFdelendFL 100 trials each\DIFdelbeginFL \DIFdelFL{. Rats ran
-  clockwise on the square track}\DIFdelendFL , \DIFdelbeginFL \DIFdelFL{and upon presentation of the cue could either
-  turn left at the choice point to check if reward was available at the reward
-  receptacle (approach trial; red and navy blue in figure), or turn right at the
-  choice point to initiate the following trial (skip trial; green and light blue
-  in figure). Reward-available and reward-unavailable cues were presented
-  pseudo-randomly, such that not more than two of the same type of cue could be
-  presented in a row. Location of the cue }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{followed by another 5 minute recording period }\DIFaddendFL on the \DIFdelbeginFL \DIFdelFL{track was irrelevant for
-  behavior, all cue locations contained an equal amount of reward-available and
-  reward-unavailable trials}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{pedestal}\DIFaddendFL . Left in figure depicts a light block, showing an
-example trajectory for a correct reward-available (\DIFaddbeginFL \DIFaddFL{approach trial; }\DIFaddendFL red) and reward-unavailable
-(\DIFaddbeginFL \DIFaddFL{skip trial; }\DIFaddendFL green) trial. Right in figure depicts a sound block, with a reward-available
-(\DIFaddbeginFL \DIFaddFL{approach trial; }\DIFaddendFL navy blue) and reward-unavailable (\DIFaddbeginFL \DIFaddFL{skip trial; }\DIFaddendFL light blue) trial. Ordering of the light and sound blocks was counterbalanced across sessions. \DIFdelbeginFL \DIFdelFL{Dashed line within track
-  indicates photobeam }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Reward-available and reward-unavailable cues were presented pseudo-randomly, such }\DIFaddendFL that \DIFdelbeginFL \DIFdelFL{triggered }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{not more than two of the same type of }\DIFaddendFL cue \DIFdelbeginFL \DIFdelFL{onset. Solid line within track
-  indicates photobeam that registered }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{could be presented in }\DIFaddendFL a \DIFdelbeginFL \DIFdelFL{nosepoke into the reward
-  receptacles}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{row}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{Receptacles containing sucrose solution are present within }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Location of }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{squares at }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{cue on }\DIFaddendFL the \DIFdelbeginFL \DIFdelFL{end }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{track was irrelevant for
-behavior, all cue locations contained an equal amount }\DIFaddendFL of \DIFdelbeginFL \DIFdelFL{each arm. Light blue fill signifies reward receipt on a
-  correct }\DIFdelendFL reward-available \DIFdelbeginFL \DIFdelFL{trial}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{and
-reward-unavailable trials}\DIFaddendFL .
-\DIFdelbeginFL \DIFdelFL{Arrows outside of track indicate correct
-  running direction. A session ended with another 5 minute recording period on
-  the pedestal.}\DIFdelendFL }
-\label{fig:task}
+a pedestal placed in the center of the apparatus. Rats then performed the light and sound blocks of the cue discrimination task in succession for 100 trials each, followed by another 5 minute recording period on the pedestal. Left in figure depicts a light block, showing an
+example trajectory for a correct reward-available (approach trial; red) and reward-unavailable
+(skip trial; green) trial. Right in figure depicts a sound block, with a reward-available
+(approach trial; navy blue) and reward-unavailable (skip trial; light blue) trial. Ordering of the light and sound blocks was counterbalanced across sessions. Reward-available and reward-unavailable cues were presented pseudo-randomly, such that not more than two of the same type of cue could be presented in a row. Location of the cue on the track was irrelevant for
+behavior, all cue locations contained an equal amount of reward-available and
+reward-unavailable trials.
+}}
+%DIFAUXCMD
+%DIFDELCMD < \label{fig:task}
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < 
 
-\end{figure}
-{\bf Surgery:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Surgery:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-Surgical procedures were as described previously
-\DIFdelbegin \DIFdel{(Malhotra et al. ,
-2015). }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+%DIFDELCMD < %%%
+\DIFdel{Surgical procedures were as described previously
+\mbox{%DIFAUXCMD
 \cite{Malhotra2015}}\hspace{0pt}%DIFAUXCMD
-. }\DIFaddend Briefly, animals were administered analgesics and
+. Briefly, animals were administered analgesics and
 antibiotics, anesthetized with isoflurane, induced with 5\% in medical
 grade oxygen and maintained at 2\% throughout the surgery (~0.8
 L/min). Rats were then chronically implanted with a ``hyperdrive''
 consisting of 16 independently drivable tetrodes, either all 16
 targeted for the right NAc (AP +1.4 mm and ML +1.6 mm relative to
-bregma; \DIFdelbegin \DIFdel{Paxinos and Watson, 2005}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+bregma; \mbox{%DIFAUXCMD
 \citeNP{atlas}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend ), or 12 in the right NAc and 4 targeted at the
+), or 12 in the right NAc and 4 targeted at the
 mPFC (AP +3.0 mm and ML +0.6 mm, relative to bregma; only data from
 NAc tetrodes was analyzed). Following surgery, all animals were given
 at least five days to recover while receiving post-operative care, and
 tetrodes were lowered to the target (DV -6.0 mm) before being
 reintroduced to the behavioral task.
+}%DIFDELCMD < 
 
-{\bf Data acquisition and preprocessing:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Data acquisition and preprocessing:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-After recovery, rats were placed back on the task for recording. NAc
+%DIFDELCMD < %%%
+\DIFdel{After recovery, rats were placed back on the task for recording. NAc
 signals were acquired at 20 kHz with a RHA2132 v0810 preamplifier
 (Intan) and a KJE-1001/KJD-1000 data acquisition system
 (Amplipex). Signals were referenced against a tetrode placed in the
 corpus callosum above the NAc. Candidate spikes for sorting into
 putative single units were obtained by band-pass filtering the data
-between 600-9000 Hz, thresholding and aligning the peaks \DIFdelbegin \DIFdel{(UltraMegaSort2k,
-Hull et al. , 2011). }\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+between 600-9000 Hz, thresholding and aligning the peaks \mbox{%DIFAUXCMD
 \cite[UltraMegaSort2k, ][]{Hill2011}}\hspace{0pt}%DIFAUXCMD
-. }\DIFaddend Spike waveforms were then
+. Spike waveforms were then
 clustered with KlustaKwik using energy and the first derivative of
 energy as features, and manually sorted into units (MClust 3.5,
-A.D.\ Redish et al.\DIFaddbegin \DIFadd{, http://redishlab.neuroscience.umn.edu/MClust/MClust.html}\DIFaddend ). Isolated units containing a minimum of 200
+A.D.\ Redish et al., http://redishlab.neuroscience.umn.edu/MClust/MClust.html). Isolated units containing a minimum of 200
 spikes within a session were included for subsequent analysis. Units
 were classified as fast spiking interneurons (FSIs) by an absence of
 interspike intervals (ISIs) $>$ 2 s, while medium spiny neurons (MSNs)
 had a combination of ISIs $>$ 2 s and phasic activity with shorter
-ISIs \DIFdelbegin \DIFdel{(Barnes 2005, Atallah 2014)}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+ISIs \mbox{%DIFAUXCMD
 \cite{Atallah2014,Barnes2005}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend .
+.
+}%DIFDELCMD < 
 
-{\bf Data analysis:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Data analysis:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-{\it Behavior.} To determine if rats distinguished behaviorally
-between the reward-available and reward-unavailable cues ({\it cue
-outcome}), we generated linear mixed effects models to investigate
+%DIFDELCMD < {\it %%%
+\DIFdel{Behavior.}%DIFDELCMD < } %%%
+\DIFdel{To determine if rats distinguished behaviorally
+between the reward-available and reward-unavailable cues (}%DIFDELCMD < {\it %%%
+\DIFdel{cue
+outcome}%DIFDELCMD < }%%%
+\DIFdel{), we generated linear mixed effects models to investigate
 the relationships between cue type and our behavioral variables, with
-{\it cue outcome} (reward available or not) and {\it cue identity}
-(light or sound) as fixed effects, and the addition of an intercept
+}%DIFDELCMD < {\it %%%
+\DIFdel{cue outcome}%DIFDELCMD < } %%%
+\DIFdel{(reward available or not) and }%DIFDELCMD < {\it %%%
+\DIFdel{cue identity}%DIFDELCMD < }
+%DIFDELCMD < %%%
+\DIFdel{(light or sound) as fixed effects, and the addition of an intercept
 for rat identity as a random effect. For each cue, the average
 proportion of trials approached and trial length for a session were
 used as response variables. Contribution of cue outcome to behavior
 was determined by comparing the full model to a model with cue outcome
 removed for each behavioral variable.
+}%DIFDELCMD < 
 
-{\it Neural data.} To investigate the contribution of different cue
-features {cue identity and cue outcome) on the firing rates of NAc
+%DIFDELCMD < {\it %%%
+\DIFdel{Neural data.}%DIFDELCMD < } %%%
+\DIFdel{To investigate the contribution of different cue
+features }%DIFDELCMD < {%%%
+\DIFdel{cue identity and cue outcome) on the firing rates of NAc
 single units, we first determined whether firing rates for a unit
 were modulated by the onset of a cue by collapsing across all cues
 and comparing the firing rates for the 1 s preceding cue-onset with
-the 1 s following cue-onset. Single units were considered to be {\it
-cue-modulated} if a Wilcoxon signed-rank test comparing pre- and
+the 1 s following cue-onset. Single units were considered to be }%DIFDELCMD < {\it
+%DIFDELCMD < %%%
+\DIFdel{cue-modulated}%DIFDELCMD < } %%%
+\DIFdel{if a Wilcoxon signed-rank test comparing pre- and
 post-cue firing was significant at $p <$ .01. Cue-modulated units
 were then classified as either increasing or decreasing if the
 post-cue activity was higher or lower than the pre-cue activity,
 respectively.
+}%DIFDELCMD < 
 
-To determine the relative contribution of different task parameters to
+%DIFDELCMD < %%%
+\DIFdel{To determine the relative contribution of different task parameters to
 firing rate variance (as in Figures \ref{fig:examples}-\ref{fig:GLM}),
 a forward selection stepwise general linear model (GLM) was fit to
 each cue-modulated unit. Cue identity (light block, sound block), cue
@@ -557,17 +658,18 @@ improved model fit using deviance as the criterion ($p <$ .01). A
 comparison of the R-squared value between the final model and the
 final model minus the predictor of interest was used to determine the
 amount of firing rate variance explained by the addition of that
-predictor for a given unit. \DIFaddbegin \DIFadd{To investigate more finely the temporal dynamics of the influence of task parameters to unit activity, we then fit a sliding window GLM with the
+predictor for a given unit. To investigate more finely the temporal dynamics of the influence of task parameters to unit activity, we then fit a sliding window GLM with the
 same task parameters using 500 ms bins and 100 ms steps, starting 500 ms before cue-onset, up to 500 ms after cue-onset, and measured the proportion of units and average R-squared value for a given time bin
 where a particular predictor contributed significantly to the final model. To control for amount of units that would be affected by a predictor by chance, we shuffled the order of firing rates used for a time bin, and took the average of this value over 100 shuffles.
-}\DIFaddend 
+}%DIFDELCMD < 
 
-To better visualize responses to cues and enable subsequent population
+%DIFDELCMD < %%%
+\DIFdel{To better visualize responses to cues and enable subsequent population
 level analyses (as in Figures \ref{fig:examples}, \ref{fig:pop}, and
 \ref{fig:tiling}), spike trains were convolved with a Gaussian kernel
 ($\sigma$ = 100 ms), and peri-event time histograms (PETHs) were
-generated by taking the average of the convolved spike trains across \DIFaddbegin \DIFadd{all
-}\DIFaddend trials for a given task condition. For analysis of population-level
+generated by taking the average of the convolved spike trains across all
+trials for a given task condition. For analysis of population-level
 responses for cue features (Figure \ref{fig:pop}), convolved spike
 trains for all units where cue identity, cue location, or cue outcome
 explained a significant portion of firing rate variance were
@@ -575,11 +677,13 @@ z-scored. Within a given cue feature, normalized spike trains were
 then separated according to the preferred and non-preferred cue
 condition (e.g.\ light vs.\ sound block), and averaged across units to
 generate population-level averages. To account for separation that
-would result from any random selection of units, \DIFdelbegin \DIFdel{cell }\DIFdelend \DIFaddbegin \DIFadd{unit }\DIFaddend identity was
+would result from any random selection of units, unit identity was
 shuffled and the shuffled average for preferred and non-preferred cue
 conditions was generated for 1000 shuffles.
+}%DIFDELCMD < 
 
-To visualize NAc representations of task space within cue conditions,
+%DIFDELCMD < %%%
+\DIFdel{To visualize NAc representations of task space within cue conditions,
 normalized spike trains for all units were ordered by the location of
 their maximum or minimum firing rate for a specified cue condition
 (Figure \ref{fig:tiling}). To compare representations of task space
@@ -588,60 +692,76 @@ for one condition (e.g.\ light block) was then applied to the
 normalized spike trains for the other condition (e.g.\ sound
 block). For control comparisons within cue conditions, half of the
 trials for a condition were compared against the other half. To look
-at the correlation of firing rates of all \DIFdelbegin \DIFdel{cells }\DIFdelend \DIFaddbegin \DIFadd{units }\DIFaddend within and across
-various cue conditions, trials for each cue condition for a \DIFdelbegin \DIFdel{cell }\DIFdelend \DIFaddbegin \DIFadd{unit }\DIFaddend were
+at the correlation of firing rates of all units within and across
+various cue conditions, trials for each cue condition for a unit were
 shuffled and divided into two averages, and averages within and across
 cue conditions were correlated. A linear mixed effects model was run
 for each cue condition to determine if correlations of firing rates
 within cue conditions were more similar than correlations across cue
 conditions.
+}%DIFDELCMD < 
 
-To identify the responsivity of units to different cue features at the
+%DIFDELCMD < %%%
+\DIFdel{To identify the responsivity of units to different cue features at the
 time of a nosepoke into a reward receptacle, and subsequent reward
 delivery, the same cue-responsive units from the cue-onset analyses
-were analyzed at the time of nosepoke and \DIFdelbegin \DIFdel{reward }\DIFdelend \DIFaddbegin \DIFadd{outcome }\DIFaddend receipt using
+were analyzed at the time of nosepoke and outcome receipt using
 identical analysis techniques (Figures \ref{fig:NP_examples},
 \ref{fig:NP_GLM}, \ref{fig:NP_pop}, and \ref{fig:NP_tiling}).
+}%DIFDELCMD < 
 
-Given that some of our analyses compare firing rates across time,
+%DIFDELCMD < %%%
+\DIFdel{Given that some of our analyses compare firing rates across time,
 particularly comparisons across blocks, we sought to exclude units
 with unstable firing rates that would generate spurious results
 reflecting a drift in firing rate over time unrelated to our task. To
 do this we ran a Mann-Whitney U test comparing the cue-evoked firing
 rates for the first and second half of trials within a block, and
-excluded 99 \DIFaddbegin \DIFadd{of 443 }\DIFaddend units from analysis that showed a significant change for
-either block\DIFaddbegin \DIFadd{, leaving 344 units for further analyses}\DIFaddend . All analyses were completed in MATLAB R2015a, the code
+excluded 99 of 443 units from analysis that showed a significant change for
+either block, leaving 344 units for further analyses. All analyses were completed in MATLAB R2015a, the code
 is available on our public GitHub repository
 (http://github.com/vandermeerlab/papers), and the data can be accessed
 through DataLad.
+}%DIFDELCMD < 
 
-{\bf Histology:}
+%DIFDELCMD < {\bf %%%
+\DIFdel{Histology:}%DIFDELCMD < }
+%DIFDELCMD < 
 
-Upon completion of the experiment, \DIFdelbegin \DIFdel{rats were }\DIFdelend \DIFaddbegin \DIFadd{recording channels were gliosed by passing 150 $\mu A$ current for 10 seconds and waiting 5 days before euthanasia, except for rat R057 whose implant detached prematurely. Rats were }\DIFaddend anesthetized with 5\%
+%DIFDELCMD < %%%
+\DIFdel{Upon completion of the experiment, recording channels were gliosed by passing 150 $\mu A$ current for 10 seconds and waiting 5 days before euthanasia, except for rat R057 whose implant detached prematurely. Rats were anesthetized with 5\%
 isoflurane, then asphyxiated with carbon dioxide. Transcardial
 perfusions were performed, and brains were fixed and removed. Brains
 were sliced in 50 $\mu m$ coronal sections and stained with
 thionin. Slices were visualized under light microscopy, tetrode
 placement was determined, and electrodes with recording locations in
 the NAc were analyzed (Figure \ref{fig:histo}).
+}%DIFDELCMD < 
 
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{Fig 3 - Histology.png}
-\caption{Histological verification of recording sites. Upon completion of
+%DIFDELCMD < \begin{figure}[h]
+%DIFDELCMD < \centering
+%DIFDELCMD < \includegraphics[width=\textwidth]{Fig 3 - Histology.png}
+%DIFDELCMD < %%%
+%DIFDELCMD < \caption{%
+{%DIFAUXCMD
+\DIFdelFL{Histological verification of recording sites. Upon completion of
   experiments, brains were sectioned and tetrode placement was
   confirmed. \bsf{A}: Example section from R060 showing a recording site in the
-  NAc core just dorsal to the anterior commissure (\DIFdelbeginFL \DIFdelFL{white circle}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{arrow}\DIFaddendFL ). \bsf{B}:
-  Schematic showing recording areas for \DIFdelbeginFL \DIFdelFL{the four rats used}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{all subjects}\DIFaddendFL .}
-\label{fig:histo}
-\end{figure}
-\section*{Results}
+  NAc core just dorsal to the anterior commissure (arrow). \bsf{B}:
+  Schematic showing recording areas for all subjects.}}
+%DIFAUXCMD
+%DIFDELCMD < \label{fig:histo}
+%DIFDELCMD < \end{figure}
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \section*{Results}
 
 \subsection*{Behavior}
 
 Rats were trained to discriminate between cues signaling the
 availability and absence of reward on a square track with four
-identical arms for two distinct \DIFdelbegin \DIFdel{sets }\DIFdelend \DIFaddbegin \DIFadd{set }\DIFaddend of cues (Figure
+identical arms for two distinct set of cues (Figure
 \ref{fig:task}). During each session, rats were presented sequentially
 with two behavioral blocks containing cues from different sensory
 modalities, a light and a sound block, with each block containing a
@@ -660,33 +780,54 @@ days). Maintenance of behavioral performance during recording sessions
 was assessed using linear mixed effects models for both proportion of
 trials where the rat approached the receptacle, and trial
 length. Analyses revealed that the likelihood of a rat to make an
-approach was influenced by \DIFdelbegin \DIFdel{which of the cues was presented }\DIFdelend \DIFaddbegin \DIFadd{whether a reward-available or reward-unavailable cue was presented, but was not significantly modulated by whether the rat was presented with a light or sound cue }\DIFaddend (Percentage
+approach was influenced by whether a reward-available or reward-unavailable cue was presented, but was not significantly modulated by whether the rat was presented with a light or sound cue (Percentage
 approached: light reward-available = 97\%; light reward-unavailable =
-34\%; sound reward-available = 91\%; sound reward-unavailable 35\%; \DIFdelbegin \DIFdel{p }\DIFdelend \DIFaddbegin \DIFadd{cue identity p
-$=$ .115; cue outcome p}\DIFaddend $<$ .001\DIFdelbegin \DIFdel{), but that cue identity did not
-significantly affect }\DIFdelend \DIFaddbegin \DIFadd{; Figure \ref{fig:behav}B). A similar trend was seen with }\DIFaddend the
+34\%; sound reward-available = 91\%; sound reward-unavailable 35\%; cue identity p
+$=$ .115; cue outcome p$<$ .001; Figure \ref{fig:behav}B). A similar trend was seen with the
 length of time taken to complete a trial (Trial length: light
 reward-available = 1.85 s; light reward-unavailable = 1.74 s; sound
-reward-available = 1.91 s; sound reward-unavailable 1.78 s; \DIFaddbegin \DIFadd{cue identity }\DIFaddend p $=$ \DIFdelbegin \DIFdel{.13; }\DIFdelend \DIFaddbegin \DIFadd{.115; cue outcome p $<$ .001; }\DIFaddend Figure \ref{fig:behav}C\DIFdelbegin \DIFdel{,D}\DIFdelend ). Thus, during recording, rats successfully
+reward-available = 1.91 s; sound reward-unavailable 1.78 s; cue identity p $=$ \DIFdelbegin \DIFdel{.115}\DIFdelend \DIFaddbegin \DIFadd{.106}\DIFaddend ; cue outcome p $<$ .001; Figure \ref{fig:behav}C). Thus, during recording, rats successfully
 discriminated the cues according to whether or not they signaled the
 availability of reward at the reward receptacle.
 
 \begin{figure}[h]
 \centering
-\includegraphics[width=\textwidth]{Fig 4 - Behavioral results.png}
-\caption{Performance on the behavioral task. \DIFdelbeginFL \DIFdelFL{\bsf{A-B}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{A}}\DIFaddendFL . Example learning curves
+\DIFaddbeginFL \includegraphics[width=\textwidth]{Fig 2 - Schematic task.png}
+\caption{\DIFaddFL{Schematic of behavioral task. \bsf{A}: To scale depiction of square
+track consisting of multiple identical T-choice points. At each choice point,
+the availability of 12\% sucrose reward at the nearest reward receptacle (light
+blue fill) was signaled by one of four possible cues, presented when the rat
+initiated a trial by crossing a photobeam on the track (dashed
+lines). Photobeams at the ends of the arms by the receptacles registered
+Nosepokes (solid lines). Rectangular boxes with yellow fill indicate location of LEDs used
+for light cues. Speakers for tone cues were placed underneath the choice
+points, indicated by magenta fill on track. Arrows outside of track indicate correct running direction. Circle in the center indicates location of pedestal during pre- and post-records. Scale bar is located beneath the track. \bsf{B}: Progression of
+a recording session. A session was started with a 5 minute recording period on
+a pedestal placed in the center of the apparatus. Rats then performed the light and sound blocks of the cue discrimination task in succession for 100 trials each, followed by another 5 minute recording period on the pedestal. Left in figure depicts a light block, showing an
+example trajectory for a correct reward-available (approach trial; red) and reward-unavailable
+(skip trial; green) trial. Right in figure depicts a sound block, with a reward-available
+(approach trial; navy blue) and reward-unavailable (skip trial; light blue) trial. Ordering of the light and sound blocks was counterbalanced across sessions. Reward-available and reward-unavailable cues were presented pseudo-randomly, such that not more than two of the same type of cue could be presented in a row. Location of the cue on the track was irrelevant for
+behavior, all cue locations contained an equal amount of reward-available and
+reward-unavailable trials.
+}}
+\label{fig:task}
+\end{figure}
+\begin{figure}[h]
+\centering
+\DIFaddendFL \includegraphics[width=\textwidth]{Fig 4 - Behavioral results.png}
+\caption{Performance on the behavioral task. \bsf{A}. Example learning curves
 across sessions from a single subject (R060) showing the proportion approached
 for reward-available (red line for light block, navy blue line for sound
 block) and reward-unavailable trials (green line for light block, light blue
-line for sound block) \DIFaddbeginFL \DIFaddFL{for light (top) and sound (bottom) blocks}\DIFaddendFL . Fully correct performance corresponds to \DIFaddbeginFL \DIFaddFL{an }\DIFaddendFL approach
+line for sound block) for light (top) and sound (bottom) blocks. Fully correct performance corresponds to an approach
 proportion of 1 for reward-available trials and 0 for reward-unavailable
 trials. Rats initially approach on both reward-available and
 reward-unavailable trials, and learn with experience to skip non-rewarded
 trials. Red bars indicate days in which a rat statistically discriminated
 between reward-available and reward-unavailable cues, determined by a chi
 square test. Dashed line indicates time of electrode implant
-surgery. \DIFdelbeginFL \DIFdelFL{\bsf{C-D}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{B-C}}\DIFaddendFL : Summary of performance during recording sessions for each
-rat. \DIFdelbeginFL \DIFdelFL{\bsf{C}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{B}}\DIFaddendFL : Proportion approached for all rats, averaged across all
+surgery. \bsf{B-C}: Summary of performance during recording sessions for each
+rat. \bsf{B}: Proportion approached for all rats, averaged across all
 recording sessions. Different columns indicate the different cues
 (reward-available (red) and reward-unavailable (green) light cues,
 reward-available (navy blue) and reward-unavailable (light blue) sound
@@ -695,11 +836,11 @@ line shows the mean. All rats learned to discriminate between reward-available
 and reward-unavailable cues, as indicated by the clear difference of
 proportion approached between reward-available ($\sim$90\% approached) and
 reward-unavailable cues ($\sim$30\% approached), for both blocks (see Results
-for statistics). \DIFdelbeginFL \DIFdelFL{\bsf{D}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{C}}\DIFaddendFL : Average trial length for each cue. Note that the
+for statistics). \bsf{C}: Average trial length for each cue. Note that the
 time to complete a trial was comparable for the different cues.}
 \label{fig:behav}
 \end{figure}
-\subsection*{NAc \DIFdelbegin \DIFdel{neurons }\DIFdelend \DIFaddbegin \DIFadd{units }\DIFaddend encode behaviorally relevant and irrelevant cue features}
+\subsection*{NAc units encode behaviorally relevant and irrelevant cue features}
 
 {\bf Single unit responses discriminate cue features:}
 
@@ -731,14 +872,13 @@ arm the rat was currently on (38\% of cue-modulated units, accounting for 6\% of
 variance on average), and whether the rat was engaged in the common portion of a
 reward-available or reward-unavailable trial (26\% of cue-modulated units,
 accounting for 4\% of variance on average), suggesting that the NAc
-\DIFdelbegin \DIFdel{independently }\DIFdelend encodes features of reward-predictive cues separate from expected
+encodes features of reward-predictive cues separate from expected
 outcome (Figure \ref{fig:examples}A-F). Furthermore, overlap of coding of cue
 features within units was not different than expected by chance according to
 chi-square tests, suggesting for integrated coding across various aspects of a
-cue (Figure \ref{fig:examples}G,H). \DIFdelbegin \DIFdel{Fitting a GLM to all recorded units revealed a similar pattern of results (data not shown}\DIFdelend \DIFaddbegin \DIFadd{Additionally, a sliding window GLM centered on cue-onset revealed that cue identity and cue location contributed to the activity
-of a significant proportion of cue-modulated units throughout this epoch, whereas an increase in units encoding cue outcome became apparent after cue-onset (Figure \ref{fig:GLM}D}\DIFaddend ).  Together, these findings show that various cue features are represented in the NAc, 
-and that this coding \DIFdelbegin \DIFdel{has
-some overlap, but is mostly distinct }\DIFdelend \DIFaddbegin \DIFadd{is both integrated and separate }\DIFaddend from expected outcome (Figure
+cue (Figure \ref{fig:examples}G,H). Additionally, a sliding window GLM centered on cue-onset revealed that cue identity and cue location contributed to the activity
+of a significant proportion of cue-modulated units throughout this epoch, whereas an increase in units encoding cue outcome became apparent after cue-onset (Figure \ref{fig:GLM}D).  Together, these findings show that various cue features are represented in the NAc, 
+and that this coding is both integrated and separate from expected outcome (Figure
 \ref{fig:schematic}; H2,H3).
 
 
@@ -748,55 +888,55 @@ some overlap, but is mostly distinct }\DIFdelend \DIFaddbegin \DIFadd{is both in
 \setlength{\tabcolsep}{1 em} % for the horizontal padding
 \begin{tabular}{l c  c c c c}
 
-\DIFdelbeginFL \DIFdelFL{Task parameter                                 }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{Task parameter}                                 }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{Total        }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{Total}        }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{$\uparrow$ MSN        }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{$\uparrow$ MSN}        }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{$\downarrow$ MSN        }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{$\downarrow$ MSN}        }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{$\uparrow$ FSI       }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{$\uparrow$ FSI}       }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{$\downarrow$ FSI}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{$\downarrow$ FSI}}\DIFaddendFL \\
+\bsf{Task parameter}                                 & \bsf{Total}        & \bsf{$\uparrow$ MSN}        & \bsf{$\downarrow$ MSN}        & \bsf{$\uparrow$ FSI}       & \bsf{$\downarrow$ FSI}\\
 \hline
 All units                       & 443        & 155         & 216          & 27          & 45\\
 \hline
-\DIFdelbeginFL \DIFdelFL{Rat ID                       }\DIFdelendFL \DIFaddbeginFL \textit{\DIFaddFL{Rat ID}}                       \DIFaddendFL &         &       &          &          &\\
+\textit{Rat ID}                       &         &       &          &          &\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\DIFaddendFL R053                       & 145         & 51          & 79          & 4         & 11\\
+\hspace{3mm}R053                       & 145         & 51          & 79          & 4         & 11\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\DIFaddendFL R056                       & 70         & 12          & 13         & 17          & 28\\
+\hspace{3mm}R056                       & 70         & 12          & 13         & 17          & 28\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\DIFaddendFL R057   	          & 136         & 55          & 75          & 3          & 3\\
+\hspace{3mm}R057   	          & 136         & 55          & 75          & 3          & 3\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\DIFaddendFL R060                       & 92         & 37          & 49          & 3          & 3\\
+\hspace{3mm}R060                       & 92         & 37          & 49          & 3          & 3\\
 \hline 
-Analyzed units                       & 344        & \DIFdelbeginFL \DIFdelFL{?         }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{117         }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{?         }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{175         }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{?          }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{18         }\DIFaddendFL & \DIFdelbeginFL \DIFdelFL{?}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{34}\DIFaddendFL \\
+Analyzed units                       & 344        & 117         & 175         & 18         & 34\\
 \hline
 Cue modulated units                      & 133         &24          &85          & 6          &18\\
 \hline
-\DIFdelbeginFL \DIFdelFL{GLM aligned to cue-onset                       }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\textit{\DIFaddFL{GLM aligned to cue-onset}}                       \DIFaddendFL &         &       &          &          &\\
+\hspace{3mm}\textit{GLM aligned to cue-onset}                       &         &       &          &          &\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue identity       & 37         & 7          & 21          & 1          & 8\\
+\hspace{6mm}Cue identity       & 37         & 7          & 21          & 1          & 8\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue location       & 50         &13          & 27          & 3          & 7\\
+\hspace{6mm}Cue location       & 50         &13          & 27          & 3          & 7\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue outcome       & 34         & 10          & 18        & 0          & 6\\
+\hspace{6mm}Cue outcome       & 34         & 10          & 18        & 0          & 6\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Approach behavior      & 31         & 8          & 18          & 1          & 4\\
+\hspace{6mm}Approach behavior      & 31         & 8          & 18          & 1          & 4\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Trial length       & 25        & 5          & 18         & 0         & 2\\
+\hspace{6mm}Trial length       & 25        & 5          & 18         & 0         & 2\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Trial number       & 32         & 11          & 12         & 1          & 8\\
+\hspace{6mm}Trial number       & 32         & 11          & 12         & 1          & 8\\
 \hline
-\DIFdelbeginFL \DIFdelFL{Recent trial       history       }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\hspace{6mm}Previous trial       }\DIFaddendFL & 5         & 0          &5          & 0          & 0\\
+\hspace{6mm}Previous trial       & 5         & 0          &5          & 0          & 0\\
 \hline
-\DIFdelbeginFL \DIFdelFL{GLM aligned to nosepoke                       }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\textit{\DIFaddFL{GLM aligned to nosepoke}}                       \DIFaddendFL &         &       &          &          &\\
+\hspace{3mm}\textit{GLM aligned to nosepoke}                       &         &       &          &          &\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue identity       & 66         &14          & 36          & 2          &14\\
+\hspace{6mm}Cue identity       & 66         &14          & 36          & 2          &14\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue location       & 66         &14          & 40          & 3          & 9\\
+\hspace{6mm}Cue location       & 66         &14          & 40          & 3          & 9\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue outcome       & 42        & 8          & 29        & 0          & 5\\
+\hspace{6mm}Cue outcome       & 42        & 8          & 29        & 0          & 5\\
 \hline
-\DIFdelbeginFL \DIFdelFL{GLM aligned to outcome                       }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\hspace{3mm}}\textit{\DIFaddFL{GLM aligned to outcome}}                       \DIFaddendFL &         &       &          &          &\\
+\hspace{3mm}\textit{GLM aligned to outcome}                       &         &       &          &          &\\
 \hline
-\DIFaddbeginFL \DIFaddFL{\hspace{6mm}}\DIFaddendFL Cue outcome       & 10        & 0          & 6       & 0          &4\\
+\hspace{6mm}Cue outcome       & 10        & 0          & 6       & 0          &4\\
 \hline
 
 \end{tabular}
-\caption {\DIFdelbeginFL \DIFdelFL{Cells }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Units }\DIFaddendFL overview} \label{tbl1} 
+\caption {Units overview} \label{tbl1} 
 \end{table}
 \begin{figure}[h]
 \centering
@@ -830,14 +970,10 @@ Cue modulated units                      & 133         &24          &85         
   that integrated cue identity and location.}
 \label{fig:examples}
 \end{figure}
-
-\begin{figure}
-[h]
+\begin{figure}[h]
 \centering
-\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig 6 - GLM.png}
-%DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[height=0.5\textheight]{Fig 6 - GLM.png}
-\DIFaddendFL \caption{Summary of influence of various task parameters on cue-modulated NAc
+\includegraphics[height=0.5\textheight]{Fig 6 - GLM.png}
+\caption{Summary of influence of various task parameters on cue-modulated NAc
 units after cue-onset. \bsf{A}: GLM matrix illustrating the contribution of
 various task parameters to NAc unit firing rates. A stepwise GLM was fit to
 each unit that showed evidence of cue modulation by a Wilcoxon signed-rank
@@ -850,10 +986,10 @@ to the cue (green, left of line), MSNs with a decreasing response (red, left
 of line), FSIs with an increasing response (green, right of line), FSIs with a
 decreasing response (red, right of line). Darker shades indicate more firing
 rate variance explained by a given predictor. Black line indicates separation
-of MSNs and FSIs. \DIFaddbeginFL \DIFaddFL{Scale bar indicates range of improvements to model fit for units with an increasing (green) and decreasing (red) response to the cue. }\DIFaddendFL \bsf{B}: Violin plots demonstrating changes in R-squared
+of MSNs and FSIs. Scale bar indicates range of improvements to model fit for units with an increasing (green) and decreasing (red) response to the cue. \bsf{B}: Violin plots demonstrating changes in R-squared
 values with the addition of each of the individual predictors. The mean,
 median, and distribution of changes in R-squared values is plotted for each of
-the seven task parameters used in the GLM. \DIFaddbeginFL \DIFaddFL{\bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D-F}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset. \bsf{D}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{E}: Same as D, but for approach behavior and trial length. \bsf{F}: Same as D, but for trial number and previous trial. \bsf{G-I}: Average improvement to model fit. \bsf{G}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs surrounding cue onset. Shaded area around mean represents the standard error of the mean. \bsf{H}: Same as G, but for approach behavior and trial length. \bsf{I}: Same G, but for trial number and previous trial.}\DIFaddendFL }
+the seven task parameters used in the GLM. \bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D-F}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset. \bsf{D}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{E}: Same as D, but for approach behavior and trial length. \bsf{F}: Same as D, but for trial number and previous trial. \bsf{G-I}: Average improvement to model fit. \bsf{G}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs surrounding cue onset. Shaded area around mean represents the standard error of the mean. \bsf{H}: Same as G, but for approach behavior and trial length. \bsf{I}: Same G, but for trial number and previous trial.}
 \label{fig:GLM}
 \end{figure}
 {\bf Population level averages reveal characteristic response profiles:}
@@ -887,33 +1023,29 @@ responses revealed nuanced differences in the way NAc units are modulated by cue
 conditions across cue features.
 
 
-\begin{figure}
-[h]
+\begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Fig 7 - Population averages.png}
 \caption{Population-level averages of cue feature sensitive NAc units. \bsf{A}:
   Average smoothed normalized (z-score) activity for cue-modulated units where
   cue identity was a significant predictor in the GLM, aligned to
   cue-onset. Activity is plotted for preferred stimulus block (red) and
-  nonpreferred stimulus block (blue). Dashed \DIFaddbeginFL \DIFaddFL{vertical }\DIFaddendFL line indicates onset of
-  cue. \DIFaddbeginFL \DIFaddFL{Dashed color lines indicate the result of shuffling the identity of the units used for this average 1000 times. }\DIFaddendFL Lightly shaded area indicates standard error of the mean. Note larger
-  increase to preferred stimulus block \DIFdelbeginFL \DIFdelFL{to }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{over }\DIFaddendFL nonpreferred stimulus block. Black
+  nonpreferred stimulus block (blue). Dashed vertical line indicates onset of
+  cue. Dashed color lines indicate the result of shuffling the identity of the units used for this average 1000 times. Lightly shaded area indicates standard error of the mean. Note larger
+  increase to preferred stimulus block over nonpreferred stimulus block. Black
   lines indicate the average of 1000 rounds of random sampling of units from the
   non-drifting population for the preferred and non-preferred blocks. \bsf{B}:
   Same as A but for units that decreased in firing. Note population level
-  activity reveals \DIFdelbeginFL \DIFdelFL{cells }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{units }\DIFaddendFL classified as “decreasing” in response to cue show a
+  activity reveals units classified as “decreasing” in response to cue show a
   biphasic response at the population level, with a transient increase around
   the time the rat starts on the arm, followed by a minimum after cue
   onset. Also, note the sustained difference in firing between the two
-  blocks. \bsf{C-D}: Same as A-B for cue location. Activity is plotted \DIFdelbeginFL \DIFdelFL{from }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{for
-  }\DIFaddendFL most preferred arm (\DIFdelbeginFL \DIFdelFL{yellow}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{black}\DIFaddendFL ) \DIFdelbeginFL \DIFdelFL{, in decreasing order to }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{and }\DIFaddendFL least preferred arm (\DIFdelbeginFL \DIFdelFL{black,
-  navy blue, magneta, respectively}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{magenta}\DIFaddendFL ). \DIFdelbeginFL \DIFdelFL{Note the graded response to arms of
-  decreasing preference. }\DIFdelendFL \bsf{E-F}: Same as A-B for cue outcome. Activity is
+  blocks. \bsf{C-D}: Same as A-B for cue location. Activity is plotted for
+  most preferred arm (black) and least preferred arm (magenta). \bsf{E-F}: Same as A-B for cue outcome. Activity is
   plotted for preferred expected outcome (red), and nonpreferred outcome
-  (green). Note the larger increase to the cue representing the \DIFdelbeginFL \DIFdelFL{cell}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{unit}\DIFaddendFL ’s preferred
+  (green). Note the larger increase to the cue representing the unit’s preferred
   outcome (E), and the sustained decrease to the nonpreferred outcome (F).}
 \label{fig:pop}
-
 \end{figure}
 {\bf NAc units dynamically segment the task:}
 
@@ -929,11 +1061,8 @@ separately for both the light and sound blocks, and found a nearly uniform
 distribution of firing fields in task space that was not limited to alignment to
 the cue (Figure \ref{fig:tiling}A). Furthermore, to determine if this population
 level activity was similar across blocks, we also organized firing during the
-sound blocks according to the ordering derived from the light
-\DIFdelbegin \DIFdel{blocks. }%DIFDELCMD < {\color{red}%%%
-\DIFdel{(JIMMIE EDIT THIS SECTION!)}%DIFDELCMD < } %%%
-\DIFdelend \DIFaddbegin \DIFadd{Blocks. }\DIFaddend This revealed that while there was some preservation of order, the overall firing was qualitatively different
-across the two blocks\DIFaddbegin \DIFadd{, implying that population activity distinguishes between light and sound blocks}\DIFaddend . To control for the possibility that any comparison of
+sound blocks according to the ordering derived from the light \DIFdelbegin \DIFdel{Blocks}\DIFdelend \DIFaddbegin \DIFadd{blocks}\DIFaddend . This revealed that while there was some preservation of order, the overall firing was qualitatively different
+across the two blocks, implying that population activity distinguishes between light and sound blocks. To control for the possibility that any comparison of
 trials would produce this effect, we did a within block comparison, comparing
 half of the trials in the light block against the other half. This comparison
 looked similar to our test comparison of sound block trials ordered by light
@@ -941,41 +1070,43 @@ block trials. Additionally, given that the majority of our units showed an
 inhibitory response to the cue, we also plotted the firing rates according to
 the lowest time in firing, and again found some maintenance of order, but
 largely different ordering across the two blocks, and the within block
-comparison (Figure \ref{fig:tiling}B). To further test this, we divided each
+comparison (Figure \ref{fig:tiling}\DIFdelbegin \DIFdel{B}\DIFdelend \DIFaddbegin \DIFadd{D}\DIFaddend ). To further test this, we divided each
 block into two halves and looked at the correlation of the average smoothed
 firing rates across various combinations of these halves across our cue-aligned
 centered epoch. A linear mixed effects model revealed that within block
 correlations (e.g. one half of light trials vs other half of light trials) were
 higher and more similar than across block correlations (e.g. half of light
-trials vs half of sound trials) \DIFdelbegin \DIFdel{, }\DIFdelend suggesting that activity in the NAc
-discriminates across various cue conditions (within block correlations = \DIFdelbegin \DIFdel{.381, }\DIFdelend \DIFaddbegin \DIFadd{.383 (light), .379 (sound); }\DIFaddend across block correlations = \DIFdelbegin \DIFdel{.342}\DIFdelend \DIFaddbegin \DIFadd{.343, .338, .337, .348; within block vs./ within block comparison = p $=$ .934; within block vs./ across block comparisons = p $<$ .001}\DIFaddend ). This process was repeated for cue location \DIFaddbegin \DIFadd{(Figure \ref{fig:tiling}C-D; within block correlations = .369 (arm 1), .350 (arm 2); across block correlations = .290, .286, .285, .291; within block vs./ within block comparison = p $=$ .071; within block vs./ across block comparisons = p $<$ .001) }\DIFaddend and cue outcome \DIFaddbegin \DIFadd{(Figure \ref{fig:tiling}E-F;  within block correlations = .429 (reward-available), .261 (reward-unavailable); across block correlations = .258}\DIFaddend , \DIFaddbegin \DIFadd{.253, .255, .249; within block vs./ within block comparison = p $<$ .001; within block vs./ across block comparisons = p $<$ .001), }\DIFaddend showing that NAc segmentation of the task is qualitatively
+trials vs half of sound trials) suggesting that activity in the NAc
+discriminates across various cue conditions (within block correlations = .383 (light), .379 (sound); across block correlations = .343, .338, .337, .348; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend within block comparison = p $=$ .934; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend across block comparisons = p $<$ .001). This process was repeated for cue location (Figure \ref{fig:tiling}\DIFdelbegin \DIFdel{C-D}\DIFdelend \DIFaddbegin \DIFadd{B,E}\DIFaddend ; within block correlations = .369 (arm 1), .350 (arm 2); across block correlations = .290, .286, .285, .291; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend within block comparison = p $=$ .071; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend across block comparisons = p $<$ .001) and cue outcome (Figure \ref{fig:tiling}\DIFdelbegin \DIFdel{E-F}\DIFdelend \DIFaddbegin \DIFadd{C,F}\DIFaddend ;  within block correlations = .429 (reward-available), .261 (reward-unavailable); across block correlations = .258, .253, .255, .249; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend within block comparison = p $<$ .001; within block vs.\DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{\ }\DIFaddend across block comparisons = p $<$ .001), showing that NAc segmentation of the task is qualitatively
 different even during those parts of the task not immediately associated with a
 specific cue, action, or outcome, although the within condition comparison of
 reward-unavailable trials was less correlated than reward-available trials, and
-more similar to the across condition comparisons\DIFdelbegin \DIFdel{(Figure \ref{fig:tiling}C-F)}\DIFdelend \DIFaddbegin \DIFadd{, potentially due do the greater behavioral variability for the reward-unavailable trials}\DIFaddend .
+more similar to the across condition comparisons, potentially due do the greater behavioral variability for the reward-unavailable trials.
 
-\begin{figure}[h]
+
+\begin{figure}
+[h]
 \centering
-\includegraphics[height=0.5\textheight]{Fig 8 - Task tiling.png}
-\caption{Distribution of NAc firing rates across time surrounding cue
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[height=0.5\textheight]{Fig 8 - Task tiling.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{Fig 8 - Task tiling.png}
+\DIFaddendFL \caption{Distribution of NAc firing rates across time surrounding cue
 onset. Each panel shows normalized (z-score) firing rates for all recorded NAc
 units (each row corresponds to one unit) as a function of time (time 0
 indicates cue onset), averaged across all trials for a specific cue type,
 indicated by text labels. \bsf{A-C}: Heat plots aligned to normalized peak
-firing rates. \DIFdelbeginFL \DIFdelFL{A}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{A}}\DIFaddendFL , \DIFdelbeginFL \DIFdelFL{far }\DIFdelendFL left: Heat plot showing smoothed normalized firing
+firing rates. \bsf{A}, left: Heat plot showing smoothed normalized firing
 activity of all recorded NAc units ordered according to the time of their peak
 firing rate during the light block. Each row is a unit’s average activity
 across time to the light block. Dashed line indicates cue onset. Notice the
 yellow band across time, indicating all aspects of visualized task space were
-captured by the peak firing rates of various units. A, middle\DIFdelbeginFL \DIFdelFL{left}\DIFdelendFL : Same units
+captured by the peak firing rates of various units. A, middle: Same units
 ordered according to the time of the peak firing rate during the sound
 block. Note that for both blocks, units tile time approximately uniformly with
-a clear diagonal of elevated firing rates. A, \DIFdelbeginFL \DIFdelFL{middle }\DIFdelendFL right: Unit firing rates
+a clear diagonal of elevated firing rates. A, right: Unit firing rates
 taken from the sound block, ordered according to peak firing rate taken from
 the light block. Note that a weaker but still discernible diagonal persists,
-indicating partial similarity between firing rates in the two blocks. A \DIFdelbeginFL \DIFdelFL{, far
-  right: Unit firing rates taken from half of the light block, ordered according
-  to peak firing rate taken from the other half of light trials. Note }\DIFdelendFL similar pattern \DIFdelbeginFL \DIFdelFL{to middle right suggests }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{exists for within-block comparisons suggesting }\DIFaddendFL that reordering any two sets of trials
+indicating partial similarity between firing rates in the two blocks. A similar pattern exists for within-block comparisons suggesting that reordering any two sets of trials
 produces this partial similarity, however correlations within blocks are more
 similar than correlations across blocks (see text). \bsf{B}: Same layout as in
 A, except that the panels now compare two different locations on the track
@@ -984,7 +1115,7 @@ clearly discriminate between locations, but also maintain some similarity
 across locations, as evident from the visible diagonal in the right panel. Two
 example locations were used for display purposes; other location pairs showed
 a similar pattern. \bsf{C}: Same layout as in A, except that panels now
-compare reward-available and reward-unavailable trials. \DIFdelbeginFL \DIFdelFL{D-F. }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{D-F}: }\DIFaddendFL Heat plots
+compare reward-available and reward-unavailable trials. \bsf{D-F}: Heat plots
 aligned to normalized minimum firing rates. \bsf{D}: Responses during
 different stimulus blocks as in A, but with units ordered according to the
 time of their minimum firing rate. \bsf{E}: Responses during trials on
@@ -996,12 +1127,12 @@ events only. Units from all sessions and animals were pooled for this
 analysis.}
 \label{fig:tiling}
 \end{figure}
-{\bf Encoding of cue features \DIFdelbegin \DIFdel{is maintained }\DIFdelend \DIFaddbegin \DIFadd{persists }\DIFaddend until outcome:}
+{\bf Encoding of cue features persists until outcome:}
 
 In order to be useful for credit assignment in reinforcement learning, a trace
 of the cue must be maintained until the outcome, so that information about the
 outcome can be associated with the outcome-predictive cue. To test whether
-representations of cue features \DIFdelbegin \DIFdel{were maintained }\DIFdelend \DIFaddbegin \DIFadd{persisted }\DIFaddend post-approach until the outcome
+representations of cue features persisted post-approach until the outcome
 was revealed, we fit a GLM to the post-approach firing rates of cue-modulated
 units aligned to the time of nosepoke into the reward receptacle. This analysis
 showed that a variety of units still discriminated firing according to various
@@ -1009,10 +1140,9 @@ cue features, but not other task parameters, showing that NAc activity
 discriminates various cue conditions well into a trial (Table \ref{tbl1},
 Figures \ref{fig:NP_examples},\ref{fig:NP_GLM}). Additionally, these units were
 a mix between most of the units that encoded cue features at cue-onset (observed
-overlap greater than expected by chance according to chi-square \DIFdelbegin \DIFdel{tets}\DIFdelend \DIFaddbegin \DIFadd{tests}\DIFaddend ), and those
-that did not previously have a cue feature as a predictor (29, 48, and 30 \DIFaddbegin \DIFadd{out of 133 cue-modulated }\DIFaddend units encoded both time points for cue identity, \DIFaddbegin \DIFadd{cue }\DIFaddend location, and \DIFaddbegin \DIFadd{cue }\DIFaddend outcome,
-respectively). \DIFdelbegin \DIFdel{Fitting a GLM to all recorded units revealed a similar pattern
-(data not shown). }\DIFdelend Population level averages for units that increased to
+overlap greater than expected by chance according to chi-square tests), and those
+that did not previously have a cue feature as a predictor (29, 48, and 30 out of 133 cue-modulated units encoded both time points for cue identity, cue location, and cue outcome,
+respectively). Population level averages for units that increased to
 cue-onset showed a ramping up of activity that peaked upon nosepoke, whereas
 units that decreased to cue-onset showed a gradual reduction of firing activity
 that reached a minimum upon nosepoke (Figure \ref{fig:NP_pop}). Additionally, a
@@ -1020,16 +1150,15 @@ peak is seen for preferred cue outcome in decreasing units at 1 second post
 cue-onset when reward was received, demonstrating an integration of expected and
 received reward (Figure \ref{fig:NP_pop}F). Furthermore, aligning normalized
 peak firing rates to nosepoke onset, revealed a clustering of responses around
-\DIFdelbegin \DIFdel{reward }\DIFdelend \DIFaddbegin \DIFadd{outcome }\DIFaddend receipt for all cue conditions where the rat would have received reward
-(Figure \ref{fig:NP_tiling}). To determine whether coding of cue features \DIFdelbegin \DIFdel{was
-maintained }\DIFdelend \DIFaddbegin \DIFadd{persisted }\DIFaddend after the outcome was revealed, a GLM was fit to the firing rates of
-cue-modulated units at the time of \DIFdelbegin \DIFdel{reward }\DIFdelend \DIFaddbegin \DIFadd{outcome }\DIFaddend receipt, during which the cue was
+outcome receipt for all cue conditions where the rat would have received reward
+(Figure \ref{fig:NP_tiling})\DIFdelbegin \DIFdel{. }\DIFdelend \DIFaddbegin \DIFadd{, in addition to the same trend of higher within- vs across-block correlations for cue identity (Figure \ref{fig:NP_tiling}A,C; within block correlations = .560 (light), .541 (sound); across block correlations = .487, .481, .483, .486; within block vs. within block comparison = p $=$ .112; within block vs. across block comparisons = p $<$ .001) and cue location (Figure \ref{fig:NP_tiling}B,E; within block correlations = .474 (arm 1), .461 (arm 2); across block correlations = .416, .402, .416, .415; within block vs. within block comparison = p $=$ .810; within block vs. across block comparisons = p $<$ .001), but not cue outcome (Figure \ref{fig:NP_tiling}C,F; within block correlations = .620 (reward-available), .401 (reward-unavailable); across block correlations = .418, .414, .390, .408; within block vs. within block comparison = p $<$ .001; within block vs. across block comparisons = p $<$ .001). }\DIFaddend To determine whether coding of cue features persisted after the outcome was revealed, a GLM was fit to the firing rates of
+cue-modulated units at the time of outcome receipt, during which the cue was
 still present. Fitting a GLM revealed 10 units (8\%) where cue outcome accounted
 for an average of 32\% of firing rate variance (Table \ref{tbl1}, data not
-shown). \DIFdelbegin \DIFdel{However, an }\DIFdelend \DIFaddbegin \DIFadd{An }\DIFaddend absence of cue identity or cue location coding \DIFaddbegin \DIFadd{at this level of analysis }\DIFaddend was observed,
-\DIFaddbegin \DIFadd{but looking at the data more closely with a sliding window GLM revealed that
+shown). An absence of cue identity or cue location coding at this level of analysis was observed,
+but looking at the data more closely with a sliding window GLM revealed that
 cue identity, cue location, and cue outcome were encoded throughout time epochs surround cue-onset, nosepoke hold, and outcome receipt,
-}\DIFaddend suggesting that the NAc \DIFdelbegin \DIFdel{does not maintain }\DIFdelend \DIFaddbegin \DIFadd{maintains }\DIFaddend a representation of these cue features once the rat receives behavioral feedback for its decision \DIFaddbegin \DIFadd{(Figure \ref{fig:NP_GLM}E-J)}\DIFaddend .
+suggesting that the NAc maintains a representation of these cue features once the rat receives behavioral feedback for its decision (Figure \ref{fig:NP_GLM}E-J).
 
 \begin{figure}[h]
 \centering
@@ -1046,7 +1175,7 @@ next. Black dashed line indicates nosepoke. Red dashed line indicates receipt
 of outcome. Bottom: PETHs showing the average smoothed firing rate for the
 unit for trials during light (red) and sound (blue) blocks, aligned to
 nosepoke. Lightly shaded area indicates standard error of the mean. Note this
-unit showed a sustained increase \DIFaddbeginFL \DIFaddFL{in firing }\DIFaddendFL to sound cues during the trial. \bsf{B}: An
+unit showed a sustained increase in firing to sound cues during the trial. \bsf{B}: An
 example of a unit that was responsive to cue identity at time of nosepoke but
 not cue-onset. \bsf{C-D}: Cue-modulated units that encoded cue location, at
 both cue-onset and nosepoke (C), and only nosepoke (D). Each color in the
@@ -1060,18 +1189,17 @@ reward-available (red) and reward-unavailable (green) trials.}
 \begin{figure}
 [h]
 \centering
-\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\textwidth]{Fig 10 - NP GLM.png}
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[height=0.4\textheight]{Fig 10 - NP GLM.png}
 %DIFDELCMD < %%%
-\DIFdelendFL \DIFaddbeginFL \includegraphics[height=0.4\textheight]{Fig 10 - NP GLM.png}
-\DIFaddendFL \caption{Summary of influence of various task parameters of cue-modulated NAc
-units during nosepoke. \bsf{A}: GLM matrix \DIFdelbeginFL \DIFdelFL{demonstrating impact }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{illustrating the contribution }\DIFaddendFL of various
-task parameters \DIFdelbeginFL \DIFdelFL{on }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{to }\DIFaddendFL NAc \DIFaddbeginFL \DIFaddFL{unit }\DIFaddendFL firing rates. A stepwise GLM was fit to each unit that
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{Fig 10 - NP GLM.png}
+\DIFaddendFL \caption{Summary of influence of various task parameters \DIFdelbeginFL \DIFdelFL{of }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{on }\DIFaddendFL cue-modulated NAc
+units during nosepoke. \bsf{A}: GLM matrix illustrating the contribution of various
+task parameters to NAc unit firing rates. A stepwise GLM was fit to each unit that
 showed evidence of cue modulation by a Wilcoxon signed-rank test. Each row
-represents a given task parameter, and each column \DIFdelbeginFL \DIFdelFL{is the influence of that
-  task parameter on }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{corresponds to }\DIFaddendFL a \DIFdelbeginFL \DIFdelFL{given }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{single }\DIFaddendFL unit. \DIFdelbeginFL \DIFdelFL{Response variable is }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Colors indicate }\DIFaddendFL how much of the firing rate variance an
+represents a given task parameter, and each column corresponds to a single unit. Colors indicate how much of the firing rate variance an
 individual predictor contributed to the model, as measured by differences in
 R-squared between the final model and the model minus the predictor of
-\DIFdelbeginFL \DIFdelFL{interest}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Interest}\DIFaddendFL . Ordering from left to right: MSNs that increased firing
+Interest. Ordering from left to right: MSNs that increased firing
 in response to the cue (green, left of line), MSNs with a decreasing response
 (red, left of line), FSIs with an increasing response (green, right of line),
 FSIs with a decreasing response (red, right of line). Darker shades indicate
@@ -1080,73 +1208,67 @@ separation of MSNs and FSIs. \bsf{B}: Violin plots demonstrating changes in
 R-squared values with the addition of each of the individual predictors. The
 mean, median, and distribution of changes in R-squared values is plotted for
 each of the three task parameters that were significant predictors in the
-GLM. \DIFaddbeginFL \DIFaddFL{\bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D}: Venn diagram illustrating the number of cue-modulated units encoding cue identity, cue location, and cue outcome during cue-onset (left circle), during nosepoke hold (right circle), and during both epochs (overlap). \bsf{E-G}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset (E), nosepoke (F), and outcome (G). \bsf{E}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{F}: Same as E, but for time epochs relative to nosepoke where the rat waited for the outcome. \bsf{G}: Same as E, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{H-J}: Average improvement to model fit. \bsf{H}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs relative to cue-onset. Shaded area around mean represents the standard error of the mean. \bsf{I}: Same as H, but for time epochs relative to nosepoke. \bsf{J}: Same H, but for time epochs relative to receipt of outcome.}\DIFaddendFL }
+GLM. \bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D}: Venn diagram illustrating the number of cue-modulated units encoding cue identity, cue location, and cue outcome during cue-onset (left circle), during nosepoke hold (right circle), and during both epochs (overlap). \bsf{E-G}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset (E), nosepoke (F), and outcome (G). \bsf{E}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{F}: Same as E, but for time epochs relative to nosepoke where the rat waited for the outcome. \bsf{G}: Same as E, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{H-J}: Average improvement to model fit. \bsf{H}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs relative to cue-onset. Shaded area around mean represents the standard error of the mean. \bsf{I}: Same as H, but for time epochs relative to nosepoke. \bsf{J}: Same H, but for time epochs relative to receipt of outcome.}
 \label{fig:NP_GLM}
 \end{figure}
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{Fig 11 - NP population averages.png}
 \caption{Population-level averages of cue feature sensitive NAc units during a
-  nosepoke. \bsf{A}: Average smoothed normalized \DIFaddbeginFL \DIFaddFL{(z-score) }\DIFaddendFL activity for cue-modulated
+  nosepoke. \bsf{A}: Average smoothed normalized (z-score) activity for cue-modulated
   units where cue identity was a significant predictor in the GLM, aligned to
   nosepoke with reward delivery occurring 1 s after nosepoke. Activity is
   plotted for preferred stimulus block (red) and nonpreferred stimulus block
-  (blue). Black \DIFaddbeginFL \DIFaddFL{vertical }\DIFaddendFL dashed line indicates nosepoke. Red \DIFaddbeginFL \DIFaddFL{vertical }\DIFaddendFL dashed line indicates reward
-  delivery occurring 1 s after nosepoke for reward-available trials. \DIFaddbeginFL \DIFaddFL{Dashed color lines indicate the result of shuffling the identity of the units used for this average 1000 times. }\DIFaddendFL Lightly
+  (blue). Black vertical dashed line indicates nosepoke. Red vertical dashed line indicates reward
+  delivery occurring 1 s after nosepoke for reward-available trials. Dashed color lines indicate the result of shuffling the identity of the units used for this average 1000 times. Lightly
   shaded area indicates standard error of the mean. Note larger increase leading
-  up to nosepoke to preferred stimulus block \DIFdelbeginFL \DIFdelFL{to }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{over }\DIFaddendFL nonpreferred stimulus
+  up to nosepoke to preferred stimulus block over nonpreferred stimulus
   block. \bsf{B}: Same as A but for units that decreased in firing. Note the
   sustained difference in firing between the two blocks. \bsf{C-D}: Same as A-B
-  for cue location. Activity is plotted \DIFdelbeginFL \DIFdelFL{from }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{for }\DIFaddendFL most preferred arm (\DIFdelbeginFL \DIFdelFL{yellow}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{black}\DIFaddendFL ) \DIFdelbeginFL \DIFdelFL{, in
-  decreasing order to }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{and }\DIFaddendFL least preferred arm (\DIFdelbeginFL \DIFdelFL{black, navy blue, }\DIFdelendFL magneta\DIFdelbeginFL \DIFdelFL{,
-  respectively}\DIFdelendFL ). \DIFdelbeginFL \DIFdelFL{Note the subtle but graded response to arms of decreasing
-  preference. }\DIFdelendFL \bsf{E-F}: Same as A-B for cue outcome. Activity is plotted for
+  for cue location. Activity is plotted for most preferred arm (black) and least preferred arm (magneta). \bsf{E-F}: Same as A-B for cue outcome. Activity is plotted for
   preferred expected outcome (red), and nonpreferred outcome (green). Note the
-  peak after \DIFdelbeginFL \DIFdelFL{reward }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{outcome }\DIFaddendFL receipt for preferred outcome in decreasing \DIFdelbeginFL \DIFdelFL{cells }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{units }\DIFaddendFL (F).}
+  peak after outcome receipt for preferred outcome in decreasing units (F).}
 \label{fig:NP_pop}
 \end{figure}
+
 \begin{figure}
 [h]
 \centering
-\includegraphics[height=0.5\textheight]{Fig 12 - NP task tiling.png}
-\caption{Distribution of NAc firing rates across \DIFdelbeginFL \DIFdelFL{task space during }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{time surrounding nosepoke for }\DIFaddendFL approach
-trials. Each panel shows normalized \DIFaddbeginFL \DIFaddFL{(z-score) }\DIFaddendFL firing rates for all recorded NAc units
+\DIFdelbeginFL %DIFDELCMD < \includegraphics[height=0.5\textheight]{Fig 12 - NP task tiling.png}
+%DIFDELCMD < %%%
+\DIFdelendFL \DIFaddbeginFL \includegraphics[width=\textwidth]{Fig 12 - NP task tiling.png}
+\DIFaddendFL \caption{Distribution of NAc firing rates across time surrounding nosepoke for approach
+trials. Each panel shows normalized (z-score) firing rates for all recorded NAc units
 (each row corresponds to one unit) as a function of time (time 0 indicates
 nosepoke), averaged across all approach trials for a specific cue type,
-indicated by text labels. \DIFaddbeginFL \DIFaddFL{\bsf{A-C}: Heat plots aligned to normalized peak firing rates. }\DIFaddendFL \bsf{A}, far left: Heat plot showing smoothed
+indicated by text labels. \bsf{A-C}: Heat plots aligned to normalized peak firing rates. \bsf{A}, far left: Heat plot showing smoothed
 normalized firing activity of all recorded NAc units ordered according to the
 time of their peak firing rate during the light block. Each row is a unit’s
 average activity across time to the light block. Black dashed line indicates
 nosepoke. Red dashed line indicates reward delivery occurring 1 s after
 nosepoke for reward-available trials. Notice the yellow band across time,
 indicating all aspects of visualized task space were captured by the peak
-firing rates of various units. A, middle\DIFdelbeginFL \DIFdelFL{left}\DIFdelendFL : Same units ordered according to
+firing rates of various units. A, middle: Same units ordered according to
 the time of the peak firing rate during the sound block. Note that for both
 blocks, units tile time approximately uniformly with a clear diagonal of
-elevated firing rates, and a clustering around \DIFdelbeginFL \DIFdelFL{reward }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{outcome }\DIFaddendFL receipt. A, \DIFdelbeginFL \DIFdelFL{middle
-  }\DIFdelendFL right: Unit firing rates taken from the sound block, ordered according to peak
+elevated firing rates, and a clustering around outcome receipt. A, right: Unit firing rates taken from the sound block, ordered according to peak
 firing rate taken from the light block. Note that a weaker but still
 discernible diagonal persists, indicating partial similarity between firing
-rates in the two blocks. A \DIFdelbeginFL \DIFdelFL{, far right: Unit firing rates taken from half of
-  the light block, ordered according to peak firing rate taken from the other
-  half of light trials. Note }\DIFdelendFL similar pattern \DIFdelbeginFL \DIFdelFL{to middle right suggests }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{exists for within-block comparisons suggesting }\DIFaddendFL that
+rates in the two blocks. A similar pattern exists for within-block comparisons suggesting that
 reordering any two sets of trials produces this partial similarity, however
 correlations within blocks are more similar than correlations across blocks
-(see text). \bsf{B}: Same layout as in A, \DIFdelbeginFL \DIFdelFL{but with units ordered according to
-  the time of their minimum firing rate. \bsf{C}: Same layout as in A, }\DIFdelendFL except
+(see text). \bsf{B}: Same layout as in A, except
 that the panels now compare two different locations on the track instead of
 two cue modalities. As for the different cue modalities, NAc units clearly
 discriminate between locations, but also maintain some similarity across
 locations, as evident from the visible diagonal in the right panel. Two
 example locations were used for display purposes; other location pairs showed
-a similar pattern. \DIFdelbeginFL \DIFdelFL{\bsf{D}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{C}}\DIFaddendFL : \DIFdelbeginFL \DIFdelFL{As for C, but with units ordered by their minimum
-  firing rate. \bsf{E}: }\DIFdelendFL Same layout as in A, except that panels now compare
-\DIFaddbeginFL \DIFaddFL{correct }\DIFaddendFL reward-available and \DIFaddbeginFL \DIFaddFL{incorrect }\DIFaddendFL reward-unavailable trials. \DIFdelbeginFL \DIFdelFL{Notice the absence of a
-  cluster of }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{The disproportionate }\DIFaddendFL tiling around \DIFdelbeginFL \DIFdelFL{reward }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{outcome }\DIFaddendFL receipt for \DIFaddbeginFL \DIFaddFL{reward-available, but not }\DIFaddendFL reward-unavailable
-trials \DIFaddbeginFL \DIFaddFL{suggests encoding of reward receipt by NAc units}\DIFaddendFL . \DIFdelbeginFL \DIFdelFL{\bsf{F}}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{\bsf{D-F}}\DIFaddendFL : \DIFdelbeginFL \DIFdelFL{As for }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Heat plots aligned to normalized minimum firing rates. \bsf{D}: Responses during different stimulus blocks as in }\DIFaddendFL A, but with units ordered \DIFaddbeginFL \DIFaddFL{according to
-the time of their minimum firing rate. \bsf{E}: Responses during trials on different arms as in B, but with units ordered }\DIFaddendFL by their minimum
-firing rate. \DIFaddbeginFL \DIFaddFL{\bsf{F}: Responses during cues signalling different outcomes as in C, but with units ordered by their minimum firing
-rate. }\DIFaddendFL Overall, NAc units "tiled" experience on the task, as opposed to being
+a similar pattern. \bsf{C}: Same layout as in A, except that panels now compare
+correct reward-available and incorrect reward-unavailable trials. The disproportionate tiling around outcome receipt for reward-available, but not reward-unavailable
+trials suggests encoding of reward receipt by NAc units. \bsf{D-F}: Heat plots aligned to normalized minimum firing rates. \bsf{D}: Responses during different stimulus blocks as in A, but with units ordered according to
+the time of their minimum firing rate. \bsf{E}: Responses during trials on different arms as in B, but with units ordered by their minimum
+firing rate. \bsf{F}: Responses during cues signalling different outcomes as in C, but with units ordered by their minimum firing
+rate. Overall, NAc units "tiled" experience on the task, as opposed to being
 confined to specific task events only. Units from all sessions and animals
 were pooled for this analysis.}
 \label{fig:NP_tiling}
@@ -1154,78 +1276,81 @@ were pooled for this analysis.}
 \end{figure}
 \section*{Discussion}
 
-The \DIFdelbegin \DIFdel{present study found evidence for coding, by partially overlapping populations of NAc units , of multiple identifying features of motivationally relevant stimuli in addition to expected outcome ; the sensory modality of the presented cue, as well at its physical location on the
-track (H2 and H3 in Figure \ref{fig:schematic}A)}\DIFdelend \DIFaddbegin \DIFadd{main result of the present study is that NAc units encode not
+The main result of the present study is that NAc units encode not
 only the expected outcome of outcome-predictive cues, but also the
-identity of such cues}\DIFaddend . Importantly, this identity coding was
-maintained on approach trials during a delay period where the rat held
-a nosepoke until \DIFdelbegin \DIFdel{receipt of outcome }\DIFdelend \DIFaddbegin \DIFadd{the outcome was received }\DIFaddend (H2 in Figure
-\ref{fig:schematic}B). \DIFdelbegin \DIFdel{Cells }\DIFdelend \DIFaddbegin \DIFadd{Units coding for cue identity showed partial
+identity of such cues. Importantly, this identity coding was
+maintained on approach trials \DIFaddbegin \DIFadd{both }\DIFaddend during a delay period where the rat held
+a nosepoke until the outcome was received\DIFaddbegin \DIFadd{, after immediately after outcome receipt }\DIFaddend (H2 \DIFaddbegin \DIFadd{and H3 }\DIFaddend in Figure
+\ref{fig:schematic}B). Units coding for cue identity showed partial
 overlap with those coding for expected outcome (H3 in Figure
-\ref{fig:schematic}A). Units }\DIFaddend that coded different cue features
-\DIFaddbegin \DIFadd{(identity, outcome, location) }\DIFaddend exhibited different temporal profiles as
-a whole, although across all recorded \DIFdelbegin \DIFdel{cells }\DIFdelend \DIFaddbegin \DIFadd{units }\DIFaddend a tiling of task structure
+\ref{fig:schematic}A). Units that coded different cue features
+(identity, outcome, location) exhibited different temporal profiles as
+a whole, although across all recorded units a tiling of task structure
 was observed such that all points within our analyzed task space was
 accounted for by the ordered peak firing rates of all
-\DIFdelbegin \DIFdel{cells}\DIFdelend \DIFaddbegin \DIFadd{units}\DIFaddend . Furthermore, this tiling differed between various conditions
-with a cue feature, such as light versus sound blocks. \DIFaddbegin \DIFadd{We discuss
+units. Furthermore, this tiling differed between various conditions
+with a cue feature, such as light versus sound blocks. We discuss
 these observations and their implications below.
-}\DIFaddend 
 
 {\bf Cue identity:}
 
-Our finding that NAc units can discriminate between \DIFaddbegin \DIFadd{different
-}\DIFaddend outcome-predictive stimuli with similar \DIFdelbegin \DIFdel{biological significance
-, in the current study cues from different sensory modalities, }\DIFdelend \DIFaddbegin \DIFadd{motivational significance
-(i.e.\ encodes cue identity) }\DIFaddend expands upon an extensive rodent
+Our finding that NAc units can discriminate between different
+outcome-predictive stimuli with similar motivational significance
+(i.e.\ encodes cue identity) expands upon an extensive rodent
 literature examining NAc correlates of conditioned stimuli
-\cite{Ambroggi2008,Atallah2014,Bissonette2013,Cooch2015,Day2006,Dejean2017,Goldstein2012,Ishikawa2008,Lansink2012,McGinty2013,Nicola2004,Roesch2009a,Roitman2005,Saddoris2011,Setlow2003,Sugam2014,West2016,Yun2004}. \DIFdelbegin \DIFdel{Units that discriminated across blocks were not simply due to drifting of the signal across trials, as units that showed a drift in firing between the first and second half within a block were excluded from the analysis. Furthermore, even though actions were stereotyped during correct trials, such that the rat always turned left at the decision point to approach for reward, and right to skip the receptacle and initiate the next trial, units that were modulated by the expected value of the cue maintained their specific firing patterns even during error trials where the rat turned left after presentation of the reward-unavailable cue, suggesting that these signals did not represent action values. Additionally, NAc signals have been shown to be modulated by response vigor, to detangle this from our results we included the trial length as a predictor in our GLMs, and found units with cue feature correlates independent of trial length \mbox{%DIFAUXCMD
-\cite{McGinty2013}}\hspace{0pt}%DIFAUXCMD
-. }\DIFdelend Perhaps
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Ambroggi2008,Atallah2014,Bissonette2013,Cooch2015,Day2006,Dejean2017,Goldstein2012,Ishikawa2008,Lansink2012,McGinty2013,Nicola2004,Roesch2009a,Roitman2005,Saddoris2011,Setlow2003,Sugam2014,West2016,Yun2004}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Setlow2003,Nicola2004,Yun2004,Roitman2005,Day2006,Ambroggi2008,Ishikawa2008,Roesch2009a,Saddoris2011,Goldstein2012,Lansink2012,Bissonette2013,McGinty2013,Atallah2014,Sugam2014,Cooch2015,West2016,Dejean2017}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . Perhaps
 the most comparable work in rodents comes from a study that found
 distinct coding for an odor when it predicted separate but equally
 valued rewards \cite{Cooch2015}. The present work is complementary to
-\DIFdelbegin \DIFdel{this }\DIFdelend \DIFaddbegin \DIFadd{such }{\it \DIFadd{outcome identity}} \DIFadd{coding }\DIFaddend as it shows that NAc units \DIFdelbegin \DIFdel{have representations of identifiable aspects of the cue
-  itself}\DIFdelend \DIFaddbegin {\it \DIFadd{cue
-  identity}}\DIFaddend , both separately and integrated with the reward it
-predicts (H2 and H3 in Figure \ref{fig:schematic}A). \DIFdelbegin \DIFdel{Another study paired separate }\DIFdelend \DIFaddbegin \DIFadd{Similarly,
-\mbox{%DIFAUXCMD
-\citeNP{Setlow2003} }\hspace{0pt}%DIFAUXCMD
-paired distinct }\DIFaddend cues with appetitive or aversive
+such {\it outcome identity} coding as it shows that NAc units {\it cue
+  identity}, both separately and integrated with the reward it
+predicts (H2 and H3 in Figure \ref{fig:schematic}A). Similarly,
+\citeNP{Setlow2003} paired distinct cues with appetitive or aversive
 outcomes, and found separate populations of units that encoded each
-cue\DIFdelbegin \DIFdel{, with many switching selectivity after reversal of the associations between the cues and outcomes, providing evidence that the NAc encodes the biological significance of stimuli \mbox{%DIFAUXCMD
-\cite{Setlow2003}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend . Once again, our study was different \DIFdelbegin \DIFdel{as we recorded neural responses to }\DIFdelend \DIFaddbegin \DIFadd{in asking how }\DIFaddend distinct cues
-encoding the same anticipated outcome \DIFdelbegin \DIFdel{, suggesting }\DIFdelend \DIFaddbegin \DIFadd{are encoded. Such cue identity
-encoding suggests }\DIFaddend that even when the biological relevance of these
-stimuli is similar\DIFdelbegin \DIFdel{the }\DIFdelend \DIFaddbegin \DIFadd{, }\DIFaddend NAc dissociates their representations at the level
-of the \DIFdelbegin \DIFdel{single-unit, although this doesn’t explain the difference in population averaged firing rate for the epochs when the cue is not present}\DIFdelend \DIFaddbegin \DIFadd{single-units}\DIFaddend . A possible interpretation of this coding of cue
+cue. Once again, our study was different in asking how distinct cues
+encoding the same anticipated outcome are encoded. Such cue identity
+encoding suggests that even when the biological relevance of these
+stimuli is similar, NAc dissociates their representations at the level
+of the single-units. A possible interpretation of this coding of cue
 features alongside expected outcome is that these representations are
 used to associate reward with relevant features of the environment,
 so-called credit assignment in the reinforcement learning literature
 \cite{sutton1998}. A burgeoning body of human and non-human primate
 work has started to elucidated neural correlates of credit assignment
 in the PFC, particularly in the lateral orbitofrontal cortex
-\cite{Akaishi2016,Asaad2017,Chau2015,Noonan2017}. Given the importance
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Akaishi2016,Asaad2017,Chau2015,Noonan2017}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Chau2015,Akaishi2016,Asaad2017,Noonan2017}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . Given the importance
 of cortical inputs in NAc associative representations, it is possible
 that information related to credit assignment is relayed from the
-cortex to NAc \cite{Cooch2015,Ishikawa2008}.
+cortex to NAc \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Cooch2015,Ishikawa2008}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Ishikawa2008,Cooch2015}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend .
 
-\DIFdelbegin \DIFdel{Another possibility is that these modality specific units were encoding the }\DIFdelend \DIFaddbegin \DIFadd{A different possible function for cue identity coding is to support
+A different possible function for cue identity coding is to support
 contextual modulation of the motivational relevance of specific
 cues. A context can be understood as a particular mapping between
 specific cues and their outcomes: for instance, in context 1 cue A but
-not cue B is rewarded, whereas in }\DIFaddend context \DIFdelbegin \DIFdel{, rule, or sequence within a session as some units responded similarly for both reward-available and reward-unavailable cues within a block. This interpretation is in alignment with a recent paper from the non-human primate literature that }\DIFdelend \DIFaddbegin \DIFadd{2 cue B but not cue A is
+not cue B is rewarded, whereas in context 2 cue B but not cue A is
 rewarded. Successfully implementing such contextual mappings requires
-representation of the cue identities. Indeed, \mbox{%DIFAUXCMD
+representation of the cue identities. Indeed, \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Sleezer2016}
+}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\citeNP{Sleezer2016}
 }\hspace{0pt}%DIFAUXCMD
 }\DIFaddend recorded NAc responses during the Wisconsin Card Sorting Task (WCST),
 a common set-shifting task used in both the laboratory and clinic, and
 found units that preferred firing to stimuli when a certain rule, or
-rule category was currently active\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{Sleezer2016}}\hspace{0pt}%DIFAUXCMD
-. Indeed, an encoding of the current strategy could be an explanation as to why a sustained difference in population averaged firing was seen across stimulus blocks, as well as a potential explanation for the differentially tiling of task structure across blocks in the current study. }\DIFdelend \DIFaddbegin \DIFadd{. }\DIFaddend Further support for a
+rule category was currently active. Further support for a
 modulation of NAc responses by strategy comes from an fMRI study that
 examined BOLD levels during a set-shifting task
 \cite{Fitzgerald2014}. In this task, participants learned two sets of
@@ -1235,12 +1360,11 @@ dimension that was relevant was periodically shifted between the
 two. Here, they found that bilateral NAc activity reflected value
 representations for the currently relevant stimulus dimension, and not
 the irrelevant stimulus. The current finding of separate, but
-overlapping, populations of units encoding cue \DIFdelbegin \DIFdel{modality and expected
-value}\DIFdelend \DIFaddbegin \DIFadd{identity and expected
-outcome}\DIFaddend , suggests that the fMRI finding is generated by the combined
+overlapping, populations of units encoding cue identity and expected
+outcome, suggests that the fMRI finding is generated by the combined
 activity of several different functional cell types.
 
-\DIFdelbegin \DIFdel{A caveat of the }\DIFdelend \DIFaddbegin \DIFadd{Our analyses were designed to eliminate several potential alternative
+Our analyses were designed to eliminate several potential alternative
 interpretations to cue identity coding. Because the different cues
 were separated into different blocks, units that discriminated between
 cue identities could instead be encoding time or other slowly-changing
@@ -1253,36 +1377,28 @@ encoding of the current strategy could be an explanation for the
 sustained difference in population averaged firing across stimulus
 blocks (Figure \ref{fig:pop}), as well as a potential explanation for
 the differentially tiling of task structure across blocks in the
-current study (Figure \ref{fig:tiling}.
-}
+current study (Figure \ref{fig:tiling}\DIFaddbegin \DIFadd{)}\DIFaddend .
 
-\DIFadd{A different potential confound is that between outcome and action
+A different potential confound is that between outcome and action
 value coding. We discriminated between these possiblities by analzying
 error trials, where the rat appraoched reward (left turn) after
 presentation of the reward-unavailable cue. Units that were modulated
 by the expected outcome of the cue maintained their specific firing
 patterns even during error trials, as expected from outcome value
 coding but not action value coding. Additionally, NAc signals have
-been shown to be modulated by response vigor \mbox{%DIFAUXCMD
-\cite{McGinty2013}}\hspace{0pt}%DIFAUXCMD
-; to
+been shown to be modulated by response vigor \cite{McGinty2013}; to
 detangle this from our results we included trial length (i.e.\ latency
 to arrival at the reward site) as a predictor in our GLMs, and found
 units with cue feature correlates independent of trial length.
-}
 
-\DIFadd{An overall limitation of the }\DIFaddend current study is that rats were never
-presented with both sets of cues simultaneously, and \DIFdelbegin \DIFdel{thus never had }\DIFdelend \DIFaddbegin \DIFadd{were not required
-}\DIFaddend to switch strategies \DIFdelbegin \DIFdel{, although extrapolating the data from the primate study suggests that the activity of the cue identity units }\DIFdelend \DIFaddbegin \DIFadd{between multiple sets of cues. Thus, it is
+An overall limitation of the current study is that rats were never
+presented with both sets of cues simultaneously, and were not required
+to switch strategies between multiple sets of cues. Thus, it is
 unknown to what extent the cue identity encoding we observed is
 behaviorally relevant, although extrapolating data from other work
-\mbox{%DIFAUXCMD
-\cite{Sleezer2016} }\hspace{0pt}%DIFAUXCMD
-suggests that cue identity coding }\DIFaddend would be
-modulated by relevance. \DIFdelbegin \DIFdel{Keeping along this theme, the current data set is unable to identity precisely what the modality-sensitive neurons were encoding, that is were they tracking representations of stimulus identity, a preferred context, or even a macroscale representation of progress through the session. Furthermore, their relevance for ongoing behavior is also uncertain. }\DIFdelend NAc core lesions have been shown to impair
-shifting between different behavioral strategies \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{Floresco2006a}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend ,
+\cite{Sleezer2016} suggests that cue identity coding would be
+modulated by relevance. NAc core lesions have been shown to impair
+shifting between different behavioral strategies \cite{Floresco2006a},
 and it is possible that selectively silencing the units that prefer
 responding for a given modality or rule would impair performance when
 the animal is required to use that information, or artificial
@@ -1293,205 +1409,385 @@ the inappropriate strategy.
 
 Our finding that cue-evoked activity was modulated by cue location is
 in alignment with several previous reports
-\cite{Lavoie1994,Mulder2005,Strait2016,Wiener2003}. The NAc receives
-\DIFdelbegin \DIFdel{strong }\DIFdelend inputs from the hippocampus, and the communication of place-reward
-information across the two structures suggests that the NAc \DIFdelbegin \DIFdel{might be keeping track of }\DIFdelend \DIFaddbegin \DIFadd{tracks
-}\DIFaddend locations associated with reward
-\cite{Lansink2008,Lansink2009,Lansink2016,Pennartz2004,Sjulson2017,Tabuchi2000,VanderMeer2011}. \DIFdelbegin \DIFdel{Alternatively, it is possible that this positional modulation is part of a representation of task space, keeping track of where in the task the rat is. A previous non-human primate experiment showed that when reward is contingent upon completion of a series of trials, separate populations of NAc
-neurons signal the start of a schedule, subsequent trials in the schedule, and the first trial in extended schedules \mbox{%DIFAUXCMD
-\cite{Shidara1998}}\hspace{0pt}%DIFAUXCMD
-. This signalling of position within a sequence has been observed in subsequent studies, and it is possible that the rats were keeping track of which specific arm they were in as part of a sequence of arms, especially since they started from the same arm during the start of each session \mbox{%DIFAUXCMD
-\cite{Atallah2014,Berke2009,Khamassi2008,Lansink2012,Mulder2004}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend \DIFaddbegin \DIFadd{NAc
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Lavoie1994,Mulder2005,Strait2016,Wiener2003}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Lavoie1994,Wiener2003,Mulder2005,Strait2016}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . The NAc receives
+inputs from the hippocampus, and the communication of place-reward
+information across the two structures suggests that the NAc tracks
+locations associated with reward
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
+\cite{Lansink2008,Lansink2009,Lansink2016,Pennartz2004,Sjulson2017,Tabuchi2000,VanderMeer2011}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Tabuchi2000,Pennartz2004,Lansink2008,Lansink2009,VanderMeer2011,Lansink2016,Sjulson2017}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . NAc
 units can also signal progress through a sequence of cues and/or
 actions
-\mbox{%DIFAUXCMD
+\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Shidara1998,Atallah2014,Berke2009,Khamassi2008,Lansink2012,Mulder2004}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Shidara1998,Mulder2004,Khamassi2008,Berke2009,Lansink2012,Atallah2014}}\hspace{0pt}%DIFAUXCMD
 }\DIFaddend . Given
 that the current task was pseudo-random, it is possible that the rats
 learned the structure of sequential cue presentation, and the neural
 activity could reflect this. However, this is unlikely as including a
 ‘previous trial’ variable in the analysis did not explain a
 significant amount of firing rate variance in response to the cue for
-the vast majority of \DIFdelbegin \DIFdel{cells. A limitation of the current study is that the behavioral relevance of
-cue location was not manipulated in the sense that varying cue location did not change the outcome-predictive nature of the cue}\DIFdelend \DIFaddbegin \DIFadd{units. In any case, NAc units on the present
+the vast majority of units. In any case, NAc units on the present
 task continued to distinguish between different locations, even though
 location, and progress through a sequence, were explicitly irrelevant
 in predicting reward. We speculate that this persistent coding of
 location in NAc may represent a bias in credit assignment, and
 associated tendency for rodents to associate motivationally relevant
-events with the locations where they occur}\DIFaddend .
+events with the locations where they occur.
 
-{\bf \DIFdelbegin \DIFdel{Potential functional consequences of maintained coding}\DIFdelend \DIFaddbegin \DIFadd{Implications}\DIFaddend :}
+{\bf Implications:}
 
-\DIFdelbegin \DIFdel{In the current study we found that the coding of cue features persisted after the choice point, during a delay period while the rat waited at the receptacle for the outcome (H2 in Figure \ref{fig:schematic}B). Having an enriched representation that includes details about the environmental context the animal finds itself in alongside expected outcome, and is maintained online until the outcome is revealed could be useful for assigning credit of a reward to the appropriate elements of an environment, to develop an accurate value function and optimize long term acquisition of reward \mbox{%DIFAUXCMD
-\cite{Lee2012}}\hspace{0pt}%DIFAUXCMD
-. A recent non-human primate experiment found evidence for simultaneous coding of outcome and outcome-predictive stimuli at the time of feedback in the dorsolateral PFC, and that this coding of stimulus information was strongest before behavioral performance stabilized \mbox{%DIFAUXCMD
-\cite{Asaad2017}}\hspace{0pt}%DIFAUXCMD
-. Interestingly, we found coding of cue identity and location after presentation }\DIFdelend \DIFaddbegin \DIFadd{Maladaptive decision making, as occurs in schizophrenia, addiction,
-Parkinson’s, among others, can result from dysfunctional RPE and value
-signals \mbox{%DIFAUXCMD
-\cite{Frank2004,Gradin2011,Maia2011}}\hspace{0pt}%DIFAUXCMD
-. This view has been
+Maladaptive decision making, as occurs in schizophrenia, addiction,
+Parkinson\DIFdelbegin \DIFdel{’}\DIFdelend \DIFaddbegin \DIFadd{'}\DIFaddend s, among others, can result from dysfunctional RPE and value
+signals \cite{Frank2004,Gradin2011,Maia2011}. This view has been
 successful in explaining both positive and negative symptoms in
-schizophrenia, and deficits in learning from feedback in Parkinson’s
-\mbox{%DIFAUXCMD
-\cite{Frank2004,Gradin2011}}\hspace{0pt}%DIFAUXCMD
-. However, the effects of RPE and value
+schizophrenia, and deficits in learning from feedback in Parkinson\DIFdelbegin \DIFdel{’}\DIFdelend \DIFaddbegin \DIFadd{'}\DIFaddend s
+\cite{Frank2004,Gradin2011}. However, the effects of RPE and value
 updating are contingent upon encoding of preceding action and cue
-features, the eligibility trace \mbox{%DIFAUXCMD
+features, the eligibility trace \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Lee2012,sutton1998}}\hspace{0pt}%DIFAUXCMD
-. Value
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{sutton1998,Lee2012}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . Value
 updates can only be performed on these aspects of preceding experience
 that are encoded when the update occurs. Therefore, maladaptive
 learning and decision making can result from not only aberrant RPEs
 but also from altered cue feature encoding. For instance, on this task
 the environmental stimulus that signaled the availability of reward
 was conveyed by two distinct cues that were presented in four
-locations. While in our current study, the location and identity }\DIFaddend of
-the cue \DIFdelbegin \DIFdel{, and during a delay period between nosepoke and outcome, but not after the outcome was received. The absence of coding during feedback, and that these recordings were done after behavioral performance had stabilized suggests the possibility that these NAc representations represent an integrated value estimate that is }\DIFdelend \DIFaddbegin \DIFadd{did not require any adjustments in the animal’s behavior, we
+locations. While in our current study, the location and identity of
+the cue did not require any adjustments in the animal’s behavior, we
 found coding of these features alongside the expected outcome of the
-cue that could be }\DIFaddend the outcome of \DIFdelbegin \DIFdel{earlier upstream credit assignment in cortical inputs. From a motivated behavior standpoint, the presence of these enriched representations can help inform action selection involving Pavlovian behaviors such as conditioned approach \mbox{%DIFAUXCMD
-\cite{DiCiano2001,Parkinson2000,Saunders2012}}\hspace{0pt}%DIFAUXCMD
-, and after a
-decision has been made the maintained representation can help to hold the
-response in the face of competing alternatives while waiting for an outcome \mbox{%DIFAUXCMD
-\cite{DiCiano2008,Floresco2008,Floresco2015,Peters2008}}\hspace{0pt}%DIFAUXCMD
-.}\DIFdelend \DIFaddbegin \DIFadd{credit assignment computations
+cue that could be the outcome of credit assignment computations
 computed upstream. Identifying neural coding related to an aspect of
 credit assignment is important as inappropriate credit assignment
 could be a contributor to conditioned fear overgeneralization seen in
 disorders with pathological anxiety such as generalized anxiety
 disorder, post traumatic stress disorder, and obsessive-compulsive
-disorder \mbox{%DIFAUXCMD
+disorder \DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
 \cite{Kaczkurkin2013,Kaczkurkin2017,Lissek2014}}\hspace{0pt}%DIFAUXCMD
-, and
-delusions observed in disorders such as schizophrenia, Alzheimer’s and
-Parkinson’s \mbox{%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
+\cite{Kaczkurkin2013,Lissek2014,Kaczkurkin2017}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend , and
+delusions observed in disorders such as schizophrenia, Alzheimer\DIFdelbegin \DIFdel{’}\DIFdelend \DIFaddbegin \DIFadd{'}\DIFaddend s and
+Parkinson\DIFdelbegin \DIFdel{’s \mbox{%DIFAUXCMD
 \cite{Corlett2010,Kapur2003}}\hspace{0pt}%DIFAUXCMD
-. Thus, our results provide a
+}\DIFdelend \DIFaddbegin \DIFadd{'s \mbox{%DIFAUXCMD
+\cite{Kapur2003,Corlett2010}}\hspace{0pt}%DIFAUXCMD
+}\DIFaddend . Thus, our results provide a
 neural window into the process of credit assignment, such that the
-extent and specific manner in which this process fails in
-e.g.\ syndromes such as schizophrenia, obsessive-compulsive disorder,
+extent and specific manner in which this process fails in \DIFdelbegin \DIFdel{e.g.\ }\DIFdelend syndromes such as schizophrenia, obsessive-compulsive disorder,
 etc.\ can be experimentally accessed.
-}\DIFaddend 
 
-\DIFaddbegin \DIFadd{OUTTAKES
+\DIFdelbegin \DIFdel{OUTTAKES
+}\DIFdelend \DIFaddbegin \section*{\DIFadd{Methods}}
+\DIFaddend 
+
+{\bf \DIFdelbegin \DIFdel{Tiling of task structure}\DIFdelend \DIFaddbegin \DIFadd{Subjects:}}
+
+\DIFadd{Adult male Long-Evans rats (n = 4, Charles River, Saint Constant, QC)
+were used as subjects. Rats were individually housed with a 12/12-h
+light-dark cycle, and tested during the light cycle. Rats were food
+deprived to 85-90\% of their free feeding weight (weight at time of
+implantation was 440 - 470 g), and water restricted 4-6 hours before
+testing. All experimental procedures were approved by the the
+University of Waterloo Animal Care Committee (protocol\# 11-06) and
+carried out in accordance with Canadian Council for Animal Care (CCAC)
+guidelines.
 }
 
-\DIFaddend {\bf Tiling of task structure:}
+{\bf \DIFadd{Overall timeline}\DIFaddend :}
 
-\DIFdelbegin \DIFdel{Additionally, we }\DIFdelend \DIFaddbegin \DIFadd{We }\DIFaddend found that the population of recorded units had a relatively
-uniform distribution of firing fields within our task space, similar
-to what has been reported previously
-\cite{Berke2009,Lansink2012,Shidara1998}. Uniquely, we found that this
+\DIFdelbegin \DIFdel{We found that the population of recorded units had a relatively
+uniform distribution of firing fields within our taskspace, similar
+to
+what has been reported previously
+\mbox{%DIFAUXCMD
+\cite{Berke2009,Lansink2012,Shidara1998}}\hspace{0pt}%DIFAUXCMD
+. Uniquely, we found that this
 representation was statistically different across conditions of a cue
 features, such as according to whether the rat was currently engaged
-in the light or sound block, suggesting that this could be a possible
+in the light or sound block, suggesting that
+this could be a possible
 neural correlate for encoding the currently relevant strategy in the
 NAc. It has been previously shown that during progress through a
-predictable trial series, \DIFdelbegin \DIFdel{neurons }\DIFdelend \DIFaddbegin \DIFadd{units }\DIFaddend represented state value of cue, and
+predictable trial series, units represented state value of cue, and
 that single-unit responses allowed the monkey to know how it was
-progressing throughout the task \cite{Shidara1998}. Likewise, the
-tiling we saw could be a consequence of upstream cortical or limbic
+progressing throughout the task \mbox{%DIFAUXCMD
+\cite{Shidara1998}}\hspace{0pt}%DIFAUXCMD
+. Likewise, the tiling we saw could be a consequence of upstream cortical or limbic
 inputs informing the striatum of the current task rules. Another
 possibility is that the NAc not only pays attention to progress
-throughout a task within a trial, but also higher-order task
-information, like blocks. Furthermore, dopamine levels in the NAc
+throughout a
+task within a }\DIFdelend \DIFaddbegin \DIFadd{Each rat was first handled for seven days during which they were
+exposed to the experiment room, the sucrose solution used as a
+reinforcer, and the click of the sucrose dispenser valves. Rats were
+then trained on the behavioral task (described in the next section)
+until they reached performance criterion. At this point they
+underwent hyperdrive implantation targeted at the NAc. Rats were
+allowed to recover for a minimum of five days before being retrained
+on the task, and recording began once performance returned to
+pre-surgery levels. Upon completion of recording, animals were gliosed,
+euthanized and recording sites were histologically confirmed.
+}
+
+{\bf \DIFadd{Behavioral task and training:}}
+
+\DIFadd{The behavioral apparatus was an elevated, square-shaped track (100 x
+100 cm, track width 10 cm) containing four possible reward locations
+at the end of track ``arms'' (Figure \ref{fig:task}). Rats initiated a
+}{\it \DIFaddend trial\DIFaddbegin } \DIFadd{by triggering a photobeam located 24 cm from the start of
+each arm. Upon trial initiation, one of two possible light cues (L1}\DIFaddend ,
+\DIFdelbegin \DIFdel{but also higher-order task
+information, like blocks. Furthermore, dopamine levels in the
+NAc
 fluctuate through a trial, and it is possible that the observed tiling
-could be a NAc-representation of state value related to this
+could be }\DIFdelend \DIFaddbegin \DIFadd{L2), or one of two possible sound cues (S1, S2), was presented that
+signaled the presence (}{\it \DIFadd{reward-available trial}}\DIFadd{, L1+, S1+) or
+absence (}{\it \DIFadd{reward-unavailable trial}}\DIFadd{, L2-, S2-) of a 12\% sucrose
+water reward (0.1 mL) at the upcoming reward site. A trial was
+classified as an }{\it \DIFadd{approach trial}} \DIFadd{if the rat turned left at the
+decision point and made a nosepoke at the reward receptacle (40 cm
+from the decision point), while trials were classified as a }{\it \DIFadd{skip
+trial}} \DIFadd{if the rat instead turned right at the decision point and
+triggered the photobeam to initiate the next trial. A trial is labeled
+}{\it \DIFadd{correct}} \DIFadd{if the rat approached (i.e.\ nosepoked) on
+reward-available trials, and skipped (i.e.\ did not nosepoke) on
+reward-unavailable trials. On reward-available trials there was a 1
+second delay between a nosepoke and subsequent reward delivery. }{\it
+\DIFadd{Trial length}} \DIFadd{was determined by measuring the length of time from
+cue onset until nosepoke (for approach trials), or from cue onset
+until the start of the following trial (for skip trials). Trials could
+only be initiated through clockwise progression through the series of
+arms, and each entry into the subsequent arm on the track counted as a
+trial.
+}
+
+\DIFadd{Each session consisted of both a }{\it \DIFadd{light block}} \DIFadd{and a }{\it \DIFadd{sound block}} \DIFadd{with
+100 trials each. Within a block, one cue signaled reward was available on that
+trial (L1+ or S1+), while the other signaled reward was not available (L2- or
+S2-). Light block cues were a flashing white light, and a constant yellow
+light. Sound block cues were a 2 kHz sine wave and a 8 kHz sine wave whose
+amplitude was modulated from 0 to maximum by a 2 Hz sine wave. Outcome-cue
+associations were counterbalanced across rats, e.g.\ for some rats L1+ was the
+flashing white light, and for others L1+ was the constant yellow light. The
+order of cue presentation was pseudorandomized so that the same cue could not be
+presented more than twice in a row. Block order within each day was also
+pseudorandomized, such that the rat could not begin a session with the same
+block for more than two days in a row. Each session consisted of }\DIFaddend a \DIFdelbegin \DIFdel{NAc-representation of state value related to
+this
 temporally evolving dopamine signal. Future experiments should monitor
-this mapping of task structure during the application of dopamine
+this mapping of task structure during the
+application of dopamine
 antagonists. Finally, the presence of functional correlates not
-evident when looking at single-unit responses time-locked to salient
+evident when looking at single-unit responses time-locked to
+salient
 task events emphasizes the need to employ ensemble level analyses
-across all aspects of a task.
+across all aspects of a }\DIFdelend \DIFaddbegin \DIFadd{5 minute
+pre-session period on a pedestal (a terracotta planter filled with towels),
+followed by the first block, then the second block, then a 5 minute post-session
+period on the pedestal. For approximately the first week of training, rats were restricted to
+running in the clockwise direction by presenting a physical barrier to
+running counterclockwise. Cues signaling the availability and
+unavailability of reward, as described above, were present from the
+start of training. Rats were trained for 200 trials per day (100
+trials per block) until they discriminated between the reward-available and reward-unavailable cues for both light and
+sound blocks for three consecutive days, according to a chi-square test
+rejecting the null hypothesis of equal approaches for reward-available and
+reward-unavailable trials, at which point they underwent electrode implant
+surgery.
+}
 
-{\bf \DIFdelbegin \DIFdel{Implications}\DIFdelend \DIFaddbegin \DIFadd{Potential functional consequences of persistent coding}\DIFaddend :}
+{\bf \DIFadd{Surgery:}}
 
-\DIFdelbegin \DIFdel{Maladaptive decision making, as occurs in schizophrenia, addiction, Parkinson’s, among others, can result from dysfunctional RPE and value signals \mbox{%DIFAUXCMD
-\cite{Frank2004,Gradin2011,Maia2011}}\hspace{0pt}%DIFAUXCMD
-. This view has been successful in
-explaining both positive and negative symptoms in schizophrenia, and deficits in learning from feedback in Parkinson’s \mbox{%DIFAUXCMD
-\cite{Frank2004,Gradin2011}}\hspace{0pt}%DIFAUXCMD
-. However, the effects of RPE and value
-updating are contingent upon encoding of preceding action and cue features, the eligibility trace \mbox{%DIFAUXCMD
-\cite{Lee2012,sutton1998}}\hspace{0pt}%DIFAUXCMD
-. Value updates can only be performed on these aspects of preceding experience that are encoded when the update occurs. Therefore, maladaptive learning and decision making can result from not only aberrant RPEs but also from altered cue feature encoding. For instance, on this task the environmental stimulus that signaled the availability of
-reward was conveyed by two distinct cues that were presented in four locations. While in our current study, the location and identity }\DIFdelend \DIFaddbegin \DIFadd{In the current study we found that the coding of cue features
+\DIFadd{Surgical procedures were as described previously
+\mbox{%DIFAUXCMD
+\cite{Malhotra2015}}\hspace{0pt}%DIFAUXCMD
+. Briefly, animals were administered analgesics and
+antibiotics, anesthetized with isoflurane, induced with 5\% in medical
+grade oxygen and maintained at 2\% throughout the surgery (~0.8
+L/min). Rats were then chronically implanted with a ``hyperdrive''
+consisting of 16 independently drivable tetrodes, either all 16
+targeted for the right NAc (AP +1.4 mm and ML +1.6 mm relative to
+bregma; \mbox{%DIFAUXCMD
+\citeNP{atlas}}\hspace{0pt}%DIFAUXCMD
+), or 12 in the right NAc and 4 targeted at the
+mPFC (AP +3.0 mm and ML +0.6 mm, relative to bregma; only data from
+NAc tetrodes was analyzed). Following surgery, all animals were given
+at least five days to recover while receiving post-operative care, and
+tetrodes were lowered to the target (DV -6.0 mm) before being
+reintroduced to the behavioral }\DIFaddend task.
+
+{\bf \DIFdelbegin \DIFdel{Potential functional consequences of persistent coding}\DIFdelend \DIFaddbegin \DIFadd{Data acquisition and preprocessing}\DIFaddend :}
+
+\DIFdelbegin \DIFdel{In the current study we found that the coding of cue features
 persisted after the choice point, during a delay period while the rat
 waited at the receptacle for the outcome (H2 in Figure
 \ref{fig:schematic}B). Having an enriched representation that includes
 details about the environmental context the animal finds itself in
-alongside expected outcome, and is maintained online until the outcome
-is revealed could be useful for assigning credit of a reward to the
-appropriate elements of an environment, to develop an accurate value
+alongside expected outcome, }\DIFdelend \DIFaddbegin \DIFadd{After recovery, rats were placed back on the task for recording. NAc
+signals were acquired at 20 kHz with a RHA2132 v0810 preamplifier
+(Intan) and a KJE-1001/KJD-1000 data acquisition system
+(Amplipex). Signals were referenced against a tetrode placed in the
+corpus callosum above the NAc. Candidate spikes for sorting into
+putative single units were obtained by band-pass filtering the data
+between 600-9000 Hz, thresholding and aligning the peaks \mbox{%DIFAUXCMD
+\cite[UltraMegaSort2k, ][]{Hill2011}}\hspace{0pt}%DIFAUXCMD
+. Spike waveforms were then
+clustered with KlustaKwik using energy and the first derivative of
+energy as features, and manually sorted into units (MClust 3.5,
+A.D.\ Redish et al., http://redishlab.neuroscience.umn.edu/MClust/MClust.html). Isolated units containing a minimum of 200
+spikes within a session were included for subsequent analysis. Units
+were classified as fast spiking interneurons (FSIs) by an absence of
+interspike intervals (ISIs) $>$ 2 s, while medium spiny neurons (MSNs)
+had a combination of ISIs $>$ 2 s and phasic activity with shorter
+ISIs \mbox{%DIFAUXCMD
+\cite{Barnes2005,Atallah2014}}\hspace{0pt}%DIFAUXCMD
+.
+}
+
+{\bf \DIFadd{Data analysis:}}
+
+{\it \DIFadd{Behavior.}} \DIFadd{To determine if rats distinguished behaviorally
+between the reward-available }\DIFaddend and \DIFdelbegin \DIFdel{is maintained online until the outcome
+is revealed could be useful for assigning credit of a reward to }\DIFdelend \DIFaddbegin \DIFadd{reward-unavailable cues (}{\it \DIFadd{cue
+outcome}}\DIFadd{), we generated linear mixed effects models to investigate
+the relationships between cue type and our behavioral variables, with
+}{\it \DIFadd{cue outcome}} \DIFadd{(reward available or not) and }{\it \DIFadd{cue identity}}
+\DIFadd{(light or sound) as fixed effects, and }\DIFaddend the \DIFdelbegin \DIFdel{appropriate elements of an environment, to develop an accurate value
 function and optimize long term acquisition of reward
 \mbox{%DIFAUXCMD
 \cite{Lee2012}}\hspace{0pt}%DIFAUXCMD
 . A recent non-human primate experiment found evidence
-for simultaneous coding of outcome and outcome-predictive stimuli at
-the time of feedback in the dorsolateral PFC, and that this coding of
-stimulus information was strongest before behavioral performance
+for simultaneous coding of outcome and outcome-predictive stimuli at the time of feedback in the dorsolateral PFC,
+and that this coding of stimulus information was strongest before behavioral performance
 stabilized \mbox{%DIFAUXCMD
 \cite{Asaad2017}}\hspace{0pt}%DIFAUXCMD
 . Interestingly, we found coding of cue
-identity and location after presentation }\DIFaddend of the cue\DIFdelbegin \DIFdel{did not require any adjustments in the animal’s behavior, we found coding of these features alongside the expected outcome of the cue that could be }\DIFdelend \DIFaddbegin \DIFadd{, and during a
-delay period between nosepoke and outcome, but not after the outcome
+identity and location after presentation of the cue , }\DIFdelend \DIFaddbegin \DIFadd{addition of an intercept
+for rat identity as a random effect. For each cue, the average
+proportion of trials approached and trial length for a session were
+used as response variables. Contribution of cue outcome to behavior
+was determined by comparing the full model to a model with cue outcome
+removed for each behavioral variable.
+}
+
+{\it \DIFadd{Neural data.}} \DIFadd{To investigate the contribution of different cue
+features }{\DIFadd{cue identity and cue outcome) on the firing rates of NAc
+single units, we first determined whether firing rates for a unit
+were modulated by the onset of a cue by collapsing across all cues
+and comparing the firing rates for the 1 s preceding cue-onset with
+the 1 s following cue-onset. Single units were considered to be }{\it
+\DIFadd{cue-modulated}} \DIFadd{if a Wilcoxon signed-rank test comparing pre- }\DIFaddend and
+\DIFdelbegin \DIFdel{during a
+delay period between nosepoke and outcome, but not after the
+outcome
 was received. The absence of coding during feedback, and that these
 recordings were done after behavioral performance had stabilized
 suggests the possibility that these NAc representations represent an
-integrated value estimate that is }\DIFaddend the outcome of \DIFdelbegin \DIFdel{credit assignment computations computed upstream
-. Identifying neural coding related to an aspect of credit assignment is important as inappropriate credit assignment could be a contributor to conditioned fear overgeneralization seen in disorders with pathological anxiety such as generalized anxiety disorder, post traumatic stress disorder, and obsessive-compulsive disorder \mbox{%DIFAUXCMD
-\cite{Kaczkurkin2013,Kaczkurkin2017,Lissek2014}}\hspace{0pt}%DIFAUXCMD
-, and delusions observed in disorders such as
-schizophrenia,
-Alzheimer’s and Parkinson’s \mbox{%DIFAUXCMD
-\cite{Corlett2010,Kapur2003}}\hspace{0pt}%DIFAUXCMD
-. Thus, our results provide a neural window into the process of credit assignment, such that the extent and specific manner in which this process fails in e.
-g. syndromes such as schizophrenia, obsessive-compulsive disorder, etc. can be experimentally accessed.
-}\DIFdelend \DIFaddbegin \DIFadd{earlier upstream
+integrated value estimate that is the outcome of earlier upstream
 credit assignment in cortical inputs. From a motivated behavior
-standpoint, the presence of these enriched representations can help
-inform action selection involving Pavlovian behaviors such as
-conditioned approach \mbox{%DIFAUXCMD
+standpoint, }\DIFdelend \DIFaddbegin \DIFadd{post-cue firing was significant at $p <$ .01. Cue-modulated units
+were then classified as either increasing or decreasing if the
+post-cue activity was higher or lower than the pre-cue activity,
+respectively.
+}
+
+\DIFadd{To determine the relative contribution of different task parameters to
+firing rate variance (as in Figures \ref{fig:examples}-\ref{fig:GLM}),
+a forward selection stepwise general linear model (GLM) was fit to
+each cue-modulated unit. Cue identity (light block, sound block), cue
+location (arm 1, arm 2, arm 3, arm 4), cue outcome (reward-available,
+reward-unavailable), behavior (approach, skip), trial length, trial
+number, and trial history (reward availability on the previous 2
+trials) were used as predictors, and the 1 s post-cue firing rate as
+the response variable. Units were classified as being modulated by a
+given task parameter if addition of the parameter significantly
+improved model fit using deviance as the criterion ($p <$ .01). A
+comparison of the R-squared value between the final model and }\DIFaddend the
+\DIFdelbegin \DIFdel{presence of these enriched representations can help
+inform action selection involving Pavlovian behaviors such as conditioned approach \mbox{%DIFAUXCMD
 \cite{DiCiano2001,Parkinson2000,Saunders2012}}\hspace{0pt}%DIFAUXCMD
-,
-and after a decision has been made the maintained representation can
+, and after a decision has been made the maintained representation can
 help to hold the response in the face of competing alternatives while
 waiting for an outcome
 \mbox{%DIFAUXCMD
 \cite{DiCiano2008,Floresco2008,Floresco2015,Peters2008}}\hspace{0pt}%DIFAUXCMD
-.
+. }\DIFdelend \DIFaddbegin \DIFadd{final model minus the predictor of interest was used to determine the
+amount of firing rate variance explained by the addition of that
+predictor for a given unit. To investigate more finely the temporal dynamics of the influence of task parameters to unit activity, we then fit a sliding window GLM with the
+same task parameters using 500 ms bins and 100 ms steps, starting 500 ms before cue-onset, up to 500 ms after cue-onset, and measured the proportion of units and average R-squared value for a given time bin
+where a particular predictor contributed significantly to the final model. To control for the amount of units that would be affected by a predictor by chance, we shuffled the trial order of firing rates for a particular unit within a time bin, and took the average of this value over 100 shuffles.
 }\DIFaddend 
 
-\DIFdelbegin \DIFdel{Orphan paragraph? (also removed mixed selectivity paragraphs)
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdelend If these representations function as an eligibility trace, then there
+\DIFdelbegin \DIFdel{If these representations function as an eligibility trace, then there
 should be a relationship between the content and robustness of these
 representations and the degree to which organisms form adaptive
-associations between reinforcers and their environment, which could
-contribute to the presence of prediction errors in the NAc in those
+associations between reinforcers and their environment,
+which could
+contribute to the presence of
+prediction errors in the NAc in those
 that learned an experimental task in humans versus those that did not
-\cite{Schonberg2007}. In the present experiment, understanding what
+\mbox{%DIFAUXCMD
+\cite{Schonberg2007}}\hspace{0pt}%DIFAUXCMD
+. In the present experiment, understanding what
 information about the environment the NAc is keeping track of when
 reward arrives could be useful for potentially determining what
-representations are being reinforced. Would be interesting to see if
+representations are being reinforced.Would be interesting to see if
 selectively reward an animal when certain representations are active
-(e.g. arm 1), would help shape their assignment of reward to that
-arm. Could be useful for altering a maladaptive preference back to a
-more adaptive one, as the loss of certain aspects of coding via BLA
-and PFC inputs leads to the loss of outcome-predictive activity to
-discrete cues in the NAc. Furthermore, non-discriminatory coding in
-the NAc could hypothetically be correlated to over-generalization of
-situations, in which the animal may not recognize it is in a different
-situation and perform actions that are inefficient or maladaptive for
-reward procurement\DIFaddbegin \DIFadd{.
+}\DIFdelend \DIFaddbegin \DIFadd{To better visualize responses to cues and enable subsequent population
+level analyses (as in Figures \ref{fig:examples}, \ref{fig:pop}, and
+\ref{fig:tiling}), spike trains were convolved with a Gaussian kernel
+($\sigma$ = 100 ms), and peri-event time histograms (PETHs) were
+generated by taking the average of the convolved spike trains across all
+trials for a given task condition. For analysis of population-level
+responses for cue features (Figure \ref{fig:pop}), convolved spike
+trains for all units where cue identity, cue location, or cue outcome
+explained a significant portion of firing rate variance were
+z-scored. Within a given cue feature, normalized spike trains were
+then separated according to the preferred and non-preferred cue
+condition (e.g.\ light vs.\ sound block), and averaged across units to
+generate population-level averages. To account for separation that
+would result from any random selection of units, unit identity was
+shuffled and the shuffled average for preferred and non-preferred cue
+conditions was generated for 1000 shuffles.
 }
 
-\DIFadd{A fundamental problem faced by all reinforcement learning agents is
+\DIFadd{To visualize NAc representations of task space within cue conditions,
+normalized spike trains for all units were ordered by the location of
+their maximum or minimum firing rate for a specified cue condition
+(Figure \ref{fig:tiling}). To compare representations of task space
+across cue conditions for a cue feature, the ordering of units derived
+for one condition (e.g.\ light block) was then applied to the
+normalized spike trains for the other condition }\DIFaddend (e.g.\DIFdelbegin \DIFdel{arm 1), would help shape their assignment of reward to that
+arm. Could be useful for altering a maladaptive preference back to a
+more adaptive one, as the loss of certain aspects of coding via BLA
+and PFC inputs leads to the loss of outcome-predictive activity to discrete cues in the
+NAc. Furthermore, non-discriminatory coding in
+the NAc could hypothetically be correlated to over-generalization of situations,
+in which the animal may not recognize it is in a different
+situation and
+perform actions that are inefficient or maladaptive for
+reward procurement. }\DIFdelend \DIFaddbegin \DIFadd{\ sound
+block). For control comparisons within cue conditions, half of the
+trials for a condition were compared against the other half. To look
+at the correlation of firing rates of all units within and across
+various cue conditions, trials for each cue condition for a unit were
+shuffled and divided into two averages, and averages within and across
+cue conditions were correlated. A linear mixed effects model was run
+for each cue condition to determine if correlations of firing rates
+within cue conditions were more similar than correlations across cue
+conditions.
+}\DIFaddend 
+
+\DIFdelbegin \DIFdel{A fundamental problem faced by all reinforcement learning agents is
 which features to credit and blame for particular outcomes
 \mbox{%DIFAUXCMD
 \cite{sutton1998}}\hspace{0pt}%DIFAUXCMD
@@ -1502,7 +1798,52 @@ such as reward prediction errors (RPEs), state values and action
 values \mbox{%DIFAUXCMD
 \cite{Lee2012,Maia2009}}\hspace{0pt}%DIFAUXCMD
 . However, successful learning requires
-not only a RPE but also a trace of the preceding actions and/or cues}\DIFaddend .
+not only a RPE but also a trace of the preceding actions and }\DIFdelend \DIFaddbegin \DIFadd{To identify the responsivity of units to different cue features at the
+time of a nosepoke into a reward receptacle, and subsequent reward
+delivery, the same cue-responsive units from the cue-onset analyses
+were analyzed at the time of nosepoke and outcome receipt using
+identical analysis techniques (Figures \ref{fig:NP_examples},
+\ref{fig:NP_GLM}, \ref{fig:NP_pop}, and \ref{fig:NP_tiling}).
+}
+
+\DIFadd{Given that some of our analyses compare firing rates across time,
+particularly comparisons across blocks, we sought to exclude units
+with unstable firing rates that would generate spurious results
+reflecting a drift in firing rate over time unrelated to our task. To
+do this we ran a Mann-Whitney U test comparing the cue-evoked firing
+rates for the first and second half of trials within a block, and
+excluded 99 of 443 units from analysis that showed a significant change for
+either block, leaving 344 units for further analyses. All analyses were completed in MATLAB R2015a, the code
+is available on our public GitHub repository
+(http:}\DIFaddend /\DIFdelbegin \DIFdel{or cues.
+}\DIFdelend \DIFaddbegin \DIFadd{/github.com/vandermeerlab/papers), and the data can be accessed
+through DataLad.
+}
+
+{\bf \DIFadd{Histology:}}
+
+\DIFadd{Upon completion of the experiment, recording channels were gliosed by passing 10 $\mu A$ current for 10 seconds and waiting 5 days before euthanasia, except for rat R057 whose implant detached prematurely. Rats were anesthetized with 5\%
+isoflurane, then asphyxiated with carbon dioxide. Transcardial
+perfusions were performed, and brains were fixed and removed. Brains
+were sliced in 50 $\mu m$ coronal sections and stained with
+thionin. Slices were visualized under light microscopy, tetrode
+placement was determined, and electrodes with recording locations in
+the NAc were analyzed (Figure \ref{fig:histo}).
+}
+
+\begin{figure}
+[h]
+\centering
+\includegraphics[width=\textwidth]{Fig 3 - Histology.png}
+\caption{\DIFaddFL{Histological verification of recording sites. Upon completion of
+  experiments, brains were sectioned and tetrode placement was
+  confirmed. \bsf{A}: Example section from R060 showing a recording site in the
+  NAc core just dorsal to the anterior commissure (arrow). \bsf{B}:
+  Schematic showing recording areas for all subjects.}}
+\label{fig:histo}
+
+\end{figure}
+\DIFaddend 
 
 \bibliography{vStrCueCoding}
 \end{document}
