@@ -10,11 +10,12 @@
 \usepackage[natbibapa]{apacite}
 %\usepackage{url}
 \usepackage{graphicx}
-\usepackage[nolists]{endfloat}
+\usepackage{setspace}
+%\usepackage[nolists]{endfloat}
 \usepackage{times}
 \usepackage{ifthen}
 \usepackage{parskip}
-\usepackage[font=sf,labelfont=bf]{caption}
+\usepackage[font={sf,small},labelfont=bf]{caption}
 \usepackage{xspace}
 \usepackage[pdftex]{color}
 \usepackage{pdfcolmk}
@@ -39,6 +40,8 @@
 \setlength{\parskip}{2\baselineskip}
 \linespread{2}
 \renewcommand{\baselinestretch}{1.66}\normalsize
+%\setstretch{1.5}
+%\captionsetup[figure]{font={stretch=1}}
 
 % definitions
 \newcommand{\bsf}[1]{\textbf{#1}}
@@ -98,13 +101,6 @@ Dartmouth College, Hanover NH
 \textsuperscript{*}Correspondence should be addressed to MvdM,
 Department of Psychological and Brain Sciences, Dartmouth College, 3
 Maynard St, Hanover, NH 03755. E-mail: {\sffamily mvdm@dartmouth.edu}.
-
-\textbf{Number of Figures:} 12\\
-\textbf{Number of Tables:} 1\\
-\textbf{Total Word Count:} ?\\
-\textbf{Abstract Word Count:} 150\\
-\textbf{Introduction Word Count:} ?\\
-\textbf{Discussion Word Count:} ?\\
 
 \textbf{Acknowledgments}: We thank Nancy Gibson, Martin Ryan and Jean
 Flanagan for animal care, and Min-Ching Kuo and
@@ -220,10 +216,12 @@ maintained after a behavioral decision has been made (Figure
 activity of NAc units as rats performed a task in which multiple,
 distinct sets of cues predicted the same outcome.
 
-\begin{figure}[h]
+
+ \begin{figure}[ht!]
 \centering
-\includegraphics[height=0.5\textheight]{Fig 1 - Schematic neural.png}
-\caption{Schematic of potential coding strategies for cue identity
+\includegraphics[width=\textwidth]{Fig 1 - Schematic neural.pdf}
+\caption{
+Schematic of potential coding strategies for cue identity
   (light, sound) and cue outcome (reward-available,
   reward-unavailable) employed by single units in the NAc across
   different units (A) and in time (B). \bsf{A}: Displayed are
@@ -265,7 +263,7 @@ distinct sets of cues predicted the same outcome.
   environment when the cue is presented, such as the physical location
   of the cue.}
 \label{fig:schematic}
-\end{figure}
+\end{figure} \clearpage
 
 \section*{Results}
 
@@ -302,9 +300,9 @@ reward-available = 1.91 s; sound reward-unavailable 1.78 s; cue identity p $=$ .
 discriminated the cues according to whether or not they signaled the
 availability of reward at the reward receptacle.
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 2 - Schematic task.png}
+\includegraphics[width=\textwidth]{Fig 2 - Schematic task.pdf}
 \caption{Schematic of behavioral task. \bsf{A}: To scale depiction of square
 track consisting of multiple identical T-choice points. At each choice point,
 the availability of 12\% sucrose reward at the nearest reward receptacle (light
@@ -323,11 +321,11 @@ behavior, all cue locations contained an equal amount of reward-available and
 reward-unavailable trials.
 }
 \label{fig:task}
-\end{figure}
+\end{figure} \clearpage
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 4 - Behavioral results.png}
+\includegraphics[width=\textwidth]{Fig 4 - Behavioral results.pdf}
 \caption{Performance on the behavioral task. \bsf{A}. Example learning curves
 across sessions from a single subject (R060) showing the proportion approached
 for reward-available (red line for light block, navy blue line for sound
@@ -352,7 +350,7 @@ reward-unavailable cues ($\sim$30\% approached), for both blocks (see Results
 for statistics). \bsf{C}: Average trial length for each cue. Note that the
 time to complete a trial was comparable for the different cues.}
 \label{fig:behav}
-\end{figure}
+\end{figure} \clearpage
 
 \subsection*{NAc units encode behaviorally relevant and irrelevant cue features}
 
@@ -448,12 +446,12 @@ Cue modulated units                      & 133         &24          &85         
 \hline
 
 \end{tabular}
-\caption {Units overview} \label{tbl1} 
+\caption {Overview of recorded NAc units and their relationship to task variables at various time epochs.} \label{tbl1} 
 \end{table}
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 5 - Neural examples.png}
+\includegraphics[width=\textwidth]{Fig 5 - Neural examples.pdf}
 \caption{Examples of different cue-modulated NAc units influenced by various
   task parameters. \bsf{A}: Example of a cue-modulated NAc unit that showed an
   increase in firing following the cue, and encoded cue identity. Top:
@@ -482,11 +480,11 @@ Cue modulated units                      & 133         &24          &85         
   This unit integrated cue identity and outcome. \bsf{H}: An example of a unit
   that integrated cue identity and location.}
 \label{fig:examples}
-\end{figure}
+\end{figure} \clearpage
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[height=0.5\textheight]{Fig 6 - GLM.png}
+\includegraphics[height=0.5\textheight]{Fig 6 - GLM.pdf}
 \caption{Summary of influence of various task parameters on cue-modulated NAc
 units after cue-onset. \bsf{A}: GLM matrix illustrating the contribution of
 various task parameters to NAc unit firing rates. A stepwise GLM was fit to
@@ -505,7 +503,7 @@ values with the addition of each of the individual predictors. The mean,
 median, and distribution of changes in R-squared values is plotted for each of
 the seven task parameters used in the GLM. \bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D-F}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset. \bsf{D}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{E}: Same as D, but for approach behavior and trial length. \bsf{F}: Same as D, but for trial number and previous trial. \bsf{G-I}: Average improvement to model fit. \bsf{G}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs surrounding cue onset. Shaded area around mean represents the standard error of the mean. \bsf{H}: Same as G, but for approach behavior and trial length. \bsf{I}: Same G, but for trial number and previous trial.}
 \label{fig:GLM}
-\end{figure}
+\end{figure} \clearpage
 
 {\bf Population level averages reveal characteristic response profiles:}
 
@@ -538,9 +536,9 @@ responses revealed nuanced differences in the way NAc units are modulated by cue
 conditions across cue features.
 
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 7 - Population averages.png}
+\includegraphics[width=\textwidth]{Fig 7 - Population averages.pdf}
 \caption{Population-level averages of cue feature sensitive NAc units. \bsf{A}:
   Average smoothed normalized (z-score) activity for cue-modulated units where
   cue identity was a significant predictor in the GLM, aligned to
@@ -561,7 +559,7 @@ conditions across cue features.
   (green). Note the larger increase to the cue representing the unit’s preferred
   outcome (E), and the sustained decrease to the nonpreferred outcome (F).}
 \label{fig:pop}
-\end{figure}
+\end{figure} \clearpage
 
 {\bf NAc units dynamically segment the task:}
 
@@ -599,9 +597,9 @@ specific cue, action, or outcome, although the within condition comparison of
 reward-unavailable trials was less correlated than reward-available trials, and
 more similar to the across condition comparisons, potentially due do the greater behavioral variability for the reward-unavailable trials.
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 8 - Task tiling.png}
+\includegraphics[width=\textwidth]{Fig 8 - Task tiling.pdf}
 \caption{Distribution of NAc firing rates across time surrounding cue
 onset. Each panel shows normalized (z-score) firing rates for all recorded NAc
 units (each row corresponds to one unit) as a function of time (time 0
@@ -638,7 +636,7 @@ but with units ordered by their minimum firing rate. Overall, NAc units
 events only. Units from all sessions and animals were pooled for this
 analysis.}
 \label{fig:tiling}
-\end{figure}
+\end{figure} \clearpage
 
 {\bf Encoding of cue features persists until outcome:}
 
@@ -673,9 +671,9 @@ but looking at the data more closely with a sliding window GLM revealed that
 cue identity, cue location, and cue outcome were encoded throughout time epochs surround cue-onset, nosepoke hold, and outcome receipt,
 suggesting that the NAc maintains a representation of these cue features once the rat receives behavioral feedback for its decision (Figure \ref{fig:NP_GLM}E-J).
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 9 - NP Neural examples.png}
+\includegraphics[width=\textwidth]{Fig 9 - NP Neural examples.pdf}
 \caption{Examples of cue-modulated NAc units influenced by various task
 parameters at time of nosepoke. \bsf{A}: Example of a cue-modulated NAc unit
 that encoded cue identity at both cue-onset and during nosepoke hold. Top:
@@ -697,11 +695,11 @@ location. \bsf{E-F}: Cue-modulated units that encoded cue outcome, at both
 cue-onset and nosepoke (E), and only nosepoke (F), with the PETHs comparing
 reward-available (red) and reward-unavailable (green) trials.}
 \label{fig:NP_examples}
-\end{figure}
+\end{figure} \clearpage
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 10 - NP GLM.png}
+\includegraphics[width=\textwidth]{Fig 10 - NP GLM.pdf}
 \caption{Summary of influence of various task parameters on cue-modulated NAc
 units during nosepoke. \bsf{A}: GLM matrix illustrating the contribution of various
 task parameters to NAc unit firing rates. A stepwise GLM was fit to each unit that
@@ -720,11 +718,11 @@ mean, median, and distribution of changes in R-squared values is plotted for
 each of the three task parameters that were significant predictors in the
 GLM. \bsf{C}: Venn diagram illustrating the number of cue-modulated units encoding cue identity (blue circle), cue location (green circle), cue outcome (pink circle), as well as the overlap among units that encoded multiple cue features. \bsf{D}: Venn diagram illustrating the number of cue-modulated units encoding cue identity, cue location, and cue outcome during cue-onset (left circle), during nosepoke hold (right circle), and during both epochs (overlap). \bsf{E-G}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset (E), nosepoke (F), and outcome (G). \bsf{E}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), cue location (red solid line), and cue outcome (yellow solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods where used in the GLM. \bsf{F}: Same as E, but for time epochs relative to nosepoke where the rat waited for the outcome. \bsf{G}: Same as E, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{H-J}: Average improvement to model fit. \bsf{H}: Average percent improvement to R-squared for units where cue identity, cue location, or cue outcome were significant contributors to the final model for time epochs relative to cue-onset. Shaded area around mean represents the standard error of the mean. \bsf{I}: Same as H, but for time epochs relative to nosepoke. \bsf{J}: Same H, but for time epochs relative to receipt of outcome.}
 \label{fig:NP_GLM}
-\end{figure}
+\end{figure} \clearpage
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 11 - NP population averages.png}
+\includegraphics[width=\textwidth]{Fig 11 - NP population averages.pdf}
 \caption{Population-level averages of cue feature sensitive NAc units during a
   nosepoke. \bsf{A}: Average smoothed normalized (z-score) activity for cue-modulated
   units where cue identity was a significant predictor in the GLM, aligned to
@@ -740,11 +738,11 @@ GLM. \bsf{C}: Venn diagram illustrating the number of cue-modulated units encodi
   preferred expected outcome (red), and nonpreferred outcome (green). Note the
   peak after outcome receipt for preferred outcome in decreasing units (F).}
 \label{fig:NP_pop}
-\end{figure}
+\end{figure} \clearpage
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
-\includegraphics[width=\textwidth]{Fig 12 - NP task tiling.png}
+\includegraphics[width=\textwidth]{Fig 12 - NP task tiling.pdf}
 \caption{Distribution of NAc firing rates across time surrounding nosepoke for approach
 trials. Each panel shows normalized (z-score) firing rates for all recorded NAc units
 (each row corresponds to one unit) as a function of time (time 0 indicates
@@ -780,7 +778,7 @@ rate. Overall, NAc units "tiled" experience on the task, as opposed to being
 confined to specific task events only. Units from all sessions and animals
 were pooled for this analysis.}
 \label{fig:NP_tiling}
-\end{figure}
+\end{figure} \clearpage
 
 \section*{Discussion}
 
@@ -1173,7 +1171,7 @@ thionin. Slices were visualized under light microscopy, tetrode
 placement was determined, and electrodes with recording locations in
 the NAc were analyzed (Figure \ref{fig:histo}).
 
-\begin{figure}[h]
+ \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{Fig 3 - Histology.png}
 \caption{Histological verification of recording sites. Upon completion of
@@ -1182,7 +1180,7 @@ the NAc were analyzed (Figure \ref{fig:histo}).
   NAc core just dorsal to the anterior commissure (arrow). \bsf{B}:
   Schematic showing recording areas for all subjects.}
 \label{fig:histo}
-\end{figure}
+\end{figure} \clearpage
 
 \bibliography{vStrCueCoding}
 \end{document}
