@@ -20,7 +20,7 @@ for iFeature = 1:3
 end
 
 %% for cue-onset GLM
-Variables = {'Mod' 'Loc' 'Out' 'App' 'Lat' 'Trial' 'Prev'};
+Variables = {'Mod' 'Loc' 'Out'};% 'App' 'Lat' 'Trial' 'Prev'};
 for iVar1 = 1:3%length(Variables)
     for iVar2 = 1:3%length(Variables)
         Overlap.obs.(Variables{iVar1}).(Variables{iVar2}) = 0;

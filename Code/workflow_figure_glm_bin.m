@@ -1,14 +1,18 @@
 Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
-for iEpoch = 2%:length(Epoch)
+for iEpoch = 1%:length(Epoch)
 disp(iEpoch)
 switch iEpoch
     case 1
-mat_files = dir('2018-03-12-GLM_cueon*');
+% mat_files = dir('2018-03-12-GLM_cueon*');
+mat_files = dir('2018-0*');
 predictor_list = {'Cue' 'Modality' 'Location' 'Outcome' 'Approach' 'Latency' 'Trial' 'Previous' ...
     'ModxLoc' 'ModxOut' 'LocxOut' 'OutxApp' 'ModxLocxOut'};
-file_order = {'2018-03-12-GLM_cueon_-0.5.mat' '2018-03-12-GLM_cueon_-0.4.mat' '2018-03-12-GLM_cueon_-0.3.mat' ...
-    '2018-03-12-GLM_cueon_-0.2.mat' '2018-03-12-GLM_cueon_-0.1.mat' '2018-03-12-GLM_cueon_0.mat' '2018-03-12-GLM_cueon_0.1.mat' ...
-    '2018-03-12-GLM_cueon_0.2.mat' '2018-03-12-GLM_cueon_0.3.mat' '2018-03-12-GLM_cueon_0.4.mat' '2018-03-12-GLM_cueon_0.5.mat'};
+file_order = {'2018-05-24-GLM_cueon_-0.5-recodePrevTrial.mat' '2018-05-24-GLM_cueon_-0.4-recodePrevTrial.mat' '2018-05-24_cueon_-0.3-recodePrevTrial.mat' ...
+    '2018-05-24-GLM_cueon_-0.2-recodePrevTrial.mat' '2018-05-24-GLM_cueon_-0.1-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0.1-recodePrevTrial.mat' ...
+    '2018-05-24-GLM_cueon_0.2-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0.3-recodePrevTrial.mat' '2018-03-12-GLM_cueon_0.4.mat' '2018-03-12-GLM_cueon_0.5.mat'};
+% file_order = {'2018-03-12-GLM_cueon_-0.5.mat' '2018-03-12-GLM_cueon_-0.4.mat' '2018-03-12-GLM_cueon_-0.3.mat' ...
+%     '2018-03-12-GLM_cueon_-0.2.mat' '2018-03-12-GLM_cueon_-0.1.mat' '2018-03-12-GLM_cueon_0.mat' '2018-03-12-GLM_cueon_0.1.mat' ...
+%     '2018-03-12-GLM_cueon_0.2.mat' '2018-03-12-GLM_cueon_0.3.mat' '2018-03-12-GLM_cueon_0.4.mat' '2018-03-12-GLM_cueon_0.5.mat'};
     case 2
 mat_files = dir('2018-03-*');
 predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};

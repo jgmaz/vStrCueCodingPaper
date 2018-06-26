@@ -26,7 +26,7 @@ for kk = 1:length(dir('*.mat'))
             switch new_v_old
                 case 0
                     %% old rats (R053,R056,R057)
-                    trials_count.(cat(2,'shuff_',num2str(iShuff))) =  1;
+                    trials_count =  1;
                     b1_length = length(FRATE.Cue.Trial_firing_rate_block1);
                     for jj = 1:b1_length
                         if metadata.TrialInfo_block1.trial_length_analysis(jj) < time_window_end
@@ -45,44 +45,44 @@ for kk = 1:length(dir('*.mat'))
           
 %                         if metadata.TrialInfo_block1.summary(jj,2) == metadata.TrialInfo_block1.summary(jj,3) % if correct response
                             if jj == 1
-                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = NaN; %prev trial
+                                dataset(trials_count,1) = NaN; %prev trial
                             elseif jj == 2
                                 switch metadata.TrialInfo_block1.rewarded(1)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                        dataset(trials_count,1) = 1;
                                     case 1
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                        dataset(trials_count,1) = 2;
                                 end
                             else
                                 switch metadata.TrialInfo_block1.rewarded(jj-1) + metadata.TrialInfo_block1.rewarded(jj-2)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 0;
+                                        dataset(trials_count,1) = 0;
                                     case 1
                                         switch metadata.TrialInfo_block1.rewarded(jj-1)
                                             case 0
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                                dataset(trials_count,1) = 1;
                                             case 1
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                                dataset(trials_count,1) = 2;
                                         end
                                     case 2
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 3;
+                                        dataset(trials_count,1) = 3;
                                 end
                             end
                             
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),2) = metadata.TrialInfo_block1.rewarded(jj); %outcome
+                            dataset(trials_count,2) = metadata.TrialInfo_block1.rewarded(jj); %outcome
                             switch sesh.block_order %modality
                                 case 1
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 1;
+                                    dataset(trials_count,3) = 1;
                                 case 2
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 2;
+                                    dataset(trials_count,3) = 2;
                             end
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),4) = metadata.TrialInfo_block1.summary(jj,5); %arm
-                                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),5) = metadata.TrialInfo_block1.approached(jj); %behav - app
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),6) = metadata.TrialInfo_block1.summary(jj,15); %behav - trial length
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),7) = jj;
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),8) = firing_rate(trials_count); %FR
+                            dataset(trials_count,4) = metadata.TrialInfo_block1.summary(jj,5); %arm
+                                                        dataset(trials_count,5) = metadata.TrialInfo_block1.approached(jj); %behav - app
+                            dataset(trials_count,6) = metadata.TrialInfo_block1.summary(jj,15); %behav - trial length
+                            dataset(trials_count,7) = jj;
+                            dataset(trials_count,8) = firing_rate(trials_count); %FR
                             
-                            trials_count.(cat(2,'shuff_',num2str(iShuff))) =  trials_count.(cat(2,'shuff_',num2str(iShuff))) + 1;
+                            trials_count =  trials_count + 1;
 %                         end
                     end
                     
@@ -107,50 +107,50 @@ for kk = 1:length(dir('*.mat'))
      
 %                         if metadata.TrialInfo_block2.summary(jj,2) == metadata.TrialInfo_block2.summary(jj,3)
                             if jj == 1
-                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = NaN; %prev trial
+                                dataset(trials_count,1) = NaN; %prev trial
                             elseif jj == 2
                                 switch metadata.TrialInfo_block2.rewarded(1)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                        dataset(trials_count,1) = 1;
                                     case 1
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                        dataset(trials_count,1) = 2;
                                 end
                             else
                                 switch metadata.TrialInfo_block2.rewarded(jj-1) + metadata.TrialInfo_block2.rewarded(jj-2)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 0;
+                                        dataset(trials_count,1) = 0;
                                     case 1
                                         switch metadata.TrialInfo_block2.rewarded(jj-1)
                                             case 0
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                                dataset(trials_count,1) = 1;
                                             case 1
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                                dataset(trials_count,1) = 2;
                                         end
                                     case 2
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 3;
+                                        dataset(trials_count,1) = 3;
                                 end
                             end
                             
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),2) = metadata.TrialInfo_block2.rewarded(jj);
+                            dataset(trials_count,2) = metadata.TrialInfo_block2.rewarded(jj);
                             switch sesh.block_order
                                 case 1
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 2;
+                                    dataset(trials_count,3) = 2;
                                 case 2
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 1;
+                                    dataset(trials_count,3) = 1;
                             end
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),4) = metadata.TrialInfo_block2.summary(jj,5);
-                                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),5) = metadata.TrialInfo_block2.approached(jj);
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),6) = metadata.TrialInfo_block2.summary(jj,15);
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),7) = b1_length+jj;
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),8) = firing_rate(trials_count);
+                            dataset(trials_count,4) = metadata.TrialInfo_block2.summary(jj,5);
+                                                        dataset(trials_count,5) = metadata.TrialInfo_block2.approached(jj);
+                            dataset(trials_count,6) = metadata.TrialInfo_block2.summary(jj,15);
+                            dataset(trials_count,7) = b1_length+jj;
+                            dataset(trials_count,8) = firing_rate(trials_count);
                             
-                            trials_count.(cat(2,'shuff_',num2str(iShuff))) =  trials_count.(cat(2,'shuff_',num2str(iShuff))) + 1;
+                            trials_count =  trials_count + 1;
 %                         end
                     end
                     
                 case 1
                     %% new rats (R060)
-                    trials_count.(cat(2,'shuff_',num2str(iShuff))) =  1;
+                    trials_count =  1;
                     b1_length = length(FRATE.Cue.Trial_firing_rate_block1);
                     for jj = 1:b1_length
                         if metadata.TrialInfo{1,1}.trial_length_analysis(jj) < time_window_end
@@ -169,44 +169,44 @@ for kk = 1:length(dir('*.mat'))
      
 %                         if metadata.TrialInfo{1,1}.summary(jj,2) == metadata.TrialInfo{1,1}.summary(jj,3)
                             if jj == 1
-                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = NaN; %prev trial
+                                dataset(trials_count,1) = NaN; %prev trial
                             elseif jj == 2
                                 switch metadata.TrialInfo{1,1}.rewarded(1)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                        dataset(trials_count,1) = 1;
                                     case 1
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                        dataset(trials_count,1) = 2;
                                 end
                             else
                                 switch metadata.TrialInfo{1,1}.rewarded(jj-1) + metadata.TrialInfo{1,1}.rewarded(jj-2)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 0;
+                                        dataset(trials_count,1) = 0;
                                     case 1
                                         switch metadata.TrialInfo{1,1}.rewarded(jj-1)
                                             case 0
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                                dataset(trials_count,1) = 1;
                                             case 1
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                                dataset(trials_count,1) = 2;
                                         end
                                     case 2
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 3;
+                                        dataset(trials_count,1) = 3;
                                 end
                             end
                             
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),2) = metadata.TrialInfo{1,1}.rewarded(jj); %outcome
+                            dataset(trials_count,2) = metadata.TrialInfo{1,1}.rewarded(jj); %outcome
                             switch sesh.block_order %modality
                                 case 1
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 1;
+                                    dataset(trials_count,3) = 1;
                                 case 2
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 2;
+                                    dataset(trials_count,3) = 2;
                             end
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),4) = metadata.TrialInfo{1,1}.summary(jj,5); %arm
-                                                         dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),5) = metadata.TrialInfo{1,1}.approached(jj); %behav - app
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),6) = metadata.TrialInfo{1,1}.summary(jj,15); %behav - trial length
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),7) = jj;
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),8) = firing_rate(trials_count); %FR
+                            dataset(trials_count,4) = metadata.TrialInfo{1,1}.summary(jj,5); %arm
+                                                         dataset(trials_count,5) = metadata.TrialInfo{1,1}.approached(jj); %behav - app
+                            dataset(trials_count,6) = metadata.TrialInfo{1,1}.summary(jj,15); %behav - trial length
+                            dataset(trials_count,7) = jj;
+                            dataset(trials_count,8) = firing_rate(trials_count); %FR
                             
-                            trials_count.(cat(2,'shuff_',num2str(iShuff))) =  trials_count.(cat(2,'shuff_',num2str(iShuff))) + 1;
+                            trials_count =  trials_count + 1;
 %                         end
                     end
                     
@@ -231,44 +231,44 @@ for kk = 1:length(dir('*.mat'))
      
 %                         if metadata.TrialInfo{1,2}.summary(jj,2) == metadata.TrialInfo{1,2}.summary(jj,3)
                             if jj == 1
-                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = NaN; %prev trial
+                                dataset(trials_count,1) = NaN; %prev trial
                             elseif jj == 2
                                 switch metadata.TrialInfo{1,2}.rewarded(1)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                        dataset(trials_count,1) = 1;
                                     case 1
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                        dataset(trials_count,1) = 2;
                                 end
                             else
                                 switch metadata.TrialInfo{1,2}.rewarded(jj-1) + metadata.TrialInfo{1,2}.rewarded(jj-2)
                                     case 0
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 0;
+                                        dataset(trials_count,1) = 0;
                                     case 1
                                         switch metadata.TrialInfo{1,2}.rewarded(jj-1)
                                             case 0
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 1;
+                                                dataset(trials_count,1) = 1;
                                             case 1
-                                                dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 2;
+                                                dataset(trials_count,1) = 2;
                                         end
                                     case 2
-                                        dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),1) = 3;
+                                        dataset(trials_count,1) = 3;
                                 end
                             end
                             
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),2) = metadata.TrialInfo{1,2}.rewarded(jj);
+                            dataset(trials_count,2) = metadata.TrialInfo{1,2}.rewarded(jj);
                             switch sesh.block_order
                                 case 1
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 2;
+                                    dataset(trials_count,3) = 2;
                                 case 2
-                                    dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),3) = 1;
+                                    dataset(trials_count,3) = 1;
                             end
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),4) = metadata.TrialInfo{1,2}.summary(jj,5);
-                                                         dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),5) = metadata.TrialInfo{1,2}.approached(jj);
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),6) = metadata.TrialInfo{1,2}.summary(jj,15);
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),7) = b1_length+jj;
-                            dataset(trials_count.(cat(2,'shuff_',num2str(iShuff))),8) = firing_rate(trials_count);
+                            dataset(trials_count,4) = metadata.TrialInfo{1,2}.summary(jj,5);
+                                                         dataset(trials_count,5) = metadata.TrialInfo{1,2}.approached(jj);
+                            dataset(trials_count,6) = metadata.TrialInfo{1,2}.summary(jj,15);
+                            dataset(trials_count,7) = b1_length+jj;
+                            dataset(trials_count,8) = firing_rate(trials_count);
                             
-                            trials_count.(cat(2,'shuff_',num2str(iShuff))) =  trials_count.(cat(2,'shuff_',num2str(iShuff))) + 1;
+                            trials_count =  trials_count + 1;
 %                         end
                     end
                     

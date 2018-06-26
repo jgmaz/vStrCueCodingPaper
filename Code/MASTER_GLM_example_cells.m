@@ -13,7 +13,7 @@ example_types = {'Cue identity - increasing','Cue identity - decreasing',...
 figure
 
   for i = 1:length(example_cells)
-    load(example_cells{i});
+    load(example_cells{4});
     meta = metadata;
 disp(i);
 

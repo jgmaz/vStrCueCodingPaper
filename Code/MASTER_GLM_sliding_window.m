@@ -1,6 +1,6 @@
 warning('error', 'stats:glmfit:IterationLimit'); % turn GLM warning into error so that you can use try catch to skip to next iteration of loop.
 %% time window to analyze
-for iRound = 1:4
+for iRound = 1%:4
     for iTime = -.5:.1:.5
 
 
@@ -273,7 +273,7 @@ for kk = 1:length(dir('*.mat'))
                     end
                     
             end
-            if sum(dataset(:,7)) < 10
+            if sum(dataset(:,8)) < 10
                 mdl{kk} = [];
             else
                 %%
@@ -1172,7 +1172,7 @@ for kk = 1:length(dir('*.mat'))
     end
 end
 
-save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-03-24-GLM_cueon_',num2str(iTime),'-round',num2str(iRound),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
+save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-06-06-GLM_cueon_',num2str(iTime),'-replication.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
 clearvars -except iTime iRound
     end
 end
