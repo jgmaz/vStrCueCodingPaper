@@ -169,7 +169,7 @@ outcome to the cue with learning
 
 Surprisingly, although substantial work has been done on the coding of
 outcomes predicted by such cues
-\cite{Hollerman1998,Setlow2003,Nicola2004,Roitman2005,Day2006,Roesch2009a,Saddoris2011,Goldstein2012,Lansink2012,Bissonette2013,McGinty2013,Atallah2014,Sugam2014,Cooch2015,West2016},
+\cite{Schultz1992,Hollerman1998,Hassani2001,Cromwell2003,Setlow2003,Nicola2004,Roitman2005,Day2006,Roesch2009a,Saddoris2011,Goldstein2012,Lansink2012,Bissonette2013,McGinty2013,Atallah2014,Sugam2014,Cooch2015,West2016},
 much less is known about how outcome-predictive cues themselves are
 encoded in the NAc \cite[but see;][]{Sleezer2016}. This is an important issue for
 at least two reasons. First, in reinforcement learning, motivationally
@@ -320,9 +320,9 @@ time to complete a trial was comparable for the different cues.}
 
 {\bf Single unit responses discriminate cue features:}
 
-We sought to address which parameters of our task were encoded by NAc activity, specifically whether the NAc encodes aspects of motivationally relevant cues not directly tied to reward, such as the identity and location of the cue, and whether this coding is accomplished by separate, independent, or joint populations (Figure \ref{fig:schematic}A). To do this we recorded a total of 443 units with $>$ 200 spikes in the NAc from 4 rats over 57 sessions (range: 12 - 18 sessions per rat) while they performed a cue discrimination task (Table \ref{tbl1}). Units that exhibited a drift in firing rate over the course of either block were excluded from further analysis, leaving 344 units for further analysis. The activity of 133 (39\%) of these 344 units were modulated by the cue, with more showing a decrease in firing (n = 103) than an increase (n = 30) around the time of cue-onset (Table \ref{tbl1}). Within this group, 24 were classified as FSIs, while 109 were classified as SPNs. Upon visual inspection, we observed several patterns of firing activity, including units that discriminated firing upon cue-onset across various cue conditions, showed sustained differences in firing across cue conditions, had transient responses to the cue, showed a ramping of activity starting at cue-onset, and showed elevated activity immediately preceding cue-onset, for example (Figure \ref{fig:examples}). 
+We sought to address which parameters of our task were encoded by NAc activity, specifically whether the NAc encodes aspects of motivationally relevant cues not directly tied to reward, such as the identity and location of the cue, and whether this coding is accomplished by separate, independent, or joint populations (Figure \ref{fig:schematic}A). To do this we recorded a total of 443 units with $>$ 200 spikes in the NAc from 4 rats over 57 sessions (range: 12 - 18 sessions per rat) while they performed a cue discrimination task (Table \ref{tbl1}). Units that exhibited a drift in firing rate over the course of either block, as measured by a Mann-Whitney U comparing firing rates for the first and second half of trials within a block, were excluded from further analysis, leaving 344 units for further analysis. The activity of 133 (39\%) of these 344 units were modulated by the cue, with more showing a decrease in firing (n = 103) than an increase (n = 30) around the time of cue-onset (Table \ref{tbl1}). Within this group, 24 were classified as FSIs, while 109 were classified as SPNs. Upon visual inspection, we observed several patterns of firing activity, including units that discriminated firing upon cue-onset across various cue conditions, showed sustained differences in firing across cue conditions, had transient responses to the cue, showed a ramping of activity starting at cue-onset, and showed elevated activity immediately preceding cue-onset, for example (Figure \ref{fig:examples}). 
 
-To characterize more formally whether these cue-evoked responses were modulated by various aspects of the task, we fit a forward selection stepwise generalized linear model (GLM) to each cue-modulated unit. Fitting GLMs revealed that a variety of task parameters accounted for a significant portion of firing rate variance in NAc cue-modulated units (Figure \ref{fig:GLM}, Table \ref{tbl1}). Notably, there were units that discriminated between whether the rat was performing in the light or sound block (28\% of cue-modulated units, accounting for 6\% of variance on average), which arm the rat was currently on (38\% of cue-modulated units, accounting for 6\% of variance on average), and whether the rat was engaged in the common portion of a reward-available or reward-unavailable trial (26\% of cue-modulated units, accounting for 4\% of variance on average), suggesting that the NAc encodes features of reward-predictive cues in addition to expected outcome (Figure \ref{fig:examples}). To determine whether overlap of coding of cue features was different than expected by chance we correlated recoded beta coefficients from the GLMs. This revealed that cue identity was coded by an independent population of units from both cue identity (r $=$ -.018; p $=$ .840) and cue location (r $=$ .107; p $=$ .220), as determined by non-significant correlations, but that cue identity and cue location were encoded by a joint population (r $=$ .221; p $=$ .011), as signified by a significant positive correlation. Additionally, a sliding window GLM centered on cue-onset revealed that cue identity and cue location contributed to the activity of a significant proportion of cue-modulated units throughout this epoch, whereas an increase in units encoding cue outcome became apparent after cue-onset (Figure \ref{fig:GLM}D). Together, these findings show that various cue features are represented in the NAc, that cue modality is coded in an independent population from cue outcome and cue location, and that cue outcome and cue location are coded in a joint population (Figure \ref{fig:schematic}).
+To characterize more formally whether these cue-evoked responses were modulated by various aspects of the task, we fit a forward selection stepwise generalized linear model (GLM) to each cue-modulated unit. Fitting GLMs to all trials within a session revealed that a variety of task parameters accounted for a significant portion of firing rate variance in NAc cue-modulated units (Figure \ref{fig:GLM}, Table \ref{tbl1}). Notably, there were units that discriminated between whether the rat was performing in the light or sound block (28\% of cue-modulated units, accounting for 6\% of variance on average), which arm the rat was currently on (38\% of cue-modulated units, accounting for 6\% of variance on average), and whether the rat was engaged in the common portion of a reward-available or reward-unavailable trial (26\% of cue-modulated units, accounting for 4\% of variance on average), suggesting that the NAc encodes features of reward-predictive cues in addition to expected outcome (Figure \ref{fig:examples}). To determine whether overlap of coding of cue features was different than expected by chance we correlated recoded beta coefficients from the GLMs (Figure \ref{fig:GLM}C). This revealed that cue identity was coded by an independent population of units from both cue identity (r $=$ -.018; p $=$ .840) and cue location (r $=$ .107; p $=$ .220), as determined by non-significant correlations, but that cue identity and cue location were encoded by a joint population (r $=$ .221; p $=$ .011), as signified by a significant positive correlation. Additionally, a sliding window GLM centered on cue-onset revealed that cue identity and cue location contributed to the activity of a significant proportion of cue-modulated units throughout this epoch, whereas an increase in units encoding cue outcome became apparent after cue-onset (Figure \ref{fig:GLM}D). Together, these findings show that various cue features are represented in the NAc, that cue modality is coded in an independent population from cue outcome and cue location, and that cue outcome and cue location are coded in a joint population (Figure \ref{fig:schematic}).
 
 \begin{table}[p]
 \centering
@@ -349,35 +349,35 @@ Cue modulated units                      & 133         &24          &85         
 \hline
 \hspace{3mm}\textit{GLM aligned to cue-onset}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue identity       & 37         & 7          & 21          & 1          & 8\\
+\hspace{6mm}Cue identity       & 37 (28$\%$)        & 7 (29$\%$)          & 21 (25$\%$)          & 1 (17$\%$)          & 8 (44$\%$)\\
 \hline
-\hspace{6mm}Cue location       & 50         &13          & 27          & 3          & 7\\
+\hspace{6mm}Cue location       & 50 (38$\%$)       &13 (54$\%$)          & 27 (32$\%$)          & 3 (50$\%$)          & 7 (39$\%$)\\
 \hline
-\hspace{6mm}Cue outcome       & 34         & 10          & 18        & 0          & 6\\
+\hspace{6mm}Cue outcome       & 34 (26$\%$)         & 10 (42$\%$)          & 18 (21$\%$)        & 0 (-)          & 6 (33$\%$)\\
 \hline
-\hspace{6mm}Approach behavior      & 31         & 8          & 18          & 1          & 4\\
+\hspace{6mm}Approach behavior      & 31 (23$\%$)         & 8 (33$\%$)          & 18 (21$\%$)          & 1 (17$\%$)          & 4 (22$\%$)\\
 \hline
-\hspace{6mm}Trial length       & 25        & 5          & 18         & 0         & 2\\
+\hspace{6mm}Trial length       & 25 (19$\%$)        & 5 (21$\%$)          & 18 (21$\%$)         & 0 (-)         & 2 (11$\%$)\\
 \hline
-\hspace{6mm}Trial number       & 32         & 11          & 12         & 1          & 8\\
+\hspace{6mm}Trial number       & 32 (24$\%$)         & 11 (46$\%$)          & 12 (14$\%$)         & 1 (17$\%$)          & 8 (44$\%$)\\
 \hline
-\hspace{6mm}Previous trial       & 5         & 0          &5          & 0          & 0\\
+\hspace{6mm}Previous trial       & 5 (4$\%$)         & 0 (-)          &5 (6$\%$)          & 0 (-)          & 0 (-)\\
 \hline
 \hspace{3mm}\textit{GLM aligned to nosepoke}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue identity       & 66         &14          & 36          & 2          &14\\
+\hspace{6mm}Cue identity       & 66 (50$\%$)         &14 (58$\%$)          & 36 (42$\%$)          & 2 (33$\%$)          &14 (78$\%$)\\
 \hline
-\hspace{6mm}Cue location       & 66         &14          & 40          & 3          & 9\\
+\hspace{6mm}Cue location       & 66 (50$\%$)         &14 (58$\%$)          & 40 (47$\%$)          & 3 (50$\%$)          & 9 (50$\%$)\\
 \hline
-\hspace{6mm}Cue outcome       & 42        & 8          & 29        & 0          & 5\\
+\hspace{6mm}Cue outcome       & 42 (32$\%$)        & 8 (33$\%$)          & 29 (34$\%$)        & 0 (-)          & 5 (28$\%$)\\
 \hline
 \hspace{3mm}\textit{GLM aligned to outcome}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue outcome       & 10        & 0          & 6       & 0          &4\\
+\hspace{6mm}Cue outcome       & 10 (8$\%$)        & 0 (-)          & 6 (7$\%$)       & 0 (-)          &4 (22$\%$)\\
 \hline
 
 \end{tabular}
-\caption {Overview of recorded NAc units and their relationship to task variables at various time epochs.} \label{tbl1} 
+\caption {Overview of recorded NAc units and their relationship to task variables at various time epochs. Percentage is relative to number of cue-modulated units} \label{tbl1} 
 \end{table}
 
  \begin{figure}[ht!]
@@ -496,7 +496,7 @@ conditions across cue features.
 
 Given the varied time courses and response profiles of NAc units to various
 aspects of the cue, the NAc may be computing a temporally evolving state value
-signal (Pennartz., 2011). If this is the case, then the recruitment of NAc units
+signal \cite{Pennartz2011}. If this is the case, then the recruitment of NAc units
 should vary alongside changes in the environment. To look at the distribution of
 responses throughout our task space and see if this distribution is modulated by
 cue features, we z-scored the firing rate of each unit and plotted the
@@ -571,36 +571,12 @@ analysis.}
 
 {\bf Encoding of cue features persists until outcome:}
 
-In order to be useful for credit assignment in reinforcement learning, a trace
-of the cue must be maintained until the outcome, so that information about the
-outcome can be associated with the outcome-predictive cue. To test whether
-representations of cue features persisted post-approach until the outcome
-was revealed, we fit a GLM to the post-approach firing rates of cue-modulated
-units aligned to the time of nosepoke into the reward receptacle. This analysis
-showed that a variety of units still discriminated firing according to various
-cue features, but not other task parameters, showing that NAc activity
-discriminates various cue conditions well into a trial (Table \ref{tbl1},
-Figures \ref{fig:NP_examples},\ref{fig:NP_GLM}). Additionally, these units were
-a mix between most of the units that encoded cue features at cue-onset (observed
-overlap greater than expected by chance according to chi-square tests), and those
-that did not previously have a cue feature as a predictor (29, 48, and 30 out of 133 cue-modulated units encoded both time points for cue identity, cue location, and cue outcome,
-respectively). Population level averages for units that increased to
-cue-onset showed a ramping up of activity that peaked upon nosepoke, whereas
-units that decreased to cue-onset showed a gradual reduction of firing activity
-that reached a minimum upon nosepoke (Figure \ref{fig:NP_pop}). Additionally, a
-peak is seen for preferred cue outcome in decreasing units at 1 second post
-cue-onset when reward was received, demonstrating an integration of expected and
-received reward (Figure \ref{fig:NP_pop}F). Furthermore, aligning normalized
-peak firing rates to nosepoke onset, revealed a clustering of responses around
-outcome receipt for all cue conditions where the rat would have received reward
-(Figure \ref{fig:NP_tiling}), in addition to the same trend of higher within- vs across-block correlations for cue identity (Figure \ref{fig:NP_tiling}A,C; within block correlations = .560 (light), .541 (sound); across block correlations = .487, .481, .483, .486; within block vs. within block comparison = p $=$ .112; within block vs. across block comparisons = p $<$ .001) and cue location (Figure \ref{fig:NP_tiling}B,E; within block correlations = .474 (arm 1), .461 (arm 2); across block correlations = .416, .402, .416, .415; within block vs. within block comparison = p $=$ .810; within block vs. across block comparisons = p $<$ .001), but not cue outcome (Figure \ref{fig:NP_tiling}C,F; within block correlations = .620 (reward-available), .401 (reward-unavailable); across block correlations = .418, .414, .390, .408; within block vs. within block comparison = p $<$ .001; within block vs. across block comparisons = p $<$ .001). To determine whether coding of cue features persisted after the outcome was revealed, a GLM was fit to the firing rates of
-cue-modulated units at the time of outcome receipt, during which the cue was
-still present. Fitting a GLM revealed 10 units (8\%) where cue outcome accounted
-for an average of 32\% of firing rate variance (Table \ref{tbl1}, data not
-shown). An absence of cue identity or cue location coding at this level of analysis was observed,
-but looking at the data more closely with a sliding window GLM revealed that
-cue identity, cue location, and cue outcome were encoded throughout time epochs surround cue-onset, nosepoke hold, and outcome receipt,
-suggesting that the NAc maintains a representation of these cue features once the rat receives behavioral feedback for its decision (Figure \ref{fig:NP_GLM}E-J).
+In order to be useful for credit assignment in reinforcement learning, a trace of the cue must be maintained until the outcome, so that information about the outcome can be associated with the outcome-predictive cue. To test whether representations of cue features persisted post-approach until the outcome was revealed, we fit a GLM to the post-approach firing rates of cue-modulated units aligned to the time of nosepoke into the reward receptacle. This analysis
+showed that a variety of units still discriminated firing according to various cue features, but not other task parameters, showing that NAc activity discriminates various cue conditions well into a trial (Table \ref{tbl1}, Figures \ref{fig:NP_examples},\ref{fig:NP_GLM}). Additionally, these units were a mix between most of the units that encoded cue features at cue-onset (r $=$ .386, .781, .758, across cue-onset and nosepoke for cue identity, cue location, and cue outcome, respectively, all p values $<$ .001), and those that did not previously have a cue feature as a predictor (29, 48, and 30 out of 133 cue-modulated units encoded both time points for cue identity, cue location, and cue outcome, respectively). Population level averages for units that increased to cue-onset showed a ramping up of activity that peaked upon nosepoke, whereas units that decreased to cue-onset showed a gradual reduction of firing activity that reached a minimum upon nosepoke (Figure \ref{fig:NP_pop}). Additionally, a peak is seen for preferred cue outcome in decreasing units at 1 second post cue-onset when reward was received, demonstrating an integration of expected and received reward (Figure \ref{fig:NP_pop}F). 
+
+Aligning normalized peak firing rates to nosepoke onset, revealed a clustering of responses around outcome receipt for all cue conditions where the rat would have received reward (Figure \ref{fig:NP_tiling}), in addition to the same trend of higher within- vs across-block correlations for cue identity (Figure \ref{fig:NP_tiling}A,C; within block correlations = .560 (light), .541 (sound); across block correlations = .487, .481, .483, .486; within block vs. within block comparison = p $=$ .112; within block vs. across block comparisons = p $<$ .001) and cue location (Figure \ref{fig:NP_tiling}B,E; within block correlations = .474 (arm 1), .461 (arm 2); across block correlations = .416, .402, .416, .415; within block vs. within block comparison = p $=$ .810; within block vs. across block comparisons = p $<$ .001), but not cue outcome (Figure \ref{fig:NP_tiling}C,F; within block correlations = .620 (reward-available), .401 (reward-unavailable); across block correlations = .418, .414, .390, .408; within block vs. within block comparison = p $<$ .001; within block vs. across block comparisons = p $<$ .001). 
+
+To determine whether coding of cue features persisted after the outcome was revealed, a GLM was fit to the firing rates of cue-modulated units at the time of outcome receipt, during which the cue was still present. Fitting a GLM revealed 10 units (8\%) where cue outcome accounted for an average of 32\% of firing rate variance (Table \ref{tbl1}, data not shown). An absence of cue identity or cue location coding at this level of analysis was observed, but looking at the data more closely with a sliding window GLM revealed that cue identity, cue location, and cue outcome were encoded throughout time epochs surround cue-onset, nosepoke hold, and outcome receipt, suggesting that the NAc maintains a representation of these cue features once the rat receives behavioral feedback for its decision (Figure \ref{fig:NP_GLM}E-J).
 
  \begin{figure}[ht!]
 \centering
@@ -717,9 +693,8 @@ The main result of the present study is that NAc units encode not
 only the expected outcome of outcome-predictive cues, but also the
 identity of such cues. Importantly, this identity coding was
 maintained on approach trials both during a delay period where the rat held
-a nosepoke until the outcome was received, and immediately after outcome receipt (H2 and H3 in Figure
-\ref{fig:schematic}B). Units coding for cue identity showed partial
-overlap with those coding for expected outcome (H3 in Figure
+a nosepoke until the outcome was received, and immediately after outcome receipt (Figure
+\ref{fig:schematic}B). Units coding for cue identity were coded by an independent population than units coding for expected value (Figure
 \ref{fig:schematic}A). Units that coded different cue features
 (identity, outcome, location) exhibited different temporal profiles as
 a whole, although across all recorded units a tiling of task structure
@@ -740,15 +715,8 @@ the most comparable work in rodents comes from a study that found
 distinct coding for an odor when it predicted separate but equally
 valued rewards \cite{Cooch2015}. The present work is complementary to
 such {\it outcome identity} coding as it shows that NAc units encode {\it cue
-  identity}, both separately and integrated with the reward it
-predicts (H2 and H3 in Figure \ref{fig:schematic}A). Similarly,
-\citeauthor{Setlow2003} (2003) paired distinct cues with appetitive or aversive
-outcomes, and found separate populations of units that encoded each
-cue. Once again, our study was different in asking how distinct cues
-encoding the same anticipated outcome are encoded. Such cue identity
-encoding suggests that even when the biological relevance of these
-stimuli is similar, NAc dissociates their representations at the level
-of the single-units. A possible interpretation of this coding of cue
+  identity}, in addition to the reward it
+predicts (Figure \ref{fig:schematic}A). Similarly, \citeauthor{Setlow2003} (2003) paired distinct odor cues with appetitive or aversive outcomes, and found separate populations of units that encoded each cue. Furthermore, during a reversal they found that the majority of units switched their selectivity, arguing that the NAc units were tracking the motivational significance of these stimuli. Once again, our study was different in asking how distinct cues encoding the same anticipated outcome are encoded. Such cue identity encoding suggests that even when the motivational significance of these stimuli is similar, NAc dissociates their representations at the level of the single-units. Importantly, while there may have been a perceptual delay between onset of the stimuli and perception by the rat, this does not affect our primary finding that coding for cue identity is present in the NAc. A possible interpretation of this coding of cue
 features alongside expected outcome is that these representations are
 used to associate reward with relevant features of the environment,
 so-called credit assignment in the reinforcement learning literature
@@ -759,6 +727,8 @@ in the PFC, particularly in the lateral orbitofrontal cortex
 of cortical inputs in NAc associative representations, it is possible
 that information related to credit assignment is relayed from the
 cortex to NAc \cite{Ishikawa2008,Cooch2015}.
+
+Viewed within the neuroeconomic framework of decision making it is possible that the NAc is encoding offers alongside their subjective value \cite{Samuelson1947}. Traditionally, functional magnetic resonance imaging (fMRI) studies have found support for NAc representations of values of offers, specifically a domain-general subjective value signal that scales different rewards into a common currency so that they can be compared across different attributes, such as reward identity, effort required to obtain the reward, and temporal proximity to reward \cite{Peters2009,Levy2012,Bartra2013,Sescousse2015}. Our study adds to a growing body of electrophysiological research that suggests the view of the NAc as an intrinsic value center, while informative and capturing major aspects of NAc processing, may miss more nuanced contributions of NAc to decision making that can only be investigated using methods that possess finer-grained spatiotemporal precision.
 
 A different possible function for cue identity coding is to support
 contextual modulation of the motivational relevance of specific
@@ -779,8 +749,7 @@ testing they were presented with both simultaneously, and the stimulus
 dimension that was relevant was periodically shifted between the
 two. Here, they found that bilateral NAc activity reflected value
 representations for the currently relevant stimulus dimension, and not
-the irrelevant stimulus. The current finding of separate, but
-overlapping, populations of units encoding cue identity and expected
+the irrelevant stimulus. The current finding of independent populations of units encoding cue identity and expected
 outcome, suggests that the fMRI finding is generated by the combined
 activity of several different functional cell types.
 
@@ -800,12 +769,7 @@ the differentially tiling of task structure across blocks in the
 current study (Figure \ref{fig:tiling}).
 
 A different potential confound is that between outcome and action
-value coding. We discriminated between these possiblities by analzying
-error trials, where the rat appraoched reward (left turn) after
-presentation of the reward-unavailable cue. Units that were modulated
-by the expected outcome of the cue maintained their specific firing
-patterns even during error trials, as expected from outcome value
-coding but not action value coding. Additionally, NAc signals have
+value coding as the rat was only rewarded for left turns. Our GLM analysis dealt with this by excluding firing rate variance accounted for a predictor that represented whether the animal approached (left turn) or skipped (right turn) the reward port at the choice point, thus we were able to identity units that were modulated by the expected outcome of the cue after removing variance for potential action value coding. Additionally, NAc signals have
 been shown to be modulated by response vigor \cite{McGinty2013}; to
 detangle this from our results we included trial length (i.e.\ latency
 to arrival at the reward site) as a predictor in our GLMs, and found
@@ -813,7 +777,7 @@ units with cue feature correlates independent of trial length.
 
 An overall limitation of the current study is that rats were never
 presented with both sets of cues simultaneously, and were not required
-to switch strategies between multiple sets of cues. Thus, it is
+to switch strategies between multiple sets of cues. An attempt to get strategy switching with simultaneously present cues was made with pilot data, but the animals took several days of training to successfully switch strategies. Additionally, our recordings were done during performance on the well-learned behavior, and not during the initial acquisition of the cue-outcome relationships when an eligibility trace would be most useful. Thus, it is
 unknown to what extent the cue identity encoding we observed is
 behaviorally relevant, although extrapolating data from other work
 \cite{Sleezer2016} suggests that cue identity coding would be
@@ -833,10 +797,8 @@ in alignment with several previous reports
 inputs from the hippocampus, and the communication of place-reward
 information across the two structures suggests that the NAc tracks
 locations associated with reward
-\cite{Tabuchi2000,Pennartz2004,Lansink2008,Lansink2009,VanderMeer2011,Lansink2016,Sjulson2017}. NAc
-units can also signal progress through a sequence of cues and/or
-actions
-\cite{Shidara1998,Mulder2004,Khamassi2008,Berke2009,Lansink2012,Atallah2014}. Given
+\cite{Tabuchi2000,Pennartz2004,Lansink2008,Lansink2009,VanderMeer2011,Lansink2016,Sjulson2017}. Additionally our finding of a tiling of task space is in alignment with previous studies showing that NAc units can also signal progress through a sequence of cues and/or
+actions \cite{Shidara1998,Mulder2004,Khamassi2008,Berke2009,Lansink2012,Atallah2014}, and may represent a temporally evolved state value signal \cite{Pennartz2011,Hamid2016}. Given
 that the current task was pseudo-random, it is possible that the rats
 learned the structure of sequential cue presentation, and the neural
 activity could reflect this. However, this is unlikely as including a
@@ -934,7 +896,7 @@ cue onset until nosepoke (for approach trials), or from cue onset
 until the start of the following trial (for skip trials). Trials could
 only be initiated through clockwise progression through the series of
 arms, and each entry into the subsequent arm on the track counted as a
-trial.
+trial. Cues were present until 1  second after outcome receipt on approach trials, and until initiating the following trial on skip trials.
 
 Each session consisted of both a {\it light block} and a {\it sound block} with
 100 trials each. Within a block, one cue signaled reward was available on that
@@ -1021,7 +983,7 @@ were then classified as either increasing or decreasing if the
 post-cue activity was higher or lower than the pre-cue activity,
 respectively.
 
-To determine the relative contribution of different task parameters to firing rate variance (as in Figures \ref{fig:examples}-\ref{fig:GLM}), a forward selection stepwise GLM using a Poisson distribution for the response variable was fit to each cue-modulated unit. Cue identity (light block, sound block), cue location (arm 1, arm 2, arm 3, arm 4), cue outcome (reward-available, reward-unavailable), behavior (approach, skip), trial length, trial number, and trial history (reward availability on the previous 2 trials) were used as predictors, and the 1 s post-cue firing rate as the response variable. Units were classified as being modulated by a
+To determine the relative contribution of different task parameters to firing rate variance (as in Figures \ref{fig:examples}-\ref{fig:GLM}), a forward selection stepwise GLM using a Poisson distribution for the response variable was fit to each cue-modulated unit, using data from every trial in a session. Cue identity (light block, sound block), cue location (arm 1, arm 2, arm 3, arm 4), cue outcome (reward-available, reward-unavailable), behavior (approach, skip), trial length, trial number, and trial history (reward availability on the previous 2 trials) were used as predictors, and the 1 s post-cue firing rate as the response variable. Units were classified as being modulated by a
 given task parameter if addition of the parameter significantly improved model fit using deviance as the criterion ($p <$ .01). A comparison of the R-squared value between the final model and the final model minus the predictor of interest was used to determine the amount of firing rate variance explained by the addition of that predictor for a given unit. To determine the degree to which coding of cue identity, cue location, and cue outcome overlapped within units we computed pearson’s r on recoded beta coefficients from the GLM for the cue features. Specifically, for all cue-modulated units, we coded a 1 if the cue feature was a significant predictor in the final model, and 0 if it was not, and calculated pearson’s r comparing an array of the coded 0s and 1s for cue-modulated units for one cue feature with a similar array for another cue feature. The NAc was determined as coding a pair of cue features in a) a separate populations of units if there was a significant negative correlation ($r < $0), b) an independent overlapping population of units if there was no significant correlation ($r = $0), and c) a joint overlapping population of units if there was a significant positive correlation ($r > $0). To investigate more finely the temporal dynamics of the influence of task parameters to unit activity, we then fit a sliding window GLM with the same task parameters using 500 ms bins and 100 ms steps, starting 500 ms before cue-onset, up to 500 ms after cue-onset, and measured the proportion of units and average R-squared value for a given time bin where a particular predictor contributed significantly to the final model. To control for the amount of units that would be affected by a predictor by chance, we shuffled the trial order of firing rates for a particular unit within a time bin, and took the average of this value over 100 shuffles.
 
 To better visualize responses to cues and enable subsequent population
@@ -1058,7 +1020,7 @@ for each cue condition to determine if correlations of firing rates
 within cue conditions were more similar than correlations across cue
 conditions.
 
-To identify the responsivity of units to different cue features at the time of a nosepoke into a reward receptacle, and subsequent reward delivery, the same cue-responsive units from the cue-onset analyses were analyzed at the time of nosepoke and outcome receipt using identical analysis techniques (Figures \ref{fig:NP_examples}, \ref{fig:NP_GLM}, \ref{fig:NP_pop}, and \ref{fig:NP_tiling}). To compare whether coding of a given cue feature was accomplished by the same or distinct population of units across time epochs, we ran the recoded coefficient correlation that was used to assess the degree of overlap among cue features within a time epoch.
+To identify the responsivity of units to different cue features at the time of a nosepoke into a reward receptacle, and subsequent reward delivery, the same cue-responsive units from the cue-onset analyses were analyzed at the time of nosepoke and outcome receipt using identical analysis techniques for all approach trials (Figures \ref{fig:NP_examples}, \ref{fig:NP_GLM}, \ref{fig:NP_pop}, and \ref{fig:NP_tiling}). To compare whether coding of a given cue feature was accomplished by the same or distinct population of units across time epochs, we ran the recoded coefficient correlation that was used to assess the degree of overlap among cue features within a time epoch.
 
 Given that some of our analyses compare firing rates across time,
 particularly comparisons across blocks, we sought to exclude units

@@ -316,3 +316,64 @@ for iTime = -.5:.1:.5
 save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-05-25-GLM_cueon_sliding_window_full_v_null_',num2str(iTime),'.mat'),'mdl','mdlcomp')
 clearvars -except iTime
 end
+
+%%
+t_count = 0;
+mdlidentifier = {'Full','Modality','Location','Outcome'};
+for iTime = -.5:.1:.5
+    load(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-05-25-GLM_cueon_sliding_window_full_v_null_',num2str(iTime),'.mat'));
+    t_count = t_count + 1;
+    for iMdl = 1:3
+    mdlavg.Rsquared.MEAN(t_count,iMdl) = nanmean(mdlcomp.Rsquared.(mdlidentifier{iMdl+1}));
+    mdlavg.Rsquared.SEM(t_count,iMdl) = nanstd(mdlcomp.Rsquared.(mdlidentifier{iMdl+1})) / sqrt(numel(mdlcomp.Rsquared.(mdlidentifier{iMdl+1}))-sum(isnan(mdlcomp.Rsquared.(mdlidentifier{iMdl+1}))));
+    mdlavg.AIC.MEAN(t_count,iMdl) = nanmean(mdlcomp.AIC.(mdlidentifier{iMdl+1}));
+    mdlavg.AIC.SEM(t_count,iMdl) = nanstd(mdlcomp.AIC.(mdlidentifier{iMdl+1})) / sqrt(numel(mdlcomp.AIC.(mdlidentifier{iMdl+1}))-sum(isnan(mdlcomp.AIC.(mdlidentifier{iMdl+1}))));
+    mdlavg.BIC.MEAN(t_count,iMdl) = nanmean(mdlcomp.BIC.(mdlidentifier{iMdl+1}));
+    mdlavg.BIC.SEM(t_count,iMdl) = nanstd(mdlcomp.BIC.(mdlidentifier{iMdl+1})) / sqrt(numel(mdlcomp.BIC.(mdlidentifier{iMdl+1}))-sum(isnan(mdlcomp.BIC.(mdlidentifier{iMdl+1}))));
+    mdlavg.Deviance.MEAN(t_count,iMdl) = nanmean(mdlcomp.Deviance.(mdlidentifier{iMdl+1}));
+    mdlavg.Deviance.SEM(t_count,iMdl) = nanstd(mdlcomp.Deviance.(mdlidentifier{iMdl+1})) / sqrt(numel(mdlcomp.Deviance.(mdlidentifier{iMdl+1}))-sum(isnan(mdlcomp.Deviance.(mdlidentifier{iMdl+1}))));
+    end
+end
+
+%% 
+figure;
+subplot(2,2,1)
+shadedErrorBar(-.25:.1:.75,mdlavg.Rsquared.MEAN(:,1) ,mdlavg.Rsquared.SEM(:,1),'-b',1);
+hold on
+shadedErrorBar(-.25:.1:.75,mdlavg.Rsquared.MEAN(:,2) ,mdlavg.Rsquared.SEM(:,2),'-r',1);
+shadedErrorBar(-.25:.1:.75,mdlavg.Rsquared.MEAN(:,3) ,mdlavg.Rsquared.SEM(:,3),'-y',1);
+plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% legend({'identity' 'location' 'outcome'}); 
+title('Cue features'); ylabel('Average improvement to Rsquared')
+% ylim([0 .5]);
+xlabel('Time from cue-onset (s)');
+
+subplot(2,2,2)
+shadedErrorBar(-.25:.1:.75,mdlavg.AIC.MEAN(:,1) ,mdlavg.AIC.SEM(:,1),'-b',1);
+hold on
+shadedErrorBar(-.25:.1:.75,mdlavg.AIC.MEAN(:,2) ,mdlavg.AIC.SEM(:,2),'-r',1);
+shadedErrorBar(-.25:.1:.75,mdlavg.AIC.MEAN(:,3) ,mdlavg.AIC.SEM(:,3),'-y',1);
+plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% legend({'identity' 'location' 'outcome'}); 
+title('Cue features'); ylabel('Average improvement to AIC')
+xlabel('Time from cue-onset (s)');
+
+subplot(2,2,3)
+shadedErrorBar(-.25:.1:.75,mdlavg.BIC.MEAN(:,1) ,mdlavg.BIC.SEM(:,1),'-b',1);
+hold on
+shadedErrorBar(-.25:.1:.75,mdlavg.BIC.MEAN(:,2) ,mdlavg.BIC.SEM(:,2),'-r',1);
+shadedErrorBar(-.25:.1:.75,mdlavg.BIC.MEAN(:,3) ,mdlavg.BIC.SEM(:,3),'-y',1);
+plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% legend({'identity' 'location' 'outcome'}); 
+title('Cue features'); ylabel('Average improvement to BIC')
+xlabel('Time from cue-onset (s)');
+
+subplot(2,2,4)
+shadedErrorBar(-.25:.1:.75,mdlavg.Deviance.MEAN(:,1) ,mdlavg.Deviance.SEM(:,1),'-b',1);
+hold on
+shadedErrorBar(-.25:.1:.75,mdlavg.Deviance.MEAN(:,2) ,mdlavg.Deviance.SEM(:,2),'-r',1);
+shadedErrorBar(-.25:.1:.75,mdlavg.Deviance.MEAN(:,3) ,mdlavg.Deviance.SEM(:,3),'-y',1);
+plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% legend({'identity' 'location' 'outcome'}); 
+title('Cue features'); ylabel('Average improvement to Deviance')
+xlabel('Time from cue-onset (s)');

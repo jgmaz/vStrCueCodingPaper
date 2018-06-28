@@ -1309,16 +1309,17 @@ figure
 shadedErrorBar(-.25:.1:.75,MdlAvgFR,MdlSEMFR,'-b',1);
 
 %% cross val
+rng('shuffle')
 warning('error', 'stats:glmfit:IterationLimit'); % turn GLM warning into error so that you can use try catch to skip to next iteration of loop.
 
 mat_files = dir('*.mat');
-t_count = 1;%0
+t_count = 0;
 mdl_identifier = {'OneBack','OneFRate'};
 
-for iTime = -.4:.1:.5
+for iTime = -.5:.1:.5
     t_count = t_count + 1;
     count = 1;
-       
+    
     time_window_start = iTime; %starting time window for analysis, 0 = time zero
     time_window_end = time_window_start + .5;
     epoch_start = 0;
@@ -1327,7 +1328,7 @@ for iTime = -.4:.1:.5
         
         load(mat_files(iCell).name);
         mat_overview.fname{iCell} = mat_files(iCell).name;
-        disp(cat(2,num2str(iCell),'/',num2str(length(dir('*.mat')))));
+        disp(cat(2,num2str(iCell),'/',num2str(length(dir('*.mat'))),' (',num2str(iTime),' epoch)'));
         new_v_old = strcmp(mat_overview.fname{iCell}(1:4),'R060');
         
         clear dataset x y %mdl
@@ -1551,43 +1552,48 @@ for iTime = -.4:.1:.5
                 
         end
         
-       block_drift.block1_length(iCell) = length(FRATE.Cue.Trial_firing_rate_block1);
-    block_drift.block1_half(iCell) = round(block_drift.block1_length(iCell) / 2);
-    block_drift.b1_1st_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block1(1:block_drift.block1_half(iCell)));
-    block_drift.b1_2nd_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block1(block_drift.block1_half(iCell)+1:end));
-    block_drift.MWU_b1(iCell) = ranksum(FRATE.Cue.Trial_firing_rate_block1(1:block_drift.block1_half(iCell)),FRATE.Cue.Trial_firing_rate_block1(block_drift.block1_half(iCell)+1:end));
-    
-    block_drift.block2_length(iCell) = length(FRATE.Cue.Trial_firing_rate_block2);
-    block_drift.block2_half(iCell) = round(block_drift.block2_length(iCell) / 2);
-    block_drift.b2_1st_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block2(1:block_drift.block2_half(iCell)));
-    block_drift.b2_2nd_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block2(block_drift.block2_half(iCell)+1:end));
-    block_drift.MWU_b2(iCell) = ranksum(FRATE.Cue.Trial_firing_rate_block2(1:block_drift.block2_half(iCell)),FRATE.Cue.Trial_firing_rate_block2(block_drift.block2_half(iCell)+1:end));
-    
-            switch block_drift.MWU_b1(iCell) < .01 || block_drift.MWU_b2(iCell) < .01
-                case 0
-                    if RANK.two.Trial > 975 || RANK.two.Trial < 26
-                        if TESTS.WSR.Task.Trial_b4_vs_Trial < .01 
+        block_drift.block1_length(iCell) = length(FRATE.Cue.Trial_firing_rate_block1);
+        block_drift.block1_half(iCell) = round(block_drift.block1_length(iCell) / 2);
+        block_drift.b1_1st_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block1(1:block_drift.block1_half(iCell)));
+        block_drift.b1_2nd_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block1(block_drift.block1_half(iCell)+1:end));
+        block_drift.MWU_b1(iCell) = ranksum(FRATE.Cue.Trial_firing_rate_block1(1:block_drift.block1_half(iCell)),FRATE.Cue.Trial_firing_rate_block1(block_drift.block1_half(iCell)+1:end));
         
-        x{1} = dataset(:,2);
-        x{2} = cat(2,dataset(:,2),dataset(:,9));
-        y = dataset(:,3);
+        block_drift.block2_length(iCell) = length(FRATE.Cue.Trial_firing_rate_block2);
+        block_drift.block2_half(iCell) = round(block_drift.block2_length(iCell) / 2);
+        block_drift.b2_1st_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block2(1:block_drift.block2_half(iCell)));
+        block_drift.b2_2nd_avg(iCell) = mean(FRATE.Cue.Trial_firing_rate_block2(block_drift.block2_half(iCell)+1:end));
+        block_drift.MWU_b2(iCell) = ranksum(FRATE.Cue.Trial_firing_rate_block2(1:block_drift.block2_half(iCell)),FRATE.Cue.Trial_firing_rate_block2(block_drift.block2_half(iCell)+1:end));
         
-        for iMdl = 1:length(mdl_identifier)
-            try
-                yfit = @(xtrain,ytrain,xtest)(glmCUE(xtrain,ytrain,xtest)');
-                cvMse{t_count}(count,iMdl) = crossval('mse',x{iMdl},y,'predfun',yfit);
-            catch                
-                cvMse{t_count}(count,iMdl) = NaN;
-            end           
-        end
-        count = count + 1;
+        switch block_drift.MWU_b1(iCell) < .01 || block_drift.MWU_b2(iCell) < .01
+            case 0
+                if RANK.two.Trial > 975 || RANK.two.Trial < 26
+                    if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
+                        
+                        shuff_FRate = [];
+                        for iShuff = 1:100
+                            shuff_FRate(:,1) = datasample(dataset(:,9),length(dataset(:,9)),'Replace',false);
+                            x{1} = dataset(:,2);
+                            x{2} = cat(2,dataset(:,2),shuff_FRate(:,1));
+                            y = dataset(:,3);
+                            
+                            for iMdl = 1:length(mdl_identifier)
+                                try
+                                    yfit = @(xtrain,ytrain,xtest)(glmCUE(xtrain,ytrain,xtest)');
+                                    cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = crossval('mse',x{iMdl},y,'predfun',yfit);
+                                catch
+                                    cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = NaN;
+                                end
+                            end
                         end
+                        count = count + 1;
                     end
-            end
+                end
+        end
     end
-%     cvMse_diff(t_count) = cvMse{t_count}(:,2) - cvMse{t_count}(:,1);
+    for iShuff = 1:100
+        cvMse_diff.(cat(2,'s',num2str(iShuff)))(:,t_count) = cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,1) - cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,2);
+    end
 end
-
 %%
 for t_count = 1:11
  cvMse_diff(:,t_count) = cvMse{t_count}(:,1) - cvMse{t_count}(:,2);
