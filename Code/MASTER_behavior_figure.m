@@ -22,7 +22,7 @@ ylabel('Proportion approached'); xlabel('Cue type');
 box off;
 h = gca;
 h.XRuler.TickLength = 0; 
-set(h,'FontSize',18);
+set(h,'FontSize',20);
     
 % figure
 %subplot(2,3,[3 6])
@@ -44,7 +44,7 @@ set(gca,'XTickLabel',{'','L1+','L2-','S1+','S2-'})
 box off;
 h = gca;
 h.XRuler.TickLength = 0;   
-set(h,'FontSize',18);
+set(h,'FontSize',20);
 
 % subplot(2,3,1)
 subplot(7,3,[1 4])
@@ -64,7 +64,7 @@ light_sig_final_last = length(p_light_1)
 plot([light_sig_first light_sig_first_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 plot([light_sig_next light_sig_next_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 plot([light_sig_final light_sig_final_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
-set(gca,'FontSize',18);
+set(gca,'FontSize',20);
 
 % subplot(2,3,4)
 subplot(7,3,[10 13])
@@ -82,4 +82,4 @@ sound_sig_final_last = length(p_sound_1)
 plot([sound_sig_first sound_sig_first_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 plot([sound_sig_next sound_sig_next_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
 plot([sound_sig_final sound_sig_final_last], [.05 .05], '-k', 'LineWidth',3,'color','r')
-set(gca,'FontSize',18);
+set(gca,'FontSize',20);

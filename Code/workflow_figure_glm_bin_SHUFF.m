@@ -76,122 +76,233 @@ end
 end
 
 GLM_window_SHUFF = GLM_window.SHUFF;
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Z-scores away from shuffle (value - shuff mean / shuff std)
+
+Epochs = {'cueon' 'NP' 'outcome'};
+for iEpoch = 1:length(Epochs);
+    if iEpoch == 1
+        Predictors = {'Modality' 'Location' 'Outcome' 'Approach' 'Latency' 'Trial' 'Previous'};
+    else
+        Predictors = {'Modality' 'Location' 'Outcome'};
+    end
+    
+    for iPred = 1:length(Predictors);
+        Table.(Epochs{iEpoch}).(Predictors{iPred}).Data = GLM_window.(Epochs{iEpoch}).prop(iPred+1,:);
+        Table.(Epochs{iEpoch}).(Predictors{iPred}).ShuffMEAN = mean(GLM_window_SHUFF.(Epochs{iEpoch}).prop.ALL.(Predictors{iPred}));
+        Table.(Epochs{iEpoch}).(Predictors{iPred}).ShuffSTD = std(GLM_window_SHUFF.(Epochs{iEpoch}).prop.ALL.(Predictors{iPred}));
+        for iTime = 1:length(Table.(Epochs{iEpoch}).(Predictors{iPred}).Data)
+            Table.(Epochs{iEpoch}).(Predictors{iPred}).Zscore(iTime) = (Table.(Epochs{iEpoch}).(Predictors{iPred}).Data(iTime) - Table.(Epochs{iEpoch}).(Predictors{iPred}).ShuffMEAN(iTime)) / Table.(Epochs{iEpoch}).(Predictors{iPred}).ShuffSTD(iTime);
+            if Table.(Epochs{iEpoch}).(Predictors{iPred}).Zscore(iTime) > 1.96
+                Table.(Epochs{iEpoch}).(Predictors{iPred}).Zscore_recode(iTime) = 1;
+            else
+                Table.(Epochs{iEpoch}).(Predictors{iPred}).Zscore_recode(iTime) = 0;
+            end
+        end
+    end
+end
+
+%%
+figure
+colors = {'b' 'r' 'y'};
+for iEpoch = 1:length(Epochs)
+    subplot(1,3,iEpoch)
+    hold on
+for iPred = 1:length(Predictors);
+    plot(-.5:.1:.5,Table.(Epochs{iEpoch}).(Predictors{iPred}).Zscore,'color',colors{iPred})
+end
+title(Epochs{iEpoch})
+plot(-.5:.05:.5,1.96,'.','color','black');
+ylabel('Zscore')
+xlabel('Time')
+end
+
 %% cue on w SHUFF
 figure;
 subplot(2,3,1)
-plot(-.25:.1:.75,GLM_window.cueon.prop(2:4,:))
+plot(-.5:.1:.5,GLM_window.cueon.prop(2:4,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Modality,GLM_window_SHUFF.cueon.prop.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Location,GLM_window_SHUFF.cueon.prop.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Outcome,GLM_window_SHUFF.cueon.prop.SEM.Outcome,'--y',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Modality,GLM_window_SHUFF.cueon.prop.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Location,GLM_window_SHUFF.cueon.prop.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Outcome,GLM_window_SHUFF.cueon.prop.SEM.Outcome,'--y',1);
+for iTime = 1:length(Table.cueon.Outcome.Zscore_recode)
+    if Table.cueon.Modality.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.03 .03], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.cueon.Location.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','r')
+    end
+    if Table.cueon.Outcome.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','y')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
 legend({'identity' 'location' 'outcome'}); title('Cue features'); ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([0 .5]); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
+
 subplot(2,3,2)
-plot(-.25:.1:.75,GLM_window.cueon.prop(5:6,:))
+plot(-.5:.1:.5,GLM_window.cueon.prop(5:6,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Approach,GLM_window_SHUFF.cueon.prop.SEM.Approach,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Latency,GLM_window_SHUFF.cueon.prop.SEM.Latency,'--r',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
-ylim([0 .5]); title('Behavioral measures'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Approach,GLM_window_SHUFF.cueon.prop.SEM.Approach,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Latency,GLM_window_SHUFF.cueon.prop.SEM.Latency,'--r',1);
+for iTime = 1:length(Table.cueon.Outcome.Zscore_recode)
+    if Table.cueon.Approach.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.cueon.Latency.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','r')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
+ylim([0 .5]); title('Behavioral measures'); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 legend({'approach' 'latency'});
+
 subplot(2,3,3)
-plot(-.25:.1:.75,GLM_window.cueon.prop(7:8,:))
+plot(-.5:.1:.5,GLM_window.cueon.prop(7:8,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Trial,GLM_window_SHUFF.cueon.prop.SEM.Trial,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Previous,GLM_window_SHUFF.cueon.prop.SEM.Previous,'--r',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
-ylim([0 .5]); title('Task history'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Trial,GLM_window_SHUFF.cueon.prop.SEM.Trial,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Previous,GLM_window_SHUFF.cueon.prop.SEM.Previous,'--r',1);
+for iTime = 1:length(Table.cueon.Outcome.Zscore_recode)
+    if Table.cueon.Trial.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.cueon.Previous.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','r')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
+ylim([0 .5]); title('Task history'); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 legend({'trial number' 'previous trial'});
+
 subplot(2,3,4)
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Location,GLM_window_SHUFF.cueon.Rsquared.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Outcome,GLM_window_SHUFF.cueon.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 8]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Location,GLM_window_SHUFF.cueon.Rsquared.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Outcome,GLM_window_SHUFF.cueon.Rsquared.SEM.Outcome,'--y',1);
+ylim([1 8]); 
+  y = ylabel('Percent improvement to R-Squared');
+set(y, 'position', get(y,'position')+[-.0005,0,0]); 
+xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 subplot(2,3,5)
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(4,:),GLM_window.cueon.Rsquared.SEM(4,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(4,:),GLM_window.cueon.Rsquared.SEM(4,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(5,:),GLM_window.cueon.Rsquared.SEM(5,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Approach,GLM_window_SHUFF.cueon.Rsquared.SEM.Approach,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Latency,GLM_window_SHUFF.cueon.Rsquared.SEM.Latency,'--r',1);
-ylim([1 8]); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(5,:),GLM_window.cueon.Rsquared.SEM(5,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Approach,GLM_window_SHUFF.cueon.Rsquared.SEM.Approach,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Latency,GLM_window_SHUFF.cueon.Rsquared.SEM.Latency,'--r',1);
+ylim([1 8]); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 subplot(2,3,6)
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(6,:),GLM_window.cueon.Rsquared.SEM(6,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(6,:),GLM_window.cueon.Rsquared.SEM(6,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(7,:),GLM_window.cueon.Rsquared.SEM(7,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Trial,GLM_window_SHUFF.cueon.Rsquared.SEM.Trial,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Previous,GLM_window_SHUFF.cueon.Rsquared.SEM.Previous,'--r',1);
-ylim([1 8]); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(7,:),GLM_window.cueon.Rsquared.SEM(7,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Trial,GLM_window_SHUFF.cueon.Rsquared.SEM.Trial,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Previous,GLM_window_SHUFF.cueon.Rsquared.SEM.Previous,'--r',1);
+ylim([1 8]); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 
 %% all epochs w SHUFF
 figure;
 subplot(2,3,1)
-plot(-.25:.1:.75,GLM_window.cueon.prop(2:4,:))
+plot(-.5:.1:.5,GLM_window.cueon.prop(2:4,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Modality,GLM_window_SHUFF.cueon.prop.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Location,GLM_window_SHUFF.cueon.prop.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.prop.MEAN.Outcome,GLM_window_SHUFF.cueon.prop.SEM.Outcome,'--y',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Modality,GLM_window_SHUFF.cueon.prop.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Location,GLM_window_SHUFF.cueon.prop.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.prop.MEAN.Outcome,GLM_window_SHUFF.cueon.prop.SEM.Outcome,'--y',1);
+for iTime = 1:length(Table.cueon.Outcome.Zscore_recode)
+    if Table.cueon.Modality.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.03 .03], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.cueon.Location.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','r')
+    end
+    if Table.cueon.Outcome.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','y')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
 % legend({'identity' 'location' 'outcome'}); 
 title('Cue features aligned to cue-onset'); ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([0 .5]); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
+
 subplot(2,3,2)
-plot(-.25:.1:.75,GLM_window.NP.prop(2:4,:))
+plot(-.5:.1:.5,GLM_window.NP.prop(2:4,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.prop.MEAN.Modality,GLM_window_SHUFF.NP.prop.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.prop.MEAN.Location,GLM_window_SHUFF.NP.prop.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.prop.MEAN.Outcome,GLM_window_SHUFF.NP.prop.SEM.Outcome,'--y',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.prop.MEAN.Modality,GLM_window_SHUFF.NP.prop.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.prop.MEAN.Location,GLM_window_SHUFF.NP.prop.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.prop.MEAN.Outcome,GLM_window_SHUFF.NP.prop.SEM.Outcome,'--y',1);
+for iTime = 1:length(Table.NP.Outcome.Zscore_recode)
+    if Table.NP.Modality.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.03 .03], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.NP.Location.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','r')
+    end
+    if Table.NP.Outcome.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','y')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
 % legend({'identity' 'location' 'outcome'});
 title('Cue features aligned to nosepoke'); % ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time from nosepoke (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([0 .5]); xlabel('GLM start relative to nosepoke (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
+
 subplot(2,3,3)
-plot(-.25:.1:.75,GLM_window.outcome.prop(2:4,:))
+plot(-.5:.1:.5,GLM_window.outcome.prop(2:4,:))
 hold on
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.prop.MEAN.Modality,GLM_window_SHUFF.outcome.prop.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.prop.MEAN.Location,GLM_window_SHUFF.outcome.prop.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.prop.MEAN.Outcome,GLM_window_SHUFF.outcome.prop.SEM.Outcome,'--y',1);
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.prop.MEAN.Modality,GLM_window_SHUFF.outcome.prop.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.prop.MEAN.Location,GLM_window_SHUFF.outcome.prop.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.prop.MEAN.Outcome,GLM_window_SHUFF.outcome.prop.SEM.Outcome,'--y',1);
+for iTime = 1:length(Table.outcome.Outcome.Zscore_recode)
+    if Table.outcome.Modality.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.03 .03], '-k', 'LineWidth',2,'color','b')
+    end
+    if Table.outcome.Location.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.02 .02], '-k', 'LineWidth',2,'color','r')
+    end
+    if Table.outcome.Outcome.Zscore_recode(iTime) == 1
+        plot([-.65+(iTime*.1) -.55+(iTime*.1)],[.01 .01], '-k', 'LineWidth',2,'color','y')
+    end
+end
+plot(-.05,0.01:.01:.5,'.k'); plot(-.45,0.01:.01:.5,'.k');
 % legend({'identity' 'location' 'outcome'});
 title('Cue features aligned to outcome'); %ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time from outcome (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+ylim([0 .5]); xlabel('GLM start relative to outcome (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
+
 subplot(2,3,4)
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(1,:),GLM_window.cueon.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Location,GLM_window_SHUFF.cueon.Rsquared.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.cueon.Rsquared.MEAN.Outcome,GLM_window_SHUFF.cueon.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 10]); ylabel('Percent improvement to R-Squared'); xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(2,:),GLM_window.cueon.Rsquared.SEM(2,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.cueon.Rsquared.MEAN(3,:),GLM_window.cueon.Rsquared.SEM(3,:),'-y',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Modality,GLM_window_SHUFF.cueon.Rsquared.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Location,GLM_window_SHUFF.cueon.Rsquared.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.cueon.Rsquared.MEAN.Outcome,GLM_window_SHUFF.cueon.Rsquared.SEM.Outcome,'--y',1);
+ylim([1 10]); ylabel('Percent improvement to R-Squared'); xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 subplot(2,3,5)
-shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(1,:),GLM_window.NP.Rsquared.SEM(1,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.NP.Rsquared.MEAN(1,:),GLM_window.NP.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(2,:),GLM_window.NP.Rsquared.SEM(2,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window.NP.Rsquared.MEAN(3,:),GLM_window.NP.Rsquared.SEM(3,:),'-y',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Modality,GLM_window_SHUFF.NP.Rsquared.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Location,GLM_window_SHUFF.NP.Rsquared.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.NP.Rsquared.MEAN.Outcome,GLM_window_SHUFF.NP.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 10]);  xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.NP.Rsquared.MEAN(2,:),GLM_window.NP.Rsquared.SEM(2,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.NP.Rsquared.MEAN(3,:),GLM_window.NP.Rsquared.SEM(3,:),'-y',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.Rsquared.MEAN.Modality,GLM_window_SHUFF.NP.Rsquared.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.Rsquared.MEAN.Location,GLM_window_SHUFF.NP.Rsquared.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.NP.Rsquared.MEAN.Outcome,GLM_window_SHUFF.NP.Rsquared.SEM.Outcome,'--y',1);
+ylim([1 10]);  xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 subplot(2,3,6)
-shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(1,:),GLM_window.outcome.Rsquared.SEM(1,:),'-b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.outcome.Rsquared.MEAN(1,:),GLM_window.outcome.Rsquared.SEM(1,:),'-b',1);
 hold on
-plot(.2,1:.2:10,'.k'); plot(-.2,1:.2:10,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(2,:),GLM_window.outcome.Rsquared.SEM(2,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(3,:),GLM_window.outcome.Rsquared.SEM(3,:),'-y',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Modality,GLM_window_SHUFF.outcome.Rsquared.SEM.Modality,'--b',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Location,GLM_window_SHUFF.outcome.Rsquared.SEM.Location,'--r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.outcome.Rsquared.MEAN.Outcome,GLM_window_SHUFF.outcome.Rsquared.SEM.Outcome,'--y',1);
-ylim([1 10]);  xlabel('Time from cue-onset (s)'); set(gca,'FontSize',18); xlim([-.25 .75]);
+plot(-.05,1:.2:10,'.k'); plot(-.45,1:.2:10,'.k');
+shadedErrorBar(-.5:.1:.5,GLM_window.outcome.Rsquared.MEAN(2,:),GLM_window.outcome.Rsquared.SEM(2,:),'-r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window.outcome.Rsquared.MEAN(3,:),GLM_window.outcome.Rsquared.SEM(3,:),'-y',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.Rsquared.MEAN.Modality,GLM_window_SHUFF.outcome.Rsquared.SEM.Modality,'--b',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.Rsquared.MEAN.Location,GLM_window_SHUFF.outcome.Rsquared.SEM.Location,'--r',1);
+shadedErrorBar(-.5:.1:.5,GLM_window_SHUFF.outcome.Rsquared.MEAN.Outcome,GLM_window_SHUFF.outcome.Rsquared.SEM.Outcome,'--y',1);
+ylim([1 10]);  xlabel('GLM start relative to cue-onset (s)'); set(gca,'FontSize',20); xlim([-.5 .5]);
 
 %%
 for iList = 2:length(predictor_list)

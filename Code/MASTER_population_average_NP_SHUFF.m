@@ -657,7 +657,7 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 title('Cue-modulated units that increased post cue-onset');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 subplot(3,2,2)
 shadedErrorBar(pref_time,popSHUFF_fig.rule_encoding.pref.DEC.MEAN,popSHUFF_fig.rule_encoding.pref.DEC.SEM,'-r',1);
@@ -672,7 +672,7 @@ box off;
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
 title('Cue-modulated units that decreased post cue-onset');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 %% plot for location
 peak_value = [];
@@ -724,7 +724,7 @@ box off;
  xlabel('Time from nosepoke (s)');
  ylabel('Normalized firing rate');
 % title('Increased');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 subplot(3,2,4)
 shadedErrorBar(one_time,popSHUFF_fig.location_encoding.one.DEC.MEAN,popSHUFF_fig.location_encoding.one.DEC.SEM,'-m',1);
@@ -741,7 +741,7 @@ ylabel('Normalized firing rate');
  xlabel('Time from nosepoke (s)');
 % ylabel('Firing rate (Hz)');
 % title('Decreased');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 %% plot for outcome (normalized)
 peak_value = [];
@@ -781,7 +781,7 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 % title('Increased');
-set(gca,'FontSize',16);
+set(gca,'FontSize',17);
 
 subplot(3,2,6)
 shadedErrorBar(pref_time,popSHUFF_fig.outcome_encoding.pref.DEC.MEAN,popSHUFF_fig.outcome_encoding.pref.DEC.SEM,'-r',1);
@@ -794,7 +794,7 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
  
 % title('Decreased');
 
@@ -844,7 +844,7 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 title('Cue-modulated units that increased post cue-onset');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 subplot(3,2,2)
 shadedErrorBar(pref_time,rule_encoding.zscore.pref.DEC.AVG.MEAN,rule_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
@@ -864,7 +864,7 @@ box off;
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
 title('Cue-modulated units that decreased post cue-onset');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 %% plot for location
 peak_value = [];
@@ -922,7 +922,7 @@ box off;
  xlabel('Time from nosepoke (s)');
  ylabel('Normalized firing rate');
 % title('Increased');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 subplot(3,2,4)
 shadedErrorBar(one_time,location_encoding.zscore.one.DEC.AVG.MEAN,location_encoding.zscore.one.DEC.AVG.SEM,'-m',1);
@@ -946,7 +946,7 @@ ylabel('Normalized firing rate');
  xlabel('Time from nosepoke (s)');
 % ylabel('Firing rate (Hz)');
 % title('Decreased');
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
 
 %% plot for outcome (normalized)
 peak_value = [];
@@ -991,7 +991,7 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 % title('Increased');ее
-set(gca,'FontSize',16);
+set(gca,'FontSize',17);
 
 subplot(3,2,6)
 shadedErrorBar(pref_time,outcome_encoding.zscore.pref.DEC.AVG.MEAN,outcome_encoding.zscore.pref.DEC.AVG.SEM,'-r',1);
@@ -1009,6 +1009,6 @@ box off;
 xlabel('Time from nosepoke (s)');
 ylabel('Normalized firing rate');
 %  set(gca,'YTick',[]);
- set(gca,'FontSize',16);
+ set(gca,'FontSize',17);
  
 % title('Decreased');

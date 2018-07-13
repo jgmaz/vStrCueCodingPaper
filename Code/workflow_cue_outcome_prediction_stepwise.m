@@ -1569,37 +1569,53 @@ for iTime = -.5:.1:.5
                 if RANK.two.Trial > 975 || RANK.two.Trial < 26
                     if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
                         
-                        shuff_FRate = [];
-                        for iShuff = 1:100
-                            shuff_FRate(:,1) = datasample(dataset(:,9),length(dataset(:,9)),'Replace',false);
+%                         shuff_FRate = [];
+%                         for iShuff = 1:100
+%                             shuff_FRate(:,1) = datasample(dataset(:,9),length(dataset(:,9)),'Replace',false);
                             x{1} = dataset(:,2);
-                            x{2} = cat(2,dataset(:,2),shuff_FRate(:,1));
+                            x{2} = cat(2,dataset(:,2),dataset(:,9));
+%                             x{2} = cat(2,dataset(:,2),shuff_FRate(:,1));
                             y = dataset(:,3);
                             
                             for iMdl = 1:length(mdl_identifier)
                                 try
                                     yfit = @(xtrain,ytrain,xtest)(glmCUE(xtrain,ytrain,xtest)');
-                                    cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = crossval('mse',x{iMdl},y,'predfun',yfit);
+                                    cvMcr{t_count}(count,iMdl) = crossval('mcr',x{iMdl},y,'predfun',yfit);
+%                                cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = crossval('mse',x{iMdl},y,'predfun',yfit);
                                 catch
-                                    cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = NaN;
+                                    cvMcr{t_count}(count,iMdl) = NaN;
+%                                      cvMse.(cat(2,'s',num2str(iShuff))){t_count}(count,iMdl) = NaN;
                                 end
                             end
-                        end
+%                         end
                         count = count + 1;
                     end
                 end
         end
     end
-    for iShuff = 1:100
-        cvMse_diff.(cat(2,'s',num2str(iShuff)))(:,t_count) = cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,1) - cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,2);
-    end
+%     for iShuff = 1:100
+        cvMcr_diff(:,t_count) = cvMcr{t_count}(:,1) - cvMcr{t_count}(:,2);
+%         cvMse_diff.(cat(2,'s',num2str(iShuff)))(:,t_count) = cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,1) - cvMse.(cat(2,'s',num2str(iShuff))){t_count}(:,2);
+%     end
 end
 %%
 for t_count = 1:11
  cvMse_diff(:,t_count) = cvMse{t_count}(:,1) - cvMse{t_count}(:,2);
 end
 
+%%
+for iShuff = 1:100
+    cvMse_SHUFF.ALL(iShuff,:) = nanmean(cvMse_diff_SHUFF.(cat(2,'s',num2str(iShuff))));
+end
+
+cvMse_SHUFF.MEAN = mean(cvMse_SHUFF.ALL);
+cvMse_SHUFF.SEM = std(cvMse_SHUFF.ALL) / sqrt(length(cvMse_SHUFF.ALL));
+
+%%
+
 figure
+violin(cvMse_SHUFF.ALL,'FaceColor',[0 0 0],'LineColor',[1 0 0])
+hold on;
 violin(cvMse_diff);
 set(gca,'XTickLabel',{'Pre-cue',' ',' ',' ',' ','Cue',' ',' ',' ',' ',' '})
 % ylim([0 12]);

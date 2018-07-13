@@ -1317,10 +1317,17 @@ set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
 ylim([0 12]);
 ylabel('Percent improvement to R-Squared')
 
-%% plot for paper
+%% plot for paper (data setup)
 %add rows
+GLM_matrices.Rsquared.SPN_Inc(:,length(GLM_matrices.Rsquared.SPN_Inc(1,:))+1:11) = 0;
+GLM_matrices.Rsquared.HFN_Inc(:,length(GLM_matrices.Rsquared.HFN_Inc(1,:))+1:11) = 0;
+GLM_matrices.Rsquared.HFN_Dec(:,length(GLM_matrices.Rsquared.HFN_Dec(1,:))+1:11) = 0;
+
 %add (6) spaces between SPN and HFNs
-GLM_matrices.Rsquared.cat_combined = cat(1,abs(GLM_matrices.Rsquared.SPN_Inc),abs(GLM_matrices.Rsquared.SPN_Dec)*-1,abs(GLM_matrices.Rsquared.HFN_Inc),abs(GLM_matrices.Rsquared.HFN_Dec)*-1)';
+Place_holder(1:6,1:11) = 0;
+
+%concat cell types
+GLM_matrices.Rsquared.cat_combined = cat(1,abs(GLM_matrices.Rsquared.SPN_Inc),abs(GLM_matrices.Rsquared.SPN_Dec)*-1,Place_holder,abs(GLM_matrices.Rsquared.HFN_Inc),abs(GLM_matrices.Rsquared.HFN_Dec)*-1)';
 for iCell = length(GLM_matrices.Rsquared.cat_combined):-1:1
     for iFeature = 1:length(GLM_matrices.Rsquared.cat_combined(:,iCell))
     if GLM_matrices.Rsquared.cat_combined(iFeature,iCell) > 100 || GLM_matrices.Rsquared.cat_combined(iFeature,iCell) < -100
@@ -1330,7 +1337,7 @@ for iCell = length(GLM_matrices.Rsquared.cat_combined):-1:1
     end
 end
 
-%%
+%% Plot
 rColorMap = [linspace(233/255, 255/255, 183),linspace(255/255, 161/255, 73)];
     gColorMap = [linspace(163/255, 255/255, 183),linspace(255/255, 215/255, 73)];
     bColorMap = [linspace(201/255, 255/255, 183),linspace(255/255, 106/255, 73)];
@@ -1345,15 +1352,15 @@ heatmap(GLM_matrices.Rsquared.cat_combined(1:7,:),  'RowLabels', {'Cue identity'
 xlabel('Unit number');
 % xlabel('MSNs increasing      MSNs decreasing          FSIs increasing        FSIs decreasing')
 title('GLM matrix for cue-modulated units');  
-set(gca,'FontSize',18);
+set(gca,'FontSize',22);
 hold on; plot(108,1:.001:7,'.k'); % plot(108,1:.001:10,'.k');
 subplot(3,12,[8 9 10 11 12 20 21 22 23 24])
 violin(GLM_matrices.Rsquared.MEAN.ALL_NaN(:,1:7));
-set(gca,'XTickLabel',{'Identity','Location','Outcome','Approach','Trial length','Trial number','Previous'},'XTickLabelRotation',45)
+set(gca,'XTickLabel',{'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous'},'XTickLabelRotation',45)
 % ylim([0 12]);
 ylabel('Percent improvement to R-Squared')
 title('Summary of changes to model fit')
-set(gca,'FontSize',18);
+set(gca,'FontSize',22);
 
 %%
 

@@ -13,7 +13,7 @@ example_types = {'Cue identity - increasing','Cue identity - decreasing',...
 figure
 
   for i = 1:length(example_cells)
-    load(example_cells{4});
+    load(example_cells{i});
     meta = metadata;
 disp(i);
 
@@ -40,7 +40,7 @@ set(gca, 'Ytick',y_values);
     y = ylabel('Firing rate (Hz)');
 set(y, 'position', get(y,'position')+[.14,0,0]); 
      end
-    set(gca,'FontSize',16)%,'YTick',[]);
+    set(gca,'FontSize',18)%,'YTick',[]);
 
     case 2
 %% trials separated by arm location
@@ -68,7 +68,7 @@ maximum_value = max(peak_value);
 xlabel('Time from cue onset (s)');
      y_values =[0 round(maximum_value/5)*5];
 set(gca, 'Ytick',y_values);
-set(gca,'FontSize',16)%,'YTick',[]);
+set(gca,'FontSize',18)%,'YTick',[]);
 
     case 3    
 %% rew v unrew trials
@@ -92,7 +92,7 @@ set(gca, 'Ytick',y_values);
     y = ylabel('Firing rate (Hz)');
 set(y, 'position', get(y,'position')+[.14,0,0]); 
      end
-set(gca,'FontSize',16)%,'YTick',[]);
+set(gca,'FontSize',18)%,'YTick',[]);
 
     case 4
 %% loc x out
@@ -138,7 +138,7 @@ photosensor1_rew_time = -5:.001:10;
 xlabel('Time from cue onset (s)');
      y_values =[0 round(maximum_value/5)*5];
 set(gca, 'Ytick',y_values);
-set(gca,'FontSize',16)%,'YTick',[]);
+set(gca,'FontSize',18)%,'YTick',[]);
 
     case 5
 %% mod x out
@@ -167,7 +167,7 @@ maximum_value = max(peak_value);
 set(gca, 'Ytick',y_values);
 %     ylabel('Firing rate (Hz)');
  box off;
-  set(gca,'FontSize',16)%,'YTick',[]);
+  set(gca,'FontSize',18)%,'YTick',[]);
 
 end
 
@@ -275,7 +275,7 @@ y_values = [length(metadata.TrialInfo_block1.trialT)/2   length(metadata.TrialIn
 y_labels ={'Block 1' 'Block 2'};
 set(gca, 'Ytick',y_values,'YTickLabel',y_labels,'YTickLabelRotation',90);
  end
-set(gca,'FontSize',16);
+set(gca,'FontSize',18);
 title(example_types{i})
 
     case 1
@@ -381,7 +381,7 @@ y_values = [length(metadata.TrialInfo{1,1}.trialT)/2   length(metadata.TrialInfo
 y_labels ={'Block 1' 'Block 2'};
 set(gca, 'Ytick',y_values,'YTickLabel',y_labels,'YTickLabelRotation',90);
  end
-set(gca,'FontSize',16);
+set(gca,'FontSize',18);
 title(example_types{i})
 end
 
@@ -389,4 +389,4 @@ clearvars -except load_var mat_files i example_cells example_coding example_fig_
 i = i + 1;
   end
   
-  tic; print(gcf,'-depsc','E:\examples2.eps'); toc;
+%   tic; print(gcf,'-depsc','E:\examples2.eps'); toc;

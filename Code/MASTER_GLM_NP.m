@@ -1207,10 +1207,16 @@ set(gca,'XTickLabel',{'','Cue modality','','Cue location','','Cue outcome'})
 % ylim([0 12]);
 ylabel('Percent improvement to R-Squared')
 
-%% plot for paper
+%% plot for paper (data setup)
+
 %add row for HFN_inc
+GLM_matrices.Rsquared.HFN_Inc(:,length(GLM_matrices.Rsquared.HFN_Inc(1,:))+1) = 0;
+
 %add (6) spaces between SPN and HFNs
-GLM_matrices.Rsquared.cat_combined = cat(1,abs(GLM_matrices.Rsquared.SPN_Inc),abs(GLM_matrices.Rsquared.SPN_Dec)*-1,abs(GLM_matrices.Rsquared.HFN_Inc),abs(GLM_matrices.Rsquared.HFN_Dec)*-1)';
+Place_holder(1:6,1:3) = 0;
+
+%concat SPNs and HFNs
+GLM_matrices.Rsquared.cat_combined = cat(1,abs(GLM_matrices.Rsquared.SPN_Inc),abs(GLM_matrices.Rsquared.SPN_Dec)*-1,Place_holder,abs(GLM_matrices.Rsquared.HFN_Inc),abs(GLM_matrices.Rsquared.HFN_Dec)*-1)';
 for iCell = length(GLM_matrices.Rsquared.cat_combined):-1:1
     for iFeature = 1:length(GLM_matrices.Rsquared.cat_combined(:,iCell))
     if GLM_matrices.Rsquared.cat_combined(iFeature,iCell) > 100 || GLM_matrices.Rsquared.cat_combined(iFeature,iCell) < -100
@@ -1220,7 +1226,7 @@ for iCell = length(GLM_matrices.Rsquared.cat_combined):-1:1
     end
 end
 
-%%
+%% Plot
 rColorMap = [linspace(233/255, 255/255, 123),linspace(255/255, 161/255, 133)];
     gColorMap = [linspace(163/255, 255/255, 123),linspace(255/255, 215/255, 133)];
     bColorMap = [linspace(201/255, 255/255, 123),linspace(255/255, 106/255, 133)];
@@ -1233,7 +1239,7 @@ heatmap(GLM_matrices.Rsquared.cat_combined,  'RowLabels', {'Cue identity','Cue l
         'FontSize', 0,'Colorbar', true);   
 xlabel('Unit number');
 title('GLM matrix for cue-modulated units aligned to nosepoke');  
-set(gca,'FontSize',18);
+set(gca,'FontSize',22);
 hold on; plot(110,.75:.001:3.25,'.k');
 
 subplot(3,12,[8 9 10 11 12 20 21 22 23 24])
@@ -1241,4 +1247,4 @@ violin(GLM_matrices.Rsquared.MEAN.ALL_NaN);
 set(gca,'XTickLabel',{'','Cue modality','','Cue location','','Cue outcome'})
 ylabel('Percent improvement to R-Squared')
 title('Summary of changes to model fit')
-set(gca,'FontSize',18);
+set(gca,'FontSize',22);

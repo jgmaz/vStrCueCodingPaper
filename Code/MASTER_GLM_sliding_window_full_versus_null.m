@@ -284,6 +284,9 @@ for iTime = -.5:.1:.5
                 
                 if sum(dataset(:,8)) > 10
                     %%
+
+                    
+                    
                     ds = array2table(dataset,'VariableNames',{'Previous','Outcome','Modality','Location','Approach','Latency','Trial','FiringRate'});
                     modelspec = {'FiringRate ~ 1 + Outcome + Modality + Location + Previous + Approach + Latency + Trial',...
                         'FiringRate ~ 1 + Outcome + Location + Previous + Approach + Latency + Trial',...
