@@ -726,39 +726,60 @@ conditions across cue features.
 
 {\bf NAc units dynamically segment the task:}
 
-Given the varied time courses and response profiles of NAc units to various
-aspects of the cue, the NAc may be computing a temporally evolving state value
-signal \cite{Pennartz2011}. If this is the case, then the recruitment of NAc units
-should vary alongside changes in the environment. To look at the distribution of
-responses throughout our task space and see if this distribution is modulated by
-cue features, we z-scored the firing rate of each unit and plotted the
-normalized firing rates of all units aligned to cue-onset and sorted them
-according to the time of peak firing rate (Figure \ref{fig:tiling}). We did this
-separately for both the light and sound blocks, and found a nearly uniform
-distribution of firing fields in task space that was not limited to alignment to
-the cue (Figure \ref{fig:tiling}A). Furthermore, to determine if this population
-level activity was similar across blocks, we also organized firing during the
-sound blocks according to the ordering derived from the light blocks. This revealed that while there was some preservation of order, the overall firing was qualitatively different
-across the two blocks, implying that population activity distinguishes between light and sound blocks. To control for the possibility that any comparison of
-trials would produce this effect, we did a within block comparison, comparing
-half of the trials in the light block against the other half. This comparison
-looked similar to our test comparison of sound block trials ordered by light
-block trials. Additionally, given that the majority of our units showed an
-inhibitory response to the cue, we also plotted the firing rates according to
-the lowest time in firing, and again found some maintenance of order, but
-largely different ordering across the two blocks, and the within block
-comparison (Figure \ref{fig:tiling}D). To further test this, we divided each
-block into two halves and looked at the correlation of the average smoothed
-firing rates across various combinations of these halves across our cue-aligned
-centered epoch. A linear mixed effects model revealed that within block
-correlations (e.g. one half of light trials vs other half of light trials) were
-higher and more similar than across block correlations (e.g. half of light
-trials vs half of sound trials) suggesting that activity in the NAc
-discriminates across various cue conditions (within block correlations = .383 (light), .379 (sound); across block correlations = .343, .338, .337, .348; within block vs.\ within block comparison = p $=$ .934; within block vs.\ across block comparisons = p $<$ .001). This process was repeated for cue location (Figure \ref{fig:tiling}B,E; within block correlations = .369 (arm 1), .350 (arm 2); across block correlations = .290, .286, .285, .291; within block vs.\ within block comparison = p $=$ .071; within block vs.\ across block comparisons = p $<$ .001) and cue outcome (Figure \ref{fig:tiling}C,F;  within block correlations = .429 (reward-available), .261 (reward-unavailable); across block correlations = .258, .253, .255, .249; within block vs.\ within block comparison = p $<$ .001; within block vs.\ across block comparisons = p $<$ .001), showing that NAc segmentation of the task is qualitatively
-different even during those parts of the task not immediately associated with a
-specific cue, action, or outcome, although the within condition comparison of
-reward-unavailable trials was less correlated than reward-available trials, and
-more similar to the across condition comparisons, potentially due do the greater behavioral variability for the reward-unavailable trials.
+Next, we sought to determine how coding of cue features evolved over
+time. Two main possibilities can be distinguished (Figure 1, bottom),
+a unit coding for a feature such as cue outcome could remain
+persistently active, or a progression of distinct units could activate
+in sequence. To visualize the distribution of responses throughout our
+task space and test if this distribution is modulated by cue features,
+we z-scored the firing rate of each unit and plotted the normalized
+firing rates of all units aligned to cue-onset and sorted them
+according to the time of peak firing rate (Figure
+\ref{fig:tiling}). We did this separately for both the light and sound
+blocks, and found a nearly uniform distribution of firing fields in
+task space that was not limited to alignment to the cue (Figure
+\ref{fig:tiling}A). Furthermore, to determine if this population level
+activity was similar across blocks, we also organized firing during
+the sound blocks according to the ordering derived from the light
+blocks. This revealed that while there was some preservation of order,
+the overall firing was qualitatively different across the two blocks,
+implying that population activity distinguishes between light and
+sound blocks. To control for the possibility that any comparison of
+trials would produce this effect, we did a within block comparison,
+comparing half of the trials in the light block against the other
+half. This comparison looked similar to our test comparison of sound
+block trials ordered by light block trials. Additionally, given that
+the majority of our units showed an inhibitory response to the cue, we
+also plotted the firing rates according to the lowest time in firing,
+and again found some maintenance of order, but largely different
+ordering across the two blocks, and the within block comparison
+(Figure \ref{fig:tiling}D). To further test this, we divided each
+block into two halves and looked at the correlation of the average
+smoothed firing rates across various combinations of these halves
+across our cue-aligned centered epoch. A linear mixed effects model
+revealed that within block correlations (e.g. one half of light trials
+vs other half of light trials) were higher and more similar than
+across block correlations (e.g. half of light trials vs half of sound
+trials) suggesting that activity in the NAc discriminates across
+various cue conditions (within block correlations = .383 (light), .379
+(sound); across block correlations = .343, .338, .337, .348; within
+block vs.\ within block comparison = p $=$ .934; within block
+vs.\ across block comparisons = p $<$ .001). This process was repeated
+for cue location (Figure \ref{fig:tiling}B,E; within block
+correlations = .369 (arm 1), .350 (arm 2); across block correlations =
+.290, .286, .285, .291; within block vs.\ within block comparison = p
+$=$ .071; within block vs.\ across block comparisons = p $<$ .001) and
+cue outcome (Figure \ref{fig:tiling}C,F; within block correlations =
+.429 (reward-available), .261 (reward-unavailable); across block
+correlations = .258, .253, .255, .249; within block vs.\ within block
+comparison = p $<$ .001; within block vs.\ across block comparisons =
+p $<$ .001), showing that NAc segmentation of the task is
+qualitatively different even during those parts of the task not
+immediately associated with a specific cue, action, or outcome,
+although the within condition comparison of reward-unavailable trials
+was less correlated than reward-available trials, and more similar to
+the across condition comparisons, potentially due do the greater
+behavioral variability for the reward-unavailable trials.
 
  \begin{figure}[ht!]
 \centering
