@@ -413,13 +413,14 @@ rng('shuffle')
 
 mat_files = dir('*.mat');
 t_count = 0;
+num_Shuffs = 100;
 
 for iTime = -.5:.1:.5
     t_count = t_count + 1;
     count = 1;
     cell_count = 1;
     
-    for iShuff = 1:25
+    for iShuff = 1:num_Shuffs
     LDA_raw_input{t_count}.(cat(2,'s',num2str(iShuff)))(1:240,1:133) = NaN;
     end
     
@@ -512,7 +513,7 @@ for iTime = -.5:.1:.5
                                     
                                     trials_count = trials_count + 1;
                                 end
-                                for iShuff = 1:25
+                                for iShuff = 1:num_Shuffs
                                     FRate_shuff = datasample(firing_rate,length(firing_rate),'Replace',false);
                                     arm1_rew_count = 1;
                                     arm2_rew_count = 16;
@@ -666,7 +667,7 @@ for iTime = -.5:.1:.5
                                     
                                     trials_count = trials_count + 1;
                                 end
-                                for iShuff = 1:25
+                                for iShuff = 1:num_Shuffs
                                     FRate_shuff = datasample(firing_rate,length(firing_rate),'Replace',false);
                                     arm1_rew_count = 1;
                                     arm2_rew_count = 16;
@@ -1042,7 +1043,7 @@ end
 
 %%
 for iTime = 1:length(LDA_raw_input) 
-    for iShuff = 1:25
+    for iShuff = 1:100
     for iMdl = 1:length(mdl_identifier)
         disp(cat(2,'Mdl ',num2str(iMdl),' (',num2str(iTime),')'))
         Label_loop = unique(Labels.(mdl_identifier{iMdl}));
@@ -1060,10 +1061,10 @@ end
 
 %%
 for iTime = 1:length(LDA_raw_input) %note, skipped 4 and 5
-    for iShuff = 1:25
+    for iShuff = 1:100
         for iMdl = 1:length(mdl_identifier)
             disp(cat(2,'Mdl ',num2str(iMdl),' (',num2str(iTime),')'))
-            for iteration = 1:25
+            for iteration = 1:100
                 LDA_Mdl = fitcdiscr(LDA_fixed_input.(mdl_identifier{iMdl}){iTime}.(cat(2,'s',num2str(iShuff)))(1:240,:),Labels.(mdl_identifier{iMdl}));
                 LDA_cv = crossval(LDA_Mdl);
                 LDA_Error.(mdl_identifier{iMdl}).(cat(2,'s',num2str(iShuff)))(iteration,iTime) = kfoldLoss(LDA_cv);
@@ -1073,7 +1074,7 @@ for iTime = 1:length(LDA_raw_input) %note, skipped 4 and 5
 end
 
 %% 
-for iShuff = 1:25
+for iShuff = 1:100
     for iMdl = 1:length(mdl_identifier)
         LDA_Error_SHUFF.(mdl_identifier{iMdl})(iShuff,:) = nanmean(LDA_Error.(mdl_identifier{iMdl}).(cat(2,'s',num2str(iShuff))));
     end
