@@ -634,31 +634,15 @@ Class_accuracy.(mdl_identifier{iMdl}) = 1 - LDA_Error.(mdl_identifier{iMdl});
 end
 
 %% Plot LDA
+
+for iMdl = 1:3
+prev_trial_fig(:,iMdl) = Class_accuracy.(mdl_identifier{iMdl})(:,6);
+end
+
+%%
 figure
-for iMdl = 1:3%length(mdl_identifier)
-subplot(3,3,iMdl)
-violin(Class_accuracy.(mdl_identifier{iMdl}));
-set(gca,'XTickLabel',{'','','','','','','','','','',''})
+violin(prev_trial_fig)
+set(gca,'XTickLabel',{'','Modality','','Location','','Outcome'})
 ylim([0 1])
-hold on;
-switch iMdl
-    case 1
-plot(0:.25:22,.5,'.','color','black');
-    case 2
-plot(0:.25:22,.25,'.','color','black');
-    case 3
-plot(0:.25:22,.5,'.','color','black');
-    case 4
-plot(0:.25:22,.125,'.','color','black');
 ylabel('Classification accuracy')
-    case 5
-plot(0:.25:22,.25,'.','color','black');
-    case 6
-plot(0:.25:22,.125,'.','color','black');
-    case 7
-plot(0:.25:22,.0625,'.','color','black');
-xlabel('Starting time')
-end
-title(mdl_identifier{iMdl})
-set(gca,'FontSize',18);
-end
+title('Predicting trial type based on previous trial cue')
