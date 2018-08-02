@@ -1,5 +1,7 @@
 cell_files = dir('*.mat');
 cue_mod(1:443) = 0;
+cue_MSN(1:443) = 0;
+cue_FSI(1:443) = 0;
 
 for kk = 1:length(dir('*.mat'))
     load(cell_files(kk).name);
@@ -23,6 +25,14 @@ for kk = 1:length(dir('*.mat'))
             if RANK.two.Trial > 975 || RANK.two.Trial < 26
                 if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
                     cue_mod(kk) = 1 ;
+                    
+                    isi = diff(spk_t);
+                    sorted_isi = sort(isi,'descend');
+                    if sorted_isi(5) < 2
+                        cue_FSI(kk) = 1;
+                    else
+                        cue_MSN(kk) = 1;
+                    end
                 end
             end
     end
@@ -30,76 +40,95 @@ end
 
 %%
 Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
-Predictors = {'Modality' 'Location' 'Outcome'};    
+Predictors = {'Modality' 'Location' 'Outcome'};
 for iEpoch = 1:3%:length(Epoch)
     switch iEpoch
         case 1
-            % mat_files = dir('2018-03-12-GLM_cueon*');
-            mat_files = dir('E:\Jimmie\Jimmie\Analysis\2018-03*');
-            % predictor_list = {'Cue' 'Modality' 'Location' 'Outcome' 'Approach' 'Latency' 'Trial' 'Previous' ...
-            %     'ModxLoc' 'ModxOut' 'LocxOut' 'OutxApp' 'ModxLocxOut'};
-            % file_order = {'2018-05-24-GLM_cueon_-0.5-recodePrevTrial.mat' '2018-05-24-GLM_cueon_-0.4-recodePrevTrial.mat' '2018-05-24_cueon_-0.3-recodePrevTrial.mat' ...
-            %     '2018-05-24-GLM_cueon_-0.2-recodePrevTrial.mat' '2018-05-24-GLM_cueon_-0.1-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0.1-recodePrevTrial.mat' ...
-            %     '2018-05-24-GLM_cueon_0.2-recodePrevTrial.mat' '2018-05-24-GLM_cueon_0.3-recodePrevTrial.mat' '2018-03-12-GLM_cueon_0.4.mat' '2018-03-12-GLM_cueon_0.5.mat'};
-            file_order = {'2018-03-12-GLM_cueon_-0.5.mat' '2018-03-12-GLM_cueon_-0.4.mat' '2018-03-12-GLM_cueon_-0.3.mat' ...
-                '2018-03-12-GLM_cueon_-0.2.mat' '2018-03-12-GLM_cueon_-0.1.mat' '2018-03-12-GLM_cueon_0.mat' '2018-03-12-GLM_cueon_0.1.mat' ...
-                '2018-03-12-GLM_cueon_0.2.mat' '2018-03-12-GLM_cueon_0.3.mat' '2018-03-12-GLM_cueon_0.4.mat' '2018-03-12-GLM_cueon_0.5.mat'};
+            mat_files = dir('2018-03-24-GLM_cueon*');
+            predictor_list = {'Cue' 'Modality' 'Location' 'Outcome' 'Approach' 'Latency' 'Trial' 'Previous'};
         case 2
-            mat_files = dir('E:\Jimmie\Jimmie\Analysis\2018-03-*');
-            % predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
-            file_order = {'2018-03-12-GLM_NP_-0.5-500bin.mat' '2018-03-12-GLM_NP_-0.4-500bin.mat' '2018-03-12-GLM_NP_-0.3-500bin.mat' ...
-                '2018-03-12-GLM_NP_-0.2-500bin.mat' '2018-03-12-GLM_NP_-0.1-500bin.mat' '2018-03-12-GLM_NP_0-500bin.mat' '2018-03-12-GLM_NP_0.1-500bin.mat' ...
-                '2018-03-12-GLM_NP_0.2-500bin.mat' '2018-03-12-GLM_NP_0.3-500bin.mat' '2018-03-12-GLM_NP_0.4-500bin.mat' '2018-03-12-GLM_NP_0.5-500bin.mat'};
+            mat_files = dir('2018-03-26-GLM_NP*');
+            predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
         case 3
-            mat_files = dir('E:\Jimmie\Jimmie\Analysis\2018-03-*');
-            % predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
-            file_order = {'2018-03-23-GLM_outcome_-0.5.mat' '2018-03-23-GLM_outcome_-0.4.mat' '2018-03-23-GLM_outcome_-0.3.mat' ...
-                '2018-03-23-GLM_outcome_-0.2.mat' '2018-03-23-GLM_outcome_-0.1.mat' '2018-03-23-GLM_outcome_0.mat' '2018-03-23-GLM_outcome_0.1.mat' ...
-                '2018-03-23-GLM_outcome_0.2.mat' '2018-03-23-GLM_outcome_0.3.mat' '2018-03-23-GLM_outcome_0.4.mat' '2018-03-23-GLM_outcome_0.5.mat'};
+            mat_files = dir('2018-03-26-GLM_outcome*');
+            predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
         case 4
-            mat_files = dir('E:\Jimmie\Jimmie\Analysis\2018-03-12-GLM_cueoff*');
-            % predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
-            file_order = {'2018-03-12-GLM_cueoff_-0.5.mat' '2018-03-12-GLM_cueoff_-0.4.mat' '2018-03-12-GLM_cueoff_-0.3.mat' ...
-                '2018-03-12-GLM_cueoff_-0.2.mat' '2018-03-12-GLM_cueoff_-0.1.mat' '2018-03-12-GLM_cueoff_0.mat' '2018-03-12-GLM_cueoff_0.1.mat' ...
-                '2018-03-12-GLM_cueoff_0.2.mat' '2018-03-12-GLM_cueoff_0.3.mat' '2018-03-12-GLM_cueoff_0.4.mat' '2018-03-12-GLM_cueoff_0.5.mat'};
+            mat_files = dir('2018-03-12-GLM_cueoff*');
+predictor_list = {'Cue' 'Modality' 'Location' 'Outcome'};
+% file_order = {'2018-03-12-GLM_cueoff_-0.5-500bin.mat' '2018-03-12-GLM_cueoff_-0.4-500bin.mat' '2018-03-12-GLM_cueoff_-0.3-500bin.mat' ...
+%     '2018-03-12-GLM_cueoff_-0.2-500bin.mat' '2018-03-12-GLM_cueoff_-0.1-500bin.mat' '2018-03-12-GLM_cueoff_0-500bin.mat' '2018-03-12-GLM_cueoff_0.1-500bin.mat' ...
+%     '2018-03-12-GLM_cueoff_0.2-500bin.mat' '2018-03-12-GLM_cueoff_0.3-500bin.mat' '2018-03-12-GLM_cueoff_0.4-500bin.mat' '2018-03-12-GLM_cueoff_0.5-500bin.mat'};
     end
-    
-    for iGLM = 1:length(file_order)
+    % for iGLM = 1:length(file_order)
+    iWindow = -.5:.1:.5;
+    for iGLM = 1:length(iWindow)
+        if iEpoch == 1
+            current_file = cat(2,'2018-03-24-GLM_',Epoch{iEpoch},'_',num2str(iWindow(iGLM)),'.mat');
+        elseif iEpoch == 4
+            current_file = cat(2,'2018-03-12-GLM_',Epoch{iEpoch},'_',num2str(iWindow(iGLM)),'-500bin.mat');
+        else
+            current_file = cat(2,'2018-03-26-GLM_',Epoch{iEpoch},'_',num2str(iWindow(iGLM)),'-round1.mat');
+        end
         for iFind = 1:length(mat_files)
-            if strcmp(mat_files(iFind).name,file_order{iGLM}) == 1
-                load(strcat('E:\Jimmie\Jimmie\Analysis\',mat_files(iFind).name),'ALL_matrix');                                            
-                           
+            if strcmp(mat_files(iFind).name,current_file) == 1
+                load(strcat('E:\Jimmie\Jimmie\Analysis\',mat_files(iFind).name),'ALL_matrix');
+                
                 for iPred = 1:length(Predictors)
-                    disp(cat(2,'Epoch ',num2str(iEpoch),' (file #',num2str(iGLM),') Pred ',num2str(iPred))); 
+                    disp(cat(2,'Epoch ',num2str(iEpoch),' (file #',num2str(iGLM),') Pred ',num2str(iPred)));
                     count = 1;
+%                     count_MSN = 1;
+%                     count_FSI = 1;
                     GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(1:133,iGLM) = 0;
+                    GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).ALL(1:133,iGLM) = 0;
+                    GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).MSN(1:109,iGLM) = 0;
+                    GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).FSI(1:24,iGLM) = 0;
                     for iCMod = 1:length(cue_mod)
-                       if iCMod <= length(ALL_matrix)
-                    if cue_mod(iCMod) == 1
-                        if ALL_matrix(iCMod,iPred) == 1
-                            GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(count,iGLM) = 1;
+                        if iCMod <= length(ALL_matrix)
+                            if cue_mod(iCMod) == 1
+                                if ALL_matrix(iCMod,iPred) == 1
+                                    GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(count,iGLM) = 1;
+                                    GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).ALL(count,iGLM) = 1;                                    
+                                    if cue_MSN(iCMod) == 1
+                                        GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).MSN(sum(cue_MSN(1:iCMod)),iGLM) = 1;
+%                                         count_MSN = count_MSN + 1;
+                                    elseif cue_FSI(iCMod) == 1
+                                        GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).FSI(sum(cue_FSI(1:iCMod)),iGLM) = 1;
+%                                         count_FSI = count_FSI + 1;
+                                    end
+                                    
+                                end
+                                count = count + 1;
+                            end
                         end
-                        count = count + 1;
                     end
-                    end 
-                    end
-                end                        
+                end
             end
         end
     end
 end
 
 %%
+Class = {'ALL' 'MSN' 'FSI'};
+Total_count = [133 109 24];
+
 for iEpoch = 1:3
     for iEpoch2 = 1:3
         for iGLM = 1:11
             for iGLM2 = 1:11
                 for iPred = 1:3
-                [GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),GLM_recode.(Epoch{iEpoch2}).(Predictors{iPred})(:,iGLM2));
-                 GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
-                 GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                    [GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),GLM_recode.(Epoch{iEpoch2}).(Predictors{iPred})(:,iGLM2));
+                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
+                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                    for iClass = 1:3
+                    GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).CountOverlap(iGLM,iGLM2) = sum(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM) == 1 & GLM_unitType.RAW.(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass})(:,iGLM2) == 1); 
+                    GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).Proportion(iGLM,iGLM2) = GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).CountOverlap(iGLM,iGLM2) / sum(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM));
+                    GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).PropTotal(iGLM,iGLM2) = GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).CountOverlap(iGLM,iGLM2) / Total_count(iClass);
+                    
+                    [GLM_unitType.corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_unitType.corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM),GLM_unitType.RAW.(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass})(:,iGLM2));
+                    GLM_unitType.coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).RecodeCorr(iGLM,iGLM2) = GLM_unitType.corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
+                    GLM_unitType.coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_unitType.corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                    end
                 end
-                
             end
         end
     end
@@ -111,77 +140,362 @@ for iEpoch = 1:3
         for iGLM2 = 1:11
             for iPred = 1:3
                 for iPred2 = 1:3
-                [GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),GLM_recode.(Epoch{iEpoch}).(Predictors{iPred2})(:,iGLM2));
-                 GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
-                 GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                    [GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),GLM_recode.(Epoch{iEpoch}).(Predictors{iPred2})(:,iGLM2));
+                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
+                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                for iClass = 1:3
+                    GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).CountOverlap(iGLM,iGLM2) = sum(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM) == 1 & GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred2}).(Class{iClass})(:,iGLM2) == 1); 
+                    GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).Proportion(iGLM,iGLM2) = GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).CountOverlap(iGLM,iGLM2) / sum(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM));
+                    GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).PropTotal(iGLM,iGLM2) = GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).CountOverlap(iGLM,iGLM2) / Total_count(iClass);
+                    
+                [GLM_unitType.corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr GLM_unitType.corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues] = corrcoef(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass})(:,iGLM),GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{iPred2}).(Class{iClass})(:,iGLM2));
+                    GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).RecodeCorr(iGLM,iGLM2) = GLM_unitType.corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorr(2);
+                    GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).RecodeCorrPvalues(iGLM,iGLM2) = GLM_unitType.corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).RecodeCorrPvalues(2);
+                end
                 end
                 
             end
         end
     end
-end    
+end
 
 %%
+start = 6; %use 1 or 6, when you want start of analysis
+
 for iEpoch = 1:3
     
     GLM_coeff.summary.(Epoch{iEpoch}).Corr = [];
     GLM_coeff.summary.(Epoch{iEpoch}).Pvalue = [];
+    for iClass = 1:3
+            GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Overlap = [];
+             GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Proportion = [];
+              GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).PropTotal = [];
+              GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr = [];
+    GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue = [];
+            end
     for iPred = 1:3
         GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr = [];
         GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue = [];
         GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr = [];
-    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue = [];
+        GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue = [];
+        for iClass = 1:3
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllOverlap = [];
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllProportion = [];
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPropTotal = [];
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredOverlap = [];
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredProportion = [];
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredPropTotal = [];
+        
+        GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Corr = [];
+        GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Pvalue = [];
+        GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Corr = [];
+        GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Pvalue = [];
+        end
         if iEpoch == 1
             GLM_coeff.summary.(Predictors{iPred}).Corr = [];
             GLM_coeff.summary.(Predictors{iPred}).Pvalue = [];
+            for iClass = 1:3
+            GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Overlap = [];
+             GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Proportion = [];
+              GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).PropTotal = [];
+              
+              GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr = [];
+            GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue = [];
+            end
         end
         for iEpoch2 = 1:3
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorr(6:11,6:11));
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorrPvalues(6:11,6:11));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorr(start:11,start:11));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).RecodeCorrPvalues(start:11,start:11));
+        for iClass = 1:3
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllOverlap = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllOverlap,GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).CountOverlap(start:11,start:11));
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllProportion = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllProportion,GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).Proportion(start:11,start:11));
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPropTotal = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPropTotal,GLM_unitType.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).PropTotal(start:11,start:11));
+        
+        GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Corr = cat(2,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Corr,GLM_unitType.coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).RecodeCorr(start:11,start:11));
+            GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Pvalue = cat(2,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Pvalue,GLM_unitType.coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(Class{iClass}).RecodeCorrPvalues(start:11,start:11));
+        end
         end
         GLM_coeff.summary.(Predictors{iPred}).Corr = cat(1,GLM_coeff.summary.(Predictors{iPred}).Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Corr);
         GLM_coeff.summary.(Predictors{iPred}).Pvalue = cat(1,GLM_coeff.summary.(Predictors{iPred}).Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).ALL_Pvalue);
-    for iPred2 = 1:3
-        GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorr(6:11,6:11));
-        GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorrPvalues(6:11,6:11));
-    end
+        for iClass = 1:3
+            GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Overlap = cat(1,GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Overlap,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllOverlap);
+             GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Proportion = cat(1,GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).Proportion,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllProportion);
+              GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).PropTotal = cat(1,GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).PropTotal,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPropTotal);
+        
+              GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr = cat(1,GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Corr);
+        GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue = cat(1,GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).ALL_Pvalue);
+        end
+        for iPred2 = 1:3
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorr(start:11,start:11));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).RecodeCorrPvalues(start:11,start:11));
+        for iClass = 1:3
+            GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredOverlap = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredOverlap,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).CountOverlap(start:11,start:11));
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredProportion = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredProportion,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).Proportion(start:11,start:11));
+        GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredPropTotal = cat(2,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredPropTotal,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).PropTotal(start:11,start:11));
+       
+         GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Corr = cat(2,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Corr,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).RecodeCorr(start:11,start:11));
+            GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Pvalue = cat(2,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Pvalue,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(Class{iClass}).RecodeCorrPvalues(start:11,start:11));       
+        end
+        end
         GLM_coeff.summary.(Epoch{iEpoch}).Corr = cat(1,GLM_coeff.summary.(Epoch{iEpoch}).Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Corr);
-    GLM_coeff.summary.(Epoch{iEpoch}).Pvalue = cat(1,GLM_coeff.summary.(Epoch{iEpoch}).Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue);
+        GLM_coeff.summary.(Epoch{iEpoch}).Pvalue = cat(1,GLM_coeff.summary.(Epoch{iEpoch}).Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).AllPred_Pvalue);
+        for iClass = 1:3
+            GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Overlap = cat(1,GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Overlap,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredOverlap);
+            GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Proportion = cat(1,GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).Proportion,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredProportion);
+            GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).PropTotal = cat(1,GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).PropTotal,GLM_unitType.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPredPropTotal);
+       
+        GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr = cat(1,GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Corr);
+        GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue = cat(1,GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue,GLM_unitType.coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Class{iClass}).AllPred_Pvalue);        
+        end
     end
 end
+
+%% overlap among all cue features or epochs
+for iEpoch = 1:3
+AllOverlap.(Epoch{iEpoch}) = sum(GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{1}).(Class{1})(:,6) == 1 & GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{2}).(Class{1})(:,6) == 1 & GLM_unitType.RAW.(Epoch{iEpoch}).(Predictors{3}).(Class{1})(:,6) == 1); 
+end
+
+for iPred = 1:3
+AllOverlap.(Predictors{iPred}) = sum(GLM_unitType.RAW.(Epoch{1}).(Predictors{iPred}).(Class{1})(:,6) == 1 & GLM_unitType.RAW.(Epoch{2}).(Predictors{iPred}).(Class{1})(:,6) == 1 & GLM_unitType.RAW.(Epoch{3}).(Predictors{iPred}).(Class{1})(:,6) == 1); 
+end
+
 %%
-rColorMap = [linspace(233/255, 255/255, 183),linspace(255/255, 161/255, 73)];
-    gColorMap = [linspace(163/255, 255/255, 183),linspace(255/255, 215/255, 73)];
-    bColorMap = [linspace(201/255, 255/255, 183),linspace(255/255, 106/255, 73)];
+% rColorMap = [linspace(233/255, 255/255, 183),linspace(255/255, 161/255, 73)];
+% gColorMap = [linspace(163/255, 255/255, 183),linspace(255/255, 215/255, 73)];
+% bColorMap = [linspace(201/255, 255/255, 183),linspace(255/255, 106/255, 73)];
+% colorMap = [rColorMap; gColorMap; bColorMap]';
+% 
+% mincolor = .01;
+% maxcolor = .2;
+% figure
+% for iPred = 1:3
+%     %     subplot(2,3,iPred)
+%     figure
+%     GLM_coeff.summary.(Predictors{iPred}).Pvalue(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
+%     
+%     heatmap(GLM_coeff.summary.(Predictors{iPred}).Pvalue,[],[],'%0.2f','ColorMap', flipud(colorMap),...% 'Colorbar',true, ...
+%         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0])%...
+%     %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+%     % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+%     hold on
+%     plot([6.5 6.5],[0.5 18.5],'k'); plot([.5 18.5],[6.5 6.5],'k');
+%     plot([12.5 12.5],[0.5 18.5],'k'); plot([.5 18.5],[12.5 12.5],'k');
+%     title(Predictors{iPred})
+% end
+% 
+% %%
+% for iEpoch = 1:3
+%     %     subplot(2,3,iEpoch+3)
+%     figure
+%     GLM_coeff.summary.(Epoch{iEpoch}).Pvalue(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue == 0)=NaN;
+%     
+%     heatmap(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue,[],[],'%0.2f','ColorMap', flipud(colorMap),...% 'Colorbar',true, ...
+%         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0])%...
+%     %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+%     % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+%     hold on
+%     plot([6.5 6.5],[0.5 18.5],'k'); plot([.5 18.5],[6.5 6.5],'k');
+%     plot([12.5 12.5],[0.5 18.5],'k'); plot([.5 18.5],[12.5 12.5],'k');
+%     title(Epoch{iEpoch})
+% end
+
+%%
+Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
+Predictors = {'Modality' 'Location' 'Outcome'};
+
+rColorMap = [linspace(233/255, 255/255, 73),linspace(255/255, 161/255, 183)]; %77
+gColorMap = [linspace(163/255, 255/255, 73),linspace(255/255, 215/255, 183)]; %146
+bColorMap = [linspace(201/255, 255/255, 73),linspace(255/255, 106/255, 183)]; %33
 colorMap = [rColorMap; gColorMap; bColorMap]';
 
-mincolor = .01;
-maxcolor = .2;
-figure
+labels = {'0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+labels_cue = {'Cue identity','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue location','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+mincolor = -.4;
+maxcolor = .7; %.8;
+% figure
 for iPred = 1:3
-    subplot(2,3,iPred)
-    GLM_coeff.summary.(Predictors{iPred}).Pvalue(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
+    %     subplot(2,3,iPred)
+    figure
+    GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
+    GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue > .05)=NaN;
     
-heatmap(GLM_coeff.summary.(Predictors{iPred}).Pvalue,[],[],'%0.2','ColorMap', flipud(colorMap),...% 'Colorbar',true, ...
-    'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0])%...
-%    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
-% set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
-hold on
-plot([6.5 6.5],[0.5 18.5],'k'); plot([.5 18.5],[6.5 6.5],'k');
-plot([12.5 12.5],[0.5 18.5],'k'); plot([.5 18.5],[12.5 12.5],'k');
-title(Predictors{iPred})
+    heatmap(GLM_coeff.summary.(Predictors{iPred}).Corr,labels,labels,'%0.1f','ColorMap',colorMap,... 'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    % title(Predictors{iPred})
+    % xlabel('cue onset')
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+     y = ylabel('Outcome                   Nosepoke                   Cue-onset');
+     x = xlabel('Cue-onset                        Nosepoke                         Outcome');
+% set(y, 'position', get(y,'position')+[.01,0,0]); 
 end
 
+%%
 for iEpoch = 1:3
-    subplot(2,3,iEpoch+3)
-    GLM_coeff.summary.(Epoch{iEpoch}).Pvalue(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue == 0)=NaN;
+    %     subplot(2,3,iEpoch+3)
+    figure
+    GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue == 0)=NaN;
+    GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue > .05)=NaN;
     
-heatmap(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue,[],[],'%0.2','ColorMap', flipud(colorMap),...% 'Colorbar',true, ...
-    'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0])%...
-%    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
-% set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
-hold on
-plot([6.5 6.5],[0.5 18.5],'k'); plot([.5 18.5],[6.5 6.5],'k');
-plot([12.5 12.5],[0.5 18.5],'k'); plot([.5 18.5],[12.5 12.5],'k');
-title(Epoch{iEpoch})
+    heatmap(GLM_coeff.summary.(Epoch{iEpoch}).Corr,labels,labels,'%0.1f','ColorMap',colorMap,... 'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    % title(Epoch{iEpoch})
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+     y = ylabel('Cue outcome              Cue location               Cue identity');
+     x = xlabel('Cue identity                      Cue location                     Cue outcome');
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Cue type other
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
+Predictors = {'Modality' 'Location' 'Outcome'};
+
+rColorMap = [linspace(255/255, 161/255, 256)]; %77
+gColorMap = [linspace(255/255, 215/255, 256)]; %146
+bColorMap = [linspace(255/255, 106/255, 256)]; %33
+colorMap = [rColorMap; gColorMap; bColorMap]';
+
+labels = {'Cue-onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Nosepoke','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+labels_cue = {'Cue identity','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue location','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+% mincolor = -.4;
+% maxcolor = .7; %.8;
+Type = {'Overlap' 'Proportion' 'PropTotal'};
+for iType = 1%1:3
+% figure
+iPlot = 1;
+for iPred = 1:3
+    for iClass = 1:3
+%          subplot(3,3,iPlot)
+         iPlot = iPlot+1;
+    figure
+%     GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue == 0)=NaN;
+%  GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr(eye(size(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue)) == 1)=NaN;
+%     GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).(Type{iType})(GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).(Type{iType}) < .4)=NaN;
+    
+    heatmap(GLM_unitType.summary.(Predictors{iPred}).(Class{iClass}).(Type{iType}),labels,labels,'%0.0f','ColorMap',colorMap,'NaNColor', [0 0 0])%,... 'Colorbar',true, ...
+%         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    title(strcat(Predictors{iPred},' (',Class{iClass},')'))
+    % xlabel('cue onset')
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+    end
+end
+end
+
+%%
+for iType = 1%1:3
+% figure
+iPlot = 1;
+for iEpoch = 1:3
+    for iClass = 1%:3
+%         subplot(3,3,iPlot)
+    figure
+iPlot = iPlot + 1;
+%     GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue < .0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001)=NaN;
+% GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(eye(size(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue)) == 1)=NaN;
+%     GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue > .05)=NaN;
+% GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).(Type{iType})(GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).(Type{iType}) < .4)=NaN;    
+
+        heatmap(GLM_unitType.summary.(Epoch{iEpoch}).(Class{iClass}).(Type{iType}),labels_cue,labels_cue,'%0.0f','ColorMap',colorMap,'NaNColor', [0 0 0])%... 'Colorbar',true, ...
+%         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %     heatmap(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr,labels_cue,labels_cue,'%0.1f','ColorMap',colorMap,... 'Colorbar',true, ...
+
+    %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    title(strcat(Epoch{iEpoch},' (',Class{iClass},')'))
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+    end
+end
+end
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% CELL TYPE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
+Predictors = {'Modality' 'Location' 'Outcome'};
+
+rColorMap = [linspace(233/255, 255/255, 73),linspace(255/255, 161/255, 183)]; %77
+gColorMap = [linspace(163/255, 255/255, 73),linspace(255/255, 215/255, 183)]; %146
+bColorMap = [linspace(201/255, 255/255, 73),linspace(255/255, 106/255, 183)]; %33
+colorMap = [rColorMap; gColorMap; bColorMap]';
+
+labels = {'Cue-onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Nosepoke','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+labels_cue = {'Cue identity','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue location','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+mincolor = -.4;
+maxcolor = .7; %.8;
+figure
+iPlot = 1;
+for iPred = 1:3
+    for iClass = 1:3
+         subplot(3,3,iPlot)
+         iPlot = iPlot+1;
+%     figure
+%     GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue == 0)=NaN;
+ GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr(eye(size(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue)) == 1)=NaN;
+    GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Pvalue > .05)=NaN;
+    
+    heatmap(GLM_unitType.coeff.summary.(Predictors{iPred}).(Class{iClass}).Corr,[],[],[],'ColorMap',colorMap,... 'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    title(strcat(Predictors{iPred},' (',Class{iClass},')'))
+    % xlabel('cue onset')
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+    end
+end
+
+%%
+figure
+iPlot = 1;
+for iEpoch = 1:3
+    for iClass = 1:3
+        subplot(3,3,iPlot)
+%     figure
+iPlot = iPlot + 1;
+%     GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue < .0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001)=NaN;
+GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(eye(size(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue)) == 1)=NaN;
+    GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Pvalue > .05)=NaN;
+    
+        heatmap(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr,[],[],[],'ColorMap',colorMap,... 'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0 0 0], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %     heatmap(GLM_unitType.coeff.summary.(Epoch{iEpoch}).(Class{iClass}).Corr,labels_cue,labels_cue,'%0.1f','ColorMap',colorMap,... 'Colorbar',true, ...
+
+    %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[6.5 6.5],'k','LineWidth',2);
+    plot([12.5 12.5],[0.51 18.49],'k','LineWidth',2); plot([.51 18.49],[12.5 12.5],'k','LineWidth',2);
+    title(strcat(Epoch{iEpoch},' (',Class{iClass},')'))
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+    end
 end

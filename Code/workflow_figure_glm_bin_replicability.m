@@ -5,7 +5,7 @@
 
 Epoch = {'cueon' 'NP' 'outcome'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
 Round = {'R1' 'R2' 'R3' 'R4' 'R5'};
-for iEpoch = 1%:length(Epoch)
+for iEpoch = 1:3%:length(Epoch)
 disp(iEpoch)
 switch iEpoch
     case 1
@@ -59,10 +59,11 @@ GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop = GLM_window.(Epoch{iEpoch}).(Ro
 end
 end
 %%
-for iEpoch = 2:3%1:length(Epoch)
-    for iRound = 1:2%:5
-figure(iEpoch);
-subplot(2,5,iRound)
+figure
+for iEpoch = 1:3%1:length(Epoch)
+    for iRound = 1%:2%:5
+% figure(iEpoch);
+subplot(2,5,iEpoch)
 plot(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop(2:4,:))
 hold on
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.(Epoch{iEpoch}).prop.MEAN.Modality,GLM_window_SHUFF.(Epoch{iEpoch}).prop.SEM.Modality,'--b',1);
@@ -73,7 +74,7 @@ plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
 title('Cue features'); ylabel('Proportion of cue-modulated units')
 ylim([0 .5]); xlabel(cat(2,'Time relative to ',Epoch{iEpoch}));
 
-subplot(2,5,iRound+5)
+subplot(2,5,iEpoch+5)
 shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(1,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(1,:),'-b',1);
 hold on
 plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:8,'.k');
@@ -84,39 +85,39 @@ shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.(Epoch{iEpoch}).Rsquared.MEAN.Locati
 shadedErrorBar(-.25:.1:.75,GLM_window_SHUFF.(Epoch{iEpoch}).Rsquared.MEAN.Outcome,GLM_window_SHUFF.(Epoch{iEpoch}).Rsquared.SEM.Outcome,'--y',1);
 ylim([1 8]); ylabel('Mean variance explained'); xlabel(cat(2,'Time relative to ',Epoch{iEpoch}));
 
-if iEpoch == 1
-figure(4);
-subplot(2,5,iRound)
-plot(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop(5:6,:))
-hold on
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
-% legend({'identity' 'location' 'outcome'}); 
-title('Behavioral measures'); ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time relative to cue-onset');
-
-subplot(2,5,iRound+5)
-shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(4,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(4,:),'-b',1);
-hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:8,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(5,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(5,:),'-r',1);
-ylim([1 8]); ylabel('Mean variance explained'); xlabel('Time relative to cue-onset'); 
-
-figure(5);
-subplot(2,5,iRound)
-plot(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop(7:8,:))
-hold on
-plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
-% legend({'identity' 'location' 'outcome'}); 
-title('Task history'); ylabel('Proportion of cue-modulated units')
-ylim([0 .5]); xlabel('Time relative to cue-onset');
-
-subplot(2,5,iRound+5)
-shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(6,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(6,:),'-b',1);
-hold on
-plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:8,'.k');
-shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(7,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(7,:),'-r',1);
-ylim([1 8]); ylabel('Mean variance explained'); xlabel('Time relative to cue-onset');    
-end
+% if iEpoch == 1
+% figure(4);
+% subplot(2,5,iRound)
+% plot(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop(5:6,:))
+% hold on
+% plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% % legend({'identity' 'location' 'outcome'}); 
+% title('Behavioral measures'); ylabel('Proportion of cue-modulated units')
+% ylim([0 .5]); xlabel('Time relative to cue-onset');
+% 
+% subplot(2,5,iRound+5)
+% shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(4,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(4,:),'-b',1);
+% hold on
+% plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:8,'.k');
+% shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(5,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(5,:),'-r',1);
+% ylim([1 8]); ylabel('Mean variance explained'); xlabel('Time relative to cue-onset'); 
+% 
+% figure(5);
+% subplot(2,5,iRound)
+% plot(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).prop(7:8,:))
+% hold on
+% plot(.2,0.01:.01:.5,'.k'); plot(-.2,0.01:.01:.5,'.k');
+% % legend({'identity' 'location' 'outcome'}); 
+% title('Task history'); ylabel('Proportion of cue-modulated units')
+% ylim([0 .5]); xlabel('Time relative to cue-onset');
+% 
+% subplot(2,5,iRound+5)
+% shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(6,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(6,:),'-b',1);
+% hold on
+% plot(.2,1:.1:8,'.k'); plot(-.2,1:.1:8,'.k');
+% shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(7,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(7,:),'-r',1);
+% ylim([1 8]); ylabel('Mean variance explained'); xlabel('Time relative to cue-onset');    
+% end
 
     end
 end
@@ -191,12 +192,12 @@ hold on
 plot(.2,0.1:.01:.5,'.k'); plot(-.2,0.1:.01:.5,'.k');
 legend({'identity' 'location' 'outcome'}); title('Outcome');
 ylim([.1 .5]); xlabel('Time relative to outcome');
-subplot(2,4,4)
-plot(-.25:.1:.75,GLM_window.cueoff.prop(2:4,:))
-hold on
-plot(.2,0.1:.01:.5,'.k'); plot(-.2,0.1:.01:.5,'.k');
-legend({'identity' 'location' 'outcome'}); title('Cue-offset');
-ylim([.1 .5]); xlabel('Time relative to cue-offset');
+% subplot(2,4,4)
+% plot(-.25:.1:.75,GLM_window.cueoff.prop(2:4,:))
+% hold on
+% plot(.2,0.1:.01:.5,'.k'); plot(-.2,0.1:.01:.5,'.k');
+% legend({'identity' 'location' 'outcome'}); title('Cue-offset');
+% ylim([.1 .5]); xlabel('Time relative to cue-offset');
 subplot(2,4,5)
 shadedErrorBar(-.25:.1:.75,GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.MEAN(1,:),GLM_window.(Epoch{iEpoch}).(Round{iRound}).Rsquared.SEM(1,:),'-b',1);
 hold on;
@@ -218,10 +219,10 @@ shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(2,:),GLM_window.outc
 shadedErrorBar(-.25:.1:.75,GLM_window.outcome.Rsquared.MEAN(3,:),GLM_window.outcome.Rsquared.SEM(3,:),'-y',1);
 plot(.2,2:.1:10,'.k'); plot(-.2,2:.1:10,'.k');
 ylim([2 10]); xlabel('Time relative to outcome');
-subplot(2,4,8)
-shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(1,:),GLM_window.cueoff.Rsquared.SEM(1,:),'-b',1);
-hold on;
-shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(2,:),GLM_window.cueoff.Rsquared.SEM(2,:),'-r',1);
-shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(3,:),GLM_window.cueoff.Rsquared.SEM(3,:),'-y',1);
-plot(.2,2:.1:10,'.k'); plot(-.2,2:.1:10,'.k');
-ylim([2 10]); xlabel('Time relative to cue-offset');
+% subplot(2,4,8)
+% shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(1,:),GLM_window.cueoff.Rsquared.SEM(1,:),'-b',1);
+% hold on;
+% shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(2,:),GLM_window.cueoff.Rsquared.SEM(2,:),'-r',1);
+% shadedErrorBar(-.25:.1:.75,GLM_window.cueoff.Rsquared.MEAN(3,:),GLM_window.cueoff.Rsquared.SEM(3,:),'-y',1);
+% plot(.2,2:.1:10,'.k'); plot(-.2,2:.1:10,'.k');
+% ylim([2 10]); xlabel('Time relative to cue-offset');

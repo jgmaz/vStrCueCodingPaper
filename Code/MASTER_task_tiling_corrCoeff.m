@@ -761,3 +761,53 @@ Corr.out.mean.cond1 = nanmean(abs(Corr.out.cond.r1_v_un1));
 Corr.out.mean.cond2 = nanmean(abs(Corr.out.cond.r1_v_un2));
 Corr.out.mean.cond3 = nanmean(abs(Corr.out.cond.r2_v_un1));
 Corr.out.mean.cond4 = nanmean(abs(Corr.out.cond.r2_v_un2));
+
+%% RM ANOVA
+%table coeff, 1v2, lvs, subj)
+Predictor = {'mod' 'loc' 'out'};
+meas = {'A' 'B' 'D' 'E'}; % no C and F as they are 1v1 and 2v2, respectively.
+
+for iPred = 1:3
+    for iMeas = 1:length(meas)
+        startT = find(Corr.(Predictor{iPred}).LME.tbl.compType == meas{iMeas},1,'first');
+        endT = find(Corr.(Predictor{iPred}).LME.tbl.compType == meas{iMeas},1,'last');
+        count = 1;
+        for iData = startT:endT
+            RMA.(Predictor{iPred}).RAW(count,iMeas) = Corr.(Predictor{iPred}).LME.tbl.corrCoeff(iData);
+            count = count + 1;
+        end
+    end
+    RMA.(Predictor{iPred}).tbl = table(RMA.(Predictor{iPred}).RAW(:,1),RMA.(Predictor{iPred}).RAW(:,2),RMA.(Predictor{iPred}).RAW(:,3),RMA.(Predictor{iPred}).RAW(:,4),'VariableNames',{'w1' 'w2' 'a1' 'a2'});
+end
+
+%%
+f1 = [1 2 1 2];
+f2 = [1 2 2 1];
+
+for iPred = 1:3
+    RMA.(Predictor{iPred}).RAWcat = [];
+    RMA.(Predictor{iPred}).RAWf1 = [];
+    RMA.(Predictor{iPred}).RAWf2 = [];
+    RMA.(Predictor{iPred}).RAWid = [];
+    for iMeas = 1:length(meas)
+        temp1 = [];
+        temp2 = [];
+        temp3 = [];
+        RMA.(Predictor{iPred}).RAWcat = cat(1,RMA.(Predictor{iPred}).RAWcat,RMA.(Predictor{iPred}).RAW(:,iMeas));
+        temp1(1:length(RMA.(Predictor{iPred}).RAW(:,iMeas)),1) = f1(iMeas);
+        temp2(1:length(RMA.(Predictor{iPred}).RAW(:,iMeas)),1) = f2(iMeas);
+        temp3(:,1) = 1:length(RMA.(Predictor{iPred}).RAW(:,iMeas));
+        RMA.(Predictor{iPred}).RAWf1 = cat(1,RMA.(Predictor{iPred}).RAWf1,temp1);
+        RMA.(Predictor{iPred}).RAWf2 = cat(1,RMA.(Predictor{iPred}).RAWf2,temp2);
+        RMA.(Predictor{iPred}).RAWid = cat(1,RMA.(Predictor{iPred}).RAWid,temp3);       
+    end
+    RMA.(Predictor{iPred}).RMtbl = table(RMA.(Predictor{iPred}).RAWcat,categorical(RMA.(Predictor{iPred}).RAWf1),categorical(RMA.(Predictor{iPred}).RAWf2),RMA.(Predictor{iPred}).RAWid,...
+        'VariableNames',{'Corr' 'factor1' 'factor2' 'cellid'});
+%     RMA.(Predictor{iPred}).RM = fitrm(RMA.(Predictor{iPred}).RMtbl,'Corr ~ factor1*factor2','WithinDesign',within)
+end
+
+%%
+for iPred = 1:3
+    [RMA.(Predictor{iPred}).RM.p RMA.(Predictor{iPred}).RM.tbl RMA.(Predictor{iPred}).RM.stats] = anovan(RMA.(Predictor{iPred}).RAWcat,{categorical(RMA.(Predictor{iPred}).RAWf1),categorical(RMA.(Predictor{iPred}).RAWf2),categorical(RMA.(Predictor{iPred}).RAWid)},...
+    'model','interaction','random',[3]);
+end
