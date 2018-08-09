@@ -8,10 +8,10 @@ switch iFig
     case 1
     % example_cells = [229 179 438 86 116 194];
 example_cells = [229 438 116];
-example_types = {'Cue identity - same','Cue location - same','Cue outcome - same'};
+example_types = {'Identity coding (same)','Location coding (same)','Outcome coding (same)'};
     case 2
 example_cells = [179 86 194];
-example_types = {'Cue identity - different','Cue location - different','Cue outcome - different'};
+example_types = {'Identity coding (different)','Location coding (different)','Outcome coding (different)'};
 end
 %   example_coding = [1 1 2 2 3 3]; % what to visualize, 1 = modality, 2 = location, 3 = outcome, 4 = mod x loc, 5 = mod x outcome
 % example_fig_PETH = {9,25,10,26,11,27};
@@ -21,9 +21,9 @@ example_fig_raster = {[1 5],[2 6],[3 7]};
 % example_fig_PETH = {9,10,25,26,41,42};
 % example_fig_raster = {[1 5],[2 6],[17 21],[18 22],[33 37],[34 38]};
 
-%     'Cue identity x cue outcome','Cue identity x cue location'};
+%     'Identity coding x cue outcome','Identity coding x cue location'};
 
-%     'Cue identity x cue outcome','Cue identity x cue location'};
+%     'Identity coding x cue outcome','Identity coding x cue location'};
 figure
 mat_files = dir('*.mat');
   for i = 1:length(example_cells)
