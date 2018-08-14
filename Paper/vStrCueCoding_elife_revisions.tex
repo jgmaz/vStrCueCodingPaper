@@ -367,56 +367,7 @@ upon cue-onset across various cue conditions, showed sustained
 differences in firing across cue conditions, had transient responses
 to the cue, showed a ramping of activity starting at cue-onset, and
 showed elevated activity immediately preceding cue-onset (Figure
-\ref{fig:examples}).
-
-To characterize more formally whether these cue-evoked responses were
-modulated by various aspects of the task, we fit a forward selection
-stepwise generalized linear model (GLM) to each cue-modulated
-unit for 1 second post cue-onset. Fitting GLMs to all trials within a session revealed that a
-variety of task parameters accounted for a significant portion of
-firing rate variance in NAc cue-modulated units (Figure \ref{fig:Q1}A-B,\ref{fig:Q1SUPP1},
-Table \ref{tbl1}). Notably, there were units that discriminated
-between the light or sound block (28\% of cue-modulated units,
-accounting for 6\% of variance on average), between arms of the maze
-(38\% of cue-modulated units, accounting for 6\% of variance on
-average), and between the common portion of reward-available or
-reward-unavailable trials (26\% of cue-modulated units, accounting for
-4\% of variance on average), suggesting that the NAc encodes features
-of reward-predictive cues in addition to expected outcome (Figure
-\ref{fig:examples},\ref{fig:examplesSUPP1},\ref{fig:examplesSUPP2},\ref{fig:scat}). \bsf{UPDATE SECTION: To
-determine whether overlap of coding of cue features was different than
-expected by chance we correlated recoded beta coefficients from the
-GLMs (Figure \ref{fig:Q1}D). This revealed that cue identity was
-coded independently from both cue outcome (r $=$ -.018; p $=$ .840)
-and cue location (r $=$ .107; p $=$ .220), as determined by
-non-significant correlations, but that cue location and cue outcome
-were encoded jointly (r $=$ .221; p $=$ .011), as signified by a
-significant positive correlation. Chi-square tests depicted a similar
-pattern of results (cue identity and cue location = $\chi =$ .687, p
-$=$ .407; cue identity and cue outcome = $\chi =$ .022, p $=$ .882;
-cue location and cue outcome = $\chi =$ 3.02, p $=$ .082).} The GLM
-fitting was repeated for the first half of the trials in each stimulus
-block. This revealed a qualitatively similar pattern of results,
-suggesting that this selectivity is present early within a block
-(first half of block vs. all trials: 37 vs. 37, 45 vs. 50, and 25
-vs. 34 units for cue identity, cue location, and cue outcome,
-respectively). To control for differences that may have arisen do to
-different behavior at the choice point, we also analyzed our data for
-approach trials only. Comparison of the GLMs using only approach
-trials versus all trials was qualitatively similar (approach trials
-vs. all trials: 33 vs. 37, 45 vs. 50, and 28 vs. 34 units for cue
-identity, cue location, and cue outcome, respectively).  Additionally,
-a sliding window GLM centered on cue-onset revealed that cue identity
-and cue location contributed to the activity of a significant
-proportion of cue-modulated units throughout this epoch, whereas an
-increase in units encoding cue outcome became apparent after cue-onset
-(z-score $>1.96$ when comparing proportion of units to that observed
-when shuffling the firing rates before running the GLM, Figure
-\ref{fig:Q1}D). Together, these findings show that various cue
-features are represented in the NAc in overlapping populations, that
-cue modality is coded independently from cue outcome and cue location,
-and that cue outcome and cue location are coded jointly (Figure
-\ref{fig:schematic}).
+\ref{fig:examples},supplement 1,supplement 2).
 
 \begin{table}[p]
 \centering
@@ -443,35 +394,35 @@ Cue modulated units                      & 133         &24          &85         
 \hline
 \hspace{3mm}\textit{GLM aligned to cue-onset}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue identity       & 42 (28$\%$)        & 7 (29$\%$)          & 21 (25$\%$)          & 1 (17$\%$)          & 8 (44$\%$)\\
+\hspace{6mm}Cue identity       & 42 (32$\%$)        & 9 (38$\%$)          & 25 (29$\%$)          & 0 (-)          & 8 (44$\%$)\\
 \hline
-\hspace{6mm}Cue location       & 55 (38$\%$)       &13 (54$\%$)          & 27 (32$\%$)          & 3 (50$\%$)          & 7 (39$\%$)\\
+\hspace{6mm}Cue location       & 55 (41$\%$)       & 11 (46$\%$)          & 33 (39$\%$)          & 3 (50$\%$)          & 8 (44$\%$)\\
 \hline
-\hspace{6mm}Cue outcome       & 26 (26$\%$)         & 10 (42$\%$)          & 18 (21$\%$)        & 0 (-)          & 6 (33$\%$)\\
+\hspace{6mm}Cue outcome       & 26 (20$\%$)         & 5 (21$\%$)          & 15 (18$\%$)        & 1 (17$\%$)          & 5 (28$\%$)\\
 \hline
-\hspace{6mm}Approach behavior      & 32 (23$\%$)         & 8 (33$\%$)          & 18 (21$\%$)          & 1 (17$\%$)          & 4 (22$\%$)\\
+\hspace{6mm}Approach behavior      & 32 (24$\%$)         & 8 (33$\%$)          & 19 (22$\%$)          & 2 (33$\%$)          & 3 (17$\%$)\\
 \hline
-\hspace{6mm}Trial length       & 22 (19$\%$)        & 5 (21$\%$)          & 18 (21$\%$)         & 0 (-)         & 2 (11$\%$)\\
+\hspace{6mm}Trial length       & 22 (17$\%$)        & 5 (21$\%$)          & 14 (16$\%$)         & 0 (-)         & 3 (17$\%$)\\
 \hline
-\hspace{6mm}Trial number       & 42 (24$\%$)         & 11 (46$\%$)          & 12 (14$\%$)         & 1 (17$\%$)          & 8 (44$\%$)\\
+\hspace{6mm}Trial number       & 42 (32$\%$)         & 11 (46$\%$)          & 20 (24$\%$)         & 1 (17$\%$)          & 10 (56$\%$)\\
 \hline
-\hspace{6mm}Previous trial       & 8 (4$\%$)         & 0 (-)          &5 (6$\%$)          & 0 (-)          & 0 (-)\\
+\hspace{6mm}Previous trial       & 8 (6$\%$)         & 1 (4$\%$)          & 5 (6$\%$)          & 0 (-)          & 1 (6$\%$)\\
 \hline
 \hspace{3mm}\textit{GLM aligned to nosepoke}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue identity       & 28 (50$\%$)         &14 (58$\%$)          & 36 (42$\%$)          & 2 (33$\%$)          &14 (78$\%$)\\
+\hspace{6mm}Cue identity       & 28 (21$\%$)         & 3 (13$\%$)          & 17 (20$\%$)          & 2 (33$\%$)          & 6 (33$\%$)\\
 \hline
-\hspace{6mm}Cue location       & 30 (50$\%$)         &14 (58$\%$)          & 40 (47$\%$)          & 3 (50$\%$)          & 9 (50$\%$)\\
+\hspace{6mm}Cue location       & 30 (23$\%$)         & 2 (8$\%$)          & 21 (25$\%$)          & 2 (33$\%$)          & 5 (28$\%$)\\
 \hline
-\hspace{6mm}Cue outcome       & 23 (32$\%$)        & 8 (33$\%$)          & 29 (34$\%$)        & 0 (-)          & 5 (28$\%$)\\
+\hspace{6mm}Cue outcome       & 23 (17$\%$)        & 2 (8$\%$)          & 14 (16$\%$)        & 1 (17$\%$)          & 6 (33$\%$)\\
 \hline
 \hspace{3mm}\textit{GLM aligned to outcome}                       &         &       &          &          &\\
 \hline
-\hspace{6mm}Cue identity       & 25 (8$\%$)        & 0 (-)          & 6 (7$\%$)       & 0 (-)          &4 (22$\%$)\\
+\hspace{6mm}Cue identity       & 25 (19$\%$)        & 4 (17$\%$)          & 15 (18$\%$)       & 2 (33$\%$)          & 4 (22$\%$)\\
 \hline
-\hspace{6mm}Cue location       & 31 (8$\%$)        & 0 (-)          & 6 (7$\%$)       & 0 (-)          &4 (22$\%$)\\
+\hspace{6mm}Cue location       & 31 (23$\%$)        & 5 (21$\%$)          & 23 (27$\%$)       & 0 (-)          & 3 (17$\%$)\\
 \hline
-\hspace{6mm}Cue outcome       & 34 (8$\%$)        & 0 (-)          & 6 (7$\%$)       & 0 (-)          &4 (22$\%$)\\
+\hspace{6mm}Cue outcome       & 34 (26$\%$)        & 6 (25$\%$)          & 15 (18$\%$)       & 4 (67$\%$)          & 9 (50$\%$)\\
 \hline
 
 \end{tabular}
@@ -503,36 +454,24 @@ Cue modulated units                      & 133         &24          &85         
 \label{fig:examplesSUPP2}
 \end{figure} \clearpage
 
+To characterize more formally whether these cue-evoked responses were modulated by various aspects of the task, we fit a sliding window generalized linear model (GLM) using a forward selection stepwise procedure to the firing rate of each cue-modulated unit surrounding cue-onset, using a bin size of 500 ms for firing rate and a step size of 100 ms for the sliding window. Fitting GLMs to all trials within a session revealed that a variety of task parameters accounted for a significant portion of firing rate variance in NAc cue-modulated units (Figure \ref{fig:Q1}A,supplement 1,supplement 2, Table \ref{tbl1}). Notably, a significant proportion of units discriminated between the light and sound block ({\it identity coding}: $\sim$30\% of cue-modulated units, accounting for $\sim$5\% of firing rate variance) or the arms of the apparatus ({\it location coding}: $\sim$40\% of cue-modulated units, accounting for $\sim$4\% of firing rate variance) throughout the entire window surrounding cue-onset, whereas a substantial proportion of units discriminating between the common portion of reward-available and reward-unavailable trials ({\it outcome coding}: $\sim$25\% of cue-modulated units, accounting for $\sim$4\% of firing rate variance) was not observed until after the onset of the cue (z-score $>1.96$ when comparing observed proportion of units to that obtained when shuffling the firing rates of each unit before running the GLM), suggesting that the NAc encodes features of reward-predictive cues in addition to expected outcome. 
+
  \begin{figure}[ht!]
 \centering
 \includegraphics[height=0.5\textheight]{Fig 5 - Q1.pdf}
-\caption{Summary of influence of various task parameters on cue-modulated NAc units after cue-onset. \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score > 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Sliding window LDA (bin size: 500 ms; step size: 100 ms) demonstrating the classification rate for cue identity (blue solid line), location (red solid line), and outcome (green solid line) using a pseudoensemble of the 133 cue-modulated units. Dashed colored lines indicate the average of shuffling the firing rate order that went into the cross-validated LDA 100 times. Solid lines at the bottom indicate when the classifier performance greater than the shuffled samples (z-score > 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the classifier. \bsf{C-D}: Correlation matrices testing the presence and overlap of cue feature coding at cue-onset. \bsf{C}: Schematic outlining the different possible alternatives for coding across cue features at cue-onset, by correlating the recoded beta coefficients from the GLMs (see text for analysis details). Top left: coding is not present, therefore no comparison is possible. Top right: cue features are coded by separate populations of units. Displayed is a correlation matrix with each block representing correlations across the post- cue-onset time bins from the sliding window GLM for two various cue features, with green representing positive correlations (r $>$ 0), pink representing negative correlations (r $<$ 0), and grey representing no significant correlation (r $\sim$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Here the pink in the off-diagonal elements suggests that coding of cue features occur separately from one another. Bottom left: Coding of cue features occurs in overlapping but independent populations of units, shown here by the abundance of grey in the off-diagonal elements. Bottom right: Joint coding of cue features in an overlapping population, shown here by the green in the off-diagonal elements. \bsf{D}: Correlation matrix showing the correlation among identity, location, and outcome coding at cue-onset. Overabundance of grey, and relative lack of green in the off-diagonal elements suggests that coding of cue features occur independently of one another at cue-onset. Scale bar indicates relative bin size of the sliding window.}
+\caption{Summary of influence of various task parameters on cue-modulated NAc units after cue-onset. \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score $>$ 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Sliding window LDA (bin size: 500 ms; step size: 100 ms) demonstrating the classification rate for cue identity (blue solid line), location (red solid line), and outcome (green solid line) using a pseudoensemble of the 133 cue-modulated units. Dashed colored lines indicate the average of shuffling the firing rate order that went into the cross-validated LDA 100 times. Solid lines at the bottom indicate when the classifier performance greater than the shuffled samples (z-score $>$ 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the classifier. \bsf{C-D}: Correlation matrices testing the presence and overlap of cue feature coding at cue-onset. \bsf{C}: Schematic outlining the different possible alternatives for coding across cue features at cue-onset, by correlating the recoded beta coefficients from the GLMs (see text for analysis details). Top left: coding is not present, therefore no comparison is possible. Top right: cue features are coded by separate populations of units. Displayed is a correlation matrix with each block representing correlations across the post- cue-onset time bins from the sliding window GLM for two various cue features, with green representing positive correlations (r $>$ 0), pink representing negative correlations (r $<$ 0), and grey representing no significant correlation (r $=$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Here the pink in the off-diagonal elements suggests that coding of cue features occur separately from one another. Bottom left: Coding of cue features occurs in overlapping but independent populations of units, shown here by the abundance of grey in the off-diagonal elements. Bottom right: Joint coding of cue features in an overlapping population, shown here by the green in the off-diagonal elements. \bsf{D}: Correlation matrix showing the correlation among identity, location, and outcome coding at cue-onset. Overabundance of grey, and relative lack of green in the off-diagonal elements suggests that coding of cue features occur independently of one another at cue-onset. Scale bar indicates relative bin size of the sliding window.}
 \label{fig:Q1}
 \end{figure} \clearpage
 
  \begin{figure}[ht!]
 \centering
 \includegraphics[width=\textwidth]{Fig 5 - SUPP GLM.pdf}
-\caption*{\bsf{Figure supplement 1:} Summary of influence of various task parameters on cue-modulated NAc units after cue-onset. \bsf{A-C}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset. \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score > 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for approach behavior and trial
+\caption*{\bsf{Figure supplement 1:} Summary of influence of various task parameters on cue-modulated NAc units after cue-onset. \bsf{A-C}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of cue-onset. \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to cue-onset. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score $>$ 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for approach behavior and trial
 length. \bsf{C}: Same as A, but for trial number and previous trial. \bsf{D-F}: Average improvement to model fit. \bsf{D}: Average percent improvement to R-squared for units where cue identity, location, or outcome were significant contributors to the final model for time epochs surrounding cue-onset. Shaded area around mean represents the standard error of the mean. \bsf{E}: Same as D, but for approach behavior and trial length. \bsf{F}: Same D, but for trial number and previous trial.}
 \label{fig:Q1SUPP1}
 \end{figure} \clearpage
 
-To assess what information may be encoded at the population level, we
-trained a classifier on a pseudoensemble of the 133 cue-modulated
-units (Figure \ref{fig:LDA}). Specifically, we used the firing rate
-across units for each trial as an observation, and different cue
-features as trial labels (cue identity, outcome, and location). A
-linear discriminant analysis (LDA) classifier with 10-fold
-cross-validation could correctly predict a trial above chance levels
-for all cue features for most time epochs (z-score $>$ 1.96 when
-comparing classification accuracy of data versus shuffling the firing
-rates). Notably, the ability to predict whether a trial was
-reward-available or reward-unavailable (cue outcome) was low pre-cue
-and increased as a trial progressed (Figure \ref{fig:LDA}A).
-
  \begin{figure}[ht!]
-%\renewcommand{\thefigure}{\arabic{figure} supplement 1}
 \centering
 \includegraphics[height=0.3\textheight]{Fig 5 - SUPP scatter.pdf}
 \caption*{\bsf{Figure supplement 2:} Scatter plot depicting comparison
@@ -544,13 +483,17 @@ and increased as a trial progressed (Figure \ref{fig:LDA}A).
   black crosses represent units where cue identity was not a
   significant predictor of firing rate variance. Diagnoal dashed lines
   indicates point of equal firing across blocks.}
-\label{fig:Q1SUPP3}
+\label{fig:Q1SUPP2}
 \end{figure} \clearpage
+
+To assess what information may be encoded at the population level, we trained a classifier on a pseudoensemble of the 133 cue-modulated units (Figure \ref{fig:Q1}B). Specifically, we used firing rate across units for each trial as an observation, and different cue conditions as trial labels (e.g.\ light block, sound block). A linear discriminant analysis (LDA) classifier with 10-fold cross-validation could correctly predict a trial above chance levels for the identity and location of a cue across all time points surrounding cue-onset (z-score $>$ 1.96 when comparing classification accuracy of data versus shuffling the firing rates). whereas the ability to predict whether a trial was reward-available or reward-unavailable (outcome coding) was not significantly higher than chance for the time point containing 500 ms of pre-cue firing rate, and increased gradually as a trial progressed, providing evidence that cue information is also present in the pseudoensemble level.
+
+To determine whether the overlap of cue feature coding was different than expected by chance we correlated recoded beta coefficients from the GLMs, and compared the obtained correlations to the shuffled data generated for the GLMs (Figure \ref{fig:schematic}A,C,\ref{fig:Q1}C,D). This revealed that identity was coded separately from outcome (mean r  $=$ .009; -6.74 standard deviations from the shuffled mean), and independently from location (mean r  $=$ .097;  0.58 standard deviations from the shuffled mean), while location and outcome were coded by a joint population of units (mean r  $=$ .119;  2.23 standard deviations from the shuffled mean). Together, these findings show that various cue features are represented in the NAc at both the single-unit and pseudoensemble level, that identity is coded independently or in separate populations form location and outcome, respectively, and that location is coded jointly with outcome.
 
 {\bf NAc units dynamically segment the task:}
 
 Next, we sought to determine how coding of cue features evolved over
-time. Two main possibilities can be distinguished (Figure 1, bottom),
+time. Two main possibilities can be distinguished (Figure \ref{fig:schematic}B),
 a unit coding for a feature such as cue outcome could remain
 persistently active, or a progression of distinct units could activate
 in sequence. To visualize the distribution of responses throughout our
@@ -576,7 +519,7 @@ the majority of our units showed an inhibitory response to the cue, we
 also plotted the firing rates according to the lowest time in firing,
 and again found some maintenance of order, but largely different
 ordering across the two blocks, and the within block comparison
-(Figure \ref{fig:tiling}D). To further test this, we divided each
+(Figure \ref{fig:tiling} supplement 1). To further test this, we divided each
 block into two halves and looked at the correlation of the average
 smoothed firing rates across various combinations of these halves
 across our cue-aligned centered epoch. A linear mixed effects model
@@ -588,11 +531,11 @@ various cue conditions (within block correlations = .383 (light), .379
 (sound); across block correlations = .343, .338, .337, .348; within
 block vs.\ within block comparison = p $=$ .934; within block
 vs.\ across block comparisons = p $<$ .001). This process was repeated
-for cue location (Figure \ref{fig:tiling}B,E; within block
+for cue location (Figure \ref{fig:tiling}B; within block
 correlations = .369 (arm 1), .350 (arm 2); across block correlations =
 .290, .286, .285, .291; within block vs.\ within block comparison = p
 $=$ .071; within block vs.\ across block comparisons = p $<$ .001) and
-cue outcome (Figure \ref{fig:tiling}C,F; within block correlations =
+cue outcome (Figure \ref{fig:tiling}C; within block correlations =
 .429 (reward-available), .261 (reward-unavailable); across block
 correlations = .258, .253, .255, .249; within block vs.\ within block
 comparison = p $<$ .001; within block vs.\ across block comparisons =
@@ -659,12 +602,7 @@ analysis.}
 
 {\bf NAc encoding of cue features persists until outcome:}
 
-In order to be useful for credit assignment in reinforcement learning, a trace of the cue must be maintained until the outcome, so that information about the outcome can be associated with the outcome-predictive cue. To test whether representations of cue features persisted post-approach until the outcome was revealed, we fit a GLM to the post-approach firing rates of cue-modulated units aligned to the time of nosepoke into the reward receptacle. This analysis
-showed that a variety of units still discriminated firing according to various cue features, but not other task parameters, showing that NAc activity discriminates various cue conditions well into a trial (Table \ref{tbl1}, Figures \ref{fig:NP_examples},\ref{fig:NP_examplesSUPP1},\ref{fig:NP_examplesSUPP2},\ref{fig:NP_GLM}). Additionally, these units were a mix between most of the units that encoded cue features at cue-onset (r $=$ .386, .781, .758, across cue-onset and nosepoke for cue identity, cue location, and cue outcome, respectively, all p values $<$ .001), and those that did not previously have a cue feature as a predictor (29, 48, and 30 out of 133 cue-modulated units encoded both time points for cue identity, cue location, and cue outcome, respectively). Chi-square tests confirmed these results (cue identity =  $\chi =$ 6.165, p $=$ .013; cue location = $\chi =$ 21.670, p $<$ .001; cue outcome = $\chi =$ 34.560, p $<$ .001). Population level averages for units that increased to cue-onset showed a ramping up of activity that peaked upon nosepoke, whereas units that decreased to cue-onset showed a gradual reduction of firing activity that reached a minimum upon nosepoke (Figure \ref{fig:NP_pop}). Additionally, a peak is seen for preferred cue outcome in decreasing units at 1 second post cue-onset when reward was received, demonstrating an integration of expected and received reward (Figure \ref{fig:NP_pop}F). 
-
-Aligning normalized peak firing rates to nosepoke onset revealed a clustering of responses around outcome receipt for all cue conditions where the rat would have received reward (Figure \ref{fig:NP_tiling}), in addition to the same trend of higher within- vs across-block correlations for cue identity (Figure \ref{fig:NP_tiling}A,C; within block correlations = .560 (light), .541 (sound); across block correlations = .487, .481, .483, .486; within block vs. within block comparison = p $=$ .112; within block vs. across block comparisons = p $<$ .001) and cue location (Figure \ref{fig:NP_tiling}B,E; within block correlations = .474 (arm 1), .461 (arm 2); across block correlations = .416, .402, .416, .415; within block vs. within block comparison = p $=$ .810; within block vs. across block comparisons = p $<$ .001), but not cue outcome (Figure \ref{fig:NP_tiling}C,F; within block correlations = .620 (reward-available), .401 (reward-unavailable); across block correlations = .418, .414, .390, .408; within block vs. within block comparison = p $<$ .001; within block vs. across block comparisons = p $<$ .001). 
-
-To determine whether coding of cue features persisted after the outcome was revealed, a GLM was fit to the firing rates of cue-modulated units at the time of outcome receipt, during which the cue was still present. Fitting a GLM revealed 10 units (8\%) where cue outcome accounted for an average of 32\% of firing rate variance (Table \ref{tbl1}, data not shown). An absence of cue identity or cue location coding at this level of analysis was observed, but looking at the data more closely with a sliding window GLM revealed that cue identity, cue location, and cue outcome were encoded throughout time epochs surround cue-onset, nosepoke hold, and outcome receipt, suggesting that the NAc maintains a representation of these cue features once the rat receives behavioral feedback for its decision (Figure \ref{fig:NP_GLM}E-J).
+In order to be useful for credit assignment in reinforcement learning, a trace of the cue must be maintained until the outcome, so that information about the outcome can be associated with the outcome-predictive cue (Figure \ref{fig:schematic}B). Investigation into the post-approach period during nosepoke revealed units that discriminated various cue features at cue-onset, and those that did not discriminate prior to nosepoke (Figure \ref{fig:NP_examples},supplement 1,supplement 2). To quantitatively test whether representations of cue features persisted post-approach until the outcome was revealed, we fit sliding window GLMs to the post-approach firing rates of cue-modulated units aligned to both the time of nosepoke into the reward receptacle, and after the outcome was revealed (Figure \ref{fig:Q2}A,B,supplement 1 A-D, Table \ref{tbl1}). This analysis showed that a variety of units still discriminated firing according to cue identity ($\sim$20\% of cue-modulated units), location ($\sim$25\% of cue-modulated units), and outcome ($\sim$25\% of cue-modulated units), but not other task parameters, showing that NAc activity discriminates various cue conditions well into a trial.
 
  \begin{figure}[ht!]
 \centering
@@ -692,16 +630,20 @@ To determine whether coding of cue features persisted after the outcome was reve
  \begin{figure}[ht!]
 \centering
 \includegraphics[height=0.7\textheight]{Fig 8 - Q2.pdf}
-\caption{Summary of influence of various task parameters on cue-modulated NAc units during nosepoke and subsequent receipt of outcome. \bsf{A-B}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of nosepoke (A), and outcome (B). \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to when the rat made a nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score > 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{C-F}: Correlation matrices testing the persistence of cue feature coding across points in time. \bsf{C}: Schematic outlining the different possible alternatives for coding of a cue feature across various points in a trial, by correlating the recoded beta coefficients from the GLMs (see text for analysis details). Top left: coding is not present, therefore no comparison is possible. Top right: a cue feature is coded by separate populations of units across time. Displayed is a correlation matrix with each block representing correlations across various event-centered time bins from the sliding window GLM for a single cue feature, with green representing positive correlations (r $>$ 0), pink negative correlations (r $<$ 0), and grey representing no significant correlation (r $\sim$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Here the pink in the off-diagonal elements suggests that coding of a cue feature is accomplished by separate populations of units across time. Bottom left: Coding of a cue feature across time occurs in overlapping but independent populations of units, shown here by the abundance of grey in the off-diagonal elements. Bottom right: Joint coding of a cue feature in an overlapping population across time, shown here by the green in the off-diagonal elements. \bsf{D}: Correlation matrix showing the correlation of units that exhibited identity coding across time points after cue-onset, nosepoke, and outcome receipt. Strong presence of green in the nosepoke \& outcome block elements suggests joint coding of identity coding across these time points. Scale bar indicates relative bin size of the sliding window. \bsf{E-F}: Same as D, but for location and outcome coding, respectively, suggesting joint coding of location for nosepoke \& outcome.}
+\caption{Summary of influence of various task parameters on cue-modulated NAc units during nosepoke and subsequent receipt of outcome. \bsf{A-B}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of nosepoke (A), and outcome (B). \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to when the rat made a nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score $>$ 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{C-F}: Correlation matrices testing the persistence of cue feature coding across points in time. \bsf{C}: Schematic outlining the different possible alternatives for coding of a cue feature across various points in a trial, by correlating the recoded beta coefficients from the GLMs (see text for analysis details). Top left: coding is not present, therefore no comparison is possible. Top right: a cue feature is coded by separate populations of units across time. Displayed is a correlation matrix with each block representing correlations across various event-centered time bins from the sliding window GLM for a single cue feature, with green representing positive correlations (r $>$ 0), pink negative correlations (r $<$ 0), and grey representing no significant correlation (r $=$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Here the pink in the off-diagonal elements suggests that coding of a cue feature is accomplished by separate populations of units across time. Bottom left: Coding of a cue feature across time occurs in overlapping but independent populations of units, shown here by the abundance of grey in the off-diagonal elements. Bottom right: Joint coding of a cue feature in an overlapping population across time, shown here by the green in the off-diagonal elements. \bsf{D}: Correlation matrix showing the correlation of units that exhibited identity coding across time points after cue-onset, nosepoke, and outcome receipt. Strong presence of green in the nosepoke \& outcome block elements suggests joint coding of identity coding across these time points. Scale bar indicates relative bin size of the sliding window. \bsf{E-F}: Same as D, but for location and outcome coding, respectively, suggesting joint coding of location for nosepoke \& outcome.}
 \label{fig:Q2}
 \end{figure} \clearpage
 
  \begin{figure}[ht!]
 \centering
 \includegraphics[height=0.7\textheight]{Fig 8 - SUPP GLM.pdf}
-\caption*{\bsf{Figure supplement 1:} Summary of influence of various task parameters on cue-modulated NAc units during nosepoke and subsequent receipt of outcome. \bsf{A-B}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of nosepoke (A), and outcome (B). \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to when the rat made a nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score > 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{C-D}: Average improvement to model fit. \bsf{C}: Average percent improvement to R-squared for units where cue identity (blue solid line), location (red solid line), or outcome (green solid line) were significant contributors to the final model for time epochs relative to nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Shaded area around mean represents the standard error of the mean. \bsf{D}: Same C, but for time epochs relative to receipt of outcome. \bsf{E-F}: Correlation matrices testing the presence and overlap of cue feature coding at nosepoke (E) and outcome (F). \bsf{E}: Correlation matrix showing the correlation among identity, location, and outcome coding at nosepoke. Each block represents correlations across various nosepoke-centered time bins from the sliding window GLM across cue features, with green representing positive correlations (r $>$ 0), pink negative correlations (r $<$ 0), and grey representing no significant correlation (r $\sim$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Scale bar indicates relative bin size of the sliding window. \bsf{F}: Same as E, but time bins following outcome.}
+\caption*{\bsf{Figure supplement 1:} Summary of influence of various task parameters on cue-modulated NAc units during nosepoke and subsequent receipt of outcome. \bsf{A-B}: Sliding window GLM illustrating the proportion of cue-modulated units influenced by various predictors around time of nosepoke (A), and outcome (B). \bsf{A}: Sliding window GLM (bin size: 500 ms; step size: 100 ms) demonstrating the proportion of cue-modulated units where cue identity (blue solid line), location (red solid line), and outcome (green solid line) significantly contributed to the model at various time epochs relative to when the rat made a nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Error bars indicate 1.96 standard deviations from the shuffled mean. Solid lines at the bottom indicate when the proportion of units observed was greater than the shuffled samples (z-score $>$ 1.96). Points in between the two vertical dashed lines indicate bins where both pre- and post-cue-onset time periods were used in the GLM. \bsf{B}: Same as A, but for time epochs relative to receipt of outcome after the rat got feedback about his approach. \bsf{C-D}: Average improvement to model fit. \bsf{C}: Average percent improvement to R-squared for units where cue identity (blue solid line), location (red solid line), or outcome (green solid line) were significant contributors to the final model for time epochs relative to nosepoke. Dashed colored lines indicate the average of shuffling the firing rate order that went into the GLM 100 times. Shaded area around mean represents the standard error of the mean. \bsf{D}: Same C, but for time epochs relative to receipt of outcome. \bsf{E-F}: Correlation matrices testing the presence and overlap of cue feature coding at nosepoke (E) and outcome (F). \bsf{E}: Correlation matrix showing the correlation among identity, location, and outcome coding at nosepoke. Each block represents correlations across various nosepoke-centered time bins from the sliding window GLM across cue features, with green representing positive correlations (r $>$ 0), pink negative correlations (r $<$ 0), and grey representing no significant correlation (r $=$ 0). X- and y-axis are the same, therefore the diagonal represents a correlation of an array against itself. Scale bar indicates relative bin size of the sliding window. \bsf{F}: Same as E, but time bins following outcome.}
 \label{fig:Q2SUPP1}
 \end{figure} \clearpage
+
+To determine whether NAc representations of cue features at nosepoke and outcome were encoded by a similar pool of units as during cue-onset, we correlated recoded beta coefficients from the GLMs for a cue feature across time points in the task, and compared the obtained correlations to the shuffled data generated for the GLMs (Figure \ref{fig:schematic}B,C,\ref{fig:Q2}C-F). This revealed that identity coding at cue-onset was separate from coding at nosepoke (mean r  $=$ .048; -2.18 standard deviations from the shuffled mean), independent from coding at outcome (mean r  $=$ .081; 1.02 standard deviations from the shuffled mean), while joint coding was observed between nosepoke and outcome (mean r  $=$ .147; 3.94 standard deviations from the shuffled mean); location coding at cue-onset was independent from coding at nosepoke (mean r  $=$ .058; -1.41 standard deviations from the shuffled mean), while joint coding was observed with coding at outcome (mean r  $=$ .093; 2.03 standard deviations from the shuffled mean), as well as between nosepoke and outcome (mean r  $=$ .204; 9.35 standard deviations from the shuffled mean); and outcome coding at cue-onset was separate from from both coding at nosepoke (mean r  $=$ -.040; -11.73 standard deviations from the shuffled mean), and coding at outcome (mean r  $=$ .025; -5.06 standard deviations from the shuffled mean), while joint coding was observed between nosepoke and outcome (mean r  $=$ .148; 3.15 standard deviations from the shuffled mean). In terms of overlap among cue features (Figure \ref{fig:Q2} supplement 1 E,F), at nosepoke identity was coded independently from location (mean r  $=$ .124; 1.00 standard deviations from the shuffled mean), and separately from outcome (mean r  $=$ .052; -3.19 standard deviations from the shuffled mean), and location and outcome were coded by a overlapping but independent population of units (mean r  $=$ .097;  -1.05 standard deviations from the shuffled mean); while at outcome, identity was coded independently from location (mean r  $=$ .085; -1.19 standard deviations from the shuffled mean), and separately from outcome (mean r  $=$ .039;  -4.20 standard deviations from the shuffled mean), and location and outcome were coded by a separate population of units (mean r  $=$ .004;  -7.22 standard deviations from the shuffled mean). Together, these findings show that the NAc maintains representations of cue features after a behavioral decision has been made with largely separate or independent pools of units, while a joint overlapping population is seen post-approach until it receives feedback about its decision.
+
+To assess the tiling of units around outcome receipt, we aligning normalized peak firing rates to nosepoke onset (Figure \ref{fig:Q2} supplement 2). This revealed a clustering of responses around outcome receipt for all cue conditions where the rat would have received reward, in addition to the same trend of higher within- vs across-block correlations for cue identity (Figure \ref{fig:Q2} supplement 2 A,C; within block correlations = .560 (light), .541 (sound); across block correlations = .487, .481, .483, .486; within block vs. within block comparison = p $=$ .112; within block vs. across block comparisons = p $<$ .001) and cue location (Figure \ref{fig:Q2} supplement 2 B,E; within block correlations = .474 (arm 1), .461 (arm 2); across block correlations = .416, .402, .416, .415; within block vs. within block comparison = p $=$ .810; within block vs. across block comparisons = p $<$ .001), but not cue outcome (Figure \ref{fig:Q2} supplement 2 C,F; within block correlations = .620 (reward-available), .401 (reward-unavailable); across block correlations = .418, .414, .390, .408; within block vs. within block comparison = p $<$ .001; within block vs. across block comparisons = p $<$ .001), further reinforcing that the NAc segments the task and represents all aspects of task space.
 
  \begin{figure}[ht!]
 \centering
@@ -762,7 +704,7 @@ units. Furthermore, this tiling differed between various conditions
 with a cue feature, such as light versus sound blocks. We discuss
 these observations and their implications below.
 
-{\bf Cue identity:}
+{\bf Identity coding:}
 
 Our finding that NAc units can discriminate between different
 outcome-predictive stimuli with similar motivational significance
@@ -1086,69 +1028,17 @@ were then classified as either increasing or decreasing if the
 post-cue activity was higher or lower than the pre-cue activity,
 respectively.
 
-To determine the relative contribution of different task parameters to firing rate variance (as in Figures \ref{fig:examples}-\ref{fig:Q1}), a forward selection stepwise GLM using a Poisson distribution for the response variable was fit to each cue-modulated unit, using data from every trial in a session. Cue identity (light block, sound block), cue location (arm 1, arm 2, arm 3, arm 4), cue outcome (reward-available, reward-unavailable), behavior (approach, skip), trial length, trial number, and trial history (reward availability on the previous 2 trials) were used as predictors, and the 1 s post-cue firing rate as the response variable. Units were classified as being modulated by a
-given task parameter if addition of the parameter significantly
-improved model fit using deviance as the criterion ($p <$ .01). A
-comparison of the R-squared value between the final model and the
-final model minus the predictor of interest was used to determine the
-amount of firing rate variance explained by the addition of that
-predictor for a given unit. To determine the degree to which coding of
-cue identity, cue location, and cue outcome overlapped within units we
-computed pearson’s r on recoded beta coefficients from the GLM for the
-cue features. Specifically, for all cue-modulated units, we coded a 1
-if the cue feature was a significant predictor in the final model, and
-0 if it was not, and calculated pearson’s r comparing an array of the
-coded 0s and 1s for cue-modulated units for one cue feature with a
-similar array for another cue feature. The NAc was determined as
-coding a pair of cue features in a) a separate populations of units if
-there was a significant negative correlation ($r < $ 0), b) an
-independently coded overlapping population of units if there was no
-significant correlation ($r = $ 0), and c) a jointly coded overlapping
-population of units if there was a significant positive correlation
-($r > $ 0). To investigate more finely the temporal dynamics of the influence of task parameters to unit activity, we then fit a sliding window GLM with the same task parameters using 500 ms bins and 100 ms steps, starting 500 ms before cue-onset, up to 500 ms after cue-onset, and measured the proportion of units and average R-squared value for a given time bin where a particular predictor contributed significantly to the final model. To control for the amount of units that would be affected by a predictor by chance, we shuffled the trial order of firing rates for a particular unit within a time bin, and took the average of this value over 100 shuffles. We then calculated how many z-scores the observed proportion was from the mean of the shuffles samples, using a z-score of greater than 1.96 as a marker of signifiance.
+To determine the relative contribution of different task parameters to firing rate variance (as in Figures \ref{fig:examples},\ref{fig:Q1}A), a forward selection stepwise GLM using a Poisson distribution for the response variable was fit to each cue-modulated unit, using data from every trial in a session. Cue identity (light block, sound block), cue location (arm 1, arm 2, arm 3, arm 4), cue outcome (reward-available, reward-unavailable), behavior (approach, skip), trial length, trial number, and trial history (reward availability on the previous 2 trials) were used as predictors, with firing rate as the response variable. The GLMs were fit using a sliding window for firing rate; with a bin size of 500 ms, step size of 100 ms, and an analysis window from 500 ms pre-cue onset to 500 ms post-cue onset, such that 11 different GLMs were fit for each unit, tracking the temporal dynamics of the influence of task parameters on firing rate around the onset of the cue. Units were classified as being modulated by a given task parameter if addition of the parameter significantly improved model fit using deviance as the criterion ($p <$ .01), and the total proportion of cue-modulated units influenced by a task parameter was counted for each time bin. A comparison of the R-squared value between the final model and the final model minus the predictor of interest was used to determine the amount of firing rate variance explained by the addition of that predictor for a given unit. To control for the amount of units that would be affected by a predictor by chance, we shuffled the trial order of firing rates for a particular unit within a time bin, and took the average of this value over 100 shuffles. We then calculated how many z-scores the observed proportion was from the mean of the shuffled samples, using a z-score of greater than 1.96 as a marker of significance.
 
-To get a sense for the predictive power of these cue feature representations we trained a classifier using firing rates from a pseudoensemble of our 133 cue-modulated units (Figure \ref{fig:LDA}). We created a matrix of firing rates for each time epoch surrounding cue-onset where each row was an observation representing the firing rate for a trial, and each column was a variable representing the firing rate for a given unit. Trial labels, or classes, were each condition for a cue feature (e.g.\ light and sound for cue identity) when trying to predict each cue feature, and combinations of conditions across cue features when trying to make more specific predictions (e.g.\ light reward-available, light reward-unavailable, sound reward-available, sound reward-unavailable), making sure to align trial labels across units. We then ran LDA on these matrices, using 10-fold cross validation to train the classifier on 90\% of the trials and testing its predictions on the held out 10\% of trials, and repeated this approach to get the classification accuracy for 100 iterations. To test if the classification accuracy was greater by chance, we shuffled the order of firing rates for each unit before we trained the classifier. We repeated this for 100 shuffled matrices for each time point, and calculated how many z-scores the mean classification rate of the observed data was from the mean of the shuffled samples, using a z-score of 1.96 as the cut off for a significant deviation from the permuted distribution.
+To get a sense of the predictive power of these cue feature representations we trained a classifier using firing rates from a pseudoensemble of our 133 cue-modulated units (Figure \ref{fig:Q1}B). We created a matrix of firing rates for each time epoch surrounding cue-onset where each row was an observation representing the firing rate for a trial, and each column was a variable representing the firing rate for a given unit. Trial labels, or classes, were each condition for a cue feature (e.g.\ light and sound for cue identity) when trying to predict each cue feature, making sure to align trial labels across units. We then ran LDA on these matrices, using 10-fold cross validation to train the classifier on 90\% of the trials and testing its predictions on the held out 10\% of trials, and repeated this approach to get the classification accuracy for 100 iterations. To test if the classification accuracy was greater by chance, we shuffled the order of firing rates for each unit before we trained the classifier. We repeated this for 100 shuffled matrices for each time point, and calculated how many z-scores the mean classification rate of the observed data was from the mean of the shuffled samples, using a z-score of 1.96 as the cut off for a significant deviation from the shuffled distribution.
 
-To better visualize responses to cues and enable subsequent population
-level analyses (as in Figures \ref{fig:examples}, \ref{fig:pop}, and
-\ref{fig:tiling}), spike trains were convolved with a Gaussian kernel
-($\sigma$ = 100 ms), and peri-event time histograms (PETHs) were
-generated by taking the average of the convolved spike trains across all
-trials for a given task condition. For analysis of population-level
-responses for cue features (Figure \ref{fig:pop}), convolved spike
-trains for all units where cue identity, cue location, or cue outcome
-explained a significant portion of firing rate variance were
-z-scored. Within a given cue feature, normalized spike trains were
-then separated according to the preferred and non-preferred cue
-condition (e.g.\ light vs.\ sound block), and averaged across units to
-generate population-level averages. To account for separation that
-would result from any random selection of units, unit identity was
-shuffled and the shuffled average for preferred and non-preferred cue
-conditions was generated for 1000 shuffles.
+To determine the degree to which coding of cue identity, cue location, and cue outcome overlapped within units we computed pearson’s r on recoded beta coefficients from the GLMs for the cue features (Figure \ref{fig:Q1}C,D). Specifically, for all cue-modulated units we coded a 1 if the cue feature was a significant predictor in the final model, and 0 if it was not, and calculated pearson’s r comparing an array of the coded 0s and 1s for one cue feature with a similar array for another cue feature, repeating this process for all post cue-onset sliding window combinations. The NAc was determined as coding a pair of cue features in a) a separate populations of units if there was a significant negative correlation ($r < $ 0), b) an independently coded overlapping population of units if there was no significant correlation ($r = $ 0), and c) a jointly coded overlapping population of units if there was a significant positive correlation ($r > $ 0). To summarize the correlation matrices generated from this analyses, we put the output of our 100 shuffled GLMs through the same pipeline, took the mean of all correlations for a block comparison for each of the 100 shuffles for an analysis window, and used the mean and standard deviation of these shuffled correlation averages to compare to the mean of the comparison block of the correlation matrix for the actual data, and generate a z-score, using a z-score of greater than 1.96 or less than -1.96 as a marker that that comparison block showed overlap across cue features greater or less than chance, respectively.
 
-To visualize NAc representations of task space within cue conditions,
-normalized spike trains for all units were ordered by the location of
-their maximum or minimum firing rate for a specified cue condition
-(Figure \ref{fig:tiling}). To compare representations of task space
-across cue conditions for a cue feature, the ordering of units derived
-for one condition (e.g.\ light block) was then applied to the
-normalized spike trains for the other condition (e.g.\ sound
-block). For control comparisons within cue conditions, half of the
-trials for a condition were compared against the other half. To look
-at the correlation of firing rates of all units within and across
-various cue conditions, trials for each cue condition for a unit were
-shuffled and divided into two averages, and averages within and across
-cue conditions were correlated. A linear mixed effects model was run
-for each cue condition to determine if correlations of firing rates
-within cue conditions were more similar than correlations across cue
-conditions.
+To better visualize responses to cues and enable subsequent population level analyses (as in Figures \ref{fig:examples},\ref{fig:tiling}), spike trains were convolved with a Gaussian kernel ($\sigma$ = 100 ms), and peri-event time histograms (PETHs) were generated by taking the average of the convolved spike trains across all trials for a given task condition. To visualize NAc representations of task space within cue conditions, normalized spike trains for all units were ordered by the location of their maximum or minimum firing rate for a specified cue condition (Figure \ref{fig:tiling}). To compare representations of task space across cue conditions for a cue feature, the ordering of units derived for one condition (e.g.\ light block) was then applied to the normalized spike trains for the other condition (e.g.\ sound block). For control comparisons within cue conditions, half of the trials for a condition were compared against the other half. To assess whether the tiling patterns were different across cue conditions, we split each cue condition into two halves, controlling for the effects of time by shuffling trial ordering before the split, and calculated the correlation of the temporally evolving smoothed firing rate across each of these halves, giving us 6 correlation values for each unit. We then concatenated these 6 values across all 443 units to give us an array of 2658 correlation coefficients. We then fit a linear mixed effects model, trying to predict these block comparison correlations with comparison type (e.g.\ 1st half of light block vs.\ 1st half of sound sound) as a fixed-effect term, and unit id as a random-effect term. Comparison type is nominal, so dummy variables were created for the various levels of comparison type, and coefficients were generated for each condition, referenced against one of the within-within comparison types (e.g.\ 1st half of light block vs.\ 2nd half of light block). Additionally, we ran a model comparison between the above model and a null model with just unit id, to see if adding comparison type improved model fit.
 
-To identify the responsivity of units to different cue features at the time of a nosepoke into a reward receptacle, and subsequent reward delivery, the same cue-responsive units from the cue-onset analyses were analyzed at the time of nosepoke and outcome receipt using identical analysis techniques for all approach trials (Figures \ref{fig:NP_examples}, \ref{fig:NP_GLM}, \ref{fig:NP_pop}, and \ref{fig:NP_tiling}). To compare whether coding of a given cue feature was accomplished by the same or distinct population of units across time epochs, we ran the recoded coefficient correlation that was used to assess the degree of overlap among cue features within a time epoch.
+To identify the responsivity of units to different cue features at the time of nosepoke into a reward receptacle, and subsequent reward delivery, the same cue-responsive units from the cue-onset analyses were analyzed at the time of nosepoke and outcome receipt using identical analysis techniques for all approach trials (Figures \ref{fig:NP_examples},\ref{fig:Q2}). To compare whether coding of a given cue feature was accomplished by the same or distinct population of units across time epochs, we ran the recoded coefficient correlation that was used to assess the degree of overlap among cue features within a time epoch.
 
-All analyses were completed in MATLAB R2015a, the code
-is available on our public GitHub repository
-(http://github.com/vandermeerlab/papers), and the data can be accessed
-through DataLad.
+All analyses were completed in MATLAB R2015a, the code is available on our public GitHub repository (http://github.com/vandermeerlab/papers), and the data can be accessed through DataLad.
 
 {\bf Histology:}
 

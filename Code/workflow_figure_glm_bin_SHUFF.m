@@ -1,6 +1,6 @@
 num_Shuffs = 100;
 Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
-for iEpoch = 1%:length(Epoch)
+for iEpoch = 1:3%:length(Epoch)
 disp(iEpoch)
 switch iEpoch
     case 1
