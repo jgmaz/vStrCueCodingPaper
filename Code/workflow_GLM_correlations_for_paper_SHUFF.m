@@ -190,6 +190,7 @@ end
 
 GLM_coeff_SHUFF = GLM_coeff;
 %% Z-scores away from shuffle (value - shuff mean / shuff std)
+%%%% for MEAN of Corr %%%%
 matrix_start = [1 7 13];
 for iShuff = 1:num_Shuffs
     for iEpoch = 1:3
@@ -248,7 +249,6 @@ for iPred = 1:3
         end
     end
 end
-
     %%
 
 %%
@@ -318,6 +318,148 @@ for iEpoch = 1:3
     % xlabel('cue onset')
      xlim([0.5 3.5])
      ylim([0.5 3.5])
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+%      y = ylabel('Cue outcome              Cue location               Cue identity');
+%      x = xlabel('Cue identity                      Cue location                     Cue outcome');
+% y = ylabel('Outcome coding          Location coding           Identity coding');
+%      x = xlabel('Identity coding               Location coding              Outcome coding');
+     ax = gca;
+     ax.Clipping = 'off';
+     title(graph_title{iEpoch})
+end
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Z-scores away from shuffle (value - shuff mean / shuff std)
+%%%% for individual Corrs %%%%
+% matrix_start = [1 7 13];
+for iShuff = 1:num_Shuffs
+    for iEpoch = 1:3
+        for iRow = 1:18
+            for iCol = 1:18
+                Table_ind.Shuffs.(Epoch{iEpoch}){iRow,iCol}(iShuff) = GLM_coeff_SHUFF.summary.(Epoch{iEpoch}).(cat(2,'s',num2str(iShuff))).Corr(iRow,iCol);
+            end
+        end
+    end
+    
+    for iPred = 1:3
+        for iRow = 1:18
+            for iCol = 1:18
+                Table_ind.Shuffs.(Predictors{iPred}){iRow,iCol}(iShuff) = GLM_coeff_SHUFF.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Corr(iRow,iCol);
+            end
+        end
+    end
+end
+
+for iEpoch = 1:3
+    for iRow = 1:18
+        for iCol = 1:18
+            Table_ind.(Epoch{iEpoch}).Data(iRow,iCol) = GLM_coeff.summary.(Epoch{iEpoch}).Corr(iRow,iCol);
+            Table_ind.(Epoch{iEpoch}).ShuffMEAN(iRow,iCol) = mean(Table_ind.Shuffs.(Epoch{iEpoch}){iRow,iCol});
+            Table_ind.(Epoch{iEpoch}).ShuffSTD(iRow,iCol) = std(Table_ind.Shuffs.(Epoch{iEpoch}){iRow,iCol});
+        Table_ind.(Epoch{iEpoch}).Zscore(iRow,iCol) = (Table_ind.(Epoch{iEpoch}).Data(iRow,iCol) - Table_ind.(Epoch{iEpoch}).ShuffMEAN(iRow,iCol)) / Table_ind.(Epoch{iEpoch}).ShuffSTD(iRow,iCol);
+       if Table_ind.(Epoch{iEpoch}).Zscore(iRow,iCol) > 1.96
+                Table_ind.(Epoch{iEpoch}).Zscore_recode(iRow,iCol) = 1;
+       elseif Table_ind.(Epoch{iEpoch}).Zscore(iRow,iCol) < -1.96
+                Table_ind.(Epoch{iEpoch}).Zscore_recode(iRow,iCol) = -1;
+            else
+                Table_ind.(Epoch{iEpoch}).Zscore_recode(iRow,iCol) = 0;
+       end
+             if iRow == iCol
+                 Table_ind.(Epoch{iEpoch}).Zscore_recode(iRow,iCol) = 0;
+            end
+        end
+    end
+    Table_ind.MAX(iEpoch,:) = max(Table_ind.(Epoch{iEpoch}).Zscore);
+end
+
+for iPred = 1:3
+    for iRow = 1:18
+        for iCol = 1:18
+            Table_ind.(Predictors{iPred}).Data(iRow,iCol) = GLM_coeff.summary.(Predictors{iPred}).Corr(iRow,iCol);
+            Table_ind.(Predictors{iPred}).ShuffMEAN(iRow,iCol) = mean(Table_ind.Shuffs.(Predictors{iPred}){iRow,iCol});
+            Table_ind.(Predictors{iPred}).ShuffSTD(iRow,iCol) = std(Table_ind.Shuffs.(Predictors{iPred}){iRow,iCol});
+            Table_ind.(Predictors{iPred}).Zscore(iRow,iCol) = (Table_ind.(Predictors{iPred}).Data(iRow,iCol) - Table_ind.(Predictors{iPred}).ShuffMEAN(iRow,iCol)) / Table_ind.(Predictors{iPred}).ShuffSTD(iRow,iCol);
+       if Table_ind.(Predictors{iPred}).Zscore(iRow,iCol) > 1.96
+                Table_ind.(Predictors{iPred}).Zscore_recode(iRow,iCol) = 1;
+       elseif Table_ind.(Predictors{iPred}).Zscore(iRow,iCol) < -1.96
+           Table_ind.(Predictors{iPred}).Zscore_recode(iRow,iCol) = -1;
+       else
+                Table_ind.(Predictors{iPred}).Zscore_recode(iRow,iCol) = 0;
+       end
+            if iRow == iCol
+                 Table_ind.(Predictors{iPred}).Zscore_recode(iRow,iCol) = 0;
+            end
+        end
+    end
+    Table_ind.MAX(3+iPred,:) = max(Table_ind.(Predictors{iPred}).Zscore);
+end
+
+%% Individual corr z score
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
+Predictors = {'Modality' 'Location' 'Outcome'};
+graph_title = {'Identity coding across task epochs' 'Location coding across task epochs' 'Outcome coding across task epochs'};
+
+rColorMap = [linspace(253/255, 255/255, 128),linspace(255/255, 49/255, 128)]; %77 253
+gColorMap = [linspace(224/255, 255/255, 128),linspace(255/255, 163/255, 128)]; %146 224 49,163,84
+bColorMap = [linspace(239/255, 255/255, 128),linspace(255/255, 84/255, 128)]; %33 239
+colorMap = [rColorMap; gColorMap; bColorMap]';
+
+labels = {'0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','0.0 s','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+labels_cue = {'Cue identity','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue location','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','Cue outcome','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'};
+labels_start = {'Cue-onset','','','','','','Nosepoke','','','','','','Outcome','','','','',''};
+mincolor = -1.95;
+maxcolor = 1.95%.7; %.8;
+figure
+for iPred = 1:3
+        subplot(2,3,iPred)
+%     figure
+%     GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
+%     GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue > .05)=NaN;
+    
+    heatmap(Table_ind.(Predictors{iPred}).Zscore_recode,[],[],[],'ColorMap',colorMap,...%'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [.6 .6 .6], 'TickAngle',90, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',4);
+    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[12.5 12.5],'k','LineWidth',4);
+    % title(Predictors{iPred})
+    % xlabel('cue onset')
+     xlim([0.5 18.5])
+     ylim([0.5 18.5])
+    set(gca,'FontSize',18)
+    set(gcf,'Position', [10, 10, 1150, 950])
+%      y = ylabel('Outcome                   Nosepoke                   Cue-onset');
+%      x = xlabel('Cue-onset                        Nosepoke                         Outcome');
+     ax = gca;
+     ax.Clipping = 'off';
+     title(graph_title{iPred})
+end
+
+%%
+graph_title = {'Coding of cue features at cue-onset' 'Coding of cue features at nosepoke' 'Coding of cue features at outcome receipt'};
+
+
+for iEpoch = 1:3
+        subplot(2,3,iEpoch+3)
+%     figure
+%     GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue == 0)=NaN;
+%     GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue > .05)=NaN;
+    
+    heatmap(Table_ind.(Epoch{iEpoch}).Zscore_recode,[],[],[],'ColorMap',colorMap,...%'Colorbar',true, ...
+        'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0.6 0.6 0.6], 'TickAngle', 45, 'ShowAllTicks', true)%...
+    %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
+    % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
+    hold on
+    plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[6.5 6.5],'k','LineWidth',4);
+    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[12.5 12.5],'k','LineWidth',4);
+    % title(Epoch{iEpoch})
+        xlim([0.5 18.5])
+     ylim([0.5 18.5])
     set(gca,'FontSize',18)
     set(gcf,'Position', [10, 10, 1150, 950])
 %      y = ylabel('Cue outcome              Cue location               Cue identity');

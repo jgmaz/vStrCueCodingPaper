@@ -354,6 +354,16 @@ end
 Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
 Predictors = {'Modality' 'Location' 'Outcome'};
 graph_title = {'Identity coding across task epochs' 'Location coding across task epochs' 'Outcome coding across task epochs'};
+colors.Modality = {[49/255 163/255 84/255] [255/255 207/255 250/255] [.8 .8 .8] ...
+    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.Location = {[49/255 163/255 84/255] [.8 .8 .8] [49/255 163/255 84/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.Outcome = {[49/255 163/255 84/255] [255/255 207/255 250/255] [255/255 207/255 250/255] ...
+    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+
 
 rColorMap = [linspace(253/255, 255/255, 45),linspace(255/255, 49/255, 211)]; %77 253
 gColorMap = [linspace(224/255, 255/255, 45),linspace(255/255, 163/255, 211)]; %146 224 49,163,84
@@ -365,19 +375,42 @@ labels_cue = {'Cue identity','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s','
 labels_start = {'Cue-onset','','','','','','Nosepoke','','','','','','Outcome','','','','',''};
 mincolor = -.2;
 maxcolor = .95%.7; %.8;
-figure
+% figure
 for iPred = 1:3
-        subplot(2,3,iPred)
-%     figure
+%         subplot(2,3,iPred)
+    figure
 %     GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
 %     GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue > .05)=NaN;
     
-    heatmap(GLM_coeff.summary.(Predictors{iPred}).Corr,[],[],[],'ColorMap',colorMap,...%'Colorbar',true, ...
+    heatmap(GLM_coeff.summary.(Predictors{iPred}).Corr,[],[],[],'ColorMap',colorMap,'Colorbar',true, ...
         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [.6 .6 .6], 'TickAngle',90, 'ShowAllTicks', true)%...
     %    'RowLabels', {'onset','+ 0.1 s','+ 0.2 s','+ 0.3 s','+ 0.4 s','+ 0.5 s'});
     % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
     hold on
-    plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',4);
+
+   
+        plot([6.27 6.27],[0.7 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12); plot([0.7 0.7],[0.7 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12);
+    plot([0.7 6.27],[6.25 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12); plot([0.7 6.27],[0.7 0.7],'color',colors.(Predictors{iPred}){1},'LineWidth',12);
+    plot([12.27 12.27],[0.7 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12); plot([6.73 6.73],[0.7 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12);
+    plot([6.73 12.27],[6.25 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12); plot([6.73 12.27],[0.7 0.7],'color',colors.(Predictors{iPred}){2},'LineWidth',12);
+  plot([18.3 18.3],[0.7 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12); plot([12.73 12.73],[0.7 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12);
+    plot([12.73 18.3],[6.25 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12); plot([12.73 18.3],[0.7 0.7],'color',colors.(Predictors{iPred}){3},'LineWidth',12);
+    
+     plot([6.27 6.27],[6.75 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12); plot([0.7 0.7],[6.75 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12);
+    plot([0.7 6.27],[12.25 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12); plot([0.7 6.27],[6.75 6.75],'color',colors.(Predictors{iPred}){4},'LineWidth',12);
+    plot([12.27 12.27],[6.75 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12); plot([6.73 6.73],[6.75 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12);
+    plot([6.73 12.27],[12.25 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12); plot([6.73 12.27],[6.75 6.75],'color',colors.(Predictors{iPred}){5},'LineWidth',12);
+  plot([18.3 18.3],[6.75 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12); plot([12.73 12.73],[6.75 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12);
+    plot([12.73 18.3],[12.25 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12); plot([12.73 18.3],[6.75 6.75],'color',colors.(Predictors{iPred}){6},'LineWidth',12);
+    
+         plot([6.27 6.27],[12.75 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12); plot([0.7 0.7],[12.75 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12);
+    plot([0.7 6.27],[18.3 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12); plot([0.7 6.27],[12.75 12.75],'color',colors.(Predictors{iPred}){7},'LineWidth',12);
+    plot([12.27 12.27],[12.75 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12); plot([6.73 6.73],[12.75 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12);
+    plot([6.73 12.27],[18.3 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12); plot([6.73 12.27],[12.75 12.75],'color',colors.(Predictors{iPred}){8},'LineWidth',12);
+  plot([18.3 18.3],[12.75 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12); plot([12.73 12.73],[12.75 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12);
+    plot([12.73 18.3],[18.3 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12); plot([12.73 18.3],[12.75 12.75],'color',colors.(Predictors{iPred}){9},'LineWidth',12);
+
+             plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',4);
     plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[12.5 12.5],'k','LineWidth',4);
     % title(Predictors{iPred})
     % xlabel('cue onset')
@@ -385,8 +418,8 @@ for iPred = 1:3
      ylim([0.5 18.5])
     set(gca,'FontSize',18)
     set(gcf,'Position', [10, 10, 1150, 950])
-%      y = ylabel('Outcome                   Nosepoke                   Cue-onset');
-%      x = xlabel('Cue-onset                        Nosepoke                         Outcome');
+     y = ylabel('Outcome                   Nosepoke                   Cue-onset');
+     x = xlabel('Cue-onset                        Nosepoke                         Outcome');
      ax = gca;
      ax.Clipping = 'off';
      title(graph_title{iPred})
@@ -394,30 +427,63 @@ end
 
 %%
 graph_title = {'Coding of cue features at cue-onset' 'Coding of cue features at nosepoke' 'Coding of cue features at outcome receipt'};
-
+colors.cueon = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.NP = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [.8 .8 .8] ...
+   [255/255 207/255 250/255] [.8 .8 .8] [49/255 163/255 84/255]};
+ colors.outcome = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [255/255 207/255 250/255] ...
+    [255/255 207/255 250/255] [255/255 207/255 250/255] [49/255 163/255 84/255]};
 
 for iEpoch = 1:3
-        subplot(2,3,iEpoch+3)
-%     figure
+%         subplot(2,3,iEpoch+3)
+    figure
 %     GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue == 0)=NaN;
 %     GLM_coeff.summary.(Epoch{iEpoch}).Corr(GLM_coeff.summary.(Epoch{iEpoch}).Pvalue > .05)=NaN;
     
-    heatmap(GLM_coeff.summary.(Epoch{iEpoch}).Corr,[],[],[],'ColorMap',colorMap,...%'Colorbar',true, ...
+    heatmap(GLM_coeff.summary.(Epoch{iEpoch}).Corr,[],[],[],'ColorMap',colorMap,'Colorbar',true, ...
         'MinColorValue', mincolor, 'MaxColorValue', maxcolor,'NaNColor', [0.6 0.6 0.6], 'TickAngle', 45, 'ShowAllTicks', true)%...
     %    'RowLabels', {'Cue identity','Cue location','Cue outcome','Approach','Trial length','Trial number','Previous trial','Cue identity x location','Cue identity x outcome','Cue location x outcome'});
     % set(gca,'XTickLabel',{'Mod','Loc','Out','App','Lat','Trial','Prev'})
     hold on
+   
+       
+    
+        plot([6.27 6.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12); plot([0.7 0.7],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12);
+    plot([0.7 6.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12); plot([0.7 6.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12);
+    plot([12.27 12.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12); plot([6.73 6.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12);
+    plot([6.73 12.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12); plot([6.73 12.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12);
+  plot([18.3 18.3],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12); plot([12.73 12.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12);
+    plot([12.73 18.3],[6.25 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12); plot([12.73 18.3],[0.7 0.7],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12);
+    
+     plot([6.27 6.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12); plot([0.7 0.7],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12);
+    plot([0.7 6.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12); plot([0.7 6.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12);
+    plot([12.27 12.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12); plot([6.73 6.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12);
+    plot([6.73 12.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12); plot([6.73 12.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12);
+  plot([18.3 18.3],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12); plot([12.73 12.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12);
+    plot([12.73 18.3],[12.25 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12); plot([12.73 18.3],[6.75 6.75],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12);
+    
+         plot([6.27 6.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12); plot([0.7 0.7],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12);
+    plot([0.7 6.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12); plot([0.7 6.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12);
+    plot([12.27 12.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12); plot([6.73 6.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12);
+    plot([6.73 12.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12); plot([6.73 12.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12);
+  plot([18.3 18.3],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12); plot([12.73 12.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12);
+    plot([12.73 18.3],[18.3 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12); plot([12.73 18.3],[12.75 12.75],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12);
+
     plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[6.5 6.5],'k','LineWidth',4);
     plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[12.5 12.5],'k','LineWidth',4);
-    % title(Epoch{iEpoch})
+   
+   % title(Epoch{iEpoch})
         xlim([0.5 18.5])
      ylim([0.5 18.5])
     set(gca,'FontSize',18)
     set(gcf,'Position', [10, 10, 1150, 950])
 %      y = ylabel('Cue outcome              Cue location               Cue identity');
 %      x = xlabel('Cue identity                      Cue location                     Cue outcome');
-% y = ylabel('Outcome coding          Location coding           Identity coding');
-%      x = xlabel('Identity coding               Location coding              Outcome coding');
+y = ylabel('Outcome coding          Location coding           Identity coding');
+     x = xlabel('Identity coding               Location coding              Outcome coding');
      ax = gca;
      ax.Clipping = 'off';
      title(graph_title{iEpoch})
@@ -428,6 +494,7 @@ Fade = [1 .6 .475 .35 .225 .1];
 matrix_start = [1 7 13];
 joint_input = [.1 .2 .3 .4 .5];
 separate_input = [-.2 -1.55 -.1 -.075 -.03];
+ind_input = [0 -.04 .05 -.025 .035];
 schematic_data(1:18,1:18) = NaN; 
 for iFade = 1:6
     schematic_data(iFade:18+1:end) = Fade(iFade);
@@ -435,6 +502,7 @@ for iFade = 1:6
 end
 schematic_data_joint = schematic_data;
 schematic_data_sep = schematic_data;
+schematic_data_ind = schematic_data;
 for iBlockRow = 1:3
     for iBlockCol = 1:3
         if iBlockRow ~= iBlockCol
@@ -445,8 +513,13 @@ separate_data = datasample(separate_input,36);
 NaNs_data(1:6,1:6) = NaN;
 % separate_data = .1:.1:3.6;
 separate_data2 = cat(1,separate_data(1:6),separate_data(7:12),separate_data(13:18),separate_data(19:24),separate_data(25:30),separate_data(31:36));
+ind_data = datasample(ind_input,36);
+% ind_data = .1:.1:3.6;
+ind_data2 = cat(1,ind_data(1:6),ind_data(7:12),ind_data(13:18),ind_data(19:24),ind_data(25:30),ind_data(31:36));
+
 schematic_data_joint(matrix_start(iBlockRow):matrix_start(iBlockRow)+5,matrix_start(iBlockCol):matrix_start(iBlockCol)+5) = joint_data2;
 schematic_data_sep(matrix_start(iBlockRow):matrix_start(iBlockRow)+5,matrix_start(iBlockCol):matrix_start(iBlockCol)+5) = separate_data2;
+schematic_data_ind(matrix_start(iBlockRow):matrix_start(iBlockRow)+5,matrix_start(iBlockCol):matrix_start(iBlockCol)+5) = ind_data2;
   schematic_data(matrix_start(iBlockRow):matrix_start(iBlockRow)+5,matrix_start(iBlockCol):matrix_start(iBlockCol)+5) = NaNs_data;
         end
         end
@@ -455,7 +528,7 @@ end
 for iPlot = 1:3
     switch iPlot
         case 1
-            plot_schematic = schematic_data;
+            plot_schematic = schematic_data_ind;
         case 2
             plot_schematic = schematic_data_joint;
         case 3

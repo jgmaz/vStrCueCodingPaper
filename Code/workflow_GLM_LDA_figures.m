@@ -122,7 +122,7 @@ for iTime = 1:length(Table.LDA.(mdl_identifier{Mdls{iMdl}(iPlot)}).Zscore_recode
     end
 end
 end
-plot(-.05,0.01:.01:1,'.k'); plot(-.45,0.01:.01:1,'.k');
+plot(-.05,0.01:.02:1,'.k'); plot(-.45,0.01:.02:1,'.k');
 % legend({'identity' 'location' 'outcome'}); 
 switch iMdl
     case 1        
