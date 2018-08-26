@@ -354,15 +354,25 @@ end
 Epoch = {'cueon' 'NP' 'outcome' 'cueoff'}; %1 = cue on, 2 = NP, 3 = outcome, 4 = cue off
 Predictors = {'Modality' 'Location' 'Outcome'};
 graph_title = {'Identity coding across task epochs' 'Location coding across task epochs' 'Outcome coding across task epochs'};
-colors.Modality = {[49/255 163/255 84/255] [255/255 207/255 250/255] [.8 .8 .8] ...
+% colors.Modality = {[49/255 163/255 84/255] [255/255 207/255 250/255] [.8 .8 .8] ...
+%     [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+%     [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+%  colors.Location = {[49/255 163/255 84/255] [.8 .8 .8] [49/255 163/255 84/255] ...
+%     [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+%     [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+%  colors.Outcome = {[49/255 163/255 84/255] [255/255 207/255 250/255] [255/255 207/255 250/255] ...
+%     [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+%     [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+
+colors.Modality = {[49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.Location = {[49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.Outcome = {[49/255 163/255 84/255] [255/255 207/255 250/255] [.8 .8 .8] ...
     [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
     [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255]};
- colors.Location = {[49/255 163/255 84/255] [.8 .8 .8] [49/255 163/255 84/255] ...
-    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
-    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
- colors.Outcome = {[49/255 163/255 84/255] [255/255 207/255 250/255] [255/255 207/255 250/255] ...
-    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
-    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
 
 
 rColorMap = [linspace(253/255, 255/255, 45),linspace(255/255, 49/255, 211)]; %77 253
@@ -376,7 +386,7 @@ labels_start = {'Cue-onset','','','','','','Nosepoke','','','','','','Outcome','
 mincolor = -.2;
 maxcolor = .95%.7; %.8;
 % figure
-for iPred = 1:3
+for iPred = 1%:3
 %         subplot(2,3,iPred)
     figure
 %     GLM_coeff.summary.(Predictors{iPred}).Corr(GLM_coeff.summary.(Predictors{iPred}).Pvalue == 0)=NaN;
@@ -389,29 +399,29 @@ for iPred = 1:3
     hold on
 
    
-        plot([6.27 6.27],[0.7 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12); plot([0.7 0.7],[0.7 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12);
-    plot([0.7 6.27],[6.25 6.25],'color',colors.(Predictors{iPred}){1},'LineWidth',12); plot([0.7 6.27],[0.7 0.7],'color',colors.(Predictors{iPred}){1},'LineWidth',12);
-    plot([12.27 12.27],[0.7 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12); plot([6.73 6.73],[0.7 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12);
-    plot([6.73 12.27],[6.25 6.25],'color',colors.(Predictors{iPred}){2},'LineWidth',12); plot([6.73 12.27],[0.7 0.7],'color',colors.(Predictors{iPred}){2},'LineWidth',12);
-  plot([18.3 18.3],[0.7 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12); plot([12.73 12.73],[0.7 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12);
-    plot([12.73 18.3],[6.25 6.25],'color',colors.(Predictors{iPred}){3},'LineWidth',12); plot([12.73 18.3],[0.7 0.7],'color',colors.(Predictors{iPred}){3},'LineWidth',12);
-    
-     plot([6.27 6.27],[6.75 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12); plot([0.7 0.7],[6.75 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12);
-    plot([0.7 6.27],[12.25 12.25],'color',colors.(Predictors{iPred}){4},'LineWidth',12); plot([0.7 6.27],[6.75 6.75],'color',colors.(Predictors{iPred}){4},'LineWidth',12);
-    plot([12.27 12.27],[6.75 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12); plot([6.73 6.73],[6.75 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12);
-    plot([6.73 12.27],[12.25 12.25],'color',colors.(Predictors{iPred}){5},'LineWidth',12); plot([6.73 12.27],[6.75 6.75],'color',colors.(Predictors{iPred}){5},'LineWidth',12);
-  plot([18.3 18.3],[6.75 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12); plot([12.73 12.73],[6.75 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12);
-    plot([12.73 18.3],[12.25 12.25],'color',colors.(Predictors{iPred}){6},'LineWidth',12); plot([12.73 18.3],[6.75 6.75],'color',colors.(Predictors{iPred}){6},'LineWidth',12);
-    
-         plot([6.27 6.27],[12.75 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12); plot([0.7 0.7],[12.75 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12);
-    plot([0.7 6.27],[18.3 18.3],'color',colors.(Predictors{iPred}){7},'LineWidth',12); plot([0.7 6.27],[12.75 12.75],'color',colors.(Predictors{iPred}){7},'LineWidth',12);
-    plot([12.27 12.27],[12.75 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12); plot([6.73 6.73],[12.75 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12);
-    plot([6.73 12.27],[18.3 18.3],'color',colors.(Predictors{iPred}){8},'LineWidth',12); plot([6.73 12.27],[12.75 12.75],'color',colors.(Predictors{iPred}){8},'LineWidth',12);
-  plot([18.3 18.3],[12.75 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12); plot([12.73 12.73],[12.75 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12);
-    plot([12.73 18.3],[18.3 18.3],'color',colors.(Predictors{iPred}){9},'LineWidth',12); plot([12.73 18.3],[12.75 12.75],'color',colors.(Predictors{iPred}){9},'LineWidth',12);
+%         plot([6.32 6.32],[0.65 6.3],'color',colors.(Predictors{iPred}){1},'LineWidth',10); plot([0.65 0.65],[0.65 6.3],'color',colors.(Predictors{iPred}){1},'LineWidth',10);
+%     plot([0.65 6.32],[6.32 6.3],'color',colors.(Predictors{iPred}){1},'LineWidth',10); plot([0.65 6.32],[0.65 0.65],'color',colors.(Predictors{iPred}){1},'LineWidth',10);
+%     plot([12.32 12.32],[0.65 6.3],'color',colors.(Predictors{iPred}){2},'LineWidth',10); plot([6.68 6.68],[0.65 6.3],'color',colors.(Predictors{iPred}){2},'LineWidth',10);
+%     plot([6.68 12.32],[6.3 6.3],'color',colors.(Predictors{iPred}){2},'LineWidth',10); plot([6.68 12.32],[0.65 0.65],'color',colors.(Predictors{iPred}){2},'LineWidth',10);
+%   plot([18.35 18.35],[0.65 6.3],'color',colors.(Predictors{iPred}){3},'LineWidth',10); plot([12.68 12.68],[0.65 6.3],'color',colors.(Predictors{iPred}){3},'LineWidth',10);
+%     plot([12.68 18.35],[6.3 6.3],'color',colors.(Predictors{iPred}){3},'LineWidth',10); plot([12.68 18.35],[0.65 0.65],'color',colors.(Predictors{iPred}){3},'LineWidth',10);
+%     
+%      plot([6.32 6.32],[6.7 12.3],'color',colors.(Predictors{iPred}){4},'LineWidth',10); plot([0.65 0.65],[6.7 12.3],'color',colors.(Predictors{iPred}){4},'LineWidth',10);
+%     plot([0.65 6.32],[12.3 12.3],'color',colors.(Predictors{iPred}){4},'LineWidth',10); plot([0.65 6.32],[6.7 6.7],'color',colors.(Predictors{iPred}){4},'LineWidth',10);
+%     plot([12.32 12.32],[6.7 12.3],'color',colors.(Predictors{iPred}){5},'LineWidth',10); plot([6.68 6.68],[6.7 12.3],'color',colors.(Predictors{iPred}){5},'LineWidth',10);
+%     plot([6.68 12.32],[12.3 12.3],'color',colors.(Predictors{iPred}){5},'LineWidth',10); plot([6.68 12.32],[6.7 6.7],'color',colors.(Predictors{iPred}){5},'LineWidth',10);
+%   plot([18.35 18.35],[6.7 12.3],'color',colors.(Predictors{iPred}){6},'LineWidth',10); plot([12.68 12.68],[6.7 12.3],'color',colors.(Predictors{iPred}){6},'LineWidth',10);
+%     plot([12.68 18.35],[12.3 12.3],'color',colors.(Predictors{iPred}){6},'LineWidth',10); plot([12.68 18.35],[6.7 6.7],'color',colors.(Predictors{iPred}){6},'LineWidth',10);
+%     
+%          plot([6.32 6.32],[12.7 18.35],'color',colors.(Predictors{iPred}){7},'LineWidth',10); plot([0.65 0.65],[12.7 18.35],'color',colors.(Predictors{iPred}){7},'LineWidth',10);
+%     plot([0.65 6.32],[18.35 18.35],'color',colors.(Predictors{iPred}){7},'LineWidth',10); plot([0.65 6.32],[12.7 12.7],'color',colors.(Predictors{iPred}){7},'LineWidth',10);
+%     plot([12.32 12.32],[12.7 18.35],'color',colors.(Predictors{iPred}){8},'LineWidth',10); plot([6.68 6.68],[12.7 18.35],'color',colors.(Predictors{iPred}){8},'LineWidth',10);
+%     plot([6.68 12.32],[18.35 18.35],'color',colors.(Predictors{iPred}){8},'LineWidth',10); plot([6.68 12.32],[12.7 12.7],'color',colors.(Predictors{iPred}){8},'LineWidth',10);
+%   plot([18.35 18.35],[12.7 18.35],'color',colors.(Predictors{iPred}){9},'LineWidth',10); plot([12.68 12.68],[12.7 18.35],'color',colors.(Predictors{iPred}){9},'LineWidth',10);
+%     plot([12.68 18.35],[18.35 18.35],'color',colors.(Predictors{iPred}){9},'LineWidth',10); plot([12.68 18.35],[12.7 12.7],'color',colors.(Predictors{iPred}){9},'LineWidth',10);
 
-             plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',4);
-    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-0.51 18.44],[12.5 12.5],'k','LineWidth',4);
+             plot([6.5 6.5],[0.56 19.49],'k','LineWidth',3); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',3);
+    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',3); plot([-0.51 18.44],[12.5 12.5],'k','LineWidth',3);
     % title(Predictors{iPred})
     % xlabel('cue onset')
      xlim([0.5 18.5])
@@ -427,15 +437,25 @@ end
 
 %%
 graph_title = {'Coding of cue features at cue-onset' 'Coding of cue features at nosepoke' 'Coding of cue features at outcome receipt'};
-colors.cueon = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
-    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
-    [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
- colors.NP = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
-    [.8 .8 .8] [49/255 163/255 84/255] [.8 .8 .8] ...
-   [255/255 207/255 250/255] [.8 .8 .8] [49/255 163/255 84/255]};
- colors.outcome = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
-    [.8 .8 .8] [49/255 163/255 84/255] [255/255 207/255 250/255] ...
-    [255/255 207/255 250/255] [255/255 207/255 250/255] [49/255 163/255 84/255]};
+% colors.cueon = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+%     [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+%     [255/255 207/255 250/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+%  colors.NP = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+%     [.8 .8 .8] [49/255 163/255 84/255] [.8 .8 .8] ...
+%    [255/255 207/255 250/255] [.8 .8 .8] [49/255 163/255 84/255]};
+%  colors.outcome = {[49/255 163/255 84/255] [.8 .8 .8] [255/255 207/255 250/255] ...
+%     [.8 .8 .8] [49/255 163/255 84/255] [255/255 207/255 250/255] ...
+%     [255/255 207/255 250/255] [255/255 207/255 250/255] [49/255 163/255 84/255]};
+
+colors.cueon = {[49/255 163/255 84/255] [49/255 163/255 84/255] [.8 .8 .8] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [.8 .8 .8] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.NP = {[49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+   [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+   [49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255]};
+ colors.outcome = {[49/255 163/255 84/255] [49/255 163/255 84/255] [49/255 163/255 84/255] ...
+    [49/255 163/255 84/255] [49/255 163/255 84/255] [.8 .8 .8] ...
+    [49/255 163/255 84/255] [.8 .8 .8] [49/255 163/255 84/255]};
 
 for iEpoch = 1:3
 %         subplot(2,3,iEpoch+3)
@@ -451,30 +471,54 @@ for iEpoch = 1:3
    
        
     
-        plot([6.27 6.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12); plot([0.7 0.7],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12);
-    plot([0.7 6.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12); plot([0.7 6.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){1},'LineWidth',12);
-    plot([12.27 12.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12); plot([6.73 6.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12);
-    plot([6.73 12.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12); plot([6.73 12.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){2},'LineWidth',12);
-  plot([18.3 18.3],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12); plot([12.73 12.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12);
-    plot([12.73 18.3],[6.25 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12); plot([12.73 18.3],[0.7 0.7],'color',colors.(Epoch{iEpoch}){3},'LineWidth',12);
-    
-     plot([6.27 6.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12); plot([0.7 0.7],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12);
-    plot([0.7 6.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12); plot([0.7 6.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){4},'LineWidth',12);
-    plot([12.27 12.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12); plot([6.73 6.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12);
-    plot([6.73 12.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12); plot([6.73 12.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){5},'LineWidth',12);
-  plot([18.3 18.3],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12); plot([12.73 12.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12);
-    plot([12.73 18.3],[12.25 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12); plot([12.73 18.3],[6.75 6.75],'color',colors.(Epoch{iEpoch}){6},'LineWidth',12);
-    
-         plot([6.27 6.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12); plot([0.7 0.7],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12);
-    plot([0.7 6.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12); plot([0.7 6.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){7},'LineWidth',12);
-    plot([12.27 12.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12); plot([6.73 6.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12);
-    plot([6.73 12.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12); plot([6.73 12.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){8},'LineWidth',12);
-  plot([18.3 18.3],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12); plot([12.73 12.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12);
-    plot([12.73 18.3],[18.3 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12); plot([12.73 18.3],[12.75 12.75],'color',colors.(Epoch{iEpoch}){9},'LineWidth',12);
-
-    plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[6.5 6.5],'k','LineWidth',4);
-    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[12.5 12.5],'k','LineWidth',4);
+%         plot([6.27 6.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10); plot([0.7 0.7],[0.7 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10);
+%     plot([0.7 6.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10); plot([0.7 6.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10);
+%     plot([12.27 12.27],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10); plot([6.73 6.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10);
+%     plot([6.73 12.27],[6.25 6.25],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10); plot([6.73 12.27],[0.7 0.7],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10);
+%   plot([18.3 18.3],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10); plot([12.73 12.73],[0.7 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10);
+%     plot([12.73 18.3],[6.25 6.25],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10); plot([12.73 18.3],[0.7 0.7],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10);
+%     
+%      plot([6.27 6.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10); plot([0.7 0.7],[6.75 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10);
+%     plot([0.7 6.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10); plot([0.7 6.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10);
+%     plot([12.27 12.27],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10); plot([6.73 6.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10);
+%     plot([6.73 12.27],[12.25 12.25],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10); plot([6.73 12.27],[6.75 6.75],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10);
+%   plot([18.3 18.3],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10); plot([12.73 12.73],[6.75 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10);
+%     plot([12.73 18.3],[12.25 12.25],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10); plot([12.73 18.3],[6.75 6.75],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10);
+%     
+%          plot([6.27 6.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10); plot([0.7 0.7],[12.75 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10);
+%     plot([0.7 6.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10); plot([0.7 6.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10);
+%     plot([12.27 12.27],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10); plot([6.73 6.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10);
+%     plot([6.73 12.27],[18.3 18.3],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10); plot([6.73 12.27],[12.75 12.75],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10);
+%   plot([18.3 18.3],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10); plot([12.73 12.73],[12.75 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10);
+%     plot([12.73 18.3],[18.3 18.3],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10); plot([12.73 18.3],[12.75 12.75],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10);
+% 
+%     plot([6.5 6.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[6.5 6.5],'k','LineWidth',4);
+%     plot([12.5 12.5],[0.56 19.49],'k','LineWidth',4); plot([-.51 18.44],[12.5 12.5],'k','LineWidth',4);
    
+ plot([6.32 6.32],[0.65 6.3],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10); plot([0.65 0.65],[0.65 6.3],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10);
+    plot([0.65 6.32],[6.32 6.3],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10); plot([0.65 6.32],[0.65 0.65],'color',colors.(Epoch{iEpoch}){1},'LineWidth',10);
+    plot([12.32 12.32],[0.65 6.3],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10); plot([6.68 6.68],[0.65 6.3],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10);
+    plot([6.68 12.32],[6.3 6.3],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10); plot([6.68 12.32],[0.65 0.65],'color',colors.(Epoch{iEpoch}){2},'LineWidth',10);
+  plot([18.35 18.35],[0.65 6.3],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10); plot([12.68 12.68],[0.65 6.3],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10);
+    plot([12.68 18.35],[6.3 6.3],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10); plot([12.68 18.35],[0.65 0.65],'color',colors.(Epoch{iEpoch}){3},'LineWidth',10);
+    
+     plot([6.32 6.32],[6.7 12.3],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10); plot([0.65 0.65],[6.7 12.3],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10);
+    plot([0.65 6.32],[12.3 12.3],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10); plot([0.65 6.32],[6.7 6.7],'color',colors.(Epoch{iEpoch}){4},'LineWidth',10);
+    plot([12.32 12.32],[6.7 12.3],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10); plot([6.68 6.68],[6.7 12.3],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10);
+    plot([6.68 12.32],[12.3 12.3],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10); plot([6.68 12.32],[6.7 6.7],'color',colors.(Epoch{iEpoch}){5},'LineWidth',10);
+  plot([18.35 18.35],[6.7 12.3],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10); plot([12.68 12.68],[6.7 12.3],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10);
+    plot([12.68 18.35],[12.3 12.3],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10); plot([12.68 18.35],[6.7 6.7],'color',colors.(Epoch{iEpoch}){6},'LineWidth',10);
+    
+         plot([6.32 6.32],[12.7 18.35],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10); plot([0.65 0.65],[12.7 18.35],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10);
+    plot([0.65 6.32],[18.35 18.35],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10); plot([0.65 6.32],[12.7 12.7],'color',colors.(Epoch{iEpoch}){7},'LineWidth',10);
+    plot([12.32 12.32],[12.7 18.35],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10); plot([6.68 6.68],[12.7 18.35],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10);
+    plot([6.68 12.32],[18.35 18.35],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10); plot([6.68 12.32],[12.7 12.7],'color',colors.(Epoch{iEpoch}){8},'LineWidth',10);
+  plot([18.35 18.35],[12.7 18.35],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10); plot([12.68 12.68],[12.7 18.35],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10);
+    plot([12.68 18.35],[18.35 18.35],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10); plot([12.68 18.35],[12.7 12.7],'color',colors.(Epoch{iEpoch}){9},'LineWidth',10);
+
+             plot([6.5 6.5],[0.56 19.49],'k','LineWidth',3); plot([-0.51 18.44],[6.5 6.5],'k','LineWidth',3);
+    plot([12.5 12.5],[0.56 19.49],'k','LineWidth',3); plot([-0.51 18.44],[12.5 12.5],'k','LineWidth',3);
+
    % title(Epoch{iEpoch})
         xlim([0.5 18.5])
      ylim([0.5 18.5])
