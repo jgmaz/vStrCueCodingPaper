@@ -85,14 +85,18 @@ for iEpoch = 1:3%:length(Epoch)
                 for iShuff = 1:num_Shuffs
                 for iPred = 1:length(Predictors)                 
                     count = 1;
+                    count_pres = 1;
                     GLM_recode.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff)))(1:133,iGLM) = 0;
                     for iCMod = 1:length(cue_mod)
                         if iCMod <= length(ALL_matrix.(cat(2,'shuff_',num2str(iShuff))))
                             if cue_mod(iCMod) == 1
+                                if cue_presence(count_pres) == 1
                                 if ALL_matrix.(cat(2,'shuff_',num2str(iShuff)))(iCMod,iPred) == 1
                                     GLM_recode.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff)))(count,iGLM) = 1;
                                 end
                                 count = count + 1;
+                                end
+                                count_pres = count_pres + 1;
                             end
                         end
                     end
@@ -106,24 +110,27 @@ end
 %% across epochs
 rng('shuffle')
 num_Shuffs = 100;
+num_GLM = 11; %6 or 11 depending if want all time windows
 % Class = {'ALL' 'MSN' 'FSI' 'MSN_Inc' 'MSN_Dec' 'FSI_Inc' 'FSI_Dec'};
 % Total_count = [sum(cue_mod) sum(cue_MSN) sum(cue_FSI) sum(cue_MSN_Inc) sum(cue_MSN_Dec) sum(cue_FSI_Inc) sum(cue_FSI_Dec)];
 
 for iEpoch = 1:3
     for iEpoch2 = 1:3
-        for iGLM = 1:11
-            for iGLM2 = 1:11
+        for iGLM = 1:num_GLM
+            for iGLM2 = 1:num_GLM
                 disp(cat(2,'Epochs ',num2str(iEpoch),' (',num2str(iGLM),') & ',num2str(iEpoch2),' (',num2str(iGLM2),')'))
                 for iPred = 1:3
+%                     Shuff_comp = randperm(100);
                     for iShuff = 1:num_Shuffs
+%                         iShuff2 = Shuff_comp(iShuff);
 %                         Epoch1_shuff = [];
 %                         Epoch2_shuff = [];
 %                         Epoch1_shuff = datasample(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),length(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM)),'Replace',false);
 %                         Epoch2_shuff = datasample(GLM_recode.(Epoch{iEpoch2}).(Predictors{iPred})(:,iGLM2),length(GLM_recode.(Epoch{iEpoch2}).(Predictors{iPred})(:,iGLM2)),'Replace',false);                          
 %                     [GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues] = corrcoef(Epoch1_shuff,Epoch2_shuff);
                     [GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff)))(:,iGLM),GLM_recode.(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff)))(:,iGLM2));
-                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorr(iGLM,iGLM2) = abs(GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr(2));
-                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(iGLM,iGLM2) = abs(GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(2));
+                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr(2);
+                    GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(2);
                     end
                     end
             end
@@ -133,20 +140,22 @@ end
 
 %% across predictors
 for iEpoch = 1:3
-    for iGLM = 1:11
-        for iGLM2 = 1:11
+    for iGLM = 1:num_GLM
+        for iGLM2 = 1:num_GLM
             for iPred = 1:3
                 disp(cat(2,'Epoch ',num2str(iEpoch),' (',num2str(iGLM),') & (',num2str(iGLM2),')'))
                 for iPred2 = 1:3
+%                     Shuff_comp = randperm(100);
                     for iShuff = 1:num_Shuffs
+%                         iShuff2 = Shuff_comp(iShuff)
 %                         Pred1_shuff = [];
 %                         Pred2_shuff = [];
 %                         Pred1_shuff = datasample(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM),length(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred})(:,iGLM)),'Replace',false);
 %                         Pred2_shuff = datasample(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred2})(:,iGLM2),length(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred2})(:,iGLM2)),'Replace',false);   
 %                     [GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues] = corrcoef(Pred1_shuff,Pred2_shuff);
                     [GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues] = corrcoef(GLM_recode.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff)))(:,iGLM),GLM_recode.(Epoch{iEpoch}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff)))(:,iGLM2));
-                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorr(iGLM,iGLM2) = abs(GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr(2));
-                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(iGLM,iGLM2) = abs(GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(2));
+                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorr(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorr(2);
+                    GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(iGLM,iGLM2) = GLM_corr.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(strcat('t',num2str(iGLM))).(strcat('t',num2str(iGLM2))).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(2);
                 end
                 end
             end
@@ -173,14 +182,14 @@ for iEpoch = 1:3
             GLM_coeff.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Pvalue = [];
         end
         for iEpoch2 = 1:3
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Corr,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorr(start:11,start:11));
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(start:11,start:11));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Corr,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorr(start:num_GLM,start:num_GLM));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Epoch{iEpoch2}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(start:num_GLM,start:num_GLM));
         end
         GLM_coeff.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Corr = cat(1,GLM_coeff.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Corr);
         GLM_coeff.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Pvalue = cat(1,GLM_coeff.summary.(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).ALL_Pvalue);
         for iPred2 = 1:3
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorr(start:11,start:11));
-            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(start:11,start:11));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Corr = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorr(start:num_GLM,start:num_GLM));
+            GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Pvalue = cat(2,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(Predictors{iPred2}).(cat(2,'s',num2str(iShuff))).RecodeCorrPvalues(start:num_GLM,start:num_GLM));
         end
         GLM_coeff.summary.(Epoch{iEpoch}).(cat(2,'s',num2str(iShuff))).Corr = cat(1,GLM_coeff.summary.(Epoch{iEpoch}).(cat(2,'s',num2str(iShuff))).Corr,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Corr);
         GLM_coeff.summary.(Epoch{iEpoch}).(cat(2,'s',num2str(iShuff))).Pvalue = cat(1,GLM_coeff.summary.(Epoch{iEpoch}).(cat(2,'s',num2str(iShuff))).Pvalue,GLM_coeff.(Epoch{iEpoch}).(Predictors{iPred}).(cat(2,'s',num2str(iShuff))).AllPred_Pvalue);
@@ -192,6 +201,7 @@ GLM_coeff_SHUFF = GLM_coeff;
 %% Z-scores away from shuffle (value - shuff mean / shuff std)
 %%%% for MEAN of Corr %%%%
 matrix_start = [1 7 13];
+num_Shuffs = 100;
 for iShuff = 1:num_Shuffs
     for iEpoch = 1:3
         for iRow = 1:3
@@ -245,7 +255,7 @@ for iPred = 1:3
            Table.(Predictors{iPred}).Zscore_recode(iRow,iCol) = -1;
        else
                 Table.(Predictors{iPred}).Zscore_recode(iRow,iCol) = 0;
-            end
+       end
         end
     end
 end
@@ -469,4 +479,39 @@ for iEpoch = 1:3
      ax = gca;
      ax.Clipping = 'off';
      title(graph_title{iEpoch})
+end
+
+%% visualize histogram of shuffled data
+for iEpoch = 1:3
+    figure
+    
+    for iPlot = 1:prod(size(Table_ind.Shuffs.(Epoch{iEpoch})))
+        subtightplot(18,18,iPlot)
+        histfit(Table_ind.Shuffs.(Epoch{iEpoch}){iPlot},10)
+        box off
+        hold on
+        plot([0 0],[0 25],'g')
+           xlim([-.5 .5])
+     ylim([0 25])
+      set(gca,'XTick',[],'YTick',[]);
+    end
+   subtightplot(18,18,9)
+   title(Epoch{iEpoch})
+end
+
+for iPred = 1:3
+    figure
+    
+    for iPlot = 1:prod(size(Table_ind.Shuffs.(Predictors{iPred})))
+        subtightplot(18,18,iPlot)
+        histfit(Table_ind.Shuffs.(Predictors{iPred}){iPlot},10)
+        box off
+        hold on
+        plot([0 0],[0 25],'g')
+           xlim([-.5 .5])
+     ylim([0 25])
+      set(gca,'XTick',[],'YTick',[]);
+    end
+   subtightplot(18,18,9)
+   title(Predictors{iPred})
 end

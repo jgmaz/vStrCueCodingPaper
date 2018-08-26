@@ -4,12 +4,12 @@
 group = [1 2 3 4];
 figure
 % subplot(2,3,[2 5])
-subplot(7,3,[2 5 8 ])
-gscatter([1 1 1 1],BEHAV_summary.APP.MEAN.rew_trials_light,group,'r','xo+*')
+subplot(7,2,[2 4 6 ])
+gscatter([1 1 1 1],BEHAV_summary.APP.MEAN.rew_trials_light,group,'r','xo+*',15)
 hold on;
-gscatter([2 2 2 2],BEHAV_summary.APP.MEAN.unrew_trials_light,group,'g','xo+*')
-gscatter([3 3 3 3],BEHAV_summary.APP.MEAN.rew_trials_sound,group,'b','xo+*')
-gscatter([4 4 4 4],BEHAV_summary.APP.MEAN.unrew_trials_sound,group,'c','xo+*')
+gscatter([2 2 2 2],BEHAV_summary.APP.MEAN.unrew_trials_light,group,'g','xo+*',15)
+gscatter([3 3 3 3],BEHAV_summary.APP.MEAN.rew_trials_sound,group,'b','xo+*',15)
+gscatter([4 4 4 4],BEHAV_summary.APP.MEAN.unrew_trials_sound,group,'c','xo+*',15)
 plot([.85 1.15],[mean_rew_light mean_rew_light],'k')
 plot([1.85 2.15],[mean_unrew_light mean_unrew_light],'k')
 plot([2.85 3.15],[mean_rew_sound mean_rew_sound],'k')
@@ -26,28 +26,28 @@ set(h,'FontSize',20);
     
 % figure
 %subplot(2,3,[3 6])
-subplot(7,3,[3 6 9])
-gscatter([1 1 1 1],BEHAV_summary.Length.MEAN.rew_trials_light,group,'r','xo+*')
-hold on;
-gscatter([2 2 2 2],BEHAV_summary.Length.MEAN.unrew_trials_light,group,'g','xo+*')
-gscatter([3 3 3 3],BEHAV_summary.Length.MEAN.rew_trials_sound,group,'b','xo+*')
-gscatter([4 4 4 4],BEHAV_summary.Length.MEAN.unrew_trials_sound,group,'c','xo+*')
-plot([.85 1.15],[mean_rew_light2 mean_rew_light2],'k')
-plot([1.85 2.15],[mean_unrew_light2 mean_unrew_light2],'k')
-plot([2.85 3.15],[mean_rew_sound2 mean_rew_sound2],'k')
-plot([3.85 4.15],[mean_unrew_sound2 mean_unrew_sound2],'k')
-
-xlim([0 5]); ylim([0 3]); %title('Trial Length');
-% set(gca,'TickLength', [0 0]); box off;
-set(gca,'XTickLabel',{'','L1+','L2-','S1+','S2-'})
-    ylabel('Trial length (s)');  xlabel('Cue type'); %'XTickLabelRotation',90,
-box off;
-h = gca;
-h.XRuler.TickLength = 0;   
-set(h,'FontSize',20);
+% subplot(7,3,[3 6 9])
+% gscatter([1 1 1 1],BEHAV_summary.Length.MEAN.rew_trials_light,group,'r','xo+*')
+% hold on;
+% gscatter([2 2 2 2],BEHAV_summary.Length.MEAN.unrew_trials_light,group,'g','xo+*')
+% gscatter([3 3 3 3],BEHAV_summary.Length.MEAN.rew_trials_sound,group,'b','xo+*')
+% gscatter([4 4 4 4],BEHAV_summary.Length.MEAN.unrew_trials_sound,group,'c','xo+*')
+% plot([.85 1.15],[mean_rew_light2 mean_rew_light2],'k')
+% plot([1.85 2.15],[mean_unrew_light2 mean_unrew_light2],'k')
+% plot([2.85 3.15],[mean_rew_sound2 mean_rew_sound2],'k')
+% plot([3.85 4.15],[mean_unrew_sound2 mean_unrew_sound2],'k')
+% 
+% xlim([0 5]); ylim([0 3]); %title('Trial Length');
+% % set(gca,'TickLength', [0 0]); box off;
+% set(gca,'XTickLabel',{'','L1+','L2-','S1+','S2-'})
+%     ylabel('Trial length (s)');  xlabel('Cue type'); %'XTickLabelRotation',90,
+% box off;
+% h = gca;
+% h.XRuler.TickLength = 0;   
+% set(h,'FontSize',20);
 
 % subplot(2,3,1)
-subplot(7,3,[1 4])
+subplot(7,2,[1 3])
 plot(prop_light_app_1,'color','r'); title('Light block'); ylabel('Proportion approached');
 ylim([0 1.1]); hold on; plot(prop_light_app_2,'color','g'); 
 plot(42,0:.05:1,'.','color','black'); xlim([0 70]);
@@ -67,7 +67,7 @@ plot([light_sig_final light_sig_final_last], [.05 .05], '-k', 'LineWidth',3,'col
 set(gca,'FontSize',20);
 
 % subplot(2,3,4)
-subplot(7,3,[10 13])
+subplot(7,2,[7 9])
 plot(prop_sound_app_1,'color','c'); title('Sound block'); ylim([0 1.1]); %xlabel('Session number'); 
 hold on; plot(prop_sound_app_2,'color','b'); plot(42,0:.05:1,'.','color','black'); 
 xlim([0 70]); xlabel('Session number'); ylabel('Proportion approached'); 
