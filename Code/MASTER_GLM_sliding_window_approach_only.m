@@ -1,7 +1,7 @@
 warning('error', 'stats:glmfit:IterationLimit'); % turn GLM warning into error so that you can use try catch to skip to next iteration of loop.
 %% time window to analyze
 for iRound = 1%:3
-    for iTime = -.5:.1:.5
+    for iTime = 0%-.5:.1:.5
 
 
 time_window_start = iTime; %starting time window for analysis, 0 = time zero
@@ -1180,7 +1180,7 @@ for kk = 1:length(dir('*.mat'))
     end
 end
 
-save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-05-24-GLM_cueon_APP_only_',num2str(iTime),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
+save(cat(2,'E:\Jimmie\Jimmie\Analysis\2018-08-28-GLM_cueon_APP_only_',num2str(iTime),'.mat'),'mdl','ALL_matrix','block_drift','GLM_matrices','summary_var')
 clearvars -except iTime iRound
     end
 end
@@ -1190,31 +1190,32 @@ summary_table{2,1} = 'Cue-evoked';
 summary_table{3,1} = 'Modality';
 summary_table{4,1} = 'Location';
 summary_table{5,1} = 'Outcome';
-summary_table{6,1} = 'Approach';
-summary_table{7,1} = 'Latency';
-summary_table{8,1} = 'Trial';
-summary_table{9,1} = 'Previous trial';
-summary_table{10,1} = 'Modality x Location';
-summary_table{11,1} = 'Modality x Outcome';
-summary_table{12,1} = 'Location x Outcome';
-summary_table{13,1} = 'Outcome x Approach';
-summary_table{14,1} = 'Modality x Location x Outcome';
+% summary_table{6,1} = 'Approach';
+summary_table{6,1} = 'Latency';
+summary_table{7,1} = 'Trial';
+summary_table{8,1} = 'Previous trial';
+% summary_table{10,1} = 'Modality x Location';
+% summary_table{11,1} = 'Modality x Outcome';
+% summary_table{12,1} = 'Location x Outcome';
+% summary_table{13,1} = 'Outcome x Approach';
+% summary_table{14,1} = 'Modality x Location x Outcome';
 
 summary_table{1,2} = 'All';
 summary_table{2,2} = summary_var.All.Cue;
 summary_table{3,2} = summary_var.All.Modality;
 summary_table{4,2} = summary_var.All.Location;
 summary_table{5,2} = summary_var.All.Outcome;
-summary_table{6,2} = summary_var.All.Approach;
-summary_table{7,2} = summary_var.All.Latency;
-summary_table{8,2} = summary_var.All.Trial;
-summary_table{9,2} = summary_var.All.Previous;
-summary_table{10,2} = summary_var.All.ModxLoc;
-summary_table{11,2} = summary_var.All.ModxOut;
-summary_table{12,2} = summary_var.All.LocxOut;
-summary_table{13,2} = summary_var.All.OutxApp;
-summary_table{14,2} = summary_var.All.ModxLocxOut;
+% summary_table{6,2} = summary_var.All.Approach;
+summary_table{6,2} = summary_var.All.Latency;
+summary_table{7,2} = summary_var.All.Trial;
+summary_table{8,2} = summary_var.All.Previous;
+% summary_table{10,2} = summary_var.All.ModxLoc;
+% summary_table{11,2} = summary_var.All.ModxOut;
+% summary_table{12,2} = summary_var.All.LocxOut;
+% summary_table{13,2} = summary_var.All.OutxApp;
+% summary_table{14,2} = summary_var.All.ModxLocxOut;
 
+%%
 summary_table{1,3} = 'SPN';
 summary_table{2,3} = summary_var.SPN.Cue;
 summary_table{3,3} = summary_var.SPN.Modality;
