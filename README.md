@@ -87,13 +87,19 @@ directory = 'E:\vStr-cuecoding\promoted\spike data\'; % where spiking data resid
 
 ### Cue-onset distributed firing (needed for Figure 5)
 
-In-progress. Generates the data for **Figure 5**.
+In-progress. Generates the data for **Figure 5** and **Figure 5 supplement 1**.
+
+### Plot cue-onset distributed firing
+
+In-progress. Plots **Figure 5** and **Figure 5 supplement 1**.
 
 ### Nosepoke distributed firing (needed for Figure 7 supplement 2)
 
+In-progress. Generates the data for **Figure 7 supplement 2**.
+
 ### Plot nosepoke distributed firing
 
-In-progress. Generates the data for **Figure 7 supplement 2**.
+In-progress. Plots **Figure 7 supplement 2**,
 
 ### Plot scatterplot
 
