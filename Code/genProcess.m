@@ -1,11 +1,11 @@
-function PROCESS = genPROCESS(directory,destination)
-% function FRATE = PROCESS = genPROCESS(directory,destination)
+function PROCESS = genPROCESS(directory,destination,PETH_generation)
+% function PROCESS = genPROCESS(directory,destination,PETH_generation)
 %
 %
 % INPUTS:
 %
 % OUTPUTS:
-% 
+%
 
 for ii = 1:4 % work through each rat in the dataset
     switch ii
@@ -29,8 +29,8 @@ for ii = 1:4 % work through each rat in the dataset
             block_order_list = [2 1 2 1 2 1 2 1 2 1 2 1];
         case 4
             rat_id = 'R060';
-            day = {'-2014-12-11'; '-2014-12-12'; '-2014-12-13'; '-2014-12-14'; '-2014-12-15'; ...
-                '-2014-12-17'; '-2014-12-19'; '-2014-12-20'; '-2014-12-21'; '-2014-12-23'; '-2014-12-24'; ...
+            day = {'-2014-12-12'; '-2014-12-13'; '-2014-12-14'; '-2014-12-15'; ...
+                '-2014-12-17'; '-2014-12-20'; '-2014-12-23'; '-2014-12-24'; ...
                 '-2014-12-26'; '-2014-12-27'; '-2014-12-28'; '-2014-12-29'; '-2014-12-30'; '-2014-12-31'; ...
                 '-2015-01-01'; '-2015-01-02'; '-2015-01-03'; '-2015-01-04'};
             block_order_list = [1 2 1 2 1 2 1 2 1 1 2 1 1 2 1 1 2 1 2 1 2];
@@ -61,7 +61,7 @@ for ii = 1:4 % work through each rat in the dataset
             end
             
             cell_count = 1;
-                        
+            
             for jj = 1:length(dir('*.t'))
                 if strcmp(t_files(jj).name(1:str_length),strcat(sesh.session_id,'-TT',num2str(kk),'_')) == 1
                     sesh.cell_number = cell_count; % which cell number on current tt
@@ -69,16 +69,18 @@ for ii = 1:4 % work through each rat in the dataset
                     
                     %% load spikes
                     disp('loading spikes')
-                    spk_t = LoadSpikes({sesh.tt_fname}); % dbl check 32 v 64 bit
+                    spk_t = LoadSpikes({sesh.tt_fname});
                     spk_t = Data(spk_t{1});
                     
                     %% peri-event histograms
-                    sesh.PETH.Trial = 1; %generate PETH separated by cue conditions at trial start
-                    sesh.PETH.Arm = 1; %generate PETH separated by arm location
-                    sesh.PETH.Approach = 0; %generate PETH separated by approach and skip for unrewarded trials
-                    sesh.PETH.Trial_np = 1; %generate PETH separated by cue conditions at trial start for when the rat approached
-                    
-                    PETH = genPETH(sesh,metadata,spk_t);
+                    if PETH_generation == 1
+                        sesh.PETH.Trial = 1; %generate PETH separated by cue conditions at trial start
+                        sesh.PETH.Arm = 1; %generate PETH separated by arm location
+                        sesh.PETH.Approach = 0; %generate PETH separated by approach and skip for unrewarded trials
+                        sesh.PETH.Trial_np = 1; %generate PETH separated by cue conditions at trial start for when the rat approached
+                        
+                        PETH = genPETH(sesh,metadata,spk_t);
+                    end
                     
                     %% rasterplots
                     RAST = genRAST(metadata,spk_t);
@@ -90,8 +92,13 @@ for ii = 1:4 % work through each rat in the dataset
                     TESTS.WSR.Task.Trial_b4_vs_Trial = signrank(FRATE.Task.Trial_B4_firing_rate,FRATE.Task.Trial_firing_rate);
                     
                     %% save variables in .mat file
-                    save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','PETH','RAST','spk_t','sesh');
-                    clearvars -except ii kj kk jj sesh rat_id days block_order_list directory destination metadata cell_count t_files str_length
+                    switch PETH_generation
+                        case 0
+                            save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','RAST','spk_t','sesh');
+                        case 1
+                            save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','RAST','PETH','spk_t','sesh');
+                    end
+                    clearvars -except ii kj kk jj sesh rat_id day block_order_list directory destination metadata cell_count t_files str_length
                     cell_count = cell_count + 1;
                 end
             end

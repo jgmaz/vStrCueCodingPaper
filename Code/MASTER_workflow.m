@@ -1,13 +1,18 @@
-%% Preprocess units (needed for Figures 3,4,5,6,7)
-directory = 'E:\vStr-cuecoding\promoted\Example session\'; % working directory
-destination = 'E:\vStr-cuecoding\promoted\spike data\'; % where to save .mat files
+%% Behavior example learning curves [NOT COMPLETED]
 
-genProcess(directory,destination);
+%% Behavior summary performance [NOT COMPLETED]
+
+%% Preprocess units (needed for Figures 3,4,5,6,7)
+directory = 'E:\vStr-cuecoding\promoted\'; % working directory
+destination = 'E:\vStr-cuecoding\promoted\spike data\'; % where to save .mat files
+PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
+
+genProcess(directory,destination,PETH_generation);
 
 %% Cue-onset GLM (needed for Figure 4)
 directory = 'E:\vStr-cuecoding\promoted\spike data\'; % working directory
 destination = 'E:\vStr-cuecoding\promoted\analysis files\'; % where to save .mat files
-num_Shuffs = 5;
+num_Shuffs = 2;
 select_Epoch = 1; % 1 = cue-onset only, 2 = nosepoke & outcome, 3 = all time points
 
 genGLM(directory,destination);
