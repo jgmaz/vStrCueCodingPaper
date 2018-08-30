@@ -1,5 +1,5 @@
 function TaskDist = genDIST(directory,destination,cfg,direction,feature,epoch)
-% function TaskDist = genDIST(directory,destination)
+% function TaskDist = genDIST(directory,destination,cfg,direction,feature,epoch)
 %
 %
 % INPUTS:
@@ -12,6 +12,7 @@ order_direction = {'max' 'min'};
 cue_feature = {'identity' 'location' 'outcome'};
 Epoch = {'Trial' 'Nosepoke'};
 epoch_lower = {'trials' 'nosepoke'};
+save_var = {'cueon' 'NP'};
 
 switch epoch
     case 1
@@ -72,6 +73,6 @@ for jj = 1:length(dir('*.mat'))
     sortedPETH.TwoVsOne.zscore(jj,:) = (sortedPETH.(condition2{feature}).(condition1{feature})(jj,:) - mean_peth.TwoVsOne(jj)) / std_peth.TwoVsOne(jj);
 end
 
-save(cat(2,destination,'Distributed_coding_',epoch_lower{epoch},'_',cue_feature{feature},'_',order_direction{direction},'.mat'),'sortedPETH')
+save(cat(2,destination,'Distributed_coding_',save_var{epoch},'_',cue_feature{feature},'_',order_direction{direction},'.mat'),'sortedPETH')
 
 end

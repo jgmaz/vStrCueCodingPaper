@@ -4,13 +4,12 @@
 Code used for Gmaz,
 Carmichael & van der Meer, "Persistent coding of outcome-predictive cue features in the rat nucleus accumbens" (2018) ([preprint](https://www.biorxiv.org/content/early/2018/08/27/300251)).
 
-This repo makes use of the [vandermeerlab codebase](https://github.com/vandermeerlab/vandermeerlab);
+This repo makes use of the [vandermeerlab codebase](https://github.com/vandermeerlab/vandermeerlab). Analyses were run on Windows 7 using MATLAB R2016a.
 
 Once you have downloaded the above code, set up your MATLAB path as follows:
 
 ```
 restoredefaultpath; % start with clean slate
-cd('\promoted\analysis files\'); % replace paths with yours
 addpath(genpath('\GitHub\vandermeerlab\code-matlab\shared')); % lab codebase
 addpath(genpath('\GitHub\vandermeerlab\code-matlab\toolboxes\MClust-3.5')); % MClust-3.5
 addpath(genpath('\GitHub\vStrCueCodingPaper\Code')); % paper repo
@@ -33,7 +32,7 @@ This cell performs the preprocessing step of the .t files, loading the spikes, t
 
 The output is a .mat file that is saved in a common *destination* for all units. 
 
-The *directory* is the location of the data (e.g. if data for a session is in ‘E:\vStr-cuecoding\promoted\R057\R057-2015-02-25’, the directory would be ‘E:\vStr-cuecoding\promoted\’).
+The *directory* is the location of the data (e.g. if data for a session is in â€˜E:\vStr-cuecoding\promoted\R057\R057-2015-02-25â€™, the directory would be â€˜E:\vStr-cuecoding\promoted\â€™).
 
 ### Cue-onset GLM (needed for Figure 4)
 
