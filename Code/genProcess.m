@@ -98,7 +98,7 @@ for ii = 1:4 % work through each rat in the dataset
                         case 1
                             save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','RAST','PETH','spk_t','sesh');
                     end
-                    clearvars -except ii kj kk jj sesh rat_id day block_order_list directory destination metadata cell_count t_files str_length
+                    clearvars -except ii kj kk jj sesh rat_id day block_order_list directory destination metadata cell_count t_files str_length PETH_generation
                     cell_count = cell_count + 1;
                 end
             end

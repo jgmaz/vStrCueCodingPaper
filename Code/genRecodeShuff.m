@@ -96,7 +96,6 @@ end
 %% Z-scores away from shuffle (value - shuff mean / shuff std)
 %%%% for MEAN of Corr %%%%
 matrix_start = [1 7 13];
-num_Shuffs = 100;
 for iShuff = 1:num_Shuffs
     for iEpoch = 1:3
         for iRow = 1:3
