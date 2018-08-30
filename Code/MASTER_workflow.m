@@ -133,21 +133,51 @@ directory = [DATA_ROOT spike_data]; % where spiking data resides
 destination = [DATA_ROOT analysis_files]; % where to save .mat files
 cfg.start = 4001; % start time of analysis (ms); centered on 5000 ms
 cfg.end = 6000; % end time of analysis (ms); centered on 5000 ms
-direction = 1; % order by maximum or minimum firing (1 = max, 2 = min)
-feature = 1; % cue feature to analyze (1 = identity, 2 = location, 3 = outcome)
-epoch = 1; % epoch to analyze (1 = cue-onset, 2 = nosepoke)
+direction = [1 2]; % order by maximum or minimum firing (1 = max, 2 = min); start and end range
+feature = [1 3]; % cue feature to analyze (1 = identity, 2 = location, 3 = outcome); start and end range
+epoch = 1; % epoch to analyze (1 = cue-onset, 2 = nosepoke); 
 
-genDIST(directory,destination,cfg,direction,feature,epoch)
+for iDirection = direction(1):direction(2)
+    for iFeature = feature(1):feature(2)
+            genDIST(directory,destination,cfg,iDirection,iFeature,epoch)
+    end
+end
 
 %% Plot cue-onset distributed firing
+directory = [DATA_ROOT analysis_files]; % where spiking data resides
+
 % Figure 5
+which_plot = 1; % 1 = MAX plot in Figure 5; 2 = MIN plot in Figure 5 supplement 1; 3 = MAX plot in Figure 7 supplement 2; 4 = MIN plot in Figure 7 supplement 2
+plotDIST(directory,which_plot)
 
 % Figure 5 supplement 1
+which_plot = 2; % 1 = MAX plot in Figure 5; 2 = MIN plot in Figure 5 supplement 1; 3 = MAX plot in Figure 7 supplement 2; 4 = MIN plot in Figure 7 supplement 2
+plotDIST(directory,which_plot)
 
 %% Nosepoke distributed firing (needed for Figure 7 supplement 2)
+directory = [DATA_ROOT spike_data]; % where spiking data resides
+destination = [DATA_ROOT analysis_files]; % where to save .mat files
+cfg.start = 4001; % start time of analysis (ms); centered on 5000 ms
+cfg.end = 8000; % end time of analysis (ms); centered on 5000 ms
+direction = [1 2]; % order by maximum or minimum firing (1 = max, 2 = min); start and end range
+feature = [1 3]; % cue feature to analyze (1 = identity, 2 = location, 3 = outcome); start and end range
+epoch = 2; % epoch to analyze (1 = cue-onset, 2 = nosepoke);
+
+for iDirection = direction(1):direction(2)
+    for iFeature = feature(1):feature(2)
+            genDIST(directory,destination,cfg,iDirection,iFeature,epoch)
+    end
+end
 
 %% Plot nosepoke distributed firing
+directory = [DATA_ROOT analysis_files]; % where spiking data resides
+
 % Figure 7 supplement 1
+which_plot = 3; % 1 = MAX plot in Figure 5; 2 = MIN plot in Figure 5 supplement 1; 3 = MAX plot in Figure 7 supplement 2; 4 = MIN plot in Figure 7 supplement 2
+plotDIST(directory,which_plot)
+
+which_plot = 4; % 1 = MAX plot in Figure 5; 2 = MIN plot in Figure 5 supplement 1; 3 = MAX plot in Figure 7 supplement 2; 4 = MIN plot in Figure 7 supplement 2
+plotDIST(directory,which_plot)
 
 %% Plot scatterplot
 % Figure 4 supplement 2
