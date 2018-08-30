@@ -1,9 +1,9 @@
 # vStrCueCodingPaper
 
 
-Figure 4:
+Figure 2:
 
-To get Figure 4 from the paper, first run MASTER_behavior_example to extract the variables needed for the example plots in A and B. Then run MASTER_behavior to extract the summary performance measures used in C and D. Then run MASTER_behavior_figure to generate Figure 4.
+To get Figure 2 from the paper, first run MASTER_behavior_example to extract the variables needed for the example plots in B. Then run MASTER_behavior to extract the summary performance measures used in C. Then run MASTER_behavior_figure to generate Figure 2.
 
 **Note: Access to behavioral data in MASTER_behavior_example is currently hardcoded in the script. Can save all the .mat files it uses and put them in a folder for the paper.**
 
@@ -14,33 +14,32 @@ Recording pre-analysis:
 
 All the neural analyses use variables generated from MASTER_main_workflow, whose purpose is to take the .t files for each cell, extract the spikes, sync with the behavioral data, and generate the firing measures used for subsequent analyses.
 
-**Note: There are multiple functions that sync the behavioral data with spiking data as the organization of inputs/outputs to the TTL box changed when we switched running rooms.** 
+
+Figure 3:
+
+To get Figure 3 from the paper, run MASTER_GLM_example_cells.
+
+
+
+Figure 3 supplements 1 and 2:
+
+To get Figure 3 supplements 1 and 2 form the paper, run MASTER_GLM_example_cells_expanded_for_SUPP.
+
+
+Figure 4:
+
+To get Figure 4 from the paper, run MASTER_GLM to perform the sliding window GLM, and MASTER_GLM_Shuff to generate the shuffled data. Run LDA_SCRIPT to perform the LDA, and LDA_shuff to generate the shuffled data. To get Figure 4A,B, run FIGURE script. To get Figure 4D run the RECODE script.
+
+Figure 4 supplements 1 and 2:
+
+To get Figure 4 supplement 1 from the paper, run FIGURE script after running MASTER_GLM as above.
+
+To get Figure 4 supplement 2 from the paper, run SCATTER script.
 
 
 Figure 5:
 
-To get Figure 5 from the paper, run MASTER_GLM_example_cells.
-
-
-Figure 6:
-
-To get Figure 6 from the paper, run MASTER_GLM.
-
-**Note: Running MASTER_GLM in its current form will also generate several figures that are not used in Figure 6 (leftover from when developing the pipeline).**
-
-**Note: There is an option specifying which rat to use, as my structuring of variables slightly changed midway through analysis (e.g. storing each block of trials in a separate cell within the same struct in metadata versus two separate structs in MASTER_main_workflow. Will rerun MASTER_main_workflow to standardize this and remove this option**
-
-
-Figure 7:
-
-To get Figure 7 from the paper, run MASTER_population_average.
-
-
-Figure 8:
-
-To get Figure 8 from the paper, run MASTER_task_tiling.
-
-**Note: There are currently mainly scripts for this figure that need to be consolidated. Running MASTER_task_tiling on its own will not generate the figure, at the moment need to run all of the below scripts to get the figure (but will consolidate into one script now that analysis is done):**
+To get Figure 5 from the paper, run MASTER_task_tiling.
 
 MASTER_task_tiling
 MASTER_task_tiling_MIN
@@ -54,22 +53,32 @@ MASTER_task_tiling_corrCoeff
 MASTER_task_tiling_figure
 
 
-Figure 9:
 
-To get Figure 9 from the paper, run MASTER_GLM_NP.
+Figure 5 supplement 1:
 
-**Note: Like MASTER_GLM, running MASTER_GLM_NP in its current form will also generate several figures that are not used in Figure 9 (leftover from when developing the pipeline).**
-
-
-Figure 10:
-
-To get Figure 10 from the paper, run MASTER_population_average selecting the nosepoke-aligned option.
-
-**Note: MASTER_population_average is currently only set up to generate Figure 7, but will add a switch command that detects which time-aligned data to pull out.** 
+To get Figure 5 supplement 1 from the paper, run FIGURE script.
 
 
-Figure 11:
+Figure 6:
 
-To get Figure 11 from the paper, run MASTER_task_tiling selecting the nosepoke-aligned option.
+To get Figure 6 from the paper, run MASTER_GLM_NP_example_cells.
 
-**Note: Like with MASTER_population_average, MASTER_task_tiling is currently only set up to generate Figure 8, but will had the switch command, or alternatively a new script.**
+
+
+Figure 6 supplements 1 and 2:
+
+To get Figure 6 supplements 1 and 2 form the paper, run MASTER_GLM_NP_example_cells_expanded_for_SUPP.
+
+
+Figure 7:
+
+To get Figure 7 from the paper, run MASTER_GLM_NP to perform the sliding window GLM, and MASTER_GLM_NP_Shuff to generate the shuffled data. To get Figure 4A,B, run FIGURE script. To get Figure 4D-F run the RECODE script.
+
+
+
+Figure 7 supplements 1 and 2:
+
+
+To get Figure 7 supplement 1 A-D from the paper, run FIGURE script after running MASTER_GLM_NP as above. To get Figure 7 supplement 1 E,F, run FIGURE script after running RECODE script as above.
+
+To get Figure 7 supplement 2 from the paper, run MASTER_task_tiling_NP.
