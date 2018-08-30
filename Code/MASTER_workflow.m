@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-%% Create folders for spiking data and analysis variables
-directory = 'E:\vStr-cuecoding\promoted\'; % working directory
-spiking_data = 'spike data'; % folder to save processed spiking data
-analysis_variables = 'analysis files'; % folder to save analysis variables
-
-mkdir(directory,spiking_data);
-mkdir(directory,analysis_variables);
-=======
 %% set up paths
 restoredefaultpath; % start with clean slate
 GITHUB_PATH = 'C:\Users\mvdm\Documents\GitHub\';
@@ -18,22 +9,23 @@ addpath(genpath([GITHUB_PATH 'vStrCueCodingPaper\Code'])); % paper repo
 % top-level folder that contains subdirs with data from each subject (R053, R056, R057, R060)
 % replace this with wherever your data is located
 DATA_ROOT = 'C:\data\vStrCueCoding\'; 
->>>>>>> 38ffde63a7a4a2233cbf40c8a3d6a5406e6cf54a
+
+%% Create folders for spiking data and analysis variables
+directory = 'E:\vStr-cuecoding\promoted\'; % working directory
+spiking_data = 'spike data'; % folder to save processed spiking data
+analysis_variables = 'analysis files'; % folder to save analysis variables
+
+mkdir(directory,spiking_data);
+mkdir(directory,analysis_variables);
 
 %% Behavior example learning curves [NOT COMPLETED]
 
 %% Behavior summary performance [NOT COMPLETED]
 
 %% Preprocess units (needed for Figures 3,4,5,6,7)
-<<<<<<< HEAD
-directory = 'E:\vStr-cuecoding\promoted\'; % working directory
-destination = 'E:\vStr-cuecoding\promoted\spike data\'; % where to save .mat files
-PETH_generation = 0; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
-=======
-directory = DATA_ROOT;
+directory = DATA_ROOT; % working directory
 destination = [DATA_ROOT 'spike data\']; % where to save .mat files
 PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
->>>>>>> 38ffde63a7a4a2233cbf40c8a3d6a5406e6cf54a
 
 genProcess(directory,destination,PETH_generation);
 
