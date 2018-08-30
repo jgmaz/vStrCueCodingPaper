@@ -25,7 +25,7 @@ mkdir(directory,analysis_files);
 %% Preprocess units (needed for Figures 3,4,5,6,7)
 directory = DATA_ROOT; % working directory
 destination = [DATA_ROOT spike_data]; % where to save .mat files
-PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
+PETH_generation = 0; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
 
 genProcess(directory,destination,PETH_generation);
 
