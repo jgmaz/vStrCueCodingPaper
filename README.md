@@ -101,4 +101,4 @@ In-progress. Generates **Figure 4 supplement 2**.
 
 ### Attributions
 
-This codebase makes use of (heatmap)[https://www.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps], (shadedErrorBar)[https://www.mathworks.com/matlabcentral/fileexchange/26311-raacampbell-shadederrorbar], and (subtightplot)[https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot].
+This codebase makes use of [heatmap](https://www.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps), [shadedErrorBar](https://www.mathworks.com/matlabcentral/fileexchange/26311-raacampbell-shadederrorbar), and [subtightplot](https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot).
