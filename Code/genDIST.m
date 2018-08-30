@@ -10,13 +10,27 @@ cd(directory)
 
 order_direction = {'max' 'min'};
 cue_feature = {'identity' 'location' 'outcome'};
-condition1 = {'light' 'arm1' 'rew'};
-condition2 = {'sound' 'arm2' 'unrew'};
 Epoch = {'Trial' 'Nosepoke'};
 epoch_lower = {'trials' 'nosepoke'};
 
-PETH_variable{1} = strcat(epoch_lower{epoch},'_',condition1{feature},'_PETH');
-PETH_variable{2} = strcat(epoch_lower{epoch},'_',condition2{feature},'_PETH');
+switch epoch
+    case 1
+        condition1 = {'light' 'photosensor1' 'rew'};
+        condition2 = {'sound' 'photosensor2' 'unrew'};
+    case 2
+        condition1 = {'light' 'receptacle1' 'rew'};
+        condition2 = {'sound' 'receptacle2' 'unrew'};
+end
+
+if feature == 2
+    Epoch = {'Arm' 'Receptacle'};
+    PETH_variable{1} = condition1{2};
+    PETH_variable{2} = condition2{2};
+else
+    Epoch = {'Trial' 'Nosepoke'};
+    PETH_variable{1} = strcat(epoch_lower{epoch},'_',condition1{feature},'_PETH');
+    PETH_variable{2} = strcat(epoch_lower{epoch},'_',condition2{feature},'_PETH');
+end
 
 mat_files = dir('*.mat');
 for kk = 1:length(dir('*.mat'))
