@@ -1,10 +1,22 @@
+%% set up paths
+restoredefaultpath; % start with clean slate
+GITHUB_PATH = 'C:\Users\mvdm\Documents\GitHub\';
+addpath(genpath([GITHUB_PATH 'vandermeerlab\code-matlab\shared'])); % lab codebase
+addpath(genpath([GITHUB_PATH 'vandermeerlab\code-matlab\toolboxes\MClust-3.5'])); % MClust-3.5
+addpath(genpath([GITHUB_PATH 'vStrCueCodingPaper\Code'])); % paper repo
+
+%% locate the data
+% top-level folder that contains subdirs with data from each subject (R053, R056, R057, R060)
+% replace this with wherever your data is located
+DATA_ROOT = 'C:\data\vStrCueCoding\'; 
+
 %% Behavior example learning curves [NOT COMPLETED]
 
 %% Behavior summary performance [NOT COMPLETED]
 
 %% Preprocess units (needed for Figures 3,4,5,6,7)
-directory = 'E:\vStr-cuecoding\promoted\'; % working directory
-destination = 'E:\vStr-cuecoding\promoted\spike data\'; % where to save .mat files
+directory = DATA_ROOT;
+destination = [DATA_ROOT 'spike data\']; % where to save .mat files
 PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
 
 genProcess(directory,destination,PETH_generation);
