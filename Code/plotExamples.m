@@ -181,97 +181,97 @@ for i = 1:length(example_cells)
     
     %% rasterplots - for newer rats
     subtightplot(8,4,example_fig_raster{i},[0,.03]);
-    
-    switch sesh.block_order
-        case 1
-            switch metadata.TrialInfo{1,1}.rewarded(j)
-                case 1
-                    colour = 'red';
-                case 0
-                    colour = 'green';
+    for j = 1:length(metadata.TrialInfo{1,1}.trialT)
+        switch sesh.block_order
+            case 1
+                switch metadata.TrialInfo{1,1}.rewarded(j)
+                    case 1
+                        colour = 'red';
+                    case 0
+                        colour = 'green';
+                end
+            case 2
+                switch metadata.TrialInfo{1,1}.rewarded(j)
+                    case 1
+                        colour = 'blue';
+                    case 0
+                        colour = 'cyan';
+                end
+        end
+        if metadata.TrialInfo{1,1}.nosepoke_length(j) > 0
+            if metadata.TrialInfo{1,1}.nosepoke_length(j) < 1 %limit data analysis to first 6 secs from nosepoke
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','magenta');
+            elseif metadata.TrialInfo{1,1}.nosepoke_length(j) < 2
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+1],[j-.5 j-.5],'LineWidth',2,'color','magenta');
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+1 metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','cyan');
+            else
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+1],[j-.5 j-.5],'LineWidth',2,'color','magenta');
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+1 metadata.TrialInfo{1,1}.trial_length_analysis(j)+2],[j-.5 j-.5],'LineWidth',2,'color','cyan');
+                line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+2 metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','green');
             end
-        case 2
-            switch metadata.TrialInfo{1,1}.rewarded(j)
-                case 1
-                    colour = 'blue';
-                case 0
-                    colour = 'cyan';
-            end
-    end
-    if metadata.TrialInfo{1,1}.nosepoke_length(j) > 0
-        if metadata.TrialInfo{1,1}.nosepoke_length(j) < 1 %limit data analysis to first 6 secs from nosepoke
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','magenta');
-        elseif metadata.TrialInfo{1,1}.nosepoke_length(j) < 2
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+1],[j-.5 j-.5],'LineWidth',2,'color','magenta');
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+1 metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','cyan');
         else
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+1],[j-.5 j-.5],'LineWidth',2,'color','magenta');
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+1 metadata.TrialInfo{1,1}.trial_length_analysis(j)+2],[j-.5 j-.5],'LineWidth',2,'color','cyan');
-            line([metadata.TrialInfo{1,1}.trial_length_analysis(j)+2 metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.nosepoke_length(j)],[j-.5 j-.5],'LineWidth',2,'color','green');
+            line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.trial_length_analysis(j+1)],[j-.5 j-.5],'LineWidth',2,'color','green');
         end
-    else
-        line([metadata.TrialInfo{1,1}.trial_length_analysis(j) metadata.TrialInfo{1,1}.trial_length_analysis(j)+metadata.TrialInfo{1,1}.trial_length_analysis(j+1)],[j-.5 j-.5],'LineWidth',2,'color','green');
-    end
-    for ii = 1:length(RAST.Trial{j})
-        if RAST.Trial{j}(ii) > metadata.TrialInfo{1,1}.summary(j,9)
-            break
+        for ii = 1:length(RAST.Trial{j})
+            if RAST.Trial{j}(ii) > metadata.TrialInfo{1,1}.summary(j,9)
+                break
+            end
+            line([RAST.Trial{j}(ii) RAST.Trial{j}(ii)],[j-1 j],'color',colour)
         end
-        line([RAST.Trial{j}(ii) RAST.Trial{j}(ii)],[j-1 j],'color',colour)
     end
-end
-
-for j = 1:length(metadata.TrialInfo{1,2}.trialT)
     
-    switch sesh.block_order
-        case 2
-            switch metadata.TrialInfo{1,2}.rewarded(j)
-                case 1
-                    colour = 'red';
-                case 0
-                    colour = 'green';
+    for j = 1:length(metadata.TrialInfo{1,2}.trialT)
+        
+        switch sesh.block_order
+            case 2
+                switch metadata.TrialInfo{1,2}.rewarded(j)
+                    case 1
+                        colour = 'red';
+                    case 0
+                        colour = 'green';
+                end
+            case 1
+                switch metadata.TrialInfo{1,2}.rewarded(j)
+                    case 1
+                        colour = 'blue';
+                    case 0
+                        colour = 'cyan';
+                end
+        end
+        if metadata.TrialInfo{1,2}.nosepoke_length(j) > 0
+            if metadata.TrialInfo{1,2}.nosepoke_length(j) < 1 %limit data analysis to first 6 secs from nosepoke
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
+            elseif metadata.TrialInfo{1,2}.nosepoke_length(j) < 2
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+1],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+1 metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','cyan');
+            else
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+1],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+1 metadata.TrialInfo{1,2}.trial_length_analysis(j)+2],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','cyan');
+                line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+2 metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','green');
             end
-        case 1
-            switch metadata.TrialInfo{1,2}.rewarded(j)
-                case 1
-                    colour = 'blue';
-                case 0
-                    colour = 'cyan';
-            end
-    end
-    if metadata.TrialInfo{1,2}.nosepoke_length(j) > 0
-        if metadata.TrialInfo{1,2}.nosepoke_length(j) < 1 %limit data analysis to first 6 secs from nosepoke
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
-        elseif metadata.TrialInfo{1,2}.nosepoke_length(j) < 2
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+1],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+1 metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','cyan');
         else
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+1],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','magenta');
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+1 metadata.TrialInfo{1,2}.trial_length_analysis(j)+2],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','cyan');
-            line([metadata.TrialInfo{1,2}.trial_length_analysis(j)+2 metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.nosepoke_length(j)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','green');
+            line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.trial_length_analysis(j+1)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','green');
         end
-    else
-        line([metadata.TrialInfo{1,2}.trial_length_analysis(j) metadata.TrialInfo{1,2}.trial_length_analysis(j)+metadata.TrialInfo{1,2}.trial_length_analysis(j+1)],[j+length(metadata.TrialInfo{1,1}.trialT)+10-.5 j+length(metadata.TrialInfo{1,1}.trialT)+10-.5],'LineWidth',2,'color','green');
-    end
-    for ii = 1:length(RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)})
-        if RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii) > metadata.TrialInfo{1,2}.summary(j,9)
-            break
+        for ii = 1:length(RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)})
+            if RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii) > metadata.TrialInfo{1,2}.summary(j,9)
+                break
+            end
+            line([RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii) RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii)],[j + length(metadata.TrialInfo{1,1}.trialT)+10-1 j + length(metadata.TrialInfo{1,1}.trialT)+10],'color',colour)
         end
-        line([RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii) RAST.Trial{j + length(metadata.TrialInfo{1,1}.trialT)}(ii)],[j + length(metadata.TrialInfo{1,1}.trialT)+10-1 j + length(metadata.TrialInfo{1,1}.trialT)+10],'color',colour)
     end
-end
-hold on; plot(0,0:10:length(RAST.Trial)+10,'.k'); %plot(-3:.5:6,length(metadata.TrialInfo{1,1}.trialT),'.b');
-xlim([-1.15 2.15]); ylim([0 length(RAST.Trial)+10+1]); set(gca,'XTick',[],'YTick',[]);
-if i == 1 || i == 5
-    ylabel('Trial number')
-    y_values = [length(metadata.TrialInfo{1,1}.trialT)/2   length(metadata.TrialInfo{1,1}.trialT)+(length(metadata.TrialInfo{1,2}.trialT)/2)];
-    y_labels ={'Block 1' 'Block 2'};
-    set(gca, 'Ytick',y_values,'YTickLabel',y_labels,'YTickLabelRotation',90);
-end
-set(gca,'FontSize',18);
-title(example_types{i})
-
-clearvars -except load_var mat_files i example_cells example_coding example_fig_PETH example_fig_raster example_types
-i = i + 1;
+    hold on; plot(0,0:10:length(RAST.Trial)+10,'.k'); %plot(-3:.5:6,length(metadata.TrialInfo{1,1}.trialT),'.b');
+    xlim([-1.15 2.15]); ylim([0 length(RAST.Trial)+10+1]); set(gca,'XTick',[],'YTick',[]);
+    if i == 1 || i == 5
+        ylabel('Trial number')
+        y_values = [length(metadata.TrialInfo{1,1}.trialT)/2   length(metadata.TrialInfo{1,1}.trialT)+(length(metadata.TrialInfo{1,2}.trialT)/2)];
+        y_labels ={'Block 1' 'Block 2'};
+        set(gca, 'Ytick',y_values,'YTickLabel',y_labels,'YTickLabelRotation',90);
+    end
+    set(gca,'FontSize',18);
+    title(example_types{i})
+    
+    clearvars -except load_var mat_files i example_cells example_coding example_fig_PETH example_fig_raster example_types
+    i = i + 1;
 end
 
 end
