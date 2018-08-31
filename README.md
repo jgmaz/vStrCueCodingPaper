@@ -1,20 +1,24 @@
 # vStrCueCodingPaper
 
 
-Code used for Gmaz,
+Code and preprocessed data files used for Gmaz,
 Carmichael & van der Meer, "Persistent coding of outcome-predictive cue features in the rat nucleus accumbens" (2018) ([preprint](https://www.biorxiv.org/content/early/2018/08/27/300251)).
 
 This repo makes use of the [vandermeerlab codebase](https://github.com/vandermeerlab/vandermeerlab). Analyses were run on Windows 7 using MATLAB R2016a.
 
-Once you have downloaded the above code, set up your MATLAB path as follows:
+Once you have cloned this repository, set up your MATLAB path as follows:
 
 ```
 restoredefaultpath; % start with clean slate
 addpath(genpath('\GitHub\vandermeerlab\code-matlab\shared')); % lab codebase
-addpath(genpath('\GitHub\vandermeerlab\code-matlab\toolboxes\MClust-3.5')); % MClust-3.5
+addpath(genpath('\GitHub\vandermeerlab\code-matlab\toolboxes\MClust-3.5')); % used for utility functions
 addpath(genpath('\GitHub\vStrCueCodingPaper\Code')); % paper repo
 ```
-The workflow for the analysis and figure generation is found in **MASTER_workflow**. It is divided into cells that run the various analyses reported in the paper, saving the output at each step to be used subsequently for higher-level analysis and figure generation. 
+The workflow for the analysis and figure generation is found in **MASTER_workflow.m**. It is divided into cells that run the various analyses reported in the paper, saving the output at each step to be used subsequently for higher-level analysis and figure generation. 
+
+At the top of this master workflow file are a few constants whose values you will need to set. They are:
+  * `GITHUB_PATH`: location of the top-level folder containing both this repo and the vandermeerlab codebase (example: `C:\Users\mvdm\Documents\GitHub\`)
+  * `DATA_ROOT`: location of the top-level folder containing the data (example: `C:\data\vStrCueCoding\`, which should have subfolders `R053`, `R060`, etc.). Note that the analysis will create some folders in this location to store intermediate results files.
 
 Below is a brief summary of the function of each cell.
 
