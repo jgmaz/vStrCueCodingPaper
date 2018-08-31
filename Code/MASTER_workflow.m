@@ -188,4 +188,8 @@ which_plot = 4; % 1 = MAX plot in Figure 5; 2 = MIN plot in Figure 5 supplement 
 plotDIST(directory,which_plot)
 
 %% Plot scatterplot
+spike_directory = [DATA_ROOT spike_data]; % where spiking data resides
+directory = [DATA_ROOT analysis_files]; % where GLM output resides
+
 % Figure 4 supplement 2
+plotScatter(spike_directory,directory);

@@ -1,5 +1,5 @@
-function Scatter = plotScatter(directory)
-% function Scatter = plotScatter(directory)
+function Scatter = plotScatter(spike_directory,directory)
+% function Scatter = plotScatter(spike_directory,directory)
 %
 %
 % INPUTS:
@@ -19,7 +19,7 @@ for jj = 1:length(ALL_matrix)
     load(mat_files(jj).name);
     disp(jj);
     
-    if TESTS.MWU.Cue.Trial < .01
+     if TESTS.WSR.Task.Trial_b4_vs_Trial < .01
         block_drift.block1_length(jj) = length(FRATE.Cue.Trial_firing_rate_block1);
         block_drift.block1_half(jj) = round(block_drift.block1_length(jj) / 2);
         block_drift.b1_1st_avg(jj) = mean(FRATE.Cue.Trial_firing_rate_block1(1:block_drift.block1_half(jj)));
@@ -83,23 +83,9 @@ for jj = 1:length(ALL_matrix)
                 end
         end
     end
+
 end
 
-%%
-frates.cue.trial.unspecific.MEAN.light = cat(2,R057_frates.cue.trial.unspecific.MEAN.light,R056_frates.cue.trial.unspecific.MEAN.light,R053_frates.cue.trial.unspecific.MEAN.light,R060_frates.cue.trial.unspecific.MEAN.light);
-frates.cue.trial.unspecific.SEM.light = cat(2,R057_frates.cue.trial.unspecific.SEM.light,R056_frates.cue.trial.unspecific.SEM.light,R053_frates.cue.trial.unspecific.SEM.light,R060_frates.cue.trial.unspecific.SEM.light);
-frates.cue.trial.unspecific.MEAN.sound = cat(2,R057_frates.cue.trial.unspecific.MEAN.sound,R056_frates.cue.trial.unspecific.MEAN.sound,R053_frates.cue.trial.unspecific.MEAN.sound,R060_frates.cue.trial.unspecific.MEAN.sound);
-frates.cue.trial.unspecific.SEM.sound = cat(2,R057_frates.cue.trial.unspecific.SEM.sound,R056_frates.cue.trial.unspecific.SEM.sound,R053_frates.cue.trial.unspecific.SEM.sound,R060_frates.cue.trial.unspecific.SEM.sound);
-
-frates.cue.trial.light.MEAN.light = cat(2,R057_frates.cue.trial.light.MEAN.light,R056_frates.cue.trial.light.MEAN.light,R053_frates.cue.trial.light.MEAN.light,R060_frates.cue.trial.light.MEAN.light);
-frates.cue.trial.light.SEM.light = cat(2,R057_frates.cue.trial.light.SEM.light,R056_frates.cue.trial.light.SEM.light,R053_frates.cue.trial.light.SEM.light,R060_frates.cue.trial.light.SEM.light);
-frates.cue.trial.light.MEAN.sound = cat(2,R057_frates.cue.trial.light.MEAN.sound,R056_frates.cue.trial.light.MEAN.sound,R053_frates.cue.trial.light.MEAN.sound,R060_frates.cue.trial.light.MEAN.sound);
-frates.cue.trial.light.SEM.sound = cat(2,R057_frates.cue.trial.light.SEM.sound,R056_frates.cue.trial.light.SEM.sound,R053_frates.cue.trial.light.SEM.sound,R060_frates.cue.trial.light.SEM.sound);
-
-frates.cue.trial.sound.MEAN.light = cat(2,R057_frates.cue.trial.sound.MEAN.light,R056_frates.cue.trial.sound.MEAN.light,R053_frates.cue.trial.sound.MEAN.light,R060_frates.cue.trial.sound.MEAN.light);
-frates.cue.trial.sound.SEM.light = cat(2,R057_frates.cue.trial.sound.SEM.light,R056_frates.cue.trial.sound.SEM.light,R053_frates.cue.trial.sound.SEM.light,R060_frates.cue.trial.sound.SEM.light);
-frates.cue.trial.sound.MEAN.sound = cat(2,R057_frates.cue.trial.sound.MEAN.sound,R056_frates.cue.trial.sound.MEAN.sound,R053_frates.cue.trial.sound.MEAN.sound,R060_frates.cue.trial.sound.MEAN.sound);
-frates.cue.trial.sound.SEM.sound = cat(2,R057_frates.cue.trial.sound.SEM.sound,R056_frates.cue.trial.sound.SEM.sound,R053_frates.cue.trial.sound.SEM.sound,R060_frates.cue.trial.sound.SEM.sound);
 %%
 figure;
 errorbarxy(frates.cue.trial.unspecific.MEAN.light,frates.cue.trial.unspecific.MEAN.sound,frates.cue.trial.unspecific.SEM.light,frates.cue.trial.unspecific.SEM.sound,'black');
