@@ -18,9 +18,17 @@ analysis_files = 'analysis files\'; % folder to save analysis variables
 mkdir(directory,spike_data);
 mkdir(directory,analysis_files);
 
-%% Behavior example learning curves [NOT COMPLETED]
+%% Behavior summary performance
+directory = DATA_ROOT; % working directory
+destination = [DATA_ROOT analysis_files]; % where to save .mat files
 
-%% Behavior summary performance [NOT COMPLETED]
+genBEHAV(directory,destination);
+
+%% Plot behavior summary
+directory = [DATA_ROOT analysis_files]; % working directory
+
+% Figure 2C
+plotBEHAV(directory);
 
 %% Preprocess units (needed for Figures 3,4,5,6,7)
 directory = DATA_ROOT; % working directory
