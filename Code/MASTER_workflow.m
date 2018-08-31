@@ -8,6 +8,10 @@ addpath(genpath([GITHUB_PATH 'vStrCueCodingPaper\Code'])); % paper repo
 %% locate the data
 % top-level folder that contains subdirs with data from each subject (R053, R056, R057, R060)
 % replace this with wherever your data is located
+%
+% note that you could point this to the \data\ folder in the vStrCueCoding
+% repository, but keep in mind that intermediate data analysis files will
+% be written to this folder
 DATA_ROOT = 'C:\data\vStrCueCoding\'; 
 
 %% Create folders for spiking data and analysis variables
@@ -19,20 +23,20 @@ mkdir(directory,spike_data);
 mkdir(directory,analysis_files);
 
 %% Behavior summary performance
-directory = [GITHUB_PATH 'vStrCueCodingPaper\data\']; % working directory
+directory = DATA_ROOT; % where data lives
 destination = [DATA_ROOT analysis_files]; % where to save .mat files
 
 genBEHAV(directory,destination);
 
 %% Plot behavior example and summary
-behavior_directory = [GITHUB_PATH 'vStrCueCodingPaper\data\R060\']; % location of R060 learning curve from data
+behavior_directory = [DATA_ROOT 'R060\']; % location of R060 learning curve from data
 directory = [DATA_ROOT analysis_files]; % location of behavior summary variable
 
 % Figure 2C
 plotBEHAV(behavior_directory,directory);
 
 %% Preprocess units (needed for Figures 3,4,5,6,7)
-directory = [GITHUB_PATH 'vStrCueCodingPaper\data\']; % working directory
+directory = DATA_ROOT; % where data lives
 destination = [DATA_ROOT spike_data]; % where to save .mat files
 PETH_generation = 0; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
 
