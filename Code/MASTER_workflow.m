@@ -38,7 +38,7 @@ plotBEHAV(behavior_directory,directory);
 %% Preprocess units (needed for Figures 3,4,5,6,7)
 directory = DATA_ROOT; % where data lives
 destination = [DATA_ROOT spike_data]; % where to save .mat files
-PETH_generation = 0; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
+PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
 
 genProcess(directory,destination,PETH_generation);
 
@@ -79,7 +79,7 @@ plotLDA(Class_accuracy);
 
 %% Nosepoke & outcome GLM (needed for Figure 7)
 directory = [DATA_ROOT spike_data]; % working directory
-destination = [DATA_ROOT analysis_files]'; % where to save .mat files
+destination = [DATA_ROOT analysis_files]; % where to save .mat files
 num_Shuffs = 2; % 100 used in paper
 select_Epoch = 2; % 1 = cue-onset only, 2 = nosepoke & outcome, 3 = all time points
 
