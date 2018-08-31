@@ -1,4 +1,4 @@
-# vStrCueCodingPaper
+﻿# vStrCueCodingPaper
 
 
 Code used for Gmaz,
@@ -26,7 +26,7 @@ This cell takes the metadata from each recording session for R060 and generates 
 
 This cell takes the metadata for each recording session and generates the summary performance figure and statistics seen in **Figure 2C**.
 
-### Preprocess units (needed for Figures 3,4,5,6,7)
+### Preprocess units (needed for Figures 3,4,5,6,7) 
 
 This cell performs the preprocessing step of the .t files, loading the spikes, trial-by-trial firing rates, presence or absence of cue-modulation, PETHs, and rasters for each unit. 
 
@@ -106,4 +106,4 @@ In-progress. Generates **Figure 4 supplement 2**.
 
 ### Attributions
 
-This codebase makes use of [heatmap](https://www.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps), [shadedErrorBar](https://www.mathworks.com/matlabcentral/fileexchange/26311-raacampbell-shadederrorbar), and [subtightplot](https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot).
+This codebase makes use of [errorbarxy](https://www.mathworks.com/matlabcentral/fileexchange/4065-errorbarxy), [heatmap](https://www.mathworks.com/matlabcentral/fileexchange/24253-customizable-heat-maps), [shadedErrorBar](https://www.mathworks.com/matlabcentral/fileexchange/26311-raacampbell-shadederrorbar), and [subtightplot](https://www.mathworks.com/matlabcentral/fileexchange/39664-subtightplot).

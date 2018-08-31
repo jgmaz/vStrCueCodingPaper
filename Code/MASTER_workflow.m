@@ -19,19 +19,20 @@ mkdir(directory,spike_data);
 mkdir(directory,analysis_files);
 
 %% Behavior summary performance
-directory = DATA_ROOT; % working directory
+directory = [GITHUB_PATH 'vStrCueCodingPaper\data\']; % working directory
 destination = [DATA_ROOT analysis_files]; % where to save .mat files
 
 genBEHAV(directory,destination);
 
-%% Plot behavior summary
-directory = [DATA_ROOT analysis_files]; % working directory
+%% Plot behavior example and summary
+behavior_directory = [GITHUB_PATH 'vStrCueCodingPaper\data\R060\']; % location of R060 learning curve from data
+directory = [DATA_ROOT analysis_files]; % location of behavior summary variable
 
 % Figure 2C
-plotBEHAV(directory);
+plotBEHAV(behavior_directory,directory);
 
 %% Preprocess units (needed for Figures 3,4,5,6,7)
-directory = DATA_ROOT; % working directory
+directory = [GITHUB_PATH 'vStrCueCodingPaper\data\']; % working directory
 destination = [DATA_ROOT spike_data]; % where to save .mat files
 PETH_generation = 0; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
 
