@@ -1,4 +1,4 @@
-﻿# vStrCueCodingPaper
+# vStrCueCodingPaper
 
 
 Code used for Gmaz,
@@ -18,13 +18,13 @@ The workflow for the analysis and figure generation is found in **MASTER_workflo
 
 Below is a brief summary of the function of each cell.
 
-### Behavior example learning curves (NOT COMPLETED)
+### Behavior summary performance (needed for Figure 2)
 
-This cell takes the metadata from each recording session for R060 and generates the learning curves seen in **Figure 2B**.
+This cell takes the metadata for each recording session and generates the summary performance variable used for **Figure 2C**.
 
-### Behavior summary performance (NOT COMPLETED)
+### Plot behavior example and summary
 
-This cell takes the metadata for each recording session and generates the summary performance figure and statistics seen in **Figure 2C**.
+This cell takes the behavioral performance summary variable generated above, along with a supplied learning curve variable for R060, and generates **Figure 2B,C**.
 
 ### Preprocess units (needed for Figures 3,4,5,6,7) 
 
@@ -86,23 +86,23 @@ directory = 'E:\vStr-cuecoding\promoted\spike data\'; % where spiking data resid
 
 ### Cue-onset distributed firing (needed for Figure 5)
 
-In-progress. Generates the data for **Figure 5** and **Figure 5 supplement 1**.
+This cell uses the PETHs generated from genPROCESS in a cell above, and orders them according to their maximum and minumum firing for identity, location, and outcome at time of cue-onset. The output is used for **Figure 5** and **Figure 5 supplement 1**.
 
 ### Plot cue-onset distributed firing
 
-In-progress. Plots **Figure 5** and **Figure 5 supplement 1**.
+This cell uses the variables created in the previous cell to generate **Figure 5** and **Figure 5 supplement 1**.
 
 ### Nosepoke distributed firing (needed for Figure 7 supplement 2)
 
-In-progress. Generates the data for **Figure 7 supplement 2**.
+This cell uses the PETHs generated from genPROCESS in a cell above, and orders them according to their maximum and minumum firing for identity, location, and outcome at time of nosepoke. The output is used for **Figure 7 supplement 2**.
 
 ### Plot nosepoke distributed firing
 
-In-progress. Plots **Figure 7 supplement 2**,
+This cell uses the variables created in the previous cell to generate **Figure 7 supplement 2**.
 
 ### Plot scatterplot
 
-In-progress. Generates **Figure 4 supplement 2**.
+This cell uses the output of the sliding window GLM centered on cue-onset to generate **Figure 4 supplement 2**, a scatterplot showing the firing rate for the light and sound block for each of the cue-modulated units.
 
 ### Attributions
 
