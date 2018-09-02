@@ -24,7 +24,7 @@ After that, you should be all set to run the analysis. Below is a brief summary 
 
 ### Behavior summary performance (needed for Figure 2)
 
-This cell takes the metadata for each recording session (see [here]() for description) and generates the summary performance variable used for **Figure 2C**.
+This cell takes the metadata for each recording session (see [here](https://github.com/jgmaz/vStrCueCodingPaper/blob/eeb72f6ecce44c0bcd4c6d7a3a3cf97342ffbbe1/METADATA.md) for description) and generates the summary performance variable used for **Figure 2C**.
 
 ### Plot behavior example and summary
 
