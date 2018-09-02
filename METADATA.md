@@ -23,7 +23,7 @@ trialT: time of start of trial.
 
 **unnosepoke_to_trialT**: time from end of nosepoke to initiation of following trial.
 
-**approached**: whether the rat approached (‘1’) or skipped (‘0’) that trial.
+**approached**: whether the rat *approached* (‘1’) or *skipped* (‘0’) that trial.
 
 **quick_approach**: trials in which the rat nosepoked for less than the 1 s delay from nosepoke start to outcome receipt.
 
