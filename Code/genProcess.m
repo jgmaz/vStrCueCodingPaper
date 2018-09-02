@@ -6,7 +6,7 @@ function PROCESS = genPROCESS(directory,destination,PETH_generation)
 %
 % OUTPUTS:
 %
-f = filesep
+f = filesep;
 
 for ii = 1:4 % work through each rat in the dataset
     switch ii
