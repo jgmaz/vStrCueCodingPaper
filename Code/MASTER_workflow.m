@@ -1,9 +1,10 @@
 %% set up paths
+f = filesep;
 restoredefaultpath; % start with clean slate
-GITHUB_PATH = 'C:\Users\mvdm\Documents\GitHub\';
-addpath(genpath([GITHUB_PATH 'vandermeerlab\code-matlab\shared'])); % lab codebase
-addpath(genpath([GITHUB_PATH 'vandermeerlab\code-matlab\toolboxes\MClust-3.5'])); % MClust-3.5
-addpath(genpath([GITHUB_PATH 'vStrCueCodingPaper\Code'])); % paper repo
+GITHUB_PATH = 'C:\Users\mvdm\Documents\GitHub\'; % your GitHub path here
+addpath(genpath([GITHUB_PATH 'vandermeerlab' f 'code-matlab' f 'shared'])); % lab codebase
+addpath(genpath([GITHUB_PATH 'vandermeerlab' f 'code-matlab' f 'toolboxes' f 'MClust-3.5'])); % MClust-3.5
+addpath(genpath([GITHUB_PATH 'vStrCueCodingPaper' f 'Code'])); % paper repo
 
 %% locate the data
 % top-level folder that contains subdirs with data from each subject (R053, R056, R057, R060)
@@ -16,8 +17,8 @@ DATA_ROOT = 'C:\data\vStrCueCoding\';
 
 %% Create folders for spiking data and analysis variables
 directory = DATA_ROOT; % working directory
-spike_data = 'spike data\'; % folder to save processed spiking data
-analysis_files = 'analysis files\'; % folder to save analysis variables
+spike_data = ['spike data' f]; % folder to save processed spiking data
+analysis_files = ['analysis files' f]; % folder to save analysis variables
 
 mkdir(directory,spike_data);
 mkdir(directory,analysis_files);
@@ -29,7 +30,7 @@ destination = [DATA_ROOT analysis_files]; % where to save .mat files
 genBEHAV(directory,destination);
 
 %% Plot behavior example and summary
-behavior_directory = [DATA_ROOT 'R060\']; % location of R060 learning curve from data
+behavior_directory = [DATA_ROOT 'R060' f]; % location of R060 learning curve from data
 directory = [DATA_ROOT analysis_files]; % location of behavior summary variable
 
 % Figure 2C
@@ -39,6 +40,9 @@ plotBEHAV(behavior_directory,directory);
 directory = DATA_ROOT; % where data lives
 destination = [DATA_ROOT spike_data]; % where to save .mat files
 PETH_generation = 1; % generating PETHs used for Figures 3,5,6,7-supplement is time consuming. Switch to 0 to bypass this step.
+% Note: if you switch PETH_generation = 0, you will cut down processing time for
+% each unit by 10-fold, but you will not be able to generate the distribution
+% (e.g. Figure 5) or example (e.g. Figure 3) figures that utilize this step
 
 genProcess(directory,destination,PETH_generation);
 

@@ -6,6 +6,7 @@ function PROCESS = genPROCESS(directory,destination,PETH_generation)
 %
 % OUTPUTS:
 %
+f = filesep
 
 for ii = 1:4 % work through each rat in the dataset
     switch ii
@@ -42,7 +43,7 @@ for ii = 1:4 % work through each rat in the dataset
         
         sesh.block_order = block_order_list(kj); % 1 if light block came first, 2 if sound block came first
         disp(cat(2,'loading session ',sesh.session_id));
-        cd(cat(2,directory,sesh.session_id(1:4),'\',sesh.session_id))
+        cd(cat(2,directory,sesh.session_id(1:4),f,sesh.session_id))
         load(strcat(sesh.session_id,'_metadata.mat'))
         
         %% find .t files
@@ -98,7 +99,7 @@ for ii = 1:4 % work through each rat in the dataset
                         case 1
                             save(cat(2,destination,sesh.session_id,'-TT',num2str(sesh.tt_number),'-cell',num2str(sesh.cell_number)),'metadata','FRATE','TESTS','RAST','PETH','spk_t','sesh');
                     end
-                    clearvars -except ii kj kk jj sesh rat_id day block_order_list directory destination metadata cell_count t_files str_length PETH_generation
+                    clearvars -except f ii kj kk jj sesh rat_id day block_order_list directory destination metadata cell_count t_files str_length PETH_generation
                     cell_count = cell_count + 1;
                 end
             end

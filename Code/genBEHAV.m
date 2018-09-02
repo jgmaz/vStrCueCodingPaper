@@ -6,6 +6,7 @@ function BEHAV = genBEHAV(directory,destination)
 %
 % OUTPUTS:
 %
+f = filesep;
 
 iSesh = 1;
 for ii = 1:4 % work through each rat in the dataset
@@ -43,7 +44,7 @@ for ii = 1:4 % work through each rat in the dataset
         
         sesh.block_order = block_order_list(kj); % 1 if light block came first, 2 if sound block came first
         disp(cat(2,'loading session ',sesh.session_id));
-        cd(cat(2,directory,sesh.session_id(1:4),'\',sesh.session_id))
+        cd(cat(2,directory,sesh.session_id(1:4),f,sesh.session_id))
         load(strcat(sesh.session_id,'_metadata.mat'))
         
         rew_trial_num_block1 = 1;
@@ -122,7 +123,7 @@ for ii = 1:4 % work through each rat in the dataset
         BEHAV_summary.APP.unrew_trials_sound(iSesh,1) =  BEHAV.Approach.PROP.unrew_trials_sound;
         BEHAV_summary.APP.ratID(iSesh,1) = ii;
         
-        clearvars -except  BEHAV_summary iSesh day kj ii rat_id directory destination block_order_list
+        clearvars -except f BEHAV_summary iSesh day kj ii rat_id directory destination block_order_list
         iSesh = iSesh + 1;
     end
 end
