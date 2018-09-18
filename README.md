@@ -3,7 +3,7 @@
 This repository hosts the code and preprocessed data files used for Gmaz,
 Carmichael & van der Meer, "Persistent coding of outcome-predictive cue features in the rat nucleus accumbens" (2018) ([preprint](https://www.biorxiv.org/content/early/2018/08/27/300251)).
 
-The code makes use of the [vandermeerlab codebase](https://github.com/vandermeerlab/vandermeerlab), and was tested on Windows 7 using MATLAB R2016a.
+The code makes use of the [vandermeerlab codebase](https://github.com/vandermeerlab/vandermeerlab), and was tested on Windows 7 using MATLAB R2015a.
 
 Please see [here](https://github.com/jgmaz/vStrCueCodingPaper/blob/master/LICENSE.md) for licensing information.
 
